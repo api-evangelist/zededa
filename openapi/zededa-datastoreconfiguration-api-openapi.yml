@@ -1,0 +1,1175 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService DatastoreConfiguration API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: DatastoreConfiguration
+paths:
+  /v1/datastores:
+    get:
+      summary: Query datastores
+      description: Query the datastore records.
+      operationId: DatastoreConfiguration_QueryDatastores
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/Datastores'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        description: Only summary of the records required
+        in: query
+        required: false
+        type: boolean
+      - name: namePattern
+        description: Datastore name pattern to be matched.
+        in: query
+        required: false
+        type: string
+      - name: dsType
+        description: Datastore type to be matched
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: originType
+        description: origin of datastore
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - DatastoreConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+    post:
+      summary: Create Datastore
+      description: Create a Datastore record.
+      operationId: DatastoreConfiguration_CreateDatastore
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this datastore record will conflict with an already existing datastore record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/DatastoreInfo'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - DatastoreConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+  /v1/datastores/id/{id}:
+    get:
+      summary: Get datastore
+      description: Get the configuration (without security details) of a datastore record.
+      operationId: DatastoreConfiguration_GetDatastore
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DatastoreInfo'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the datastore
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - DatastoreConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+    delete:
+      summary: Delete datastore
+      description: Delete a datastore record.
+      operationId: DatastoreConfiguration_DeleteDatastore
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because there are edge application images using this datastore
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the datastore
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - DatastoreConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+    put:
+      summary: Update datastore
+      description: Update a datastore record. The usual pattern to update a datastore record is to retrieve the record and update with the modified values in a new body to update the datastore record.
+      operationId: DatastoreConfiguration_UpdateDatastore
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this operation will conflict with an already existing datastore record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the datastore.
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: User defined name of the datastore, unique across the enterprise. Once datastore is created, name can’t be changed.
+              maxLength: 256
+              minLength: 3
+              pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+              uniqueItems: true
+            title:
+              type: string
+              description: User defined title of the datastore. Title can be changed at any time.
+              maxLength: 256
+              minLength: 3
+              pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+            description:
+              type: string
+              description: Detailed description of the datastore.
+              maxLength: 256
+            revision:
+              $ref: '#/definitions/ObjectRevision'
+              description: system defined info
+              readOnly: true
+            enterpriseId:
+              type: string
+            dsType:
+              $ref: '#/definitions/DatastoreType'
+              description: Datastore type
+            dsFQDN:
+              type: string
+              description: Datastore Fully Qualified Domain Name
+            dsPath:
+              type: string
+              description: Datastore relative path w.r.t. Datastore root
+            apiKey:
+              type: string
+            region:
+              type: string
+              description: Datastore region - valid for AWS S3 and Azure BlobStorage
+            dsStatus:
+              $ref: '#/definitions/DatastoreStatus'
+              description: Datastore status
+            dsErr:
+              type: string
+              description: Datastore validation detailed error/status message
+              readOnly: true
+            secret:
+              $ref: '#/definitions/DatastoreInfoSecrets'
+              description: Plain-text sensitive data
+            encryptedSecrets:
+              type: object
+              additionalProperties:
+                type: string
+              description: Internal - Encrypted sensitive data
+              readOnly: true
+            cryptoKey:
+              type: string
+              description: Internal - Encryption Key context
+              readOnly: true
+            originType:
+              $ref: '#/definitions/Origin'
+              description: Origin type of datastore.
+              readOnly: true
+            certificateChain:
+              $ref: '#/definitions/CertificateChain'
+              description: Certificate chain of the certificate
+            needClearText:
+              type: boolean
+              description: knob for sending creds in clear text
+            projectAccessList:
+              type: array
+              items:
+                type: string
+              description: project access list of the datastore
+          description: Datastore idetail
+          title: Datastore
+          required:
+          - name
+          - title
+          - dsType
+          - dsFQDN
+          - dsPath
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - DatastoreConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+  /v1/datastores/name/{name}:
+    get:
+      summary: Get datastore
+      description: Get the configuration (without security details) of a datastore record.
+      operationId: DatastoreConfiguration_GetDatastoreByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DatastoreInfo'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        description: User defined name of the datastore, unique across the enterprise. Once datastore is created, name can’t be changed.
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - DatastoreConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+  /v1/datastores/projects:
+    get:
+      summary: Query the project access list among a list of datastore
+      description: Query the project access list among a list of datastore
+      operationId: DatastoreConfiguration_QueryDatastoreProjectList
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DatastoreProjectList'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: ids
+        description: List of datastore IDs
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - DatastoreConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+definitions:
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  Summary:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Summary description
+      total:
+        type: number
+        format: int64
+        description: Total
+      values:
+        type: object
+        additionalProperties:
+          type: integer
+          format: int64
+        description: 'Values: Map for storing <string, uint32>'
+    description: Summary is used to store the Summary details
+    title: Summary is used to store the Summary details
+  Subject:
+    type: object
+    properties:
+      commonName:
+        type: string
+        description: Certificate common name.
+      country:
+        type: array
+        items:
+          type: string
+        description: List of countries.
+      organization:
+        type: array
+        items:
+          type: string
+        description: List of organization.
+      organizationalUnit:
+        type: array
+        items:
+          type: string
+        description: List of Organizational Unit.
+      locality:
+        type: array
+        items:
+          type: string
+        description: List of locallity.
+      postalCode:
+        type: array
+        items:
+          type: string
+        description: List of Postal codes.
+      province:
+        type: array
+        items:
+          type: string
+        description: List of List of Prvince.
+      serialNumber:
+        type: string
+        description: Subject cerial number
+  Origin:
+    type: string
+    enum:
+    - ORIGIN_UNSPECIFIED
+    - ORIGIN_IMPORTED
+    - ORIGIN_LOCAL
+    - ORIGIN_GLOBAL
+    - ORIGIN_APP_PROFILE_LOCAL
+    default: ORIGIN_UNSPECIFIED
+    description: "- ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+    title: 'OriginType : enum specifies the Object orgigin type'
+  Certificate:
+    type: object
+    properties:
+      cert:
+        type: string
+        description: base64 string of the parent certificate
+        title: certificate details
+      pvtKey:
+        type: string
+        description: base64 string of the parent pvt key
+      publicKey:
+        type: string
+        description: base63 string of the public key
+      passPhrase:
+        type: string
+        description: pass phase for the pvt key, this has to be filled if pvt key is encrypted with a pass phrase
+      exportable:
+        type: boolean
+        description: Indicates if the private key can be exported.
+      reuseKey:
+        type: boolean
+        description: Indicates if the same key pair will be used on certificate renewal.
+      encryptedSecrets:
+        type: object
+        additionalProperties:
+          type: string
+        description: user encrypted secrets map
+        title: secrets encryption
+      cryptoKey:
+        type: string
+        description: Crypto Key for decrypting user secret information
+      publicKeyAlgorithm:
+        type: string
+        description: Public key algorithm.
+        title: encryption algorithm
+      rsaEcryption:
+        $ref: '#/definitions/RSA'
+        description: RSA encryption algorithm of the certificate
+      ecdsaEncryption:
+        $ref: '#/definitions/ECDSA'
+        description: ECDSA encryption algorithm of the certificate
+      validFrom:
+        type: string
+        format: date-time
+        description: Certificate validatity start time
+        title: certificate validity
+      validTill:
+        type: string
+        format: date-time
+        description: Certificate validatity start time
+      sanValues:
+        $ref: '#/definitions/SANValues'
+        description: This holds the alternative name values like URIs, domain names IPs etc.
+        title: Subject alternative name values
+      subject:
+        $ref: '#/definitions/Subject'
+        description: Parameters for the subject of the X509 component of a certificate.
+      issuer:
+        $ref: '#/definitions/Subject'
+        description: Parameters for the issuer of the X509 component of a certificate.
+      serialNumber:
+        type: string
+        description: 'Unique identifier for each Certificate generated by an Certificate Issuer. '
+      basicContraintsValid:
+        type: boolean
+        description: This fields tells the basic constraints like isCA are correct.
+      keyUsage:
+        type: integer
+        format: int32
+        description: Key usage extensions define the purpose of the public key contained in a certificate.
+      extendedKeyUsage:
+        type: array
+        items:
+          type: string
+        description: Sequence of extended key usages.
+      signatureAlgorithm:
+        type: string
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  ObjectDetail:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+  Cursor:
+    type: object
+    properties:
+      pageToken:
+        type: string
+        description: Page Token
+      orderBy:
+        type: array
+        items:
+          type: string
+        description: OrderBy helps in sorting the list response
+      pageNum:
+        type: number
+        format: int64
+        description: Page Number
+      pageSize:
+        type: number
+        format: int64
+        description: Defines the page size
+      totalPages:
+        type: number
+        format: int64
+        description: Total number of pages to be fetched.
+    description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+    title: Cursor is used as filter in list operation.
+  ObjectRevision:
+    type: object
+    properties:
+      prev:
+        type: string
+        description: Previous
+      curr:
+        type: string
+        description: Current Database version of the record
+      createdAt:
+        type: object
+        format: date-time
+        description: The time, in milliseconds since the epoch, when the record was created.
+      createdBy:
+        type: string
+        description: 'User data: Created By'
+      updatedAt:
+        type: object
+        format: date-time
+        description: The time, in milliseconds since the epoch, when the record was last updated.
+      updatedBy:
+        type: string
+        description: 'User data: Updated By'
+    description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+    title: ObjectRevision is used to store the user information.
+    required:
+    - curr
+    - createdAt
+    - createdBy
+    - updatedAt
+    - updatedBy
+  SANValues:
+    type: object
+    properties:
+      hosts:
+        type: array
+        items:
+          type: string
+        description: List of permitted hosts.
+      emaildIds:
+        type: array
+        items:
+          type: string
+        description: List of permitted email addresses.
+      uris:
+        type: array
+        items:
+          type: string
+        description: List of permitted URIs.
+      ips:
+        type: array
+        items:
+          type: string
+        description: List of permitted IP addresses.
+      dns:
+        type: array
+        items:
+          type: string
+        description: List of permitted DNS names.
+      upns:
+        type: array
+        items:
+          type: string
+        description: List of permitted User principal names.
+  DatastoreType:
+    type: string
+    enum:
+    - DATASTORE_TYPE_UNSPECIFIED
+    - DATASTORE_TYPE_HTTP
+    - DATASTORE_TYPE_HTTPS
+    - DATASTORE_TYPE_AWSS3
+    - DATASTORE_TYPE_SFTP
+    - DATASTORE_TYPE_CONTAINERREGISTRY
+    - DATASTORE_TYPE_AZUREBLOB
+    - DATASTORE_TYPE_ZEDEDAS3
+    - DATASTORE_TYPE_ZEDEDABLOB
+    - DATASTORE_TYPE_FILE_STORAGE
+    default: DATASTORE_TYPE_UNSPECIFIED
+    description: "- DATASTORE_TYPE_HTTP: Datastore hosted on HTTP server\n - DATASTORE_TYPE_HTTPS: Datastore hosted on HTTPS server\n - DATASTORE_TYPE_AWSS3: Datastore hosted on AWS S3\n - DATASTORE_TYPE_SFTP: Datastore hosted on SFTP server\n - DATASTORE_TYPE_CONTAINERREGISTRY: Datastore hosted on Container Registry (e.g. Dockerhub, Azure Container Registry etc.)\n - DATASTORE_TYPE_AZUREBLOB: Datastore hosted on Azure BlobStorage\n - DATASTORE_TYPE_ZEDEDAS3: ZEDEDA Owned and Operated datastore hosted on AWS S3\n - DATASTORE_TYPE_ZEDEDABLOB: ZEDEDA Owned and Operated datastore hosted on Azure BlobStorage\n - DATASTORE_TYPE_FILE_STORAGE: Datastore hosted on File Storage (e.g. HTTP, HTTPS, AWS S3, SFTP, Azure Blob, etc.)"
+    title: Datastore type
+  CertificateChain:
+    type: object
+    properties:
+      certificates:
+        type: array
+        items:
+          $ref: '#/definitions/Certificate'
+        description: List of Certificate object holds the details of certificate like cert block, encryption type, validity, subject etc
+  DatastoreStatus:
+    type: string
+    enum:
+    - DATASTORE_STATUS_UNSPECIFIED
+    - DATASTORE_STATUS_CREATED
+    - DATASTORE_STATUS_VERIFYING
+    - DATASTORE_STATUS_ACTIVE
+    - DATASTORE_STATUS_INACTIVE
+    - DATASTORE_STATUS_FAILED
+    default: DATASTORE_STATUS_UNSPECIFIED
+    title: Datastore status
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  ECDSA:
+    type: object
+    properties:
+      curve:
+        type: string
+        description: ECDSA curve to be used while signing the certificate.
+  Datastores:
+    type: object
+    properties:
+      summaryByType:
+        $ref: '#/definitions/Summary'
+        description: Type distribution summary of filtered Datastore records
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/DatastoreInfo'
+        description: List of filtered Datastore records
+      summaryByCategory:
+        $ref: '#/definitions/Summary'
+        description: Category distribution summary of filtered Datastore records
+      summaryByOrigin:
+        $ref: '#/definitions/Summary'
+        description: datstore by origin summary
+      next:
+        $ref: '#/definitions/Cursor'
+        description: Responded page details of filtered records
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  DatastoreInfoSecrets:
+    type: object
+    properties:
+      apiKey:
+        type: string
+        description: Datastore access API key in plain-text
+      apiPasswd:
+        type: string
+        description: Datastore access API password in plain-text
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  DatastoreInfo:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the datastore.
+        readOnly: true
+        pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+        uniqueItems: true
+      name:
+        type: string
+        description: User defined name of the datastore, unique across the enterprise. Once datastore is created, name can’t be changed.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      title:
+        type: string
+        description: User defined title of the datastore. Title can be changed at any time.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+      description:
+        type: string
+        description: Detailed description of the datastore.
+        maxLength: 256
+      revision:
+        $ref: '#/definitions/ObjectRevision'
+        description: system defined info
+        readOnly: true
+      enterpriseId:
+        type: string
+      dsType:
+        $ref: '#/definitions/DatastoreType'
+        description: Datastore type
+      dsFQDN:
+        type: string
+        description: Datastore Fully Qualified Domain Name
+      dsPath:
+        type: string
+        description: Datastore relative path w.r.t. Datastore root
+      apiKey:
+        type: string
+      region:
+        type: string
+        description: Datastore region - valid for AWS S3 and Azure BlobStorage
+      dsStatus:
+        $ref: '#/definitions/DatastoreStatus'
+        description: Datastore status
+      dsErr:
+        type: string
+        description: Datastore validation detailed error/status message
+        readOnly: true
+      secret:
+        $ref: '#/definitions/DatastoreInfoSecrets'
+        description: Plain-text sensitive data
+      encryptedSecrets:
+        type: object
+        additionalProperties:
+          type: string
+        description: Internal - Encrypted sensitive data
+        readOnly: true
+      cryptoKey:
+        type: string
+        description: Internal - Encryption Key context
+        readOnly: true
+      originType:
+        $ref: '#/definitions/Origin'
+        description: Origin type of datastore.
+        readOnly: true
+      certificateChain:
+        $ref: '#/definitions/CertificateChain'
+        description: Certificate chain of the certificate
+      needClearText:
+        type: boolean
+        description: knob for sending creds in clear text
+      projectAccessList:
+        type: array
+        items:
+          type: string
+        description: project access list of the datastore
+    description: Datastore idetail
+    title: Datastore
+    required:
+    - name
+    - title
+    - dsType
+    - dsFQDN
+    - dsPath
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  DatastoreProjectList:
+    type: object
+    properties:
+      projectDetails:
+        type: array
+        items:
+          $ref: '#/definitions/ObjectDetail'
+        description: List of projects which are associated with the given datastore
+      totalCount:
+        type: integer
+        format: int64
+        description: total number of records
+      next:
+        $ref: '#/definitions/Cursor'
+        description: Responded page details of filtered records
+  RSA:
+    type: object
+    properties:
+      rsaBits:
+        type: string
+        format: int64
+        description: RSA Encryption Key bit size.
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

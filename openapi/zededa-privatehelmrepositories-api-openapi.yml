@@ -1,0 +1,749 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService PrivateHelmRepositories API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: PrivateHelmRepositories
+  description: APIs for managing private Helm repositories and their authentication configurations
+paths:
+  /v1/cluster/instances/kubernetes/helm/repository:
+    get:
+      summary: List all private Helm repositories
+      description: "Retrieve a list of all configured private Helm repositories with their status and configuration information.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/helm/repository\n```\n\n**Example Response:**\n```json\n{\n  \"list\": [\n    {\n      \"id\": \"private-repo-abc123\",\n      \"metadata\": {\n        \"name\": \"company-charts\",\n        \"title\": \"Company Private Helm Repository\",\n        \"description\": \"Private Helm repository containing company-specific charts\",\n        \"tags\": {\n          \"environment\": \"production\"\n        }\n      },\n      \"spec\": {\n        \"repoDetails\": {\n          \"type\": \"PRIVATE_REPO_TYPE_HELM_INDEX\",\n          \"url\": \"https://charts.company.com/helm\"\n        }\n      },\n      \"status\": {\n        \"error\": false,\n        \"message\": \"Repository is accessible\",\n        \"name\": \"company-charts\"\n      },\n      \"repoIdentifier\": \"company-charts-repo\"\n    },\n    {\n      \"id\": \"private-repo-def456\",\n      \"metadata\": {\n        \"name\": \"team-charts\",\n        \"title\": \"Team Specific Charts\",\n        \"description\": \"Charts for team-specific applications\"\n      },\n      \"spec\": {\n        \"repoDetails\": {\n          \"type\": \"PRIVATE_REPO_TYPE_GIT\",\n          \"url\": \"https://git.company.com/helm-charts\",\n          \"branch\": \"main\"\n        }\n      },\n      \"status\": {\n        \"error\": false,\n        \"message\": \"Repository is accessible\",\n        \"name\": \"team-charts\"\n      },\n      \"repoIdentifier\": \"team-charts-repo\"\n    }\n  ],\n  \"total\": 2\n}\n```"
+      operationId: PrivateHelmRepositories_ListPrivateRepos
+      responses:
+        '200':
+          description: Successfully retrieved private repository list
+          schema:
+            $ref: '#/definitions/PrivateRepoListResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to list private repositories.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve private repository list due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      tags:
+      - PrivateHelmRepositories
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+    post:
+      summary: Create a new private Helm repository
+      description: "Create a new private Helm repository configuration to access Helm charts from private repositories with authentication. This enables deployment of Helm charts from secured repositories.\n\n**Example Request:**\n```json\n{\n  \"metadata\": {\n    \"name\": \"company-charts\",\n    \"title\": \"Company Private Helm Repository\",\n    \"description\": \"Private Helm repository containing company-specific charts\",\n    \"tags\": {\n      \"environment\": \"production\",\n      \"team\": \"platform\"\n    }\n  },\n  \"spec\": {\n    \"repoDetails\": {\n      \"type\": \"PRIVATE_REPO_TYPE_HELM_INDEX\",\n      \"url\": \"https://charts.company.com/helm\",\n      \"branch\": \"main\"\n    },\n    \"auth\": {\n      \"secret\": {\n        \"type\": \"SECRET_TYPE_BASIC_AUTH\",\n        \"name\": \"helm-repo-credentials\"\n      }\n    }\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"private-repo-abc123\",\n  \"objectName\": \"company-charts\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 201,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```"
+      operationId: PrivateHelmRepositories_CreatePrivateRepo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '201':
+          description: Successfully created private Helm repository configuration
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid repository configuration or missing required fields.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to create private repository configurations.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Private repository configuration with the same name already exists.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to create private repository configuration due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/PrivateRepoCreateRequest'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PrivateHelmRepositories
+  /v1/cluster/instances/kubernetes/helm/repository/id/{id}:
+    put:
+      summary: Update private Helm repository
+      description: "Update an existing private Helm repository configuration. This allows modification of repository details, authentication settings, and metadata. The repository name cannot be changed after creation.\n\n**Example Request:**\n```json\n{\n  \"id\": \"private-repo-abc123\",\n  \"metadata\": {\n    \"name\": \"company-charts\",\n    \"title\": \"Updated Company Private Helm Repository\",\n    \"description\": \"Updated private Helm repository containing company-specific charts\",\n    \"tags\": {\n      \"environment\": \"production\",\n      \"team\": \"platform\",\n      \"updated\": \"2024-01-15\"\n    }\n  },\n  \"spec\": {\n    \"repoDetails\": {\n      \"type\": \"PRIVATE_REPO_TYPE_HELM_INDEX\",\n      \"url\": \"https://charts.company.com/helm/v2\",\n      \"branch\": \"main\"\n    },\n    \"auth\": {\n      \"secret\": {\n        \"type\": \"SECRET_TYPE_TOKEN\",\n        \"name\": \"updated-helm-repo-token\"\n      }\n    }\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"private-repo-abc123\",\n  \"objectName\": \"company-charts\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```"
+      operationId: PrivateHelmRepositories_UpdatePrivateRepo
+      responses:
+        '200':
+          description: Successfully updated private repository configuration
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid repository configuration or missing required fields.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to update this private repository.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. Private repository with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Cannot update private repository due to conflicting state.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to update private repository due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: Unique identifier of the private repository to update (required)
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            metadata:
+              $ref: '#/definitions/PrivateRepoMetadata'
+              description: Metadata for the private repository (name cannot be updated, required)
+            spec:
+              $ref: '#/definitions/PrivateRepoSpec'
+              description: Specification for the private repository (required)
+          description: Request message for updating an existing private repository configuration
+          title: Private Repository update request
+          required:
+          - metadata
+          - spec
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PrivateHelmRepositories
+  /v1/cluster/instances/kubernetes/helm/repository/id/{privateRepoId}:
+    get:
+      summary: Get private Helm repository by ID
+      description: "Retrieve detailed information about a specific private Helm repository including its configuration, authentication details, and status.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/helm/repository/id/private-repo-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"private-repo-abc123\",\n  \"metadata\": {\n    \"name\": \"company-charts\",\n    \"title\": \"Company Private Helm Repository\",\n    \"description\": \"Private Helm repository containing company-specific charts\",\n    \"tags\": {\n      \"environment\": \"production\",\n      \"team\": \"platform\"\n    }\n  },\n  \"spec\": {\n    \"repoDetails\": {\n      \"type\": \"PRIVATE_REPO_TYPE_HELM_INDEX\",\n      \"url\": \"https://charts.company.com/helm\",\n      \"branch\": \"main\"\n    },\n    \"auth\": {\n      \"secret\": {\n        \"id\": \"secret-123\",\n        \"type\": \"SECRET_TYPE_BASIC_AUTH\",\n        \"name\": \"helm-repo-credentials\",\n        \"data\": {\n          \"username\": \"helm-user\",\n          \"password\": \"***\"\n        }\n      }\n    }\n  },\n  \"status\": {\n    \"error\": false,\n    \"message\": \"Repository is accessible and ready\",\n    \"name\": \"company-charts\",\n    \"transitioning\": false\n  },\n  \"repoIdentifier\": \"company-charts-repo\"\n}\n```"
+      operationId: PrivateHelmRepositories_GetPrivateRepo
+      responses:
+        '200':
+          description: Successfully retrieved private repository configuration
+          schema:
+            $ref: '#/definitions/PrivateRepoGetByIdResponse'
+        '400':
+          description: Bad Request. Invalid repository ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view this private repository.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. Private repository with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve private repository due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: privateRepoId
+        description: 'Unique identifier of the Private Repository (required). Example: ''private-repo-abc123'''
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PrivateHelmRepositories
+    delete:
+      summary: Delete private Helm repository
+      description: "Delete a private Helm repository configuration. This will remove access to the private repository and all its associated configurations. This action is irreversible.\n\n**Example Request:**\n```\nDELETE /v1/cluster/instances/kubernetes/helm/repository/id/private-repo-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"private-repo-abc123\",\n  \"objectName\": \"company-charts\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Warning:** This operation will remove the private repository configuration and stop access to its charts. Any deployments using charts from this repository may be affected.\n\n**Note:** The private_repo_id parameter is **required** and must be a valid repository identifier."
+      operationId: PrivateHelmRepositories_DeletePrivateRepo
+      responses:
+        '200':
+          description: Successfully deleted private repository configuration
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid repository ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to delete this private repository.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. Private repository with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Cannot delete private repository because it is currently in use by deployments.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to delete private repository due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: privateRepoId
+        description: 'Unique identifier of the Private Repository (required). Example: ''private-repo-abc123'''
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PrivateHelmRepositories
+  /v1/cluster/instances/kubernetes/helm/repository/id/{privateRepoId}/charts:
+    get:
+      summary: Get Helm charts from private repository
+      description: "Retrieve a list of available Helm charts from a specific private repository with their versions and metadata.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/helm/repository/id/private-repo-abc123/charts\n```\n\n**Example Response:**\n```json\n{\n  \"api_version\": \"v2\",\n  \"generated\": \"2024-01-15T12:00:00Z\",\n  \"repo_identifier\": \"company-charts-repo\",\n  \"repo_name\": \"Company Private Repository\",\n  \"entries\": {\n    \"company-app\": [\n      {\n        \"name\": \"company-app\",\n        \"version\": \"2.1.0\",\n        \"app_version\": \"1.5.0\",\n        \"description\": \"Company proprietary application\",\n        \"created\": \"2024-01-10T09:00:00Z\",\n        \"digest\": \"sha256:abc123def456...\",\n        \"urls\": [\"/charts/company-app-2.1.0.tgz\"]\n      },\n      {\n        \"name\": \"company-app\",\n        \"version\": \"2.0.0\",\n        \"app_version\": \"1.4.0\",\n        \"description\": \"Company proprietary application\",\n        \"created\": \"2024-01-05T14:30:00Z\",\n        \"digest\": \"sha256:def456ghi789...\",\n        \"urls\": [\"/charts/company-app-2.0.0.tgz\"]\n      }\n    ],\n    \"internal-service\": [\n      {\n        \"name\": \"internal-service\",\n        \"version\": \"1.0.0\",\n        \"app_version\": \"0.9.0\",\n        \"description\": \"Internal microservice\",\n        \"created\": \"2024-01-12T16:45:00Z\",\n        \"digest\": \"sha256:ghi789jkl012...\",\n        \"urls\": [\"/charts/internal-service-1.0.0.tgz\"]\n      }\n    ]\n  }\n}\n```"
+      operationId: PrivateHelmRepositories_GetPrivateRepoCharts
+      responses:
+        '200':
+          description: Successfully retrieved chart list from private repository
+          schema:
+            $ref: '#/definitions/HelmChartListResponse'
+        '400':
+          description: Bad Request. Invalid repository ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to access this private repository.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. Private repository with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve charts from private repository due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: privateRepoId
+        description: 'Unique identifier of the Private Repository (required). Example: ''private-repo-abc123'''
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PrivateHelmRepositories
+definitions:
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  PrivateRepoAuthConfig:
+    type: object
+    properties:
+      secret:
+        $ref: '#/definitions/PrivateRepoSecretConfig'
+        description: Secret configuration for authentication
+    description: Authentication configuration for private repository access
+    title: Private Repository authentication configuration
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  PrivateRepoRepositoryDetails:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/PrivateRepoType'
+        description: Type of the private repository (PRIVATE_REPO_TYPE_HELM_INDEX, PRIVATE_REPO_TYPE_GIT, PRIVATE_REPO_TYPE_UNSPECIFIED). This is a required parameter
+      url:
+        type: string
+        description: Private repository URL (required)
+      branch:
+        type: string
+        description: Git branch to track
+    description: Repository configuration details for private repository
+    title: Private Repository details
+    required:
+    - type
+    - url
+  PrivateRepoStatus:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Indicates if the repository is in an error state
+      message:
+        type: string
+        description: Status message providing additional details about the repository state
+      name:
+        type: string
+        description: Name of the repository in its current state
+      transitioning:
+        type: boolean
+        description: Indicates if the repository is currently undergoing state transition
+    description: Current operational status of a private repository
+    title: Private Repository status
+  PrivateRepoListResponse:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/PrivateRepoGetByIdResponse'
+        description: List of private repositories
+      total:
+        type: integer
+        format: int32
+        description: Total number of private repositories
+    description: Response message for listing private repositories
+    title: Private Repository list response
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  PrivateRepoSecretConfig:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/SecretType'
+        description: Type of the secret (SECRET_TYPE_SSH, SECRET_TYPE_BASIC_AUTH, SECRET_TYPE_UNSPECIFIED, SECRET_TYPE_NONE). This field is required and must be a valid Kubernetes secret type.
+      name:
+        type: string
+        description: Name of the secret resource
+    description: Secret configuration for private repository authentication
+    title: Private Repository secret configuration
+  HelmChartListResponse:
+    type: object
+    properties:
+      apiVersion:
+        type: string
+        description: API version of the chart index
+      generated:
+        type: string
+        description: Timestamp when the chart index was generated
+      repoIdentifier:
+        type: string
+        description: Identifier for the Helm chart repository
+      repoName:
+        type: string
+        description: Name of the Helm chart repository
+    description: Response containing a list of Helm charts with their metadata and versions
+    title: Helm chart list response
+  PrivateRepoAuthInfo:
+    type: object
+    properties:
+      secret:
+        $ref: '#/definitions/PrivateRepoSecretInfo'
+        description: Enhanced secret information for authentication
+    description: Enhanced authentication information including secret details for private repository access
+    title: Private Repository authentication information
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  PrivateRepoMetadata:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the private repository configuration (required)
+      title:
+        type: string
+        description: Display title of the private repository configuration
+      description:
+        type: string
+        description: Description of the private repository configuration
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags associated with the private repository
+    description: Metadata information for a private repository configuration
+    title: Private Repository metadata
+    required:
+    - name
+  PrivateRepoSecretInfo:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier of the secret
+      type:
+        $ref: '#/definitions/SecretType'
+        description: Type of secret for authentication
+      name:
+        type: string
+        description: Name of the secret resource
+      data:
+        $ref: '#/definitions/SecretData'
+        description: Secret credentials data
+    description: Enhanced secret information including credentials data for private repository authentication
+    title: Private Repository secret information
+  SecretType:
+    type: string
+    enum:
+    - SECRET_TYPE_UNSPECIFIED
+    - SECRET_TYPE_SSH
+    - SECRET_TYPE_BASIC_AUTH
+    - SECRET_TYPE_NONE
+    default: SECRET_TYPE_UNSPECIFIED
+    title: Kubernetes Secret Types
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  PrivateRepoType:
+    type: string
+    enum:
+    - PRIVATE_REPO_TYPE_UNSPECIFIED
+    - PRIVATE_REPO_TYPE_GIT
+    - PRIVATE_REPO_TYPE_HELM_INDEX
+    default: PRIVATE_REPO_TYPE_UNSPECIFIED
+    title: Private Repository Type
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  PrivateRepoCreateRequest:
+    type: object
+    properties:
+      metadata:
+        $ref: '#/definitions/PrivateRepoMetadata'
+        description: Metadata for the private repository (required)
+      spec:
+        $ref: '#/definitions/PrivateRepoSpec'
+        description: Specification for the private repository (required)
+    description: Request message for creating a new private repository configuration
+    title: Private Repository create request
+    required:
+    - metadata
+    - spec
+  PrivateRepoGetByIdResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier of the private repository
+      metadata:
+        $ref: '#/definitions/PrivateRepoMetadata'
+        description: Metadata information for the private repository
+      spec:
+        $ref: '#/definitions/PrivateRepoSpecInfo'
+        description: Enhanced specification of the private repository
+      status:
+        $ref: '#/definitions/PrivateRepoStatus'
+        description: Current operational status of the private repository
+      repoIdentifier:
+        type: string
+        description: Unique identifier for the private repository
+    description: Detailed response message for private repository get by ID operation including metadata, specification, and status
+    title: Private Repository detailed response
+  PrivateRepoSpec:
+    type: object
+    properties:
+      repoDetails:
+        $ref: '#/definitions/PrivateRepoRepositoryDetails'
+        description: Repository details and configuration (required)
+      auth:
+        $ref: '#/definitions/PrivateRepoAuthConfig'
+        description: Authentication configuration
+    description: Complete specification for a private repository configuration
+    title: Private Repository specification
+    required:
+    - repoDetails
+  SecretData:
+    type: object
+    properties:
+      encodedUsername:
+        type: string
+        description: Base64 encoded username for basic authentication, Required if Secret type is SECRET_TYPE_BASIC_AUTH
+      encodedPassword:
+        type: string
+        description: Base64 encoded password for basic authentication, Required if Secret type is SECRET_TYPE_BASIC_AUTH
+      sshPublicKey:
+        type: string
+        description: Base64 encoded SSH public key for SSH authentication, Required if Secret type is SECRET_TYPE_SSH
+      sshPrivateKey:
+        type: string
+        description: Base64 encoded SSH private key for SSH authentication, Required if Secret type is SECRET_TYPE_SSH
+    description: Raw data for Kubernetes secrets including encoded credentials and SSH keys
+    title: Kubernetes secret data
+  PrivateRepoSpecInfo:
+    type: object
+    properties:
+      repoDetails:
+        $ref: '#/definitions/PrivateRepoRepositoryDetails'
+        description: Repository details and configuration
+      auth:
+        $ref: '#/definitions/PrivateRepoAuthInfo'
+        description: Enhanced authentication configuration
+    description: Enhanced specification information for a private repository configuration
+    title: Private Repository specification information
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

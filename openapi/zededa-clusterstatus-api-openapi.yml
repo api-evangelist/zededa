@@ -1,0 +1,920 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService ClusterStatus API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: ClusterStatus
+paths:
+  /v1/cluster/id/{id}/raw/status:
+    get:
+      summary: Get Edge-Node Cluster raw status.
+      description: Get the raw (unprocessed) status of an Edge-Node Cluster as reported by the cluster reporter.
+      operationId: ClusterStatus_GetClusterRawStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/EdgeNodeClusterRawInfo'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this edge-node cluster record will conflict with an already existing edge-node cluster record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '412':
+          description: Precondition failed. Some of preconditions haven't been met to start request processing.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the cluster
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ClusterStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com
+  /v1/cluster/id/{id}/status:
+    get:
+      summary: Get Edge-Node Cluster status.
+      description: Get the status of an Edge-Node Cluster as reported by the cluster reporter.
+      operationId: ClusterStatus_GetClusterStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/EdgeNodeClusterStatus'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this edge-node cluster record will conflict with an already existing edge-node cluster record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '412':
+          description: Precondition failed. Some of preconditions haven't been met to start request processing.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the cluster
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ClusterStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com
+  /v1/cluster/id/{id}/upgrade/status:
+    get:
+      summary: Get Edge-Node Cluster upgrade status.
+      description: Get the eve-os upgrade status of an Edge-Node Cluster as reported by the cluster reporter.
+      operationId: ClusterStatus_GetClusterUpgradeStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/EdgeNodeClusterUpgradeStatusResp'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this edge-node cluster record will conflict with an already existing edge-node cluster record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '412':
+          description: Precondition failed. Some of preconditions haven't been met to start request processing.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the cluster
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ClusterStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com
+definitions:
+  infoKubeEVEAppPodInfo:
+    type: object
+    properties:
+      name:
+        type: string
+        title: Name of the EVE application
+      status:
+        $ref: '#/definitions/infoKubePodStatus'
+        title: Application Status
+      restartCount:
+        type: integer
+        format: int64
+        title: Restart count of the application
+      restartTimestamp:
+        type: string
+        format: date-time
+        title: Restart time of the application
+      creationTimestamp:
+        type: string
+        format: date-time
+        title: Creation Time of the application
+      ipAddress:
+        type: string
+        title: IP address of the application, on cni0 interface
+      nodeName:
+        type: string
+        title: Node name on which the application is running
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  infoErrorInfo:
+    type: object
+    properties:
+      description:
+        type: string
+      timestamp:
+        type: string
+        format: date-time
+      severity:
+        $ref: '#/definitions/eveinfoSeverity'
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/eveinfoDeviceEntity'
+      retryCondition:
+        type: string
+    title: Errors in response to the application of configuration
+  infoKubeComp:
+    type: string
+    enum:
+    - KUBE_COMP_UNSPECIFIED
+    - KUBE_COMP_CONTAINERD
+    - KUBE_COMP_K3S
+    - KUBE_COMP_MULTUS
+    - KUBE_COMP_KUBEVIRT
+    - KUBE_COMP_CDI
+    - KUBE_COMP_LONGHORN
+    default: KUBE_COMP_UNSPECIFIED
+    description: "KubeComp is a component installed in eve after usb install.\n These are provided to show more detail on cluster update progress."
+  EdgeNodeClusterRawInfo:
+    type: object
+    properties:
+      cluster:
+        $ref: '#/definitions/infoZInfoKubeCluster'
+      upgradeStatus:
+        $ref: '#/definitions/infoZInfoKubeClusterUpdateStatus'
+  eveinfoSeverity:
+    type: string
+    enum:
+    - SEVERITY_UNSPECIFIED
+    - SEVERITY_NOTICE
+    - SEVERITY_WARNING
+    - SEVERITY_ERROR
+    default: SEVERITY_UNSPECIFIED
+    title: Severity tells the severity type
+  infoKubeVMIInfo:
+    type: object
+    properties:
+      name:
+        type: string
+        title: Name of the VirtualMachineInstance
+      status:
+        $ref: '#/definitions/infoKubeVMIStatus'
+        title: Status (VirtualMachineInstance.Status.Phase)
+      creationTime:
+        type: string
+        format: date-time
+        title: Creation Time of the VirtualMachineInstance
+      lastTransitionTime:
+        type: string
+        format: date-time
+        title: LastTransitionTime is the last time is_ready changed
+      isReady:
+        type: boolean
+        title: IsReady is true if the VMI has a Ready Condition which is true
+      nodeName:
+        type: string
+        title: NodeName is the current node (kubernetes.io/hostname) the VMI is running on
+    title: KubeVMIInfo is the VMI status of eve VM apps
+  infoStorageVolumeState:
+    type: string
+    enum:
+    - STORAGE_VOLUME_STATE_UNSPECIFIED
+    - STORAGE_VOLUME_STATE_CREATING
+    - STORAGE_VOLUME_STATE_ATTACHED
+    - STORAGE_VOLUME_STATE_DETACHED
+    - STORAGE_VOLUME_STATE_ATTACHING
+    - STORAGE_VOLUME_STATE_DETACHING
+    - STORAGE_VOLUME_STATE_DELETING
+    default: STORAGE_VOLUME_STATE_UNSPECIFIED
+    title: "StorageVolumeState is the kubernetes 'state' field of a replicated csi-driver volume.\n Refer to: https://github.com/longhorn/longhorn-manager/blob/v1.6.2/k8s/pkg/apis/longhorn/v1beta1/volume.go#L14"
+  eveinfoEntity:
+    type: string
+    enum:
+    - ENTITY_UNSPECIFIED
+    - ENTITY_BASE_OS
+    - ENTITY_SYSTEM_ADAPTER
+    - ENTITY_VAULT
+    - ENTITY_ATTESTATION
+    - ENTITY_APP_INSTANCE
+    - ENTITY_PORT
+    - ENTITY_NETWORK
+    - ENTITY_NETWORK_INSTANCE
+    - ENTITY_CONTENT_TREE
+    - ENTITY_CONTENT_BLOB
+    - ENTITY_VOLUME
+    default: ENTITY_UNSPECIFIED
+    description: "- ENTITY_UNSPECIFIED: Invalid Device Entity\n - ENTITY_BASE_OS: Base OS entity\n - ENTITY_SYSTEM_ADAPTER: System Adapter Entity\n - ENTITY_VAULT: Vault Entity\n - ENTITY_ATTESTATION: Attestation Entity\n - ENTITY_APP_INSTANCE: App Instance Entity\n - ENTITY_PORT: Port Entity\n - ENTITY_NETWORK: Network Entity\n - ENTITY_NETWORK_INSTANCE: Network Instance Entity\n - ENTITY_CONTENT_TREE: ContentTree Entity\n - ENTITY_CONTENT_BLOB: Blob Entity\n - ENTITY_VOLUME: VOLUME Entity"
+    title: Entity contains the entity type
+  infoStorageVolumePVCStatus:
+    type: string
+    enum:
+    - STORAGE_VOLUME_PVC_STATUS_UNSPECIFIED
+    - STORAGE_VOLUME_PVC_STATUS_BOUND
+    - STORAGE_VOLUME_PVC_STATUS_PENDING
+    - STORAGE_VOLUME_PVC_STATUS_AVAILABLE
+    - STORAGE_VOLUME_PVC_STATUS_RELEASED
+    - STORAGE_VOLUME_PVC_STATUS_FAILED
+    default: STORAGE_VOLUME_PVC_STATUS_UNSPECIFIED
+    title: "StorageVolumePVCStatus is the kubernetes 'phase' of a PVC. Listed as status in cli.\n Refer to: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase"
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  EdgeNodeClusterUpgradeStatusResp:
+    type: object
+    properties:
+      nodes:
+        type: array
+        items:
+          $ref: '#/definitions/EdgeNodeClusterUpgradeStatusRespNode'
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  infoKubeVolumeInfo:
+    type: object
+    properties:
+      name:
+        type: string
+        title: Name of the volume
+      state:
+        $ref: '#/definitions/infoStorageVolumeState'
+        title: Status of the volume attachment
+      robustness:
+        $ref: '#/definitions/infoStorageVolumeRobustness'
+        title: Robustness of the volume
+      creationTimestamp:
+        type: string
+        format: date-time
+        title: Creation Time of the volume in the cluster
+      provisionedBytes:
+        type: string
+        format: uint64
+        title: Provisioned size of the volume in bytes
+      allocatedBytes:
+        type: string
+        format: uint64
+        title: Allocated size of the volume in bytes
+      pvcStatus:
+        $ref: '#/definitions/infoStorageVolumePVCStatus'
+        title: PV/PVC status of the volume
+      replica:
+        type: array
+        items:
+          $ref: '#/definitions/infoKubeVolumeReplicaInfo'
+        title: Replicas of the volume
+      robustnessSubstate:
+        $ref: '#/definitions/infoStorageHealthStatus'
+        title: Robustness substate of the replication status of the volume
+      volumeId:
+        type: string
+        title: Id of the eve volume info.ZInfoVolume.uuid
+  infoKubePodNameSpaceInfo:
+    type: object
+    properties:
+      name:
+        type: string
+        title: Name of the namespace
+      podCount:
+        type: integer
+        format: int64
+        title: Number of pods in the namespace
+      podRunningCount:
+        type: integer
+        format: int64
+        title: Number of pods in the namespace that are running
+      podPendingCount:
+        type: integer
+        format: int64
+        title: Number of pods in the namespace that are pending
+      podFailedCount:
+        type: integer
+        format: int64
+        title: Number of pods in the namespace that are failed
+      podSucceededCount:
+        type: integer
+        format: int64
+        title: Number of pods in the namespace that are succeeded
+  eveinfoDeviceEntity:
+    type: object
+    properties:
+      entity:
+        $ref: '#/definitions/eveinfoEntity'
+      entityId:
+        type: string
+      entityName:
+        type: string
+    title: DeviceEntity contains the device entity details
+  infoKubeNodeInfo:
+    type: object
+    properties:
+      name:
+        type: string
+        title: Name of the node, will match device name
+      conditions:
+        type: array
+        items:
+          $ref: '#/definitions/infoKubeNodeCondition'
+        title: Status of the node
+      roleServer:
+        type: boolean
+        title: Role of the node is server or not
+      creationTimestamp:
+        type: string
+        format: date-time
+        title: Creation Time of the node in the cluster
+      apiServerSersion:
+        type: string
+        title: Version of the API Server running on the node
+      internalIp:
+        type: string
+        title: Internal IP address of the node
+      schedulable:
+        type: boolean
+      admissionStatus:
+        $ref: '#/definitions/infoNodeAdmission'
+        title: Admission State of the local node in a cluster
+      nodeId:
+        type: string
+        title: Id of the eve node matching config.EdgeDevConfig.id
+  infoKubePodStatus:
+    type: string
+    enum:
+    - KUBE_POD_STATUS_UNSPECIFIED
+    - KUBE_POD_STATUS_PENDING
+    - KUBE_POD_STATUS_RUNNING
+    - KUBE_POD_STATUS_SUCCEEDED
+    - KUBE_POD_STATUS_CONTAINER_CREATING
+    - KUBE_POD_STATUS_CRASHLOOP_BACKOFF
+    - KUBE_POD_STATUS_ERROR
+    - KUBE_POD_STATUS_EVICTED
+    - KUBE_POD_STATUS_FAILED
+    default: KUBE_POD_STATUS_UNSPECIFIED
+    title: "KubePodStatus is a combination of the kubernetes status:\n PodPhase: https://pkg.go.dev/k8s.io/api/core/v1#PodPhase\n PodConditionType: https://pkg.go.dev/k8s.io/api/core/v1#PodConditionType\n ContainerState: https://pkg.go.dev/k8s.io/api/core/v1#ContainerState"
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  EdgeNodeClusterUpgradeStatusRespNode:
+    type: object
+    properties:
+      nodeId:
+        type: string
+      upgradeableEveOs:
+        type: string
+      status:
+        $ref: '#/definitions/EdgeNodeClusterUpgradeStatus'
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  infoNodeAdmission:
+    type: string
+    enum:
+    - NODE_ADMISSION_UNSPECIFIED
+    - NODE_ADMISSION_NOT_CLUSTERED
+    - NODE_ADMISSION_LEAVING
+    - NODE_ADMISSION_JOINING
+    - NODE_ADMISSION_JOINED
+    default: NODE_ADMISSION_UNSPECIFIED
+    description: "- NODE_ADMISSION_NOT_CLUSTERED: Not Clustered is the default state at first boot\n - NODE_ADMISSION_LEAVING: Leaving can be a long lived state due to draining existing data\n - NODE_ADMISSION_JOINING: Joining can be a long lived state if inter-node networking is not operable\n - NODE_ADMISSION_JOINED: Joined is reached when the node becomes Ready the first time after a request\nto join the cluster"
+    title: Cluster Admission status of the eve node
+  EdgeNodeClusterStatus:
+    type: object
+    properties:
+      id:
+        type: string
+      runState:
+        $ref: '#/definitions/RunState'
+  infoKubeNodeConditionType:
+    type: string
+    enum:
+    - KUBE_NODE_CONDITION_TYPE_UNSPECIFIED
+    - KUBE_NODE_CONDITION_TYPE_READY
+    - KUBE_NODE_CONDITION_TYPE_MEMORY_PRESSURE
+    - KUBE_NODE_CONDITION_TYPE_DISK_PRESSURE
+    - KUBE_NODE_CONDITION_TYPE_PID_PRESSURE
+    - KUBE_NODE_CONDITION_TYPE_NETWORK_UNAVAIL
+    default: KUBE_NODE_CONDITION_TYPE_UNSPECIFIED
+    title: "KubeNodeStatus follows Kubernetes Node Conditions\n  Refer here: https://pkg.go.dev/k8s.io/api/core/v1#NodeConditionType"
+  infoStorageHealthStatus:
+    type: string
+    enum:
+    - STORAGE_HEALTH_STATUS_UNSPECIFIED
+    - STORAGE_HEALTH_STATUS_HEALTHY
+    - STORAGE_HEALTH_STATUS_DEGRADED_2_REPLICA_AVAILABLE_REPLICATING
+    - STORAGE_HEALTH_STATUS_DEGRADED_2_REPLICA_AVAILABLE_NOT_REPLICATING
+    - STORAGE_HEALTH_STATUS_DEGRADED_1_REPLICA_AVAILABLE_REPLICATING
+    - STORAGE_HEALTH_STATUS_DEGRADED_1_REPLICA_AVAILABLE_NOT_REPLICATING
+    - STORAGE_HEALTH_STATUS_FAILED
+    default: STORAGE_HEALTH_STATUS_UNSPECIFIED
+    description: 'StorageHealthStatus is a higher level tracking status to show redundancy/failure-zone level
+
+      and rebuild progress.'
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  infoStorageVolumeReplicaStatus:
+    type: string
+    enum:
+    - STORAGE_VOLUME_REPLICA_STATUS_UNSPECIFIED
+    - STORAGE_VOLUME_REPLICA_STATUS_REBUILDING
+    - STORAGE_VOLUME_REPLICA_STATUS_ONLINE
+    - STORAGE_VOLUME_REPLICA_STATUS_FAILED
+    - STORAGE_VOLUME_REPLICA_STATUS_OFFLINE
+    - STORAGE_VOLUME_REPLICA_STATUS_STARTING
+    - STORAGE_VOLUME_REPLICA_STATUS_STOPPING
+    default: STORAGE_VOLUME_REPLICA_STATUS_UNSPECIFIED
+    description: "StorageVolumeReplicaStatus is a higher level status which combines replica and engine\n   status to show a simplified view of a replica rebuild state."
+  infoKubeCompUpdateStatus:
+    type: string
+    enum:
+    - KUBE_COMP_UPDATE_STATUS_UNSPECIFIED
+    - KUBE_COMP_UPDATE_STATUS_DOWNLOAD
+    - KUBE_COMP_UPDATE_STATUS_DOWNLOAD_FAILED
+    - KUBE_COMP_UPDATE_STATUS_IN_PROGRESS
+    - KUBE_COMP_UPDATE_STATUS_FAILED
+    - KUBE_COMP_UPDATE_STATUS_COMPLETED
+    default: KUBE_COMP_UPDATE_STATUS_UNSPECIFIED
+    description: "KubeCompUpdateStatus will track status of each\n KubeComp which will update serially in a cluster."
+  EdgeNodeClusterUpgradeStatus:
+    type: string
+    enum:
+    - STATUS_UNSPECIFIED
+    - STATUS_IN_PROGRESS
+    - STATUS_COMPLETED
+    - STATUS_FAILED
+    default: STATUS_UNSPECIFIED
+  infoZInfoKubeClusterUpdateStatus:
+    type: object
+    properties:
+      currentNode:
+        type: string
+        title: current_node will have an empty value when no node is in an update
+      component:
+        $ref: '#/definitions/infoKubeComp'
+        title: component currently under update or KUBE_COMP_UNSPECIFIED when no update in progress
+      status:
+        $ref: '#/definitions/infoKubeCompUpdateStatus'
+        title: "status of the current component under update, KUBE_COMP_UPDATE_STATUS_UNSPECIFIED when\n  no updates in progress"
+      error:
+        $ref: '#/definitions/infoErrorInfo'
+        title: Error info in case of failure
+      clusterId:
+        type: string
+        description: "Cluster UUID which will match config.EdgeNodeCluster.cluster_id passed\n  in to the node by the controller."
+  infoKubeNodeCondition:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/infoKubeNodeConditionType'
+        title: Type of the condition
+      set:
+        type: boolean
+        title: Condition state
+      lastTransitionTime:
+        type: string
+        format: date-time
+        title: last_transition_time is the last time the Condition changed
+  infoKubeVMIStatus:
+    type: string
+    enum:
+    - KUBE_VMI_STATUS_UNSPECIFIED
+    - KUBE_VMI_STATUS_PENDING
+    - KUBE_VMI_STATUS_SCHEDULING
+    - KUBE_VMI_STATUS_SCHEDULED
+    - KUBE_VMI_STATUS_RUNNING
+    - KUBE_VMI_STATUS_SUCCEEDED
+    - KUBE_VMI_STATUS_FAILED
+    - KUBE_VMI_STATUS_UNKNOWN
+    default: KUBE_VMI_STATUS_UNSPECIFIED
+    title: 'KubeVMIStatus is the VirtualMachineInstancePhase
+
+      Refer to: https://pkg.go.dev/kubevirt.io/api/core/v1#VirtualMachineInstancePhase'
+  RunState:
+    type: string
+    enum:
+    - RUN_STATE_UNSPECIFIED
+    - RUN_STATE_ONLINE
+    - RUN_STATE_HALTED
+    - RUN_STATE_INIT
+    - RUN_STATE_REBOOTING
+    - RUN_STATE_OFFLINE
+    - RUN_STATE_UNKNOWN
+    - RUN_STATE_UNPROVISIONED
+    - RUN_STATE_PROVISIONED
+    - RUN_STATE_SUSPECT
+    - RUN_STATE_DOWNLOADING
+    - RUN_STATE_RESTARTING
+    - RUN_STATE_PURGING
+    - RUN_STATE_HALTING
+    - RUN_STATE_ERROR
+    - RUN_STATE_VERIFYING
+    - RUN_STATE_LOADING
+    - RUN_STATE_CREATING_VOLUME
+    - RUN_STATE_BOOTING
+    - RUN_STATE_MAINTENANCE_MODE
+    - RUN_STATE_START_DELAYED
+    - RUN_STATE_BASEOS_UPDATING
+    - RUN_STATE_PREPARING_POWEROFF
+    - RUN_STATE_POWERING_OFF
+    - RUN_STATE_PREPARED_POWEROFF
+    default: RUN_STATE_UNSPECIFIED
+    description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
+    title: RunState - On update, please update RunState_HttpRequest as well
+  infoKubeStorageInfo:
+    type: object
+    properties:
+      health:
+        $ref: '#/definitions/infoServiceStatus'
+        title: Health of the distributes storage services
+      transitionTime:
+        type: string
+        format: date-time
+        title: Time of the most recent health status transition
+      volumes:
+        type: array
+        items:
+          $ref: '#/definitions/infoKubeVolumeInfo'
+        title: Status of all the volumes in Longhorn
+  infoKubeVolumeReplicaInfo:
+    type: object
+    properties:
+      name:
+        type: string
+        title: Name of the volume replica
+      ownerNode:
+        type: string
+        title: Node replica resides on, will match node name
+      rebuildProgressPercentage:
+        type: integer
+        format: int64
+        title: Rebuild progress of the volume replica
+      status:
+        $ref: '#/definitions/infoStorageVolumeReplicaStatus'
+        title: Replica status
+  infoZInfoKubeCluster:
+    type: object
+    properties:
+      nodes:
+        type: array
+        items:
+          $ref: '#/definitions/infoKubeNodeInfo'
+        title: Info message on a list of cluster nodes
+      podNameSpaces:
+        type: array
+        items:
+          $ref: '#/definitions/infoKubePodNameSpaceInfo'
+        title: Info message on a list of namespaces's pods summary
+      eveApps:
+        type: array
+        items:
+          $ref: '#/definitions/infoKubeEVEAppPodInfo'
+        title: Info message on a list of EVE applications
+      storage:
+        $ref: '#/definitions/infoKubeStorageInfo'
+        title: Info message on cluster storage
+      clusterId:
+        type: string
+        description: "Cluster UUID which will match config.EdgeNodeCluster.cluster_id passed\n  in to the node by the controller."
+      eveVmApps:
+        type: array
+        items:
+          $ref: '#/definitions/infoKubeVMIInfo'
+        title: Virtual Machines running on the cluster
+  infoServiceStatus:
+    type: string
+    enum:
+    - SERVICE_STATUS_UNSPECIFIED
+    - SERVICE_STATUS_FAILED
+    - SERVICE_STATUS_DEGRADED
+    - SERVICE_STATUS_HEALTHY
+    default: SERVICE_STATUS_UNSPECIFIED
+    title: "ServiceStatus denotes a cluster wide\n infrastructure component's health.\n eg. a daemonset which requires pods on multiple nodes"
+  infoStorageVolumeRobustness:
+    type: string
+    enum:
+    - STORAGE_VOLUME_ROBUSTNESS_UNSPECIFIED
+    - STORAGE_VOLUME_ROBUSTNESS_HEALTHY
+    - STORAGE_VOLUME_ROBUSTNESS_DEGRADED
+    - STORAGE_VOLUME_ROBUSTNESS_FAULTED
+    default: STORAGE_VOLUME_ROBUSTNESS_UNSPECIFIED
+    title: "StorageVolumeRobustness is the 'robustness' of a replicated csi-driver volume.\n Refer to: https://github.com/longhorn/longhorn-manager/blob/v1.6.2/k8s/pkg/apis/longhorn/v1beta1/volume.go#L25"
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

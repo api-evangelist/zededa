@@ -1,0 +1,1588 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService ZKSClusterInstances API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: ZKSClusterInstances
+  description: APIs for managing ZKS (ZEDEDA Kubernetes Service) cluster instances including creation, management, node operations, and status monitoring
+paths:
+  /v1/zks/instances:
+    get:
+      summary: List all ZKS instances
+      description: "Retrieve a list of all ZKS instances with their basic information and metadata.\n\n**Query Parameters:**\n- Pagination parameters supported via cursor\n\n**Example Request:**\n```\nGET /v1/zks/instances\n```\n\n**Example Response:**\n```json\n{\n  \"list\": [\n    {\n      \"id\": \"zks-instance-abc123\",\n      \"projectId\": \"project-123\",\n      \"name\": \"production-cluster\",\n      \"title\": \"Production Kubernetes Cluster\",\n      \"description\": \"Main production cluster for edge applications\",\n      \"tags\": {\n        \"environment\": \"production\",\n        \"region\": \"us-west\"\n      },\n      \"nOfNodes\": 3\n    },\n    {\n      \"id\": \"zks-instance-def456\",\n      \"projectId\": \"project-456\",\n      \"name\": \"development-cluster\",\n      \"title\": \"Development Kubernetes Cluster\",\n      \"description\": \"Development cluster for testing\",\n      \"tags\": {\n        \"environment\": \"development\",\n        \"region\": \"us-east\"\n      },\n      \"nOfNodes\": 1\n    }\n  ],\n  \"next\": {\n    \"pageToken\": \"next-page-token\"\n  }\n}\n```"
+      operationId: ZKSClusterInstances_ListZKSInstances
+      responses:
+        '200':
+          description: Successfully retrieved ZKS instances list
+          schema:
+            $ref: '#/definitions/ZksInstancesList'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to list ZKS instances.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve ZKS instances list due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      tags:
+      - ZKSClusterInstances
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+    post:
+      summary: Create a new ZKS instance
+      description: "Create a new ZKS (ZEDEDA Kubernetes Service) cluster instance with specified nodes and configuration.\n\n**Example Request:**\n```json\n{\n  \"projectId\": \"project-123\",\n  \"name\": \"production-cluster\",\n  \"title\": \"Production Kubernetes Cluster\",\n  \"description\": \"Main production cluster for edge applications\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"region\": \"us-west\",\n    \"purpose\": \"edge-computing\"\n  },\n  \"nodes\": [\n    {\n      \"id\": \"node-001\",\n      \"clusterInterface\": \"eth0\"\n    },\n    {\n      \"id\": \"node-002\",\n      \"clusterInterface\": \"eth0\"\n    }\n  ],\n  \"isImported\": false\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"zks-instance-abc123\",\n  \"objectName\": \"production-cluster\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 201,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```"
+      operationId: ZKSClusterInstances_CreateZKSInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '201':
+          description: Successfully created ZKS instance
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid ZKS instance configuration or missing required fields.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to create ZKS instances.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. ZKS instance with the same name already exists.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to create ZKS instance due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ZksInstance'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+    put:
+      summary: Bulk update ZKS instances
+      description: "Update multiple ZKS instances at once with new tags or other common properties. This operation is useful for applying changes to multiple clusters simultaneously.\n\n**Example Request:**\n```json\n{\n  \"ids\": [\n    \"zks-instance-abc123\",\n    \"zks-instance-def456\",\n    \"zks-instance-ghi789\"\n  ],\n  \"data\": {\n    \"tags\": {\n      \"environment\": \"production\",\n      \"version\": \"v2\",\n      \"managed-by\": \"platform-team\"\n    }\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"\",\n  \"objectName\": \"\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"Successfully updated 3 ZKS instances\"\n    }\n  ]\n}\n```"
+      operationId: ZKSClusterInstances_BulkUpdateZKSInstances
+      responses:
+        '200':
+          description: Successfully updated ZKS instances
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid bulk update configuration or empty instance IDs list.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to update ZKS instances.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. One or more ZKS instances with the specified IDs do not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to update ZKS instances due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ZksInstanceBulkUpdate'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/id/{id}:
+    put:
+      summary: Update ZKS instance
+      description: "Update an existing ZKS instance configuration including name, title, description, and tags.\n\n**Example Request:**\n```json\n{\n  \"id\": \"zks-instance-abc123\",\n  \"projectId\": \"project-123\",\n  \"name\": \"production-cluster\",\n  \"title\": \"Updated Production Kubernetes Cluster\",\n  \"description\": \"Updated main production cluster for edge applications\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"region\": \"us-west\",\n    \"version\": \"v2\"\n  },\n  \"nodes\": [\n    {\n      \"id\": \"node-001\",\n      \"clusterInterface\": \"eth0\"\n    },\n    {\n      \"id\": \"node-002\",\n      \"clusterInterface\": \"eth0\"\n    }\n  ],\n  \"isImported\": false\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"zks-instance-abc123\",\n  \"objectName\": \"production-cluster\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```"
+      operationId: ZKSClusterInstances_UpdateZKSInstance
+      responses:
+        '200':
+          description: Successfully updated ZKS instance
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid ZKS instance configuration or missing required fields.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to update this ZKS instance.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. ZKS instance with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Update conflicts with current instance state.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to update ZKS instance due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the zks instance
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            projectId:
+              type: string
+              description: Foreign key to the project
+              pattern: '[0-9A-Za-z-]+'
+            name:
+              type: string
+              description: User defined name of the zks instance, unique across the enterprise. Once zks instance is created, name can’t be changed
+            title:
+              type: string
+              description: User defined title of the zks instance. Title can be changed at any time
+            description:
+              type: string
+              description: Detailed description of the zks instance
+            tags:
+              type: object
+              additionalProperties:
+                type: string
+              description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+              maxLength: 32
+              pattern: ^[^<%&?/\>]+$
+            nodes:
+              type: array
+              items:
+                $ref: '#/definitions/ZksInstanceNode'
+              description: A list of nodes in the zks instance
+            isImported:
+              type: boolean
+              description: Indicates if the ZKS instance is imported from an external source
+            clusterPrefix:
+              type: string
+              description: Cluster prefix for the ZKS instance
+          description: ZKS Instance details
+          title: ZKS Instance details
+          required:
+          - projectId
+          - name
+          - nodes
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/id/{zksId}:
+    get:
+      summary: Get ZKS instance by ID
+      description: "Retrieve detailed information about a specific ZKS instance including its configuration, nodes, and metadata.\n\n**Example Request:**\n```\nGET /v1/zks/instances/id/zks-instance-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"zks-instance-abc123\",\n  \"projectId\": \"project-123\",\n  \"name\": \"production-cluster\",\n  \"title\": \"Production Kubernetes Cluster\",\n  \"description\": \"Main production cluster for edge applications\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"region\": \"us-west\",\n    \"purpose\": \"edge-computing\"\n  },\n  \"nodes\": [\n    {\n      \"id\": \"node-001\",\n      \"clusterInterface\": \"eth0\"\n    },\n    {\n      \"id\": \"node-002\",\n      \"clusterInterface\": \"eth0\"\n    }\n  ],\n  \"isImported\": false\n}\n```"
+      operationId: ZKSClusterInstances_GetZKSInstance
+      responses:
+        '200':
+          description: Successfully retrieved ZKS instance information
+          schema:
+            $ref: '#/definitions/ZksInstance'
+        '400':
+          description: Bad Request. Invalid ZKS instance ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view this ZKS instance.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. ZKS instance with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve ZKS instance due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: zksId
+        description: Unique identifier of the ZKS instance. This field is required and must be a valid ZKS instance ID.
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+    delete:
+      summary: Delete ZKS instance
+      description: "Delete a ZKS instance and all its associated resources. This operation is irreversible and will terminate all running workloads.\n\n**Example Request:**\n```\nDELETE /v1/zks/instances/id/zks-instance-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"zks-instance-abc123\",\n  \"objectName\": \"production-cluster\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Warning:** This operation will permanently delete the ZKS instance and all its data. Ensure all important data is backed up before deletion."
+      operationId: ZKSClusterInstances_DeleteZKSInstance
+      responses:
+        '200':
+          description: Successfully deleted ZKS instance
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid ZKS instance ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to delete this ZKS instance.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. ZKS instance with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Cannot delete ZKS instance due to active workloads or dependencies.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to delete ZKS instance due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: zksId
+        description: Unique identifier of the ZKS instance. This field is required and must be a valid ZKS instance ID.
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/id/{zksId}/metrics:
+    get:
+      summary: Get ZKS instance metrics by ID
+      description: "Retrieve detailed metrics for a specific ZKS instance including resource utilization and capacity information.\n\n**Example Request:**\n```\nGET /v1/zks/instances/id/zks-instance-abc123/metrics\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"zks-instance-abc123\",\n  \"name\": \"production-cluster\",\n  \"provider\": \"k3s\",\n  \"kubeVersion\": \"v1.28.2+k3s1\",\n  \"architecture\": \"amd64\",\n  \"created\": \"2024-01-15T10:00:00Z\",\n  \"totalResources\": 100,\n  \"nOfNodes\": 3,\n  \"deployments\": 15,\n  \"capacity\": {\n    \"pods\": {\n      \"used\": 25,\n      \"total\": 110\n    },\n    \"cpus\": {\n      \"reserved\": {\n        \"current\": 2.5,\n        \"total\": 8.0\n      },\n      \"used\": {\n        \"current\": 1.8,\n        \"total\": 8.0\n      }\n    },\n    \"memory\": {\n      \"reserved\": {\n        \"current\": 4.0,\n        \"total\": 16.0\n      },\n      \"used\": {\n        \"current\": 3.2,\n        \"total\": 16.0\n      }\n    }\n  }\n}\n```"
+      operationId: ZKSClusterInstances_GetZKSInstanceMetrics
+      responses:
+        '200':
+          description: Successfully retrieved ZKS instance metrics
+          schema:
+            $ref: '#/definitions/ZksInstanceMetrics'
+        '400':
+          description: Bad Request. Invalid ZKS instance ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view metrics for this ZKS instance.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. ZKS instance with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve metrics due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: zksId
+        description: Unique identifier of the ZKS instance. This field is required and must be a valid ZKS instance ID.
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/id/{zksId}/nodes:
+    put:
+      summary: Update ZKS instance nodes
+      description: "Add or remove nodes from a ZKS instance. This operation allows scaling the cluster up or down by managing individual nodes.\n\n**Example Request (Add Nodes):**\n```json\n{\n  \"action\": \"NODE_ACTION_ADD_NODES\",\n  \"nodes\": [\n    {\n      \"id\": \"node-003\",\n      \"clusterInterface\": \"eth0\"\n    },\n    {\n      \"id\": \"node-004\",\n      \"clusterInterface\": \"eth0\"\n    }\n  ]\n}\n```\n\n**Example Request (Remove Nodes):**\n```json\n{\n  \"action\": \"NODE_ACTION_REMOVE_NODES\",\n  \"nodes\": [\n    {\n      \"id\": \"node-002\",\n      \"clusterInterface\": \"eth0\"\n    }\n  ]\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"zks-instance-abc123\",\n  \"objectName\": \"production-cluster\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```"
+      operationId: ZKSClusterInstances_UpdateZKSInstanceNodes
+      responses:
+        '200':
+          description: Successfully updated ZKS instance nodes
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid node update configuration or missing required fields.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to update this ZKS instance.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. ZKS instance with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Cannot update nodes due to cluster state or resource constraints.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to update nodes due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: zksId
+        description: ZKS instance ID for the node update operation
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            action:
+              $ref: '#/definitions/NodeAction'
+              description: Action to be performed on the nodes
+            nodes:
+              type: array
+              items:
+                $ref: '#/definitions/ZksInstanceNode'
+              description: List of nodes to be added or removed
+          title: ZksNodeUpdate for node update operations
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/id/{zksId}/registration-commands:
+    get:
+      summary: Get registration commands by ID
+      description: "Retrieve registration commands for adding nodes to a ZKS instance. These commands can be executed on edge devices to join them to the cluster.\n\n**Example Request:**\n```\nGET /v1/zks/instances/id/zks-instance-abc123/registration-commands\n```\n\n**Example Response:**\n```json\n{\n  \"created\": \"2024-01-15T10:30:00Z\",\n  \"manifestUrl\": \"https://api.zededa.com/manifests/zks-instance-abc123\",\n  \"commands\": {\n    \"command\": \"curl -sfL https://get.k3s.io | K3S_URL=https://cluster.example.com:6443 K3S_TOKEN=K1234567890abcdef::server:1234567890abcdef sh -\",\n    \"insecureCommand\": \"curl -sfL https://get.k3s.io | K3S_URL=https://cluster.example.com:6443 K3S_TOKEN=K1234567890abcdef::server:1234567890abcdef INSTALL_K3S_SKIP_VERIFY=true sh -\",\n    \"nodeCommand\": \"curl -sfL https://get.k3s.io | K3S_URL=https://cluster.example.com:6443 K3S_TOKEN=K1234567890abcdef::server:1234567890abcdef sh -s - agent\",\n    \"windowsNodeCommand\": \"Invoke-WebRequest -Uri https://github.com/k3s-io/k3s/releases/download/v1.28.2%2Bk3s1/k3s-windows-amd64.exe -OutFile k3s.exe\"\n  }\n}\n```"
+      operationId: ZKSClusterInstances_GetZKSInstanceRegistrationCommands
+      responses:
+        '200':
+          description: Successfully retrieved registration commands
+          schema:
+            $ref: '#/definitions/ZksInstanceRegistrationInfo'
+        '400':
+          description: Bad Request. Invalid ZKS instance ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view registration commands.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. ZKS instance with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve registration commands due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: zksId
+        description: Unique identifier of the ZKS instance. This field is required and must be a valid ZKS instance ID.
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/id/{zksId}/upgrade:
+    put:
+      summary: Upgrade ZKS instance
+      description: "Upgrade a ZKS instance to a new base OS image or Kubernetes version. This operation will update the underlying infrastructure.\n\n**Example Request:**\n```json\n{\n  \"baseOSImage\": {\n    \"name\": \"ubuntu-22.04-lts\",\n    \"version\": \"22.04.3\",\n    \"digest\": \"sha256:abcd1234...\"\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"zks-instance-abc123\",\n  \"objectName\": \"production-cluster\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"upgrade-job-123\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Note:** Upgrade operations may take significant time to complete and will be processed asynchronously."
+      operationId: ZKSClusterInstances_UpgradeZKSInstance
+      responses:
+        '200':
+          description: Successfully initiated ZKS instance upgrade
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid upgrade configuration or missing required fields.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to upgrade this ZKS instance.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. ZKS instance with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Cannot upgrade due to cluster state or ongoing operations.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to initiate upgrade due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: zksId
+        description: ZKS instance ID for the upgrade operation
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            baseOSImage:
+              $ref: '#/definitions/BaseOSImage'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/import:
+    post:
+      summary: Import an existing ZKS instance
+      description: "Import an existing Kubernetes cluster as a ZKS instance into the ZEDEDA platform. This allows managing externally created clusters through ZEDEDA.\n\n**Example Request:**\n```json\n{\n  \"projectId\": \"project-123\",\n  \"name\": \"imported-cluster\",\n  \"title\": \"Imported Production Cluster\",\n  \"description\": \"Externally created cluster imported into ZEDEDA\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"source\": \"external\"\n  },\n  \"nodes\": [\n    {\n      \"id\": \"node-001\",\n      \"clusterInterface\": \"eth0\"\n    }\n  ],\n  \"isImported\": true\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"zks-instance-def456\",\n  \"objectName\": \"imported-cluster\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 201,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```"
+      operationId: ZKSClusterInstances_ImportZKSInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '201':
+          description: Successfully imported ZKS instance
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid import configuration or missing required fields.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to import ZKS instances.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. ZKS instance with the same name already exists.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to import ZKS instance due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ZksInstance'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/k3s-upgrade:
+    put:
+      summary: Bulk upgrade K3s version
+      description: "Upgrade K3s version for multiple ZKS instances simultaneously. This operation initiates a rolling upgrade across the specified clusters.\n\n**Example Request:**\n```json\n{\n  \"ids\": [\n    \"zks-instance-abc123\",\n    \"zks-instance-def456\"\n  ],\n  \"data\": {\n    \"version\": \"v1.28.5+k3s1\"\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"\",\n  \"objectName\": \"\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"bulk-upgrade-job-123\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"K3s upgrade initiated for 2 ZKS instances\"\n    }\n  ]\n}\n```\n\n**Note:** Upgrade operations are asynchronous and may take considerable time to complete."
+      operationId: ZKSClusterInstances_BulkUpgradeK3s
+      responses:
+        '200':
+          description: Successfully initiated K3s upgrade
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid upgrade configuration or empty instance IDs list.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to upgrade ZKS instances.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. One or more ZKS instances with the specified IDs do not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Cannot upgrade due to cluster state or ongoing operations.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to initiate K3s upgrade due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ZksInstanceK3sBulkUpgrade'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/k3s-versions:
+    get:
+      summary: Get available K3s versions
+      description: "Retrieve a list of available K3s versions that can be used for cluster creation or upgrades.\n\n**Example Request:**\n```\nGET /v1/zks/instances/k3s-versions\n```\n\n**Example Response:**\n```json\n{\n  \"list\": [\n    {\n      \"id\": \"v1.28.5+k3s1\",\n      \"version\": \"v1.28.5+k3s1\",\n      \"type\": \"release\"\n    },\n    {\n      \"id\": \"v1.28.4+k3s2\",\n      \"version\": \"v1.28.4+k3s2\",\n      \"type\": \"release\"\n    },\n    {\n      \"id\": \"v1.27.9+k3s1\",\n      \"version\": \"v1.27.9+k3s1\",\n      \"type\": \"release\"\n    },\n    {\n      \"id\": \"v1.29.0+k3s1\",\n      \"version\": \"v1.29.0+k3s1\",\n      \"type\": \"beta\"\n    }\n  ]\n}\n```"
+      operationId: ZKSClusterInstances_GetK3sVersions
+      responses:
+        '200':
+          description: Successfully retrieved K3s versions list
+          schema:
+            $ref: '#/definitions/ZksK3sVersionList'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view K3s versions.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve K3s versions due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      tags:
+      - ZKSClusterInstances
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+  /v1/zks/instances/name/{zksName}:
+    get:
+      summary: Get ZKS instance by name
+      description: "Retrieve detailed information about a specific ZKS instance by its name.\n\n**Example Request:**\n```\nGET /v1/zks/instances/name/production-cluster\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"zks-instance-abc123\",\n  \"projectId\": \"project-123\",\n  \"name\": \"production-cluster\",\n  \"title\": \"Production Kubernetes Cluster\",\n  \"description\": \"Main production cluster for edge applications\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"region\": \"us-west\"\n  },\n  \"nodes\": [\n    {\n      \"id\": \"node-001\",\n      \"clusterInterface\": \"eth0\"\n    }\n  ],\n  \"isImported\": false\n}\n```"
+      operationId: ZKSClusterInstances_GetZKSInstanceByName
+      responses:
+        '200':
+          description: Successfully retrieved ZKS instance information
+          schema:
+            $ref: '#/definitions/ZksInstance'
+        '400':
+          description: Bad Request. Invalid ZKS instance name format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view this ZKS instance.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. ZKS instance with the specified name does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve ZKS instance due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: zksName
+        description: Name of the ZKS instance. This field is required and must be a valid ZKS instance name.
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/name/{zksName}/metrics:
+    get:
+      summary: Get ZKS instance metrics by name
+      description: "Retrieve detailed metrics for a specific ZKS instance by its name including resource utilization and capacity information.\n\n**Example Request:**\n```\nGET /v1/zks/instances/name/production-cluster/metrics\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"zks-instance-abc123\",\n  \"name\": \"production-cluster\",\n  \"provider\": \"k3s\",\n  \"kubeVersion\": \"v1.28.2+k3s1\",\n  \"architecture\": \"amd64\",\n  \"created\": \"2024-01-15T10:00:00Z\",\n  \"totalResources\": 100,\n  \"nOfNodes\": 3,\n  \"deployments\": 15,\n  \"capacity\": {\n    \"pods\": {\n      \"used\": 25,\n      \"total\": 110\n    },\n    \"cpus\": {\n      \"reserved\": {\n        \"current\": 2.5,\n        \"total\": 8.0\n      },\n      \"used\": {\n        \"current\": 1.8,\n        \"total\": 8.0\n      }\n    },\n    \"memory\": {\n      \"reserved\": {\n        \"current\": 4.0,\n        \"total\": 16.0\n      },\n      \"used\": {\n        \"current\": 3.2,\n        \"total\": 16.0\n      }\n    }\n  }\n}\n```"
+      operationId: ZKSClusterInstances_GetZKSInstanceMetricsByName
+      responses:
+        '200':
+          description: Successfully retrieved ZKS instance metrics
+          schema:
+            $ref: '#/definitions/ZksInstanceMetrics'
+        '400':
+          description: Bad Request. Invalid ZKS instance name format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view metrics for this ZKS instance.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. ZKS instance with the specified name does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve metrics due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: zksName
+        description: Name of the ZKS instance. This field is required and must be a valid ZKS instance name.
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/name/{zksName}/registration-commands:
+    get:
+      summary: Get registration commands by name
+      description: "Retrieve registration commands for adding nodes to a ZKS instance by its name. These commands can be executed on edge devices to join them to the cluster.\n\n**Example Request:**\n```\nGET /v1/zks/instances/name/production-cluster/registration-commands\n```\n\n**Example Response:**\n```json\n{\n  \"created\": \"2024-01-15T10:30:00Z\",\n  \"manifestUrl\": \"https://api.zededa.com/manifests/production-cluster\",\n  \"commands\": {\n    \"command\": \"curl -sfL https://get.k3s.io | K3S_URL=https://cluster.example.com:6443 K3S_TOKEN=K1234567890abcdef::server:1234567890abcdef sh -\",\n    \"insecureCommand\": \"curl -sfL https://get.k3s.io | K3S_URL=https://cluster.example.com:6443 K3S_TOKEN=K1234567890abcdef::server:1234567890abcdef INSTALL_K3S_SKIP_VERIFY=true sh -\",\n    \"nodeCommand\": \"curl -sfL https://get.k3s.io | K3S_URL=https://cluster.example.com:6443 K3S_TOKEN=K1234567890abcdef::server:1234567890abcdef sh -s - agent\",\n    \"windowsNodeCommand\": \"Invoke-WebRequest -Uri https://github.com/k3s-io/k3s/releases/download/v1.28.2%2Bk3s1/k3s-windows-amd64.exe -OutFile k3s.exe\"\n  }\n}\n```"
+      operationId: ZKSClusterInstances_GetZKSInstanceRegistrationCommandsByName
+      responses:
+        '200':
+          description: Successfully retrieved registration commands
+          schema:
+            $ref: '#/definitions/ZksInstanceRegistrationInfo'
+        '400':
+          description: Bad Request. Invalid ZKS instance name format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view registration commands.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. ZKS instance with the specified name does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve registration commands due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: zksName
+        description: Name of the ZKS instance. This field is required and must be a valid ZKS instance name.
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ZKSClusterInstances
+  /v1/zks/instances/status:
+    get:
+      summary: Get ZKS instances status
+      description: "Retrieve detailed status information for all ZKS instances including runtime metrics, capacity information, and node health.\n\n**Query Parameters:**\n- `zksid` (optional): Filter by ZKS instance ID\n- `zksname` (optional): Filter by ZKS instance name\n- `zksnamePattern` (optional): Filter by ZKS instance name pattern\n- `projectName` (optional): Filter by project name\n- `projectNamePattern` (optional): Filter by project name pattern\n- `tags` (optional): Filter by tags (JSON object)\n\n**Example Request:**\n```\nGET /v1/zks/instances/status\nGET /v1/zks/instances/status?zksname=production-cluster\nGET /v1/zks/instances/status?projectName=production-project\n```\n\n**Example Response:**\n```json\n{\n  \"list\": [\n    {\n      \"id\": \"zks-instance-abc123\",\n      \"projectId\": \"project-123\",\n      \"name\": \"production-cluster\",\n      \"title\": \"Production Kubernetes Cluster\",\n      \"description\": \"Main production cluster\",\n      \"tags\": {\n        \"environment\": \"production\"\n      },\n      \"runState\": \"DEPLOYED\",\n      \"kubeVersion\": \"v1.28.2\",\n      \"architecture\": \"amd64\",\n      \"created\": \"2024-01-15T10:00:00Z\",\n      \"totalResources\": 100,\n      \"nOfNodes\": 3,\n      \"deployments\": 15,\n      \"capacity\": {\n        \"pods\": {\n          \"used\": 25,\n          \"total\": 110\n        },\n        \"cpus\": {\n          \"reserved\": {\n            \"current\": 2.5,\n            \"total\": 8.0\n          },\n          \"used\": {\n            \"current\": 1.8,\n            \"total\": 8.0\n          }\n        },\n        \"memory\": {\n          \"reserved\": {\n            \"current\": 4.0,\n            \"total\": 16.0\n          },\n          \"used\": {\n            \"current\": 3.2,\n            \"total\": 16.0\n          }\n        }\n      },\n      \"projectName\": \"Production Project\",\n      \"isImported\": false\n    }\n  ],\n  \"summaries\": {\n    \"statuses\": {\n      \"online\": 3,\n      \"init\": 0,\n      \"suspect\": 0,\n      \"error\": 0,\n      \"unspecified\": 0,\n      \"unknown\": 0,\n      \"offline\": 0,\n      \"pending\": 0\n    }\n  },\n  \"next\": {\n    \"pageToken\": \"next-page-token\"\n  }\n}\n```"
+      operationId: ZKSClusterInstances_GetZKSInstancesStatus
+      responses:
+        '200':
+          description: Successfully retrieved ZKS instances status
+          schema:
+            $ref: '#/definitions/ZksInstanceStatusListResp'
+        '400':
+          description: Bad Request. Invalid query parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view ZKS instances status.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve status due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      tags:
+      - ZKSClusterInstances
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+definitions:
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  NodeAction:
+    type: string
+    enum:
+    - NODE_ACTION_UNSPECIFIED
+    - NODE_ACTION_ADD_NODES
+    - NODE_ACTION_REMOVE_NODES
+    default: NODE_ACTION_UNSPECIFIED
+    title: NodeAction enum for node operations
+  ZksInstanceRegistrationInfo:
+    type: object
+    properties:
+      created:
+        type: string
+        description: Timestamp when the registration commands were created
+      manifestUrl:
+        type: string
+        description: URL to fetch the registration manifest
+      commands:
+        $ref: '#/definitions/ZksInstanceRegistrationCommands'
+        description: Registration commands for the ZKS instance
+  PodsCapacity:
+    type: object
+    properties:
+      used:
+        type: integer
+        format: int32
+        description: Used pods capacity
+      total:
+        type: integer
+        format: int32
+        description: Total pods capacity
+    title: ResourceCapacity represents capacity info for pods
+  ZksInstanceBulkUpdateData:
+    type: object
+    properties:
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: New tags for the ZKS instance
+  ZksInstancesList:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/ZksInstanceSummary'
+        description: List of ZKS instances
+      next:
+        $ref: '#/definitions/Cursor'
+        description: next cursor
+    title: ZksInstancesList is the response for listing ZKS instances
+  ZksK3sVersion:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier for the K3s version
+      version:
+        type: string
+        description: K3s version string
+      type:
+        type: string
+        description: Type of the K3s version (e.g., release, beta)
+  ZksInstanceNode:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the node
+        readOnly: true
+        pattern: '[0-9A-Za-z-]+'
+        uniqueItems: true
+      clusterInterface:
+        type: string
+        description: Cluster interface of the node
+    description: ZKS Instance node detail
+    title: ZKS Instance node detail
+    required:
+    - id
+    - clusterInterface
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  ResourceUsage:
+    type: object
+    properties:
+      current:
+        type: number
+        format: double
+        description: Current resource usage
+      total:
+        type: number
+        format: double
+        description: Total resource usage
+    title: ResourceUsage represents usage metrics for a resource
+  Cursor:
+    type: object
+    properties:
+      pageToken:
+        type: string
+        description: Page Token
+      orderBy:
+        type: array
+        items:
+          type: string
+        description: OrderBy helps in sorting the list response
+      pageNum:
+        type: number
+        format: int64
+        description: Page Number
+      pageSize:
+        type: number
+        format: int64
+        description: Defines the page size
+      totalPages:
+        type: number
+        format: int64
+        description: Total number of pages to be fetched.
+    description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+    title: Cursor is used as filter in list operation.
+  ClusterCapacity:
+    type: object
+    properties:
+      pods:
+        $ref: '#/definitions/PodsCapacity'
+        description: Pods capacity of the cluster
+      cpus:
+        $ref: '#/definitions/ResourceCapacityUsage'
+        description: CPU capacity of the cluster
+      memory:
+        $ref: '#/definitions/ResourceCapacityUsage'
+        description: Memory capacity of the cluster
+    title: ClusterCapacity represents the overall capacity of a cluster
+  ZksInstanceK3sBulkUpgrade:
+    type: object
+    properties:
+      ids:
+        type: array
+        items:
+          type: string
+        description: List of ZKS instance IDs to be upgraded
+      data:
+        $ref: '#/definitions/ZksInstanceK3sBulkUpgradeData'
+        description: Data for bulk upgrade
+  BaseOSImage:
+    type: object
+    properties:
+      uuid:
+        type: string
+        description: system generated unique id for an image
+      version:
+        type: string
+        description: image version
+      imageName:
+        type: string
+        description: image name
+      activate:
+        type: boolean
+        description: activation flag
+      imvolId:
+        type: string
+        description: immutable Volume for this base image
+    description: Base OS image request details
+    title: Base OS image payload detail
+    required:
+    - uuid
+    - version
+    - imageName
+    - activate
+  ZksInstanceStatus:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the zks instance
+      projectId:
+        type: string
+        description: Foreign key to the project
+      name:
+        type: string
+        description: User defined name of the zks instance, unique across the enterprise. Once zks instance is created, name can’t be changed
+      title:
+        type: string
+        description: User defined title of the zks instance. Title can be changed at any time
+      description:
+        type: string
+        description: Detailed description of the zks instance
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags are name/value pairs that enable you to categorize resources.
+      runState:
+        $ref: '#/definitions/RunState'
+        description: Current state of the zks instance
+      provider:
+        type: string
+        description: Provider of the zks instance
+      kubeVersion:
+        type: string
+        description: Kubernetes version of the zks instance
+      architecture:
+        type: string
+        description: Architecture of the zks instance
+      created:
+        type: string
+        format: date-time
+        description: Creation time of the zks instance
+      totalResources:
+        type: integer
+        format: int32
+        description: Total resources in the zks instance
+      nOfNodes:
+        type: integer
+        format: int32
+        description: Number of nodes in the zks instance
+      deployments:
+        type: integer
+        format: int32
+        description: Number of deployments in the zks instance
+      capacity:
+        $ref: '#/definitions/ClusterCapacity'
+        description: Capacity information of the zks instance
+      zksClusterId:
+        type: string
+        description: ZKS cluster ID
+      projectName:
+        type: string
+        description: Name of the project to which the zks instance belongs
+      zksBaseUrl:
+        type: string
+        description: Base URL of the ZKS instance
+      isImported:
+        type: boolean
+        description: Indicates if the ZKS instance is imported from an external source
+      fleetWorkspaceName:
+        type: string
+        description: Name of the Fleet workspace associated with the ZKS instance
+      totalNumberOfNodes:
+        type: integer
+        format: int32
+        description: Total number of nodes in the ZKS instance
+      clusterPrefix:
+        type: string
+        description: Cluster prefix for the ZKS instance
+    title: ZksClusterStatus represents detailed status information for a cluster
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  ResourceCapacityUsage:
+    type: object
+    properties:
+      reserved:
+        $ref: '#/definitions/ResourceUsage'
+        description: Reserved resource usage
+      used:
+        $ref: '#/definitions/ResourceUsage'
+        description: Used resource usage
+    title: ResourceCapacityUsage represents capacity with reserved and used values
+  ZksInstanceStatusListResp:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/ZksInstanceStatus'
+        description: Detailed statuses of the zks instances
+      result:
+        $ref: '#/definitions/ZsrvResponse'
+        description: Response result
+      summaries:
+        $ref: '#/definitions/ZksInstanceStatusSummaries'
+        description: Summaries of the ZKS instance statuses
+      totalCount:
+        type: integer
+        format: int64
+        description: Total count of zks instances matching the filter
+      next:
+        $ref: '#/definitions/Cursor'
+        description: Cursor for pagination
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  ZksInstanceK3sBulkUpgradeData:
+    type: object
+    properties:
+      version:
+        type: string
+        description: K3s version to upgrade to
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  ZksInstanceBulkUpdate:
+    type: object
+    properties:
+      ids:
+        type: array
+        items:
+          type: string
+        description: List of ZKS instance IDs to be updated
+      data:
+        $ref: '#/definitions/ZksInstanceBulkUpdateData'
+        description: Data for bulk update
+  ZksInstanceStatusSummary:
+    type: object
+    properties:
+      online:
+        type: integer
+        format: int32
+        description: Number of online nodes in the zks instance
+      init:
+        type: integer
+        format: int32
+        description: Number of nodes in init state in the zks instance
+      suspect:
+        type: integer
+        format: int32
+        description: Number of suspect nodes in the zks instance
+      error:
+        type: integer
+        format: int32
+        description: Number of error nodes in the zks instance
+      unspecified:
+        type: integer
+        format: int32
+        description: Number of nodes in unspecified state in the zks instance
+      unknown:
+        type: integer
+        format: int32
+        description: Number of nodes in unknown state in the zks instance
+      offline:
+        type: integer
+        format: int32
+        description: Number of offline nodes in the zks instance
+      pending:
+        type: integer
+        format: int32
+        description: Number of pending nodes in the zks instance
+  ZksK3sVersionList:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/ZksK3sVersion'
+        description: List of available K3s versions
+  ZksInstance:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the zks instance
+        readOnly: true
+        pattern: '[0-9A-Za-z-]+'
+        uniqueItems: true
+      projectId:
+        type: string
+        description: Foreign key to the project
+        pattern: '[0-9A-Za-z-]+'
+      name:
+        type: string
+        description: User defined name of the zks instance, unique across the enterprise. Once zks instance is created, name can’t be changed
+      title:
+        type: string
+        description: User defined title of the zks instance. Title can be changed at any time
+      description:
+        type: string
+        description: Detailed description of the zks instance
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+        maxLength: 32
+        pattern: ^[^<%&?/\>]+$
+      nodes:
+        type: array
+        items:
+          $ref: '#/definitions/ZksInstanceNode'
+        description: A list of nodes in the zks instance
+      isImported:
+        type: boolean
+        description: Indicates if the ZKS instance is imported from an external source
+      clusterPrefix:
+        type: string
+        description: Cluster prefix for the ZKS instance
+    description: ZKS Instance details
+    title: ZKS Instance details
+    required:
+    - projectId
+    - name
+    - nodes
+  ZksInstanceRegistrationCommands:
+    type: object
+    properties:
+      command:
+        type: string
+        description: Command to register a node with the ZKS instance
+      insecureCommand:
+        type: string
+        description: Insecure command to register a node with the ZKS instance
+      nodeCommand:
+        type: string
+        description: Node command to register a node with the ZKS instance
+      windowsNodeCommand:
+        type: string
+        description: Windows node command to register a node with the ZKS instance
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  ZksInstanceSummary:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the zks instance
+      projectId:
+        type: string
+        description: Foreign key to the project
+      name:
+        type: string
+        description: User defined name of the zks instance, unique across the enterprise. Once zks instance is created, name can’t be changed
+      title:
+        type: string
+        description: User defined title of the zks instance. Title can be changed at any time
+      description:
+        type: string
+        description: Detailed description of the zks instance
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags are name/value pairs that enable you to categorize resources.
+      nOfNodes:
+        type: integer
+        format: int32
+        description: Number of nodes in the zks instance
+    title: ZksInstanceSummary is used for listing ZKS instances
+  ZksInstanceStatusSummaries:
+    type: object
+    properties:
+      statuses:
+        $ref: '#/definitions/ZksInstanceStatusSummary'
+        description: Summary of the zks instance status
+  ZksInstanceMetrics:
+    type: object
+    properties:
+      id:
+        type: string
+        description: ZKS instance ID for which metrics are provided
+      name:
+        type: string
+        description: ZKS instance name for which metrics are provided
+      provider:
+        type: string
+        description: Provider of the zks instance
+      kubeVersion:
+        type: string
+        description: Kubernetes version of the zks instance
+      architecture:
+        type: string
+        description: Architecture of the zks instance
+      created:
+        type: string
+        format: date-time
+        description: Creation time of the zks instance
+      totalResources:
+        type: integer
+        format: int32
+        description: Total resources in the zks instance
+      nOfNodes:
+        type: integer
+        format: int32
+        description: Number of nodes in the zks instance
+      deployments:
+        type: integer
+        format: int32
+        description: Number of deployments in the zks instance
+      capacity:
+        $ref: '#/definitions/ClusterCapacity'
+        description: Capacity information of the zks instance
+  RunState:
+    type: string
+    enum:
+    - RUN_STATE_UNSPECIFIED
+    - RUN_STATE_ONLINE
+    - RUN_STATE_HALTED
+    - RUN_STATE_INIT
+    - RUN_STATE_REBOOTING
+    - RUN_STATE_OFFLINE
+    - RUN_STATE_UNKNOWN
+    - RUN_STATE_UNPROVISIONED
+    - RUN_STATE_PROVISIONED
+    - RUN_STATE_SUSPECT
+    - RUN_STATE_DOWNLOADING
+    - RUN_STATE_RESTARTING
+    - RUN_STATE_PURGING
+    - RUN_STATE_HALTING
+    - RUN_STATE_ERROR
+    - RUN_STATE_VERIFYING
+    - RUN_STATE_LOADING
+    - RUN_STATE_CREATING_VOLUME
+    - RUN_STATE_BOOTING
+    - RUN_STATE_MAINTENANCE_MODE
+    - RUN_STATE_START_DELAYED
+    - RUN_STATE_BASEOS_UPDATING
+    - RUN_STATE_PREPARING_POWEROFF
+    - RUN_STATE_POWERING_OFF
+    - RUN_STATE_PREPARED_POWEROFF
+    default: RUN_STATE_UNSPECIFIED
+    description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
+    title: RunState - On update, please update RunState_HttpRequest as well
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

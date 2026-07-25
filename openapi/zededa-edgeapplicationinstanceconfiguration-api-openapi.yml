@@ -1,0 +1,3052 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService EdgeApplicationInstanceConfiguration API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: EdgeApplicationInstanceConfiguration
+paths:
+  /v1/apps/instances:
+    get:
+      summary: Query edge application instances
+      description: Query the edge application instance records.
+      operationId: EdgeApplicationInstanceConfiguration_QueryEdgeApplicationInstances
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/AppInstances'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: project
+        description: User defined name of the project, unique across the enterprise. Once project is created, name can’t be changed
+        in: query
+        required: false
+        type: string
+      - name: bundle
+        description: User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed
+        in: query
+        required: false
+        type: string
+      - name: device
+        description: User defined name of the device, unique across the enterprise. Once device is created, name can’t be changed
+        in: query
+        required: false
+        type: string
+      - name: namePattern
+        description: name pattern
+        in: query
+        required: false
+        type: string
+      - name: appType
+        description: type of bundle
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: deploymentType
+        description: 'type of deployment for the app, eg: azure, k3s, standalone'
+        in: query
+        required: false
+        type: string
+        enum:
+        - DEPLOYMENT_TYPE_UNSPECIFIED
+        - DEPLOYMENT_TYPE_STAND_ALONE
+        - DEPLOYMENT_TYPE_AZURE
+        - DEPLOYMENT_TYPE_K3S
+        - DEPLOYMENT_TYPE_AWS
+        - DEPLOYMENT_TYPE_K3S_AZURE
+        - DEPLOYMENT_TYPE_K3S_AWS
+        - DEPLOYMENT_TYPE_VMWARE_VCE
+        - DEPLOYMENT_TYPE_VMWARE_TKG_ATTACH
+        - DEPLOYMENT_TYPE_DOCKER_RUNTIME
+        default: DEPLOYMENT_TYPE_UNSPECIFIED
+      - name: projectNamePattern
+        description: project name pattern
+        in: query
+        required: false
+        type: string
+      - name: deviceNamePattern
+        description: device name pattern
+        in: query
+        required: false
+        type: string
+      - name: summary
+        description: summary flag
+        in: query
+        required: false
+        type: boolean
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: fields
+        description: 'Fields to select: id, name, title, description, projectId, tags, clusterID, appId, deviceId, manifestInfo, appType, appPolicyId, userDefinedVersion, remoteConsole'
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+    post:
+      summary: Create edge application instance
+      description: Create an edge application instance record.
+      operationId: EdgeApplicationInstanceConfiguration_CreateEdgeApplicationInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this edge application instance record will conflict with an already existing edge application iinstance record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/AppInstance'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v1/apps/instances/id/{id}:
+    get:
+      summary: Get edge application instance
+      description: Get the configuration (without security details) of an edge application instance record.
+      operationId: EdgeApplicationInstanceConfiguration_GetEdgeApplicationInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/AppInstance'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+    delete:
+      summary: Delete edge application instance
+      description: Delete an edge application instance record.
+      operationId: EdgeApplicationInstanceConfiguration_DeleteEdgeApplicationInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+    put:
+      summary: Update edge application instance
+      description: Update an edge application instance. The usual pattern to update an edge application bundle record is to retrieve the record and update with the modified values in a new body to update the edge application bundle record.
+      operationId: EdgeApplicationInstanceConfiguration_UpdateEdgeApplicationInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this operation will conflict with an already existing edge network record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/AppInstanceUpdate_HttpRequest'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v1/apps/instances/id/{id}/activate:
+    put:
+      summary: Activate edge application instance
+      description: Activate an edge application instance. If already in active state no action is taken.
+      operationId: EdgeApplicationInstanceConfiguration_ActivateEdgeApplicationInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this operation will conflict with an already existing edge network record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v1/apps/instances/id/{id}/console/remote:
+    put:
+      summary: Connect to edge application instance console
+      description: Remotely connect to console of an edge application instance running on the edge node where the edge application instance has been deployed.
+      operationId: EdgeApplicationInstanceConfiguration_ConnectToEdgeApplicationInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this operation will conflict with an already existing edge network record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v1/apps/instances/id/{id}/deactivate:
+    put:
+      summary: Deactivate edge application instance
+      description: Deactivate an edge application instance. If already in inactive state no action is taken.
+      operationId: EdgeApplicationInstanceConfiguration_DeActivateEdgeApplicationInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this operation will conflict with an already existing edge network record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v1/apps/instances/id/{id}/refresh:
+    put:
+      summary: Refresh edge application instance
+      description: Refresh an edge application instance. Update edge application instance to the latest version of the edge application. This operation will result in a restart of the edge application instance.
+      operationId: EdgeApplicationInstanceConfiguration_RefreshEdgeApplicationInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this operation will conflict with an already existing edge network record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v1/apps/instances/id/{id}/refresh/purge:
+    put:
+      summary: Refresh and purge edge application instance
+      description: 'Refresh and purge an edge application instance, update edge application instance to the latest version of the edge application. This operation will result in loss of data and a restart of the edge application instance. '
+      operationId: EdgeApplicationInstanceConfiguration_RefreshPurgeEdgeApplicationInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this operation will conflict with an already existing edge network record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v1/apps/instances/id/{id}/restart:
+    put:
+      summary: Restart edge application instance
+      description: Restart an edge application instance, initiate a restart of the edge application instance.
+      operationId: EdgeApplicationInstanceConfiguration_RestartEdgeApplicationInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this operation will conflict with an already existing edge network record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v1/apps/instances/name/{name}:
+    get:
+      summary: Get edge application instance
+      description: Get the configuration (without security details) of an edge application instance record.
+      operationId: EdgeApplicationInstanceConfiguration_GetEdgeApplicationInstanceByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/AppInstance'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        description: User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v1/apps/instances/patch-reference-update:
+    post:
+      summary: Patch envelope reference update
+      description: Attach/detach a patch envelope to app instance. For detaching, pass patch envelope id as empty string
+      operationId: EdgeApplicationInstanceConfiguration_UpdatePatchEnvelopeReferencetoAppInstance
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '202':
+          description: Accepted. The API gateway accepted the request for updating patch envelope reference but the update process has not been completed. Please check the job status to track the status of patch envelope reference update and any error messages.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/PatchReferenceUpdateConfig'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v2/apps/instances:
+    get:
+      summary: Query edge application instances
+      description: v2 API to query the edge application instance records.
+      operationId: EdgeApplicationInstanceConfiguration_QueryEdgeApplicationInstancesV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/AppInstances'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: project
+        description: User defined name of the project, unique across the enterprise. Once project is created, name can’t be changed
+        in: query
+        required: false
+        type: string
+      - name: bundle
+        description: User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed
+        in: query
+        required: false
+        type: string
+      - name: device
+        description: User defined name of the device, unique across the enterprise. Once device is created, name can’t be changed
+        in: query
+        required: false
+        type: string
+      - name: namePattern
+        description: name pattern
+        in: query
+        required: false
+        type: string
+      - name: appType
+        description: type of bundle
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: deploymentType
+        description: 'type of deployment for the app, eg: azure, k3s, standalone'
+        in: query
+        required: false
+        type: string
+        enum:
+        - DEPLOYMENT_TYPE_UNSPECIFIED
+        - DEPLOYMENT_TYPE_STAND_ALONE
+        - DEPLOYMENT_TYPE_AZURE
+        - DEPLOYMENT_TYPE_K3S
+        - DEPLOYMENT_TYPE_AWS
+        - DEPLOYMENT_TYPE_K3S_AZURE
+        - DEPLOYMENT_TYPE_K3S_AWS
+        - DEPLOYMENT_TYPE_VMWARE_VCE
+        - DEPLOYMENT_TYPE_VMWARE_TKG_ATTACH
+        - DEPLOYMENT_TYPE_DOCKER_RUNTIME
+        default: DEPLOYMENT_TYPE_UNSPECIFIED
+      - name: projectNamePattern
+        description: project name pattern
+        in: query
+        required: false
+        type: string
+      - name: deviceNamePattern
+        description: device name pattern
+        in: query
+        required: false
+        type: string
+      - name: summary
+        description: summary flag
+        in: query
+        required: false
+        type: boolean
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: fields
+        description: 'Fields to select: id, name, title, description, projectId, tags, clusterID, appId, deviceId, manifestInfo, appType, appPolicyId, userDefinedVersion, remoteConsole'
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+    post:
+      summary: Create edge application instance
+      description: v2 API to create an edge application instance record.
+      operationId: EdgeApplicationInstanceConfiguration_CreateEdgeApplicationInstanceV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/AppInstance'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v2/apps/instances/id/{id}:
+    get:
+      summary: Get edge application instance
+      description: v2 API to get the configuration (without security details) of an edge application instance record.
+      operationId: EdgeApplicationInstanceConfiguration_GetEdgeApplicationInstanceV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/AppInstance'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+    delete:
+      summary: Delete edge application instance
+      description: v2 API to delete an edge application instance record.
+      operationId: EdgeApplicationInstanceConfiguration_DeleteEdgeApplicationInstanceV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+    put:
+      summary: Update edge application instance
+      description: v2 API to update an edge application instance. The usual pattern to update an edge application bundle record is to retrieve the record and update with the modified values in a new body to update the edge application bundle record.
+      operationId: EdgeApplicationInstanceConfiguration_UpdateEdgeApplicationInstanceV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed
+              maxLength: 256
+              minLength: 3
+              pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+              uniqueItems: true
+            title:
+              type: string
+              description: User defined title of the app instance. Title can be changed at any time
+              maxLength: 256
+              minLength: 3
+              pattern: ^[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+$
+            description:
+              type: string
+              description: Detailed description of the app instance
+              maxLength: 256
+            revision:
+              $ref: '#/definitions/ObjectRevision'
+              description: app instance object revision details
+            projectId:
+              type: string
+              description: project name which the given app instance belong to
+            tags:
+              type: object
+              additionalProperties:
+                type: string
+              description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+              maxLength: 32
+              pattern: ^[^<%&?/\>]+$
+            clusterID:
+              type: string
+              description: System defined universally unique clusterInstance ID, unique across the enterprise.
+              maxLength: 256
+              minLength: 3
+              pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+              uniqueItems: true
+            appId:
+              type: string
+              description: User defined name of the edge app, unique across the enterprise. Once app name is created, name can’t be changed
+              maxLength: 256
+              minLength: 3
+              pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+              uniqueItems: true
+            deviceId:
+              type: string
+              description: User defined name of the device name, unique across the enterprise. Once device name is defined, name can’t be changed
+              maxLength: 256
+              minLength: 3
+              pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+              uniqueItems: true
+            activate:
+              type: boolean
+              description: app instance activation flag
+            vminfo:
+              $ref: '#/definitions/vm'
+              description: virtual machine info
+            drives:
+              type: array
+              items:
+                $ref: '#/definitions/drive'
+              description: drive details
+            interfaces:
+              type: array
+              items:
+                $ref: '#/definitions/appInterface'
+              description: application interfaces
+            userData:
+              type: string
+              description: 'Deprecated: Application initiazation script in cloud-config format to be used by cloud-init'
+            customConfig:
+              $ref: '#/definitions/CustomConfig'
+              description: Application initialization script template in cloud-config format and user specified values
+            collectStatsIPAddr:
+              type: string
+              description: holds the static Ip of the app instance
+            bundleversion:
+              type: string
+              description: version of bundle app is referring to
+            logs:
+              $ref: '#/definitions/AppInstanceLogs'
+              description: App Instance logs
+            restart:
+              $ref: '#/definitions/ZedCloudOpsCmd'
+              description: 'Restart counter: ZedCloudOpsCmd'
+            refresh:
+              $ref: '#/definitions/ZedCloudOpsCmd'
+              description: 'Refresh counter: ZedCloudOpsCmd'
+            purge:
+              $ref: '#/definitions/ZedCloudOpsCmd'
+              description: 'Purge counter: ZedCloudOpsCmd'
+            remoteConsole:
+              type: boolean
+              description: Remote console flag
+            encryptedSecrets:
+              type: object
+              additionalProperties:
+                type: string
+              description: user encrypted secrets map
+            cryptoKey:
+              type: string
+              description: Crypto Key for decrypting user secret information
+            manifestInfo:
+              $ref: '#/definitions/ManifestInfo'
+              description: app manifest Info
+            appType:
+              $ref: '#/definitions/AppType'
+              description: type of bundle
+            isSecretUpdated:
+              type: boolean
+              description: This field tells whether user secrets has updated or not, especially the cusotom config
+            appPolicyId:
+              type: string
+              description: app policy id
+            deploymentType:
+              $ref: '#/definitions/DeploymentType'
+              description: 'type of deployment for the app, eg: azure, k3s, standalone'
+            userDefinedVersion:
+              type: string
+              description: Instance version tells which edge app does this instance is running
+            startDelayInSeconds:
+              type: integer
+              format: int64
+              description: start delay is the time in seconds EVE should wait after boot before starting the application instance
+            cloudInitVersion:
+              type: integer
+              format: int64
+              description: Cloud-init version that indicates whether it necessary or not for cloud-init tool to restart in a guest
+            allowSnapshots:
+              type: boolean
+              description: Flag to determine if a snapshot creation is allowed
+            maxSnapshots:
+              type: integer
+              format: int64
+              description: Maximum number of snapshots allowed to be created
+            availableSnapshots:
+              type: array
+              items:
+                $ref: '#/definitions/AppInstanceSnapshot'
+              description: The list of available snapshots of the application instance
+            patchEnvelopeId:
+              type: string
+              description: patch envelope id
+            patchEnvelopeName:
+              type: string
+              description: patch envelope name
+            edgeNodeCluster:
+              $ref: '#/definitions/AppInstEdgeNodeCluster'
+              description: edge node cluster
+            dockerComposeYamlText:
+              type: string
+              description: Docker compose base64 encoded plain text
+              title: internal field
+              readOnly: true
+            dockerComposeTarImageName:
+              type: string
+              description: Docker compose tar image name
+              title: internal field
+              readOnly: true
+            datastoreIdList:
+              type: array
+              items:
+                type: string
+              description: List of datastore ids containing private registry credentials
+              title: internal field
+              readOnly: true
+            PersistentRuntimeSizeBytes:
+              type: string
+              format: uint64
+              description: Persistent runtime size in bytes
+          description: App Instance detail
+          title: App Instance detail
+          required:
+          - name
+          - title
+          - projectId
+          - appId
+          - deviceId
+          - activate
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v2/apps/instances/id/{id}/activate:
+    put:
+      summary: Activate edge application instance
+      description: v2 API to activate an edge application instance. If already in active state no action is taken.
+      operationId: EdgeApplicationInstanceConfiguration_ActivateEdgeApplicationInstanceV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v2/apps/instances/id/{id}/console/remote:
+    put:
+      summary: Connect to edge application instance console
+      description: v2 API to remotely connect to console of an edge application instance running on the edge node where the edge application instance has been deployed.
+      operationId: EdgeApplicationInstanceConfiguration_ConnectToEdgeApplicationInstanceV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v2/apps/instances/id/{id}/deactivate:
+    put:
+      summary: Deactivate edge application instance
+      description: v2 API to deactivate an edge application instance. If already in inactive state no action is taken.
+      operationId: EdgeApplicationInstanceConfiguration_DeActivateEdgeApplicationInstanceV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v2/apps/instances/id/{id}/refresh:
+    put:
+      summary: Refresh edge application instance
+      description: v2 API to refresh an edge application instance. Update edge application instance to the latest version of the edge application. This operation will result in a restart of the edge application instance.
+      operationId: EdgeApplicationInstanceConfiguration_RefreshEdgeApplicationInstanceV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v2/apps/instances/id/{id}/refresh/purge:
+    put:
+      summary: Refresh and purge edge application instance
+      description: v2 API to refresh and purge an edge application instance, update edge application instance to the latest version of the edge application. This operation will result in loss of data and a restart of the edge application instance.
+      operationId: EdgeApplicationInstanceConfiguration_RefreshPurgeEdgeApplicationInstanceV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v2/apps/instances/id/{id}/restart:
+    put:
+      summary: Restart edge application instance
+      description: v2 API to restart an edge application instance, initiate a restart of the edge application instance.
+      operationId: EdgeApplicationInstanceConfiguration_RestartEdgeApplicationInstanceV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the app instance
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v2/apps/instances/name/{name}:
+    get:
+      summary: Get edge application instance
+      description: v2 API to get the configuration (without security details) of an edge application instance record.
+      operationId: EdgeApplicationInstanceConfiguration_GetEdgeApplicationInstanceByNameV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/AppInstance'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        description: User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+  /v2/apps/instances/patch-reference-update:
+    post:
+      summary: Patch envelope reference update
+      description: Attach/detach a patch envelope to app instance. For detaching, pass patch envelope id as empty string
+      operationId: EdgeApplicationInstanceConfiguration_UpdatePatchEnvelopeReferencetoAppInstanceV2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '202':
+          description: Accepted. The API gateway accepted the request for updating patch envelope reference but the update process has not been completed. Please check the job status to track the status of patch envelope reference update and any error messages.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/PatchReferenceUpdateConfig'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeApplicationInstanceConfiguration
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-apps
+definitions:
+  appACEMatch:
+    type: object
+    properties:
+      type:
+        type: string
+        description: Type
+      value:
+        type: string
+        description: Value
+    description: App ACE Match
+    title: appACEMatch detail
+    required:
+    - type
+    - value
+  phyAdapter:
+    type: object
+    properties:
+      type:
+        type: object
+        $ref: '#/definitions/IoType'
+        description: IoType specifies the type of the Input output of the device
+      name:
+        type: string
+        description: Physical Adapter name
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+        maxLength: 32
+        pattern: ^[^<%&?/\>]+$
+    description: Physical Adapter
+    title: Physical Adapter
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  Summary:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Summary description
+      total:
+        type: number
+        format: int64
+        description: Total
+      values:
+        type: object
+        additionalProperties:
+          type: integer
+          format: int64
+        description: 'Values: Map for storing <string, uint32>'
+    description: Summary is used to store the Summary details
+    title: Summary is used to store the Summary details
+  VariableFileEncoding:
+    type: string
+    enum:
+    - FILE_ENCODING_UNSPECIFIED
+    - FILE_ENCODING_BASE64
+    default: FILE_ENCODING_UNSPECIFIED
+    description: "- FILE_ENCODING_UNSPECIFIED: File content not encoded\n - FILE_ENCODING_BASE64: File content encoded in Base64"
+    title: File content encoding type
+  PatchReferenceUpdateConfig:
+    type: object
+    properties:
+      projectId:
+        type: string
+      patchenvelopeId:
+        type: string
+      appInstIDList:
+        type: array
+        items:
+          type: string
+  VariableGroupCondition:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+      operator:
+        $ref: '#/definitions/VariableGroupConditionOperator'
+  AppInstances:
+    type: object
+    properties:
+      summaryByState:
+        $ref: '#/definitions/Summary'
+        description: app instance by summary
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/AppInstance'
+        description: app insatance list response
+      next:
+        $ref: '#/definitions/Cursor'
+        description: cursor next
+  AppInstEdgeNodeCluster:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Id of the edge node cluster
+        pattern: '[0-9A-Za-z-]+'
+      designatedNodeID:
+        type: string
+        description: Id of the designated node
+        pattern: '[0-9A-Za-z-]+'
+      name:
+        type: string
+        description: edge node cluster name
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  Cursor:
+    type: object
+    properties:
+      pageToken:
+        type: string
+        description: Page Token
+      orderBy:
+        type: array
+        items:
+          type: string
+        description: OrderBy helps in sorting the list response
+      pageNum:
+        type: number
+        format: int64
+        description: Page Number
+      pageSize:
+        type: number
+        format: int64
+        description: Defines the page size
+      totalPages:
+        type: number
+        format: int64
+        description: Total number of pages to be fetched.
+    description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+    title: Cursor is used as filter in list operation.
+  EIDRegister:
+    type: object
+    properties:
+      AppCert:
+        type: string
+        format: byte
+        description: app certificate
+      AppPublicKey:
+        type: string
+        format: byte
+        description: App public key
+      AppPrivateKey:
+        type: string
+        format: byte
+        description: App private key
+      UUID:
+        type: string
+        description: UUID
+      DisplayName:
+        type: string
+        description: Display name
+      LispInstance:
+        type: number
+        format: int64
+        description: Lisp Instance
+      EID:
+        type: string
+        description: EID
+      EIDHashLen:
+        type: number
+        format: int64
+        description: EID hash length
+      LispSignature:
+        type: string
+        description: Lisp Signature
+      LispMapServers:
+        type: array
+        items:
+          $ref: '#/definitions/LispServer'
+        description: Lisp Map Server
+        title: time CreateTime     time.Time
+    description: EID Register
+    title: EID Register detail
+    required:
+    - AppCert
+    - AppPublicKey
+    - AppPrivateKey
+    - UUID
+    - DisplayName
+    - LispInstance
+    - EID
+    - EIDHashLen
+    - LispSignature
+    - LispMapServers
+  ObjectRevision:
+    type: object
+    properties:
+      prev:
+        type: string
+        description: Previous
+      curr:
+        type: string
+        description: Current Database version of the record
+      createdAt:
+        type: object
+        format: date-time
+        description: The time, in milliseconds since the epoch, when the record was created.
+      createdBy:
+        type: string
+        description: 'User data: Created By'
+      updatedAt:
+        type: object
+        format: date-time
+        description: The time, in milliseconds since the epoch, when the record was last updated.
+      updatedBy:
+        type: string
+        description: 'User data: Updated By'
+    description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+    title: ObjectRevision is used to store the user information.
+    required:
+    - curr
+    - createdAt
+    - createdBy
+    - updatedAt
+    - updatedBy
+  ManifestInfo:
+    type: object
+    properties:
+      bundleVersion:
+        type: string
+        description: Current version of edge application being used
+      nextBundleVersion:
+        type: string
+        description: Next version of edge application available
+      transitionAction:
+        type: string
+        $ref: '#/definitions/InstanceTransitionAction'
+        description: Recommended transition action
+      params:
+        type: object
+        additionalProperties:
+          type: string
+        description: Common and Custom parameters for deciding on transition actions
+      details:
+        $ref: '#/definitions/TransDetails'
+        description: Details for recommended transition action
+      enablevnc:
+        type: boolean
+        description: Enable vnc for the app
+    description: Details about transition parameters and indication for cause of the transition and recommendation for the transition action
+    title: Transition action information
+  IoType:
+    type: string
+    enum:
+    - IO_TYPE_UNSPECIFIED
+    - IO_TYPE_ETH
+    - IO_TYPE_USB
+    - IO_TYPE_COM
+    - IO_TYPE_AUDIO
+    - IO_TYPE_WLAN
+    - IO_TYPE_WWAN
+    - IO_TYPE_HDMI
+    - IO_TYPE_LTE
+    - IO_TYPE_STORAGE_NVME_DEVICE
+    - IO_TYPE_STORAGE_SATA_DEVICE
+    - IO_TYPE_ETH_PF
+    - IO_TYPE_ETH_VF
+    - IO_TYPE_USB_CONTROLLER
+    - IO_TYPE_USB_DEVICE
+    - IO_TYPE_CAN
+    - IO_TYPE_VCAN
+    - IO_TYPE_LCAN
+    - IO_TYPE_OTHER
+    default: IO_TYPE_UNSPECIFIED
+    description: "- IO_TYPE_UNSPECIFIED: No operation/ Invalid peration\n - IO_TYPE_ETH: Ethernet\n - IO_TYPE_USB: USB Type - General\n - IO_TYPE_COM: Communication Port\n - IO_TYPE_AUDIO: Audio Port\n - IO_TYPE_WLAN: wireless LAN\n - IO_TYPE_WWAN: Wireless wide area network\n - IO_TYPE_HDMI: High-Definition Multimedia Interface\n - IO_TYPE_LTE: LTE Interfaces\n - IO_TYPE_STORAGE_NVME_DEVICE: Storage NVME device\n - IO_TYPE_STORAGE_SATA_DEVICE: Storage SATA device\n - IO_TYPE_ETH_PF: Physical Interface (PF) of the Virtual Functions\n - IO_TYPE_ETH_VF: Virtual Function (VF)\n - IO_TYPE_USB_CONTROLLER: USB Type - Controller\n - IO_TYPE_USB_DEVICE: USB Type - Device\n - IO_TYPE_CAN: CAN - Device\n - IO_TYPE_VCAN: VCAN - Virtual CAN device\n - IO_TYPE_LCAN: LCAN - Logical CAN device\n - IO_TYPE_OTHER: Other Io Types"
+    title: Input/Output Type
+  AppInstanceLogs:
+    type: object
+    properties:
+      access:
+        type: boolean
+        description: Flags to enable / disable sending of logs generated by app instance to zedcloud
+    description: App Instance Logs configuration
+    title: App Instance Logs configuration
+    required:
+    - access
+  appInterface:
+    type: object
+    properties:
+      netname:
+        type: string
+        description: 'network name: will be deprecated in future, use netinstname'
+      io:
+        $ref: '#/definitions/phyAdapter'
+        description: Physical Adapter to be matched for interface assignment. Applicable only when "direct attach" flag is true
+      intforder:
+        type: number
+        format: int64
+        description: intforder
+      intfname:
+        type: string
+        description: intf Name
+      directattach:
+        type: boolean
+        description: direct attach flag
+        title: comes from manifest during app create
+      privateip:
+        type: string
+        description: Private IP flag
+      acls:
+        type: array
+        items:
+          $ref: '#/definitions/appACE'
+        description: app Acls
+      ipaddr:
+        type: string
+        description: IP address
+        title: 'if netname points static DHCP then we need to take
+
+          static /32 address here'
+      macaddr:
+        type: string
+        description: MAC address
+        title: 'in case of p2v we might want to provide a mac-address.
+
+          applicable only in case of DHCP=passthrough'
+      accessVlanId:
+        type: number
+        format: int64
+        description: access port VLAN ID, vlan id of zero will be treated as trunk port and vlan id 1 is implicitly used by linux bridges
+        maximum: 4093
+        minimum: 2
+      eidregister:
+        $ref: '#/definitions/EIDRegister'
+        description: EID register details
+        title: 'FIXME: Check why is this required'
+      netinstname:
+        type: string
+        description: Network Instance name to be matched for interface assignment. Applicable only when "direct attach" flag is false
+      netinsttag:
+        type: object
+        additionalProperties:
+          type: string
+        description: Network Instance tag to be matched for interface assignment. Applicable only when "direct attach" flag is false
+      netinstid:
+        type: string
+        description: Network Instance id to be matched for interface assignment.
+      defaultNetInstance:
+        type: boolean
+        description: default instance flag
+      allowToDiscover:
+        type: boolean
+        description: flag tells if appInstance have permission to access the network mappings from the connected netInstance
+    description: App Interface detail
+    title: App Interface detail
+    required:
+    - intfname
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  vm:
+    type: object
+    properties:
+      cpus:
+        type: number
+        format: int64
+        description: CPUs
+      memory:
+        type: number
+        format: int64
+        description: Memory
+      mode:
+        $ref: '#/definitions/hvMode'
+        description: Hardware Virtualization
+      vnc:
+        type: boolean
+        description: VNC
+      vncDisplay:
+        type: number
+        format: int64
+        description: VNC display
+        readOnly: true
+      cpuPinningEnabled:
+        type: boolean
+        description: Enable CpuPinning
+      vmmMaxmem:
+        type: integer
+        format: int64
+        description: Maximum amount of memory in kbytes allowed for VM monitor to occupy
+      bootloaderMode:
+        $ref: '#/definitions/VmBootloaderMode'
+        description: The bootloader mode that will be used for the VM. Default is VM_BOOTLOADER_MODE_LEGACY
+      enableOemWinLicenseKey:
+        type: boolean
+        description: Enable device which has VM to receive the Windows license embedded in the ACPI tables
+      disableVTPM:
+        type: boolean
+        description: Disable vTPM for virtual machines (VM)
+    description: Virtual machine memory configuration
+    title: vm detail
+    required:
+    - cpus
+    - memory
+    - mode
+    - vnc
+  VariableGroupConditionOperator:
+    type: string
+    enum:
+    - CONDITION_OPERATOR_UNSPECIFIED
+    - CONDITION_OPERATOR_EQUALTO
+    - CONDITION_OPERATOR_NOTEQUALTO
+    default: CONDITION_OPERATOR_UNSPECIFIED
+  VariableVariableFormat:
+    type: string
+    enum:
+    - VARIABLE_FORMAT_UNSPECIFIED
+    - VARIABLE_FORMAT_TEXT
+    - VARIABLE_FORMAT_NUMBER
+    - VARIABLE_FORMAT_FILE
+    - VARIABLE_FORMAT_DROPDOWN
+    - VARIABLE_FORMAT_BOOLEAN
+    - VARIABLE_FORMAT_PASSWORD
+    default: VARIABLE_FORMAT_UNSPECIFIED
+    description: "- VARIABLE_FORMAT_UNSPECIFIED: Invalid format\n - VARIABLE_FORMAT_TEXT: Value in string format\n - VARIABLE_FORMAT_NUMBER: Value in integer format\n - VARIABLE_FORMAT_FILE: Value to be read from a file\n - VARIABLE_FORMAT_DROPDOWN: Value to be selected from dropdown of options\n - VARIABLE_FORMAT_BOOLEAN: Value in boolean format\n - VARIABLE_FORMAT_PASSWORD: Value in string to be masked in User-Agent"
+    title: Custom variable format
+  hvMode:
+    type: string
+    enum:
+    - HV_PV
+    - HV_HVM
+    - HV_FML
+    - HV_NOHYPER
+    - HV_LEGACY
+    default: HV_PV
+    description: 'For now we need to tell the device which virtualization mode
+
+      to use. Later we might use a single one for all VMs (on any particular
+
+      ISA). If we end up keeping this we should make the names be less
+
+      tied to a particular hypervisor.'
+  ZedCloudOpsCmd:
+    type: object
+    properties:
+      counter:
+        type: number
+        format: int64
+        description: counter
+      opsTime:
+        type: object
+        format: date-time
+        description: 'Timestamp: Operational time'
+    description: Zed cloud Operation command
+    title: Zed cloud Operation command
+  TransCause:
+    type: string
+    enum:
+    - TRANS_CAUSE_UNSPECIFIED
+    - TRANS_CAUSE_APP_DRIVE_CHANGED
+    - TRANS_CAUSE_APP_NETWORK_CHANGED
+    - TRANS_CAUSE_APP_CUSTOM_CONFIG_CHANGED
+    - TRANS_CAUSE_APP_MODULE_BUNDLE_UPDATE
+    - TRANS_CAUSE_APP_DESC_CHANGED
+    - TRANS_CAUSE_APP_FIXED_RESOURCES_CHANGED
+    - TRANS_CAUSE_APP_VNC_MODE_CHANGED
+    - TRANS_CAUSE_APP_VM_MODE_CHANGED
+    - TRANS_CAUSE_INTER_CA_EXPIRING
+    - TRANS_CAUSE_INTER_CA_EXPIRED
+    - TRANS_CAUSE_DEVICE_CA_EXPIRING
+    - TRANS_CAUSE_DEVICE_CA_EXPIRED
+    - TRANS_CAUSE_IDENTITY_CA_EXPIRING
+    - TRANS_CAUSE_IDENTITY_CA_EXPIRED
+    - TRANS_CAUSE_APP_COMPOSE_TAR_IMAGE_CHANGED
+    - TRANS_CAUSE_APP_COMPOSE_YAML_CHANGED
+    - TRANS_CAUSE_APP_COMPOSE_DATASTORE_CHANGED
+    - TRANS_CAUSE_APP_ENABLE_VM_CONFIG_CHANGED
+    default: TRANS_CAUSE_UNSPECIFIED
+  AppType:
+    type: string
+    enum:
+    - APP_TYPE_UNSPECIFIED
+    - APP_TYPE_VM
+    - APP_TYPE_VM_RUNTIME
+    - APP_TYPE_CONTAINER
+    - APP_TYPE_MODULE
+    - APP_TYPE_DOCKER_COMPOSE
+    default: APP_TYPE_UNSPECIFIED
+    description: type of app bundle.
+  DeploymentType:
+    type: string
+    enum:
+    - DEPLOYMENT_TYPE_UNSPECIFIED
+    - DEPLOYMENT_TYPE_STAND_ALONE
+    - DEPLOYMENT_TYPE_AZURE
+    - DEPLOYMENT_TYPE_K3S
+    - DEPLOYMENT_TYPE_AWS
+    - DEPLOYMENT_TYPE_K3S_AZURE
+    - DEPLOYMENT_TYPE_K3S_AWS
+    - DEPLOYMENT_TYPE_VMWARE_VCE
+    - DEPLOYMENT_TYPE_VMWARE_TKG_ATTACH
+    - DEPLOYMENT_TYPE_DOCKER_RUNTIME
+    default: DEPLOYMENT_TYPE_UNSPECIFIED
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  ActionScope:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/ObjectType'
+        description: Scope of the action (e.g. project in case certificate expired at project level)
+      id:
+        type: string
+        description: Unique id of the type (e.g. projectId in case of project type)
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  appMapParams:
+    type: object
+    properties:
+      port:
+        type: number
+        format: int64
+        description: Application port
+    description: Application map parameters
+    title: App map Params detail
+    required:
+    - port
+  AppInstanceSnapshot:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the app instance snapshot
+        pattern: '[0-9A-Za-z-]+'
+        uniqueItems: true
+      name:
+        type: string
+        description: Snapshot name. Unique across the application instance
+      state:
+        $ref: '#/definitions/SnapshotState'
+        description: Status of the snapshot
+      config:
+        type: object
+        $ref: '#/definitions/AppInstance'
+        description: The complete configuration of the application instance
+      activate:
+        type: boolean
+        description: Indicates whether the snapshot should be activated
+      immediate:
+        type: boolean
+        description: Indicates that the snapshot should be taken immediately
+    description: App instance snapshot
+    title: App instance snapshot
+    required:
+    - name
+  AppInstance:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the app instance
+        readOnly: true
+        pattern: '[0-9A-Za-z-]+'
+        uniqueItems: true
+      name:
+        type: string
+        description: User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      title:
+        type: string
+        description: User defined title of the app instance. Title can be changed at any time
+        maxLength: 256
+        minLength: 3
+        pattern: ^[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+$
+      description:
+        type: string
+        description: Detailed description of the app instance
+        maxLength: 256
+      revision:
+        $ref: '#/definitions/ObjectRevision'
+        description: app instance object revision details
+      projectId:
+        type: string
+        description: project name which the given app instance belong to
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+        maxLength: 32
+        pattern: ^[^<%&?/\>]+$
+      clusterID:
+        type: string
+        description: System defined universally unique clusterInstance ID, unique across the enterprise.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      appId:
+        type: string
+        description: User defined name of the edge app, unique across the enterprise. Once app name is created, name can’t be changed
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      deviceId:
+        type: string
+        description: User defined name of the device name, unique across the enterprise. Once device name is defined, name can’t be changed
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      activate:
+        type: boolean
+        description: app instance activation flag
+      vminfo:
+        $ref: '#/definitions/vm'
+        description: virtual machine info
+      drives:
+        type: array
+        items:
+          $ref: '#/definitions/drive'
+        description: drive details
+      interfaces:
+        type: array
+        items:
+          $ref: '#/definitions/appInterface'
+        description: application interfaces
+      userData:
+        type: string
+        description: 'Deprecated: Application initiazation script in cloud-config format to be used by cloud-init'
+      customConfig:
+        $ref: '#/definitions/CustomConfig'
+        description: Application initialization script template in cloud-config format and user specified values
+      collectStatsIPAddr:
+        type: string
+        description: holds the static Ip of the app instance
+      bundleversion:
+        type: string
+        description: version of bundle app is referring to
+      logs:
+        $ref: '#/definitions/AppInstanceLogs'
+        description: App Instance logs
+      restart:
+        $ref: '#/definitions/ZedCloudOpsCmd'
+        description: 'Restart counter: ZedCloudOpsCmd'
+      refresh:
+        $ref: '#/definitions/ZedCloudOpsCmd'
+        description: 'Refresh counter: ZedCloudOpsCmd'
+      purge:
+        $ref: '#/definitions/ZedCloudOpsCmd'
+        description: 'Purge counter: ZedCloudOpsCmd'
+      remoteConsole:
+        type: boolean
+        description: Remote console flag
+      encryptedSecrets:
+        type: object
+        additionalProperties:
+          type: string
+        description: user encrypted secrets map
+      cryptoKey:
+        type: string
+        description: Crypto Key for decrypting user secret information
+      manifestInfo:
+        $ref: '#/definitions/ManifestInfo'
+        description: app manifest Info
+      appType:
+        $ref: '#/definitions/AppType'
+        description: type of bundle
+      isSecretUpdated:
+        type: boolean
+        description: This field tells whether user secrets has updated or not, especially the cusotom config
+      appPolicyId:
+        type: string
+        description: app policy id
+      deploymentType:
+        $ref: '#/definitions/DeploymentType'
+        description: 'type of deployment for the app, eg: azure, k3s, standalone'
+      userDefinedVersion:
+        type: string
+        description: Instance version tells which edge app does this instance is running
+      startDelayInSeconds:
+        type: integer
+        format: int64
+        description: start delay is the time in seconds EVE should wait after boot before starting the application instance
+      cloudInitVersion:
+        type: integer
+        format: int64
+        description: Cloud-init version that indicates whether it necessary or not for cloud-init tool to restart in a guest
+      allowSnapshots:
+        type: boolean
+        description: Flag to determine if a snapshot creation is allowed
+      maxSnapshots:
+        type: integer
+        format: int64
+        description: Maximum number of snapshots allowed to be created
+      availableSnapshots:
+        type: array
+        items:
+          $ref: '#/definitions/AppInstanceSnapshot'
+        description: The list of available snapshots of the application instance
+      patchEnvelopeId:
+        type: string
+        description: patch envelope id
+      patchEnvelopeName:
+        type: string
+        description: patch envelope name
+      edgeNodeCluster:
+        $ref: '#/definitions/AppInstEdgeNodeCluster'
+        description: edge node cluster
+      dockerComposeYamlText:
+        type: string
+        description: Docker compose base64 encoded plain text
+        title: internal field
+        readOnly: true
+      dockerComposeTarImageName:
+        type: string
+        description: Docker compose tar image name
+        title: internal field
+        readOnly: true
+      datastoreIdList:
+        type: array
+        items:
+          type: string
+        description: List of datastore ids containing private registry credentials
+        title: internal field
+        readOnly: true
+      PersistentRuntimeSizeBytes:
+        type: string
+        format: uint64
+        description: Persistent runtime size in bytes
+    description: App Instance detail
+    title: App Instance detail
+    required:
+    - name
+    - title
+    - projectId
+    - appId
+    - deviceId
+    - activate
+  LispServer:
+    type: object
+    properties:
+      nameOrIp:
+        type: string
+        description: name/IP
+      credential:
+        type: string
+        description: lisp credential
+    description: LispServer request payload
+    title: LispServer payload detail
+    required:
+    - nameOrIp
+    - credential
+  drive:
+    type: object
+    properties:
+      imagename:
+        type: string
+        description: Name of Image Object used for the drive.
+      maxsize:
+        type: number
+        format: uint64
+        description: Drive maximum size
+      readonly:
+        type: boolean
+        description: Read only flag. If set, drive is mounted as readonly by app instance.
+      preserve:
+        type: boolean
+        description: Preserve the drive even when all app instances using it are deleted
+      drvtype:
+        type: string
+        description: 'Type of Drive. Valid Values: UNSPECIFIED, CDROM, HDD, NET, HDD_EMPTY. HDD_EMPTY - is to allocate the empty disk of maxsizebytes specified'
+      target:
+        type: string
+        description: 'type of target. Valid values: Disk, Kernel, Initrd, RamDisk'
+      volumelabel:
+        type: string
+        description: 'User defined volume to use for this drive '
+      mvolname:
+        type: string
+        description: mutable Volume for this drive. Only one of imvolname and mvolname must be specified.
+      imvolname:
+        type: string
+        description: immutable Volume for this drive. Only one of imvolname and mvolname must be specified.
+      ignorepurge:
+        type: boolean
+        description: don't purge this drive as part of purge command for mutable volumes
+      cleartext:
+        type: boolean
+        description: If set, don't encrypt the drive. Store in cleartext
+      mountpath:
+        type: string
+        description: Mount Path for the drive in the App Instance
+      runtimeInternal:
+        type: boolean
+        description: If set, the drive is internal to the runtime and not externally exposed with API
+        readOnly: true
+    description: Drive configuration
+    title: Drive details
+    required:
+    - imagename
+    - maxsize
+    - readonly
+    - preserve
+    - drvtype
+    - target
+  AppInstanceUpdate_HttpRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the app instance
+        pattern: '[0-9A-Za-z-]+'
+        uniqueItems: true
+      name:
+        type: string
+        description: User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      title:
+        type: string
+        description: User defined title of the app instance. Title can be changed at any time
+        maxLength: 256
+        minLength: 3
+        pattern: ^[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+$
+      description:
+        type: string
+        description: Detailed description of the app instance
+        maxLength: 256
+      revision:
+        $ref: '#/definitions/ObjectRevision'
+        description: app instance object revision details
+      projectId:
+        type: string
+        description: project name which the given app instance belong to
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+        maxLength: 32
+        pattern: ^[^<%&?/\>]+$
+      clusterID:
+        type: string
+        description: System defined universally unique clusterInstance ID, unique across the enterprise.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      appId:
+        type: string
+        description: User defined name of the edge app, unique across the enterprise. Once app name is created, name can’t be changed
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      deviceId:
+        type: string
+        description: User defined name of the device name, unique across the enterprise. Once device name is defined, name can’t be changed
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      activate:
+        type: boolean
+        description: app instance activation flag
+      vminfo:
+        $ref: '#/definitions/vm'
+        description: virtual machine info
+      drives:
+        type: array
+        items:
+          $ref: '#/definitions/drive'
+        description: drive details
+      interfaces:
+        type: array
+        items:
+          $ref: '#/definitions/appInterface'
+        description: application interfaces
+      userData:
+        type: string
+        description: 'Deprecated: Application initiazation script in cloud-config format to be used by cloud-init'
+      customConfig:
+        $ref: '#/definitions/CustomConfig'
+        description: Application initialization script template in cloud-config format and user specified values
+      collectStatsIPAddr:
+        type: string
+        description: holds the static Ip of the app instance
+      bundleversion:
+        type: string
+        description: version of bundle app is referring to
+      logs:
+        $ref: '#/definitions/AppInstanceLogs'
+        description: App Instance logs
+      restart:
+        $ref: '#/definitions/ZedCloudOpsCmd'
+        description: 'Restart counter: ZedCloudOpsCmd'
+      refresh:
+        $ref: '#/definitions/ZedCloudOpsCmd'
+        description: 'Refresh counter: ZedCloudOpsCmd'
+      purge:
+        $ref: '#/definitions/ZedCloudOpsCmd'
+        description: 'Purge counter: ZedCloudOpsCmd'
+      remoteConsole:
+        type: boolean
+        description: Remote console flag
+      encryptedSecrets:
+        type: object
+        additionalProperties:
+          type: string
+        description: user encrypted secrets map
+      cryptoKey:
+        type: string
+        description: Crypto Key for decrypting user secret information
+      manifestInfo:
+        $ref: '#/definitions/ManifestInfo'
+        description: app manifest Info
+      appType:
+        $ref: '#/definitions/AppType'
+        description: type of bundle
+      isSecretUpdated:
+        type: boolean
+        description: This field tells whether user secrets has updated or not, especially the cusotom config
+      appPolicyId:
+        type: string
+        description: app policy id
+      deploymentType:
+        $ref: '#/definitions/DeploymentType'
+        description: 'type of deployment for the app, eg: azure, k3s, standalone'
+      userDefinedVersion:
+        type: string
+        description: Instance version tells which edge app does this instance is running
+      startDelayInSeconds:
+        type: integer
+        format: int64
+        description: start delay is the time in seconds EVE should wait after boot before starting the application instance
+      cloudInitVersion:
+        type: integer
+        format: int64
+        description: Cloud-init version that indicates whether it necessary or not for cloud-init tool to restart in a guest
+      allowSnapshots:
+        type: boolean
+        description: Flag to determine if a snapshot creation is allowed
+      maxSnapshots:
+        type: integer
+        format: int64
+        description: Maximum number of snapshots allowed to be created
+      availableSnapshots:
+        type: array
+        items:
+          $ref: '#/definitions/AppInstanceSnapshot'
+        description: The list of available snapshots of the application instance
+      patchEnvelopeId:
+        type: string
+        description: patch envelope id
+      patchEnvelopeName:
+        type: string
+        description: patch envelope name
+      edgeNodeCluster:
+        $ref: '#/definitions/AppInstEdgeNodeCluster'
+        description: edge node cluster
+    description: App Instance detail
+    title: App Instance detail
+    required:
+    - name
+    - title
+    - projectId
+    - appId
+    - deviceId
+    - activate
+  appACEAction:
+    type: object
+    properties:
+      drop:
+        type: boolean
+        description: ACE drop flag
+      limit:
+        type: boolean
+        description: ACE limit flag
+      limitrate:
+        type: number
+        format: int64
+        description: ACE limit rate
+      limitunit:
+        type: string
+        description: ACE limit unit
+      limitburst:
+        type: number
+        format: int64
+        description: ACE limit burst
+      portmap:
+        type: boolean
+        description: application port map flag
+      mapparams:
+        $ref: '#/definitions/appMapParams'
+        description: Application map params
+    description: App ACE actions
+    title: App ACE Action
+    required:
+    - drop
+    - limit
+    - limitrate
+    - limitunit
+    - limitburst
+    - portmap
+    - mapparams
+  VariableGroupVariable:
+    type: object
+    example:
+      format: VARIABLE_FORMAT_TEXT
+      name: username
+      label: Enter User Name
+      required: 'True'
+    properties:
+      type:
+        type: string
+      name:
+        type: string
+        description: Name of the Variable (Required)
+      label:
+        type: string
+        description: Label for the variable (Required)
+      maxLength:
+        type: string
+        description: 'Max length of the value of the variable(Optional. Default: 1024)'
+      required:
+        type: boolean
+        description: 'This variable MUST be specified when creating an App Instance. (Optional. Default: False)'
+      default:
+        type: string
+        description: 'Default value of the variable. (Optional. Default: <Default value based on type>)'
+      processInput:
+        type: string
+      value:
+        type: string
+        description: User-specified value of the variable.(Required if required is true. Optional otherwise)
+      format:
+        $ref: '#/definitions/VariableVariableFormat'
+        description: Format of the user variable. (Required)
+      encode:
+        $ref: '#/definitions/VariableFileEncoding'
+        description: Encoding of file content. Applicable if format is VARIABLE_FORMAT_FILE
+      options:
+        type: array
+        items:
+          $ref: '#/definitions/VariableOptionVal'
+        description: Key-Value pair of options. Applicable if format is VARIABLE_FORMAT_DROPDOWN
+    description: Edge Application Artifact Details
+    title: Edge Application detail
+    required:
+    - format
+    - name
+    - label
+    - required
+  CustomConfig:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of CustomConfig (Required)
+      add:
+        type: boolean
+        description: 'Add the Custom Config to App Instance (Optional. Default: False)'
+      override:
+        type: boolean
+        description: 'Override existing custom config from App Bundle Manifest (Optional. Default: False)'
+      allowStorageResize:
+        type: boolean
+        description: 'Allow Appinstance storage to be resized after app instance is created. (Optional. Default: False)'
+      fieldDelimiter:
+        type: string
+        description: Field delimiter used in specifying variables in template. (Required)
+      template:
+        type: string
+        description: base64 encrypted template string. (Optional)
+      variableGroups:
+        type: array
+        items:
+          $ref: '#/definitions/CustomConfigVariableGroup'
+        description: List of Variable groups. (Required)
+  CustomConfigVariableGroup:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the Variable Group(Required)
+      variables:
+        type: array
+        items:
+          $ref: '#/definitions/VariableGroupVariable'
+        description: List of variables(Required)
+      required:
+        type: boolean
+        description: Indicates if the variable group is required to be specified for the App Instance. (Optional. Default:False)
+      condition:
+        $ref: '#/definitions/VariableGroupCondition'
+        description: 'Condition to apply the variable group. (Optional. Default: None)'
+  TransDetails:
+    type: object
+    properties:
+      cause:
+        $ref: '#/definitions/TransCause'
+        description: Cause of the transition action
+      severity:
+        type: string
+        description: Urgency of the recommended action (ERROR - must take action immediately, WARN - must take action but not immediately, NOTICE - may take action
+      scope:
+        $ref: '#/definitions/ActionScope'
+        description: Scope of the action (e.g. project, cluster, instance)
+  InstanceTransitionAction:
+    type: string
+    enum:
+    - INSTANCE_TA_UNSPECIFIED
+    - INSTANCE_TA_NONE
+    - INSTANCE_TA_UPDATEREQUIRED
+    - INSTANCE_TA_UPDATEWITHRESTART
+    - INSTANCE_TA_UPDATEWITHPURGE
+    default: INSTANCE_TA_UNSPECIFIED
+    description: "- INSTANCE_TA_UNSPECIFIED: Default. Invalid option\n - INSTANCE_TA_NONE: Either Edge app bundle has not changed or Edge app bundle has\nchanged but the changes do not impact Edge app instances\n - INSTANCE_TA_UPDATEREQUIRED: Edge app bundle has changed. Changes impact Edge app Instances\nEdge App instances need to be restarted with temporary loss of access\n - INSTANCE_TA_UPDATEWITHRESTART: Transition Action: Update with Restart\n - INSTANCE_TA_UPDATEWITHPURGE: Edge app bundle has changed. Changes impact Edge app Instances\nEdge App instances need to be deleted and created again with\ntemporary loss of access and permanent loss of data"
+    title: Instance Transition action
+  SnapshotState:
+    type: string
+    enum:
+    - INVALID
+    - IDLE
+    - CREATING
+    - CREATED
+    - CREATE_FAILED
+    - ROLLING_BACK
+    - ACTIVE
+    - ROLLBACK_FAILED
+    - DELETING
+    - DELETE_FAILED
+    - DELETED
+    default: INVALID
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  appACE:
+    type: object
+    properties:
+      matches:
+        type: array
+        items:
+          $ref: '#/definitions/appACEMatch'
+        description: app ACE match
+      actions:
+        type: array
+        items:
+          $ref: '#/definitions/appACEAction'
+        description: app ACE actions
+      id:
+        type: number
+        format: int32
+        description: app ACE id
+      name:
+        type: string
+        description: User defined name of the app ACE, unique across the enterprise. Once object is created, name can’t be changed
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+    description: App ACE Configuration
+    title: App ACE detaisn
+    required:
+    - matches
+    - actions
+    - id
+    - name
+  VariableOptionVal:
+    type: object
+    properties:
+      label:
+        type: string
+        description: Display label of the key in User-Agent
+      value:
+        type: string
+        description: Value of the key to be used
+  VmBootloaderMode:
+    type: string
+    enum:
+    - VM_BOOTLOADER_MODE_UNSPECIFIED
+    - VM_BOOTLOADER_MODE_LEGACY
+    - VM_BOOTLOADER_MODE_UEFI
+    default: VM_BOOTLOADER_MODE_UNSPECIFIED
+    title: 'VmBootloaderMode is used to specify the bootloader mode that will be used for the VM.
+
+      It represents the boot mechanism to be used to boot the VM'
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

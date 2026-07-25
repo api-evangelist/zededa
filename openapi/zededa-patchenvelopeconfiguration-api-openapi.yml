@@ -1,0 +1,965 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService PatchEnvelopeConfiguration API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: PatchEnvelopeConfiguration
+paths:
+  /v1/patch-envelope:
+    get:
+      summary: Get all the patch envelopes
+      description: Get the list of patch envelope details.
+      operationId: PatchEnvelopeConfiguration_GetPatchEnvelope
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PatchEnvelopeList'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: projectNamePattern
+        description: project name pattern
+        in: query
+        required: false
+        type: string
+      - name: namePattern
+        description: patch envelope name pattern
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: summary
+        description: Only summary of the records required
+        in: query
+        required: false
+        type: boolean
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PatchEnvelopeConfiguration
+    post:
+      summary: Create patch envelope
+      description: Create a patch envelope record.
+      operationId: PatchEnvelopeConfiguration_CreatePatchEnvelope
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/PatchEnvelope'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PatchEnvelopeConfiguration
+  /v1/patch-envelope/id/{id}:
+    get:
+      summary: Get patch envelope by id
+      description: Get patch envelope detail by patch envelope id.
+      operationId: PatchEnvelopeConfiguration_GetPatchEnvelopeById
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PatchEnvelope'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the patch envelope
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PatchEnvelopeConfiguration
+    delete:
+      summary: Delete patch envelope
+      description: Deletes patch envelope with specified id
+      operationId: PatchEnvelopeConfiguration_DeleteAppInstanceSnapshot
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the patch envelope
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PatchEnvelopeConfiguration
+    put:
+      summary: Update patch envelope
+      description: Update apatch envelope record. The usual pattern to update a patch envelope bundle record is to retrieve the record and update with the modified values in a new body.
+      operationId: PatchEnvelopeConfiguration_UpdatePatchEnvelope
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the patch envelope.
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: User defined name of the patch envelope, unique across the enterprise. Once patch envelope is created, name can’t be changed.
+              maxLength: 256
+              minLength: 3
+              pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+              uniqueItems: true
+            title:
+              type: string
+              description: User defined title of the patch envelope. Title can be changed at any time.
+              maxLength: 256
+              minLength: 3
+              pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+            description:
+              type: string
+              description: Detailed description of the patch envelope.
+              maxLength: 256
+            revision:
+              $ref: '#/definitions/ObjectRevision'
+              description: system defined info
+              readOnly: true
+            userDefinedVersion:
+              type: string
+              description: User defined version for the given patch envelope
+              title: optional - arbitrary version string if any by user
+            action:
+              $ref: '#/definitions/PatchEnvelopeAction'
+              description: Flag to represent whether device needs to present it to app instance
+              title: 'if activate is false, device should only download
+
+                images and not present them to app instance'
+            artifacts:
+              type: array
+              items:
+                $ref: '#/definitions/BinaryArtifact'
+              description: Patch envelope artifacts
+            projectId:
+              type: string
+              description: project id
+            deviceCount:
+              type: number
+              format: int64
+              description: number of devices referencing this patch envelope
+            projectName:
+              type: string
+              description: project name
+          description: PatchEnvelope is a proto that should be used by user-agents to create/update opaque data for application instances.
+          title: Opaque data for application instances
+          required:
+          - name
+          - title
+          - action
+          - artifacts
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PatchEnvelopeConfiguration
+  /v1/patch-envelope/name/{name}:
+    get:
+      summary: Get patch envelope by name
+      description: Get patch envelope detail by patch envelope name.
+      operationId: PatchEnvelopeConfiguration_GetPatchEnvelopeByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PatchEnvelope'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        description: User defined name of the patch envelope, unique across the enterprise. Once object is created, name can’t be changed
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PatchEnvelopeConfiguration
+  /v1/patch-envelope/status:
+    get:
+      summary: Get patch envelope status
+      description: Get patch envelope status information.
+      operationId: PatchEnvelopeConfiguration_GetPatchEnvelopeStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PatchStatusListMsg'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        in: query
+        required: false
+        type: boolean
+      - name: filter.deviceName
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: fields
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - PatchEnvelopeConfiguration
+definitions:
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  PatchStatusListMsg:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/PatchEnvelopeStatus'
+      totalCount:
+        type: integer
+        format: int64
+      next:
+        $ref: '#/definitions/Cursor'
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  PatchEnvelopeStatus:
+    type: object
+    properties:
+      id:
+        type: string
+        description: patch envelope id
+      name:
+        type: string
+        description: User defined name of the patch envelope, unique across the enterprise. Once patch envelope is created, name can’t be changed
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      userDefinedVersion:
+        type: string
+        description: User defined version for the given patch envelope
+      state:
+        $ref: '#/definitions/PatchEnvelopeState'
+        description: Patch envelope state
+      errors:
+        type: array
+        items:
+          type: string
+        description: Patch envelope error
+      projectId:
+        type: string
+        description: project id
+      projectName:
+        type: string
+        description: project name
+      deviceId:
+        type: string
+        description: device id
+      deviceName:
+        type: string
+        description: device name
+    description: PatchEnvelopeStatus encapsulates the status of an patch envelope
+    title: Patch Envelope status message
+  Summary:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Summary description
+      total:
+        type: number
+        format: int64
+        description: Total
+      values:
+        type: object
+        additionalProperties:
+          type: integer
+          format: int64
+        description: 'Values: Map for storing <string, uint32>'
+    description: Summary is used to store the Summary details
+    title: Summary is used to store the Summary details
+  PatchEnvelopeState:
+    type: string
+    enum:
+    - PatchEnvelopeStateUnknown
+    - PatchEnvelopeStateErrored
+    - PatchEnvelopeStateReceived
+    - PatchEnvelopeStateDownloading
+    - PatchEnvelopeStateDownloaded
+    - PatchEnvelopeStateReady
+    - PatchEnvelopeStateActive
+    default: PatchEnvelopeStateUnknown
+    title: "- PatchEnvelopeStateErrored: there is an error with config or during download or verification failed\n - PatchEnvelopeStateReceived: Configuration received but no downloads started\n - PatchEnvelopeStateDownloading: Artifact/Volume download started\nOne or more of the artifacts are being downloaded\n - PatchEnvelopeStateDownloaded: all downloads finished, verified and added to content tree\n - PatchEnvelopeStateReady: patch envelope ready for application instances\napplication instances will still not be allowed\nto fetch the patch envelope contents\n - PatchEnvelopeStateActive: application instances are now allowed to fetch contents"
+  PatchEnvelope:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the patch envelope.
+        readOnly: true
+        pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+        uniqueItems: true
+      name:
+        type: string
+        description: User defined name of the patch envelope, unique across the enterprise. Once patch envelope is created, name can’t be changed.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      title:
+        type: string
+        description: User defined title of the patch envelope. Title can be changed at any time.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+      description:
+        type: string
+        description: Detailed description of the patch envelope.
+        maxLength: 256
+      revision:
+        $ref: '#/definitions/ObjectRevision'
+        description: system defined info
+        readOnly: true
+      userDefinedVersion:
+        type: string
+        description: User defined version for the given patch envelope
+        title: optional - arbitrary version string if any by user
+      action:
+        $ref: '#/definitions/PatchEnvelopeAction'
+        description: Flag to represent whether device needs to present it to app instance
+        title: 'if activate is false, device should only download
+
+          images and not present them to app instance'
+      artifacts:
+        type: array
+        items:
+          $ref: '#/definitions/BinaryArtifact'
+        description: Patch envelope artifacts
+      projectId:
+        type: string
+        description: project id
+      deviceCount:
+        type: number
+        format: int64
+        description: number of devices referencing this patch envelope
+      projectName:
+        type: string
+        description: project name
+    description: PatchEnvelope is a proto that should be used by user-agents to create/update opaque data for application instances.
+    title: Opaque data for application instances
+    required:
+    - name
+    - title
+    - action
+    - artifacts
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  Cursor:
+    type: object
+    properties:
+      pageToken:
+        type: string
+        description: Page Token
+      orderBy:
+        type: array
+        items:
+          type: string
+        description: OrderBy helps in sorting the list response
+      pageNum:
+        type: number
+        format: int64
+        description: Page Number
+      pageSize:
+        type: number
+        format: int64
+        description: Defines the page size
+      totalPages:
+        type: number
+        format: int64
+        description: Total number of pages to be fetched.
+    description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+    title: Cursor is used as filter in list operation.
+  ObjectRevision:
+    type: object
+    properties:
+      prev:
+        type: string
+        description: Previous
+      curr:
+        type: string
+        description: Current Database version of the record
+      createdAt:
+        type: object
+        format: date-time
+        description: The time, in milliseconds since the epoch, when the record was created.
+      createdBy:
+        type: string
+        description: 'User data: Created By'
+      updatedAt:
+        type: object
+        format: date-time
+        description: The time, in milliseconds since the epoch, when the record was last updated.
+      updatedBy:
+        type: string
+        description: 'User data: Updated By'
+    description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+    title: ObjectRevision is used to store the user information.
+    required:
+    - curr
+    - createdAt
+    - createdBy
+    - updatedAt
+    - updatedBy
+  ExternalOpaqueBinaryBlob:
+    type: object
+    properties:
+      imageName:
+        type: string
+        title: Name of the image uploaded into data store
+      fileNameToUse:
+        type: string
+        title: 'optional - file name to be used for storing this data in EVE.
+
+          the same file name shall be advertised to application agent'
+      blobMetaData:
+        type: string
+        description: 'Eve shall use the image name when fileNameToUse is empty
+
+          optional - this can be image type or size etc encoded into a single string.
+
+          only the application instance agents will interpret this.'
+      imageId:
+        type: string
+  PatchEnvelopeAction:
+    type: string
+    enum:
+    - PATCH_ENVELOPE_ACTION_UNSPECIFIED
+    - PATCH_ENVELOPE_ACTION_STORE
+    - PATCH_ENVELOPE_ACTION_ACTIVATE
+    default: PATCH_ENVELOPE_ACTION_UNSPECIFIED
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  PatchEnvelopeList:
+    type: object
+    properties:
+      next:
+        $ref: '#/definitions/Cursor'
+        description: cursor next
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/PatchEnvelope'
+        description: patch envelope summary list
+      summaryByAction:
+        $ref: '#/definitions/Summary'
+        description: patch envelopes summary by action
+      totalCount:
+        type: integer
+        format: int64
+        description: patch envelope total count
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  BinaryArtifact:
+    type: object
+    properties:
+      format:
+        $ref: '#/definitions/OpaqueObjectCategory'
+        title: base64 or binary blob only - secret type is invalid
+      base64Artifact:
+        $ref: '#/definitions/InlineOpaqueBase64Data'
+      binaryArtifact:
+        $ref: '#/definitions/ExternalOpaqueBinaryBlob'
+      artifactMetaData:
+        type: string
+        title: optional - any arbitrary metadata about/for artifact encoded to base64 string
+      id:
+        type: string
+        description: System defined universally unique Id of the artifact.
+        title: artifact id
+        readOnly: true
+        pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+        uniqueItems: true
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  InlineOpaqueBase64Data:
+    type: object
+    properties:
+      base64Data:
+        type: string
+        title: base64 encoded
+      fileNameToUse:
+        type: string
+        title: 'file name to be used for storing this data in EVE.
+
+          the same file name shall be advertised to application agent'
+      base64MetaData:
+        type: string
+        title: optional - any arbitrary metadata encoded to base64 string
+  OpaqueObjectCategory:
+    type: string
+    enum:
+    - OpaqueObjectCategoryUnknown
+    - OpaqueObjectCategoryInline
+    - OpaqueObjectCategoryExternalBinary
+    default: OpaqueObjectCategoryUnknown
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

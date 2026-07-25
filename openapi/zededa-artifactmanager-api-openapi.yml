@@ -1,0 +1,741 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService ArtifactManager API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: ArtifactManager
+paths:
+  /v1/artifacts:
+    get:
+      summary: Query artifact files
+      description: Query the artifact file records.
+      operationId: ArtifactManager_QueryArtifacts
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ArtifactList'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        description: Only summary of the records required
+        in: query
+        required: false
+        type: boolean
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ArtifactManager
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+    post:
+      summary: Create artifact file in the file storage
+      description: Create the artifact file in the file storage in AWS S3 or Azure BlobStorage
+      operationId: ArtifactManager_CreateArtifact
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/Artifact'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Artifact'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ArtifactManager
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+  /v1/artifacts/id/{id}:
+    get:
+      summary: Download artifact file chunk by chunk
+      description: Downloads the artifact file in a stream from the file storage
+      operationId: ArtifactManager_GetArtifactStream
+      responses:
+        '200':
+          description: artifact chunk data(streaming responses)
+          schema:
+            type: object
+            format: byte
+            properties:
+              result: {}
+              error:
+                $ref: '#/definitions/googlerpcStatus'
+            description: artifact chunk data
+            title: Stream result of ArtifactStream
+        '206':
+          description: Partial Content. The API gateway has fulfilled the partial GET request for the resource.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '307':
+          description: Temporary Redirect. Returned when the requested artifactId is not available at the requested time
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: system generated unique id for an artifact
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ArtifactManager
+      produces:
+      - application/octet-stream
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+    delete:
+      summary: Delete artifact file form the datastore
+      description: Drops the artifact file from the file storage in AWS S3 or Azure BlobStorage
+      operationId: ArtifactManager_DeleteArtifact
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: system generated unique id for an artifact
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ArtifactManager
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+  /v1/artifacts/id/{id}/upload/chunked:
+    put:
+      summary: Uploads the given chunk into the specified multiplePart file
+      description: Uploads the given chunk into the specified file
+      operationId: ArtifactManager_UploadArtifact
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '202':
+          description: Accepted. The API gateway accepted the request for uploading but the uploading process has not been completed.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: body
+        description: artifact chunk data
+        in: body
+        required: true
+        schema:
+          type: string
+          format: byte
+          description: artifact chunk data
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      - name: Content-Range
+        in: header
+        required: true
+        pattern: bytes (\d+-\d+)/\d+
+        description: 'Content range in this request. Example : bytes 1024-2047/8192'
+        type: string
+      tags:
+      - ArtifactManager
+      produces:
+      - application/json
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+  /v1/artifacts/id/{id}/url:
+    get:
+      summary: Generates the signedUrl for accessing the resource
+      description: Generate the URL which can be used to access the resource from datastore like s3, Azure etc for specified amount of time.
+      operationId: ArtifactManager_GetArtifactSignedUrl
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/Artifact'
+        '307':
+          description: Temporary Redirect. Returned when the requested artifactId is not available at the requested time
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: system generated unique id for an artifact
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ArtifactManager
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+definitions:
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  StatusCode:
+    type: string
+    enum:
+    - STATUS_CODE_UNSPECIFIED
+    - STATUS_CODE_SUCCESS
+    - STATUS_CODE_FAILURE
+    - STATUS_CODE_PARTIAL_SUCCESS
+    default: STATUS_CODE_UNSPECIFIED
+    title: status codes for internal use (Gilas and Niles)
+  Cursor:
+    type: object
+    properties:
+      pageToken:
+        type: string
+        description: Page Token
+      orderBy:
+        type: array
+        items:
+          type: string
+        description: OrderBy helps in sorting the list response
+      pageNum:
+        type: number
+        format: int64
+        description: Page Number
+      pageSize:
+        type: number
+        format: int64
+        description: Defines the page size
+      totalPages:
+        type: number
+        format: int64
+        description: Total number of pages to be fetched.
+    description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+    title: Cursor is used as filter in list operation.
+  Artifact:
+    type: object
+    properties:
+      id:
+        type: string
+        description: system generated unique id for an artifact
+        readOnly: true
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+a'
+        uniqueItems: true
+      name:
+        type: string
+        description: User defined name of the artifact, unique across the enterprise. Once object is created, name can’t be changed
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      status:
+        $ref: '#/definitions/Status'
+        description: describes the status of the operation
+        readOnly: true
+      signedUrl:
+        type: string
+        description: generated signed url for an artifact
+        readOnly: true
+      ttl:
+        type: number
+        format: int64
+        description: TTL for the URL
+        readOnly: true
+    description: ArtifactKey idenfies the artifact by artifactId
+    title: ArtifactKey detail
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  DecsriptionCode:
+    type: string
+    enum:
+    - DESCRIPTION_CODE_UNSPECIFIED
+    - DESCRIPTION_CODE_RECEIVED
+    - DESCRIPTION_CODE_PACKET_CORRUPT
+    - DESCRIPTION_CODE_FAILED_TO_RECEIVE
+    - DESCRIPTION_CODE_NETWORK_ERROR
+    - DESCRIPTION_CODE_NOT_FOUND
+    - DESCRIPTION_CODE_NOT_SUPPORTED
+    - DESCRIPTION_CODE_INTERNAL_ERROR
+    - DESCRIPTION_CODE_NOT_SPECIFIED
+    - DESCRIPTION_CODE_UPLOAD_DONE
+    - DESCRIPTION_CODE_ALREADY_EXISTS
+    - DESCRIPTION_CODE_INVALID_PARAMS
+    default: DESCRIPTION_CODE_UNSPECIFIED
+    title: description codes for internal use (Gilas and Niles)
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  Summary:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Summary description
+      total:
+        type: number
+        format: int64
+        description: Total
+      values:
+        type: object
+        additionalProperties:
+          type: integer
+          format: int64
+        description: 'Values: Map for storing <string, uint32>'
+    description: Summary is used to store the Summary details
+    title: Summary is used to store the Summary details
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  Description:
+    type: object
+    properties:
+      descMessage:
+        type: string
+        description: description of an operation
+        readOnly: true
+      descCode:
+        type: string
+        $ref: '#/definitions/DecsriptionCode'
+        default: UPLOAD_DONE
+        description: description code for an operation
+        readOnly: true
+    description: Description encapsulates the top level Description of the operation
+    title: Description encapsulates the top level Description of the operation
+  ArtifactList:
+    type: object
+    properties:
+      summary:
+        type: object
+        $ref: '#/definitions/Summary'
+        description: Summary by state
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/Artifact'
+        description: Artifact Key list
+      next:
+        $ref: '#/definitions/Cursor'
+    description: Response returned for List artifact Keys
+    title: ArtifactKeyListResponse detail
+  Status:
+    type: object
+    properties:
+      code:
+        type: string
+        $ref: '#/definitions/StatusCode'
+        default: SUCCESS
+        description: describes the overall status of the operation
+        readOnly: true
+      description:
+        $ref: '#/definitions/Description'
+        description: top level description of the operation
+        readOnly: true
+    description: Status encapsulates the top level status of the operation
+    title: Status encapsulates the top level status of the operation
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

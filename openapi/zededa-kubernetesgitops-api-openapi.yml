@@ -1,0 +1,863 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService KubernetesGitOps API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: KubernetesGitOps
+  description: APIs for managing GitOps configurations and continuous deployment from Git repositories to Kubernetes clusters
+paths:
+  /v1/cluster/instances/kubernetes/gitrepos:
+    get:
+      summary: List all GitRepo configurations
+      description: "Retrieve a list of all GitRepo configurations with their status and summary information. Includes statistics about sync status and resource counts.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/gitrepos\n```\n\n**Example Response:**\n```json\n{\n  \"totalCount\": 2,\n  \"stateSummary\": {\n    \"description\": \"GitRepo Status Summary\",\n    \"total\": 2,\n    \"values\": {\n      \"Active\": 1,\n      \"Pending\": 1\n    }\n  },\n  \"gitrepos\": [\n    {\n      \"id\": \"gitrepo-abc123\",\n      \"name\": \"app-manifests\",\n      \"title\": \"Application Manifests Repository\",\n      \"description\": \"Git repository containing production application manifests\",\n      \"workspace\": \"default\",\n      \"status\": {\n        \"display\": {\n          \"ready_bundle_deployments\": \"3/3\",\n          \"state\": \"Active\"\n        }\n      },\n      \"created_at\": \"2024-01-15T10:30:00Z\",\n      \"updated_at\": \"2024-01-15T11:00:00Z\"\n    },\n    {\n      \"id\": \"gitrepo-def456\",\n      \"name\": \"helm-charts\",\n      \"title\": \"Helm Charts Repository\",\n      \"description\": \"Repository containing Helm chart definitions\",\n      \"workspace\": \"default\",\n      \"status\": {\n        \"display\": {\n          \"ready_bundle_deployments\": \"0/2\",\n          \"state\": \"Pending\"\n        }\n      },\n      \"created_at\": \"2024-01-14T15:20:00Z\",\n      \"updated_at\": \"2024-01-14T15:25:00Z\"\n    }\n  ]\n}\n```"
+      operationId: KubernetesGitOps_ListGitRepos
+      responses:
+        '200':
+          description: Successfully retrieved GitRepo configuration list
+          schema:
+            $ref: '#/definitions/GitRepoListResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to list GitRepo configurations.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve GitRepo list due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      tags:
+      - KubernetesGitOps
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+    post:
+      summary: Create a new GitRepo configuration
+      description: "Create a new GitRepo configuration to enable continuous deployment from a Git repository. This allows automatic synchronization of Kubernetes manifests or Helm charts from a Git repository to target clusters.\n\n**Example Request:**\n```json\n{\n  \"metadata\": {\n    \"name\": \"app-manifests\",\n    \"title\": \"Application Manifests Repository\",\n    \"description\": \"Git repository containing production application manifests\"\n  },\n  \"data\": {\n    \"project_id\": \"proj-12345\",\n    \"repo_details\": {\n      \"url\": \"https://github.com/myorg/k8s-manifests.git\",\n      \"branch\": \"main\",\n      \"path_list\": [\"applications/\", \"ingress/\"]\n    },\n    \"auth\": {\n      \"git\": {\n        \"secret\": {\n          \"type\": \"SECRET_TYPE_OPAQUE\",\n          \"name\": \"git-credentials\"\n        }\n      }\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_CLUSTER\",\n      \"value\": \"cluster-abc123\"\n    }\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"gitrepo-abc123\",\n  \"objectName\": \"app-manifests\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 201,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```"
+      operationId: KubernetesGitOps_CreateGitRepo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '201':
+          description: Successfully created GitRepo configuration
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid GitRepo configuration or missing required fields.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to create GitRepo configurations.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. GitRepo configuration with the same name already exists.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to create GitRepo configuration due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/GitRepoCreateRequest'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - KubernetesGitOps
+  /v1/cluster/instances/kubernetes/gitrepos/id/{gitrepoId}:
+    get:
+      summary: Get GitRepo configuration by ID
+      description: "Retrieve detailed information about a specific GitRepo configuration including its current status, sync information, and metadata.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/gitrepos/id/gitrepo-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"gitrepo-abc123\",\n  \"name\": \"app-manifests\",\n  \"title\": \"Application Manifests Repository\",\n  \"description\": \"Git repository containing production application manifests\",\n  \"workspace\": \"default\",\n  \"data\": {\n    \"project_id\": \"proj-12345\",\n    \"repo_details\": {\n      \"url\": \"https://github.com/myorg/k8s-manifests.git\",\n      \"branch\": \"main\",\n      \"commit\": \"a1b2c3d4e5f6\",\n      \"path_list\": [\"applications/\", \"ingress/\"]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_CLUSTER\",\n      \"value\": \"cluster-abc123\"\n    }\n  },\n  \"status\": {\n    \"display\": {\n      \"ready_bundle_deployments\": \"3/3\",\n      \"state\": \"Active\"\n    },\n    \"conditions\": [\n      {\n        \"type\": \"Ready\",\n        \"status\": \"True\",\n        \"message\": \"GitRepo is ready and syncing\"\n      }\n    ],\n    \"resource_counts\": {\n      \"ready\": 3,\n      \"desired_ready\": 3\n    }\n  },\n  \"created_at\": \"2024-01-15T10:30:00Z\",\n  \"updated_at\": \"2024-01-15T11:00:00Z\",\n  \"created_by\": \"user@example.com\",\n  \"updated_by\": \"user@example.com\"\n}\n```"
+      operationId: KubernetesGitOps_GetGitRepo
+      responses:
+        '200':
+          description: Successfully retrieved GitRepo configuration
+          schema:
+            $ref: '#/definitions/GitRepoGetResponse'
+        '400':
+          description: Bad Request. Invalid GitRepo ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view this GitRepo configuration.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. GitRepo configuration with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve GitRepo configuration due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: gitrepoId
+        description: 'Unique identifier of the GitRepo (required). Example: ''gitrepo-abc123'''
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - KubernetesGitOps
+    delete:
+      summary: Delete GitRepo configuration
+      description: "Delete a GitRepo configuration. This will stop the synchronization from the Git repository and remove all associated resources from the target clusters. This action is irreversible.\n\n**Example Request:**\n```\nDELETE /v1/cluster/instances/kubernetes/gitrepos/id/gitrepo-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"gitrepo-abc123\",\n  \"objectName\": \"app-manifests\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Warning:** This operation will remove the GitRepo configuration and stop synchronization. All resources deployed through this GitRepo will be removed from target clusters.\n\n**Note:** The gitrepo_id parameter is **required** and must be a valid GitRepo identifier."
+      operationId: KubernetesGitOps_DeleteGitRepo
+      responses:
+        '200':
+          description: Successfully deleted GitRepo configuration
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid GitRepo ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to delete this GitRepo configuration.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. GitRepo configuration with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Cannot delete GitRepo configuration because it is currently in use or in a transitioning state.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to delete GitRepo configuration due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: gitrepoId
+        description: 'Unique identifier of the GitRepo (required). Example: ''gitrepo-abc123'''
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - KubernetesGitOps
+    put:
+      summary: Update GitRepo configuration
+      description: "Update an existing GitRepo configuration. This allows modification of repository details, authentication settings, and target configuration. The GitRepo name cannot be changed after creation.\n\n**Example Request:**\n```json\n{\n  \"gitrepo_id\": \"gitrepo-abc123\",\n  \"metadata\": {\n    \"name\": \"app-manifests\",\n    \"title\": \"Updated Application Manifests Repository\",\n    \"description\": \"Updated Git repository containing production application manifests\"\n  },\n  \"data\": {\n    \"project_id\": \"proj-12345\",\n    \"repo_details\": {\n      \"url\": \"https://github.com/myorg/k8s-manifests.git\",\n      \"branch\": \"production\",\n      \"path_list\": [\"applications/\", \"ingress/\", \"monitoring/\"]\n    },\n    \"auth\": {\n      \"git\": {\n        \"secret\": {\n          \"type\": \"SECRET_TYPE_OPAQUE\",\n          \"name\": \"updated-git-credentials\"\n        }\n      }\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_CLUSTER_GROUP\",\n      \"value\": \"production-clusters\"\n    }\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"gitrepo-abc123\",\n  \"objectName\": \"app-manifests\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```"
+      operationId: KubernetesGitOps_UpdateGitRepo
+      responses:
+        '200':
+          description: Successfully updated GitRepo configuration
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid GitRepo configuration or missing required fields.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to update this GitRepo configuration.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. GitRepo configuration with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Cannot update GitRepo configuration due to conflicting state.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to update GitRepo configuration due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: gitrepoId
+        description: 'Unique identifier of the GitRepo to update (required). Example: ''gitrepo-abc123'''
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            metadata:
+              $ref: '#/definitions/GitRepoMetadata'
+              description: Metadata for the GitRepo (name cannot be updated, required)
+            data:
+              $ref: '#/definitions/GitRepoData'
+              description: Data specification for the GitRepo (required)
+          description: Request message for updating an existing GitRepo configuration
+          title: GitRepo update request
+          required:
+          - gitrepo_id
+          - metadata
+          - data
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - KubernetesGitOps
+definitions:
+  GitAuthConfig:
+    type: object
+    properties:
+      secret:
+        $ref: '#/definitions/GitRepoSecretConfig'
+        description: Secret configuration for Git authentication
+    description: Authentication configuration for Git repository access
+    title: Git authentication configuration
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  GitRepoGetResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier of the GitRepo
+      name:
+        type: string
+        description: Name of the GitRepo configuration
+      title:
+        type: string
+        description: Display title of the GitRepo configuration
+      description:
+        type: string
+        description: Description of the GitRepo configuration
+      workspace:
+        type: string
+        description: Workspace where the GitRepo is deployed
+      data:
+        $ref: '#/definitions/GitRepoData'
+        description: Specification details
+      status:
+        $ref: '#/definitions/GitRepoGetStatus'
+        description: Current status information
+      events:
+        type: array
+        items:
+          $ref: '#/definitions/GitRepoEvents'
+        description: List of events related to the GitRepo
+      createdAt:
+        type: string
+        format: date-time
+        description: Timestamp when the GitRepo was created
+      updatedAt:
+        type: string
+        format: date-time
+        description: Timestamp when the GitRepo was last updated
+      createdBy:
+        type: string
+        description: User who created the GitRepo
+      updatedBy:
+        type: string
+        description: User who last updated the GitRepo
+    description: Complete response for GitRepo GET operations including metadata, specification, and status
+    title: GitRepo get response
+  GitRepoResourceStatusMap:
+    type: object
+    properties:
+      apiVersion:
+        type: string
+        description: API version of the resource
+      kind:
+        type: string
+        description: Kind of Kubernetes resource
+      name:
+        type: string
+        description: Name of the resource
+      namespace:
+        type: string
+        description: Namespace of the resource
+      state:
+        type: string
+        description: State of the resource
+    description: Status information for individual resources with detailed mapping
+    title: GitRepo resource status map
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  GitRepoTargetConfig:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/GitRepoTargetType'
+        description: Type of target for GitRepo deployment (required)
+      value:
+        type: string
+        description: Target value (cluster ID, cluster group ID, etc.). Required when type is CLUSTER or CLUSTER_GROUP, not required for ALL_CLUSTER
+    description: Target configuration specifying where the GitRepo should be deployed
+    title: GitRepo target configuration
+    required:
+    - type
+  GitRepoAuthConfig:
+    type: object
+    properties:
+      encodedCertificates:
+        type: string
+        description: Base64 encoded certificates for TLS authentication
+      insecureSkipTlsVerify:
+        type: boolean
+        description: Skip TLS certificate verification
+      git:
+        $ref: '#/definitions/GitAuthConfig'
+        description: Git-specific authentication configuration
+      helm:
+        $ref: '#/definitions/HelmAuthConfig'
+        description: Helm-specific authentication configuration
+    description: Complete authentication configuration for GitRepo including certificates and credentials
+    title: GitRepo authentication configuration
+  GitRepoData:
+    type: object
+    properties:
+      projectId:
+        type: string
+        description: Project ID where the GitRepo belongs (required)
+      repoDetails:
+        $ref: '#/definitions/GitRepoRepositoryDetails'
+        description: Repository details and configuration (required)
+      auth:
+        $ref: '#/definitions/GitRepoAuthConfig'
+        description: Authentication configuration
+      target:
+        $ref: '#/definitions/GitRepoTargetConfig'
+        description: Target deployment configuration (required)
+    description: Complete data specification for a GitRepo configuration
+    title: GitRepo data
+    required:
+    - projectId
+    - repoDetails
+    - target
+  GitRepoGetStatus:
+    type: object
+    properties:
+      display:
+        $ref: '#/definitions/GitRepoStatusDisplay'
+        description: Display status information
+      conditions:
+        type: array
+        items:
+          $ref: '#/definitions/GitRepoCondition'
+        description: List of conditions describing the current state
+      resourceCounts:
+        $ref: '#/definitions/GitRepoResourceCounts'
+        description: Resource count information
+      resourceStatusMap:
+        type: array
+        items:
+          $ref: '#/definitions/GitRepoResourceStatusMap'
+        description: Detailed status map of individual resources managed by this GitRepo
+      state:
+        $ref: '#/definitions/GitRepoState'
+        description: Current state information for the GitRepo
+      summary:
+        type: object
+        description: Summary information for the GitRepo
+    description: Status information for GitRepo including sync status and resource conditions
+    title: GitRepo get status
+  GitRepoState:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Indicates if the GitRepo is in an error state
+      message:
+        type: string
+        description: Status message providing additional details about the GitRepo state
+      name:
+        type: string
+        description: current state name
+      transitioning:
+        type: boolean
+        description: Indicates if the GitRepo is currently undergoing state transition
+    description: Current operational state of a GitRepo
+    title: GitRepo state
+  GitRepoEvents:
+    type: object
+    properties:
+      reason:
+        type: string
+        description: Reason for the event
+      type:
+        type: string
+        description: Type of the event
+      message:
+        type: string
+        description: Detailed message about the event
+      lastUpdateTime:
+        type: string
+        format: date-time
+        description: Last time the event was updated
+    description: Events related to GitRepo operations
+    title: GitRepo events
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  HelmAuthConfig:
+    type: object
+    properties:
+      secret:
+        $ref: '#/definitions/GitRepoSecretConfig'
+        description: Secret configuration for Helm authentication
+      helmRepoUrlRegex:
+        type: string
+        description: Regular expression pattern to match Helm repository URLs
+    description: Authentication configuration for Helm repository access
+    title: Helm authentication configuration
+  GitRepoMetadata:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the GitRepo configuration (required)
+      title:
+        type: string
+        description: Display title of the GitRepo configuration
+      description:
+        type: string
+        description: Description of the GitRepo configuration
+    description: Metadata information for a GitRepo configuration
+    title: GitRepo metadata
+    required:
+    - name
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  GitRepoResourceCounts:
+    type: object
+    properties:
+      desiredReady:
+        type: integer
+        format: int32
+        description: Desired ready count
+      missing:
+        type: integer
+        format: int32
+        description: Missing resources count
+      modified:
+        type: integer
+        format: int32
+        description: Modified resources count
+      notReady:
+        type: integer
+        format: int32
+        description: Not ready resources count
+      orphaned:
+        type: integer
+        format: int32
+        description: Orphaned resources count
+      ready:
+        type: integer
+        format: int32
+        description: Ready resources count
+      unknown:
+        type: integer
+        format: int32
+        description: Unknown resources count
+      waitApplied:
+        type: integer
+        format: int32
+        description: Wait applied resources count
+    description: Count of resources in different states
+    title: GitRepo resource counts
+  GitRepoTargetType:
+    type: string
+    enum:
+    - GIT_REPO_TARGET_TYPE_UNKNOWN
+    - GIT_REPO_TARGET_TYPE_ALL_CLUSTER
+    - GIT_REPO_TARGET_TYPE_CLUSTER
+    - GIT_REPO_TARGET_TYPE_CLUSTER_GROUP
+    default: GIT_REPO_TARGET_TYPE_UNKNOWN
+    title: GitRepo Target Types
+  GitRepoRepositoryDetails:
+    type: object
+    properties:
+      url:
+        type: string
+        description: Git repository URL (required)
+      branch:
+        type: string
+        description: Git branch to track
+      commit:
+        type: string
+        description: Specific git commit hash
+      pathList:
+        type: array
+        items:
+          type: string
+        description: List of paths within the repository to monitor
+    description: Repository configuration details for GitRepo
+    title: GitRepo repository details
+    required:
+    - url
+  GitRepoStatusDisplay:
+    type: object
+    properties:
+      readyBundleDeployments:
+        type: string
+        description: Ready bundle deployments count
+      state:
+        type: string
+        description: Current state of the GitRepo
+    description: Display-friendly status information
+    title: GitRepo status display
+  SecretType:
+    type: string
+    enum:
+    - SECRET_TYPE_UNSPECIFIED
+    - SECRET_TYPE_SSH
+    - SECRET_TYPE_BASIC_AUTH
+    - SECRET_TYPE_NONE
+    default: SECRET_TYPE_UNSPECIFIED
+    title: Kubernetes Secret Types
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  GitRepoCreateRequest:
+    type: object
+    properties:
+      metadata:
+        $ref: '#/definitions/GitRepoMetadata'
+        description: Metadata for the GitRepo (required)
+      data:
+        $ref: '#/definitions/GitRepoData'
+        description: Data specification for the GitRepo (required)
+    description: Request message for creating a new GitRepo configuration
+    title: GitRepo create request
+    required:
+    - metadata
+    - data
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  GitRepoCondition:
+    type: object
+    properties:
+      type:
+        type: string
+        description: Type of the condition
+      status:
+        type: string
+        description: Status of the condition (True, False, Unknown)
+      error:
+        type: boolean
+        description: Whether the condition represents an error state
+      transitioning:
+        type: boolean
+        description: Whether the condition is in a transitioning state
+      message:
+        type: string
+        description: Human readable message indicating details about the condition
+      lastUpdateTime:
+        type: string
+        description: Last time the condition was updated
+    description: Status condition information for a GitRepo
+    title: GitRepo condition
+  GitRepoListResponse:
+    type: object
+    properties:
+      totalCount:
+        type: integer
+        format: int32
+        description: Total count of GitRepos
+      stateSummary:
+        $ref: '#/definitions/GitRepoListStatusSummary'
+        description: Summary of GitRepo statuses
+      gitrepos:
+        type: array
+        items:
+          $ref: '#/definitions/GitRepoGetResponse'
+        description: List of GitRepo entries
+    description: Response for GitRepo LIST operations containing multiple GitRepo entries with summary information
+    title: GitRepo list response
+  GitRepoListStatusSummary:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Description of the status summary
+      total:
+        type: integer
+        format: int32
+        description: Total number of GitRepos
+      values:
+        type: object
+        additionalProperties:
+          type: integer
+          format: int32
+        description: Map of status values and their counts
+    description: Summary of GitRepo statuses in the list response
+    title: GitRepo list status summary
+  GitRepoSecretConfig:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/SecretType'
+        description: Type of secret for authentication
+      name:
+        type: string
+        description: Name of the secret
+    description: Secret configuration for GitRepo authentication
+    title: GitRepo secret configuration
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

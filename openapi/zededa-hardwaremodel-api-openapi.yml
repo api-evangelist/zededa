@@ -1,0 +1,3875 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService HardwareModel API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: HardwareModel
+paths:
+  /v1/brands:
+    get:
+      summary: Query hardware brands
+      description: Query the hardware brand records.
+      operationId: HardwareModel_QueryHardwareBrands
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysBrands'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        description: Only summary of the records required
+        in: query
+        required: false
+        type: boolean
+      - name: namePattern
+        description: Brand name pattern to be matched.
+        in: query
+        required: false
+        type: string
+      - name: originType
+        description: "origin of object\n\n - ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+        in: query
+        required: false
+        type: string
+        enum:
+        - ORIGIN_UNSPECIFIED
+        - ORIGIN_IMPORTED
+        - ORIGIN_LOCAL
+        - ORIGIN_GLOBAL
+        - ORIGIN_APP_PROFILE_LOCAL
+        default: ORIGIN_UNSPECIFIED
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+    post:
+      summary: Create hardware brand
+      description: Create a hardware brand record.
+      operationId: HardwareModel_CreateHardwareBrand
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this hardware brand record will conflict with an already existing hardware brand record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/SysBrand'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/brands/global:
+    get:
+      summary: Query global hardware brands
+      description: Query the global hardware brand records.
+      operationId: HardwareModel_QueryGlobalHardwareBrands
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysBrands'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        description: Only summary of the records required
+        in: query
+        required: false
+        type: boolean
+      - name: namePattern
+        description: Brand name pattern to be matched.
+        in: query
+        required: false
+        type: string
+      - name: originType
+        description: "origin of object\n\n - ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+        in: query
+        required: false
+        type: string
+        enum:
+        - ORIGIN_UNSPECIFIED
+        - ORIGIN_IMPORTED
+        - ORIGIN_LOCAL
+        - ORIGIN_GLOBAL
+        - ORIGIN_APP_PROFILE_LOCAL
+        default: ORIGIN_UNSPECIFIED
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/brands/global/id/{id}:
+    get:
+      summary: Get global hardware brand
+      description: Get the configuration (without security details) of a global hardware brand record.
+      operationId: HardwareModel_GetGlobalHardwareBrand
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysBrand'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the model.
+        in: path
+        required: true
+        type: string
+      - name: enterpriseId
+        description: 'deprecated field: EnterpriseId'
+        in: query
+        required: false
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+  /v1/brands/global/name/{name}:
+    get:
+      summary: Get global hardware brand
+      description: Get the configuration (without security details) of a global hardware brand record.
+      operationId: HardwareModel_GetGlobalHardwareBrandByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysBrand'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        description: user defined sys brand name
+        in: path
+        required: true
+        type: string
+      - name: enterpriseId
+        description: 'deprecated field: EnterpriseId'
+        in: query
+        required: false
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+  /v1/brands/id/{id}:
+    get:
+      summary: Get hardware brand
+      description: Get the configuration (without security details) of a hardware brand record.
+      operationId: HardwareModel_GetHardwareBrand
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysBrand'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the model.
+        in: path
+        required: true
+        type: string
+      - name: enterpriseId
+        description: 'deprecated field: EnterpriseId'
+        in: query
+        required: false
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+    delete:
+      summary: Delete hardware brand
+      description: Delete a hardware brand record.
+      operationId: HardwareModel_DeleteHardwareBrand
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the model.
+        in: path
+        required: true
+        type: string
+      - name: enterpriseId
+        description: 'deprecated field: EnterpriseId'
+        in: query
+        required: false
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+    put:
+      summary: Update hardware brand
+      description: Update a hardware brand. The usual pattern to update a hardware brand record is to retrieve the record and update with the modified values in a new body to update the hardware brand record.
+      operationId: HardwareModel_UpdateHardwareBrand
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this operation will conflict with an already existing hardware brand record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the brand.
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: user defined sys brand name
+              maxLength: 256
+              minLength: 3
+              pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+            title:
+              type: string
+              description: user defined title for sys brand
+              pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+            description:
+              type: string
+              description: Detailed description of the image.
+              maxLength: 256
+            svg:
+              type: string
+              description: 'Deprecated: base64 encoded string of svg file'
+            attr:
+              type: object
+              additionalProperties:
+                type: string
+              description: Map of <string, string>
+            state:
+              $ref: '#/definitions/SysModelState'
+              description: Sys Model Status
+            revision:
+              $ref: '#/definitions/ObjectRevision'
+              description: Object Revision  of the sys brand
+            systemMfgName:
+              type: string
+              description: System Manufacturer name
+            logo:
+              type: object
+              additionalProperties:
+                type: string
+              description: Map of <string, string> which holds the key:url for the logo artifact of the the brand
+            originType:
+              $ref: '#/definitions/Origin'
+              description: origin of object
+          description: SysModel consists of various brand attributes like id, name, title, svg, state, systemMfgName
+          title: SysBrand  payload details
+          required:
+          - name
+          - title
+          - originType
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/brands/name/{name}:
+    get:
+      summary: Get hardware brand
+      description: Get the configuration (without security details) of a hardware brand record.
+      operationId: HardwareModel_GetHardwareBrandByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysBrand'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        description: user defined sys brand name
+        in: path
+        required: true
+        type: string
+      - name: enterpriseId
+        description: 'deprecated field: EnterpriseId'
+        in: query
+        required: false
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/status-config:
+    get:
+      summary: Query device status and config
+      description: Device status config API is a composite API for device config and device status
+      operationId: HardwareModel_GetDeviceStatusConfig
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DeviceStatusConfigList'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        in: query
+        required: false
+        type: boolean
+      - name: runState
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - ONLINE
+        - HALTED
+        - INIT
+        - REBOOTING
+        - OFFLINE
+        - UNKNOWN
+        - UNPROVISIONED
+        - PROVISIONED
+        - SUSPECT
+        - DOWNLOADING
+        - RESTARTING
+        - PURGING
+        - HALTING
+        - ERROR
+        - VERIFYING
+        - LOADING
+        - CREATING_VOLUME
+        - BOOTING
+        - MAINTENANCE_MODE
+        - START_DELAYED
+        - BASEOS_UPDATING
+        - PREPARING_POWEROFF
+        - POWERING_OFF
+        - PREPARED_POWEROFF
+        default: UNSPECIFIED
+      - name: projectName
+        in: query
+        required: false
+        type: string
+      - name: load
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - FREE
+        - MODERATE
+        - HEAVY
+        default: UNSPECIFIED
+      - name: namePattern
+        in: query
+        required: false
+        type: string
+      - name: tags
+        in: query
+        required: false
+        type: string
+      - name: projectNamePattern
+        in: query
+        required: false
+        type: string
+      - name: deviceName
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: fields
+        description: 'Fields to select for composite api: id, name, title, serialNo, projectId, projectName, isEveLatest, appInstCount, runState, adminState.'
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: adminState
+        description: " - CREATED: Entity Created in the controller\n - DELETED: Entity Deleted in the controller\n - ACTIVE: Entity Activated in the controller\n - INACTIVE: Entity Deactivated in the controller\n - REGISTERED: Specific to Edge-node - Edge-node Registered with the controller\n - ARCHIVED: Entity Archived in the controller"
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - CREATED
+        - DELETED
+        - ACTIVE
+        - INACTIVE
+        - REGISTERED
+        - ARCHIVED
+        default: UNSPECIFIED
+      - name: eveLtsSupportType
+        description: filter devices by eve version support type i.e LTS OR NON_LTS
+        in: query
+        required: false
+        type: string
+        enum:
+        - SUPPORT_TYPE_UNSPECIFIED
+        - SUPPORT_TYPE_LTS
+        - SUPPORT_TYPE_NON_LTS
+        default: SUPPORT_TYPE_UNSPECIFIED
+      - name: includeInterfaces
+        description: flag to indicate whether to include network interface details in the response
+        in: query
+        required: false
+        type: boolean
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/status/locations:
+    get:
+      summary: Query device status location
+      description: Query device status locations
+      operationId: HardwareModel_GetDeviceStatusLocation
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DeviceLocations'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        in: query
+        required: false
+        type: boolean
+      - name: runState
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - ONLINE
+        - HALTED
+        - INIT
+        - REBOOTING
+        - OFFLINE
+        - UNKNOWN
+        - UNPROVISIONED
+        - PROVISIONED
+        - SUSPECT
+        - DOWNLOADING
+        - RESTARTING
+        - PURGING
+        - HALTING
+        - ERROR
+        - VERIFYING
+        - LOADING
+        - CREATING_VOLUME
+        - BOOTING
+        - MAINTENANCE_MODE
+        - START_DELAYED
+        - BASEOS_UPDATING
+        - PREPARING_POWEROFF
+        - POWERING_OFF
+        - PREPARED_POWEROFF
+        default: UNSPECIFIED
+      - name: projectName
+        in: query
+        required: false
+        type: string
+      - name: load
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - FREE
+        - MODERATE
+        - HEAVY
+        default: UNSPECIFIED
+      - name: namePattern
+        in: query
+        required: false
+        type: string
+      - name: tags
+        in: query
+        required: false
+        type: string
+      - name: projectNamePattern
+        in: query
+        required: false
+        type: string
+      - name: deviceName
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: fields
+        description: 'Fields to select for composite api: id, name, title, serialNo, projectId, projectName, isEveLatest, appInstCount, runState, adminState.'
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: adminState
+        description: " - CREATED: Entity Created in the controller\n - DELETED: Entity Deleted in the controller\n - ACTIVE: Entity Activated in the controller\n - INACTIVE: Entity Deactivated in the controller\n - REGISTERED: Specific to Edge-node - Edge-node Registered with the controller\n - ARCHIVED: Entity Archived in the controller"
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - CREATED
+        - DELETED
+        - ACTIVE
+        - INACTIVE
+        - REGISTERED
+        - ARCHIVED
+        default: UNSPECIFIED
+      - name: eveLtsSupportType
+        description: filter devices by eve version support type i.e LTS OR NON_LTS
+        in: query
+        required: false
+        type: string
+        enum:
+        - SUPPORT_TYPE_UNSPECIFIED
+        - SUPPORT_TYPE_LTS
+        - SUPPORT_TYPE_NON_LTS
+        default: SUPPORT_TYPE_UNSPECIFIED
+      - name: includeInterfaces
+        description: flag to indicate whether to include network interface details in the response
+        in: query
+        required: false
+        type: boolean
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/tags:
+    get:
+      summary: Query device object tag key-values
+      description: Query device object tag key-values
+      operationId: HardwareModel_GetDeviceTags
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ObjectTagsList'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/pcrtemplate/id/{id}:
+    put:
+      summary: Update pcr template
+      description: Update a pcr template record. The usual pattern to update a pcr template record is to retrieve the record and update with the modified values in a new body to update the pcr template record.
+      operationId: HardwareModel_UpdatePCRTemplate
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the PCR template. If not set in POST / PUT API calls, this will be treated as a new entry and a unique System Generated ID assigned.
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            eveVersion:
+              type: string
+              description: EVE version related to the PCR template
+            firmwareVersion:
+              type: string
+              description: Firmware version related to the PCR template. If user doesn't set it, it will be set to '*'
+            PCRValues:
+              type: array
+              items:
+                $ref: '#/definitions/PCRValue'
+              description: List of PCR values for the PCR template
+            name:
+              type: string
+              description: Name of the PCR template. The name is Unique among PCR templates for that System Model. If it is not specified, a system-generated name will be assigned.
+              maxLength: 256
+          description: PCR template data for the specified eve version and firmware version
+          title: PCR template
+          required:
+          - eveVersion
+          - PCRValues
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/pcrtemplates/id/{id}:
+    get:
+      summary: Query pcr template
+      description: 'Query pcr template by id. '
+      operationId: HardwareModel_GetPCRTemplateById
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PCRTemplatesInfo'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the pcr template
+        in: path
+        required: true
+        type: string
+      - name: modelId
+        description: Device model identifier
+        in: query
+        required: false
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+    delete:
+      summary: Delete pcr template
+      description: Delete an pcr template record.
+      operationId: HardwareModel_DeleteEdgeNode
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the pcr template
+        in: path
+        required: true
+        type: string
+      - name: modelId
+        description: Device model identifier
+        in: query
+        required: false
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/sysmodels:
+    get:
+      summary: Query hardware models
+      description: Query the hardware model records.
+      operationId: HardwareModel_QueryHardwareModels
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysModels'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        description: Only summary of the records required
+        in: query
+        required: false
+        type: boolean
+      - name: namePattern
+        description: Model name pattern to be matched.
+        in: query
+        required: false
+        type: string
+      - name: brandId
+        description: System defined universally unique Id of the brand.
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: originType
+        description: "origin of object\n\n - ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+        in: query
+        required: false
+        type: string
+        enum:
+        - ORIGIN_UNSPECIFIED
+        - ORIGIN_IMPORTED
+        - ORIGIN_LOCAL
+        - ORIGIN_GLOBAL
+        - ORIGIN_APP_PROFILE_LOCAL
+        default: ORIGIN_UNSPECIFIED
+      - name: includeGlobal
+        description: Include global models that are not imported.
+        in: query
+        required: false
+        type: boolean
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+    post:
+      summary: Create hardware model
+      description: Create a hardware model record.
+      operationId: HardwareModel_CreateHardwareModel
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this hardware model record will conflict with an already existing hardware model record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/SysModel'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/sysmodels/global:
+    get:
+      summary: Query global hardware models
+      description: Query the global hardware model records.
+      operationId: HardwareModel_QueryGlobalHardwareModels
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysModels'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        description: Only summary of the records required
+        in: query
+        required: false
+        type: boolean
+      - name: namePattern
+        description: Model name pattern to be matched.
+        in: query
+        required: false
+        type: string
+      - name: brandId
+        description: System defined universally unique Id of the brand.
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: originType
+        description: "origin of object\n\n - ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+        in: query
+        required: false
+        type: string
+        enum:
+        - ORIGIN_UNSPECIFIED
+        - ORIGIN_IMPORTED
+        - ORIGIN_LOCAL
+        - ORIGIN_GLOBAL
+        - ORIGIN_APP_PROFILE_LOCAL
+        default: ORIGIN_UNSPECIFIED
+      - name: includeGlobal
+        description: Include global models that are not imported.
+        in: query
+        required: false
+        type: boolean
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/sysmodels/global/id/{id}:
+    get:
+      summary: Get global hardware model
+      description: Get the configuration (without security details) of a global hardware model record.
+      operationId: HardwareModel_GetGlobalHardwareModel
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysModel'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the  model
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+  /v1/sysmodels/global/name/{name}:
+    get:
+      summary: Get global hardware model
+      description: Get the configuration (without security details) of a global hardware model record.
+      operationId: HardwareModel_GetGlobalHardwareModelByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysModel'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        description: User defined name of the model, unique across the enterprise. Once model is created, name can’t be changed.
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+  /v1/sysmodels/id/{id}:
+    get:
+      summary: Get hardware model
+      description: Get the configuration (without security details) of a hardware model record.
+      operationId: HardwareModel_GetHardwareModel
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysModel'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the  model
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+    delete:
+      summary: Delete hardware model
+      description: Delete a hardware model record.
+      operationId: HardwareModel_DeleteHardwareModel
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the  model
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+    put:
+      summary: Update hardware model
+      description: Update a hardware model. The usual pattern to update a hardware model record is to retrieve the record and update with the modified values in a new body to update the hardware model record.
+      operationId: HardwareModel_UpdateHardwareModel
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. The API gateway did not process the request because this operation will conflict with an already existing hardware model record.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the model.
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: user defined model name
+              maxLength: 256
+              minLength: 3
+              pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+            title:
+              type: string
+              description: User defined title of the model. Title can be changed at any time.
+              maxLength: 256
+              minLength: 3
+              pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+            brandId:
+              type: string
+              description: System defined universally unique Id of the brand.
+              pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12'
+              uniqueItems: true
+            description:
+              type: string
+              description: Detailed description of the model.
+              maxLength: 256
+            state:
+              $ref: '#/definitions/SysModelState'
+              description: SysModel State which denotes the status of the model
+            revision:
+              $ref: '#/definitions/ObjectRevision'
+              description: Object Revision  of the model
+              readOnly: true
+            type:
+              $ref: '#/definitions/ModelArchType'
+              description: Defines the Architecture type of the model
+            attr:
+              type: object
+              additionalProperties:
+                type: string
+              description: Map of <string, string> which defines attr
+            productStatus:
+              type: string
+              description: Product status
+            productURL:
+              type: string
+              description: Product URL
+            brandName:
+              type: string
+              description: Brand name.
+            ioMemberList:
+              type: array
+              items:
+                $ref: '#/definitions/ioMember'
+              description: List of IoMembers
+            logo:
+              type: object
+              additionalProperties:
+                type: string
+              description: Map of <string, string> which holds the key:url for the logo artifact of the model
+            parentDetail:
+              $ref: '#/definitions/ObjectParentDetail'
+              description: origin and parent related details
+            originType:
+              $ref: '#/definitions/Origin'
+              description: origin of object
+            PCRTemplates:
+              type: array
+              items:
+                $ref: '#/definitions/PCRTemplate'
+              description: PCR templates keyed by EVE version
+            isImported:
+              type: boolean
+              description: Flag to represent whether sysModel is imported
+          description: SysModel consists of various model attributes like id, name, title, brandId etc
+          title: SysModel  payload details
+          required:
+          - name
+          - title
+          - brandId
+          - state
+          - type
+          - attr
+          - originType
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/sysmodels/id/{id}/import:
+    put:
+      summary: Import hardware model to local enterprise if it is not already imported and return imported model information.
+      description: Import hardware model to local enterprise if it is not already imported and return model information.
+      operationId: HardwareModel_ImportHardwareModel
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysModel'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the  model
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/sysmodels/id/{id}/pcrtemplates:
+    get:
+      summary: Query pcr templates
+      description: 'Query pcr template records. '
+      operationId: HardwareModel_GetPCRTemplates
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PCRTemplatesInfo'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the model.
+        in: path
+        required: true
+        type: string
+      - name: name
+        description: PCR template name.
+        in: query
+        required: false
+        type: string
+      - name: eveImageVersion
+        description: PCR template eve version.
+        in: query
+        required: false
+        type: string
+      - name: namePattern
+        description: PCR template name pattern to be matched.
+        in: query
+        required: false
+        type: string
+      - name: eveImageVersionPattern
+        description: PCR template eve image version pattern to be matched
+        in: query
+        required: false
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+    post:
+      summary: Create pcr templates
+      description: Create a list of pcr templates.
+      operationId: HardwareModel_CreatePCRTemplates
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/PCRTemplatesReq'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/sysmodels/id/{modelId}/pcrtemplates/name/{name}:
+    get:
+      summary: Query pcr template
+      description: 'Query pcr template by name. '
+      operationId: HardwareModel_GetPCRTemplateByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PCRTemplatesInfo'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: modelId
+        description: Device model identifier
+        in: path
+        required: true
+        type: string
+      - name: name
+        description: 'User defined name of the pcr template, unique across a model '
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/sysmodels/name/{name}:
+    get:
+      summary: Get hardware model
+      description: Get the configuration (without security details) of a hardware model record.
+      operationId: HardwareModel_GetHardwareModelByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/SysModel'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        description: User defined name of the model, unique across the enterprise. Once model is created, name can’t be changed.
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HardwareModel
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+definitions:
+  NtpServer:
+    type: object
+    properties:
+      server:
+        type: string
+        description: NTP Server IP or FQDN
+    description: NTP Server
+    title: NTP Server
+  Summary:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Summary description
+      total:
+        type: number
+        format: int64
+        description: Total
+      values:
+        type: object
+        additionalProperties:
+          type: integer
+          format: int64
+        description: 'Values: Map for storing <string, uint32>'
+    description: Summary is used to store the Summary details
+    title: Summary is used to store the Summary details
+  Origin:
+    type: string
+    enum:
+    - ORIGIN_UNSPECIFIED
+    - ORIGIN_IMPORTED
+    - ORIGIN_LOCAL
+    - ORIGIN_GLOBAL
+    - ORIGIN_APP_PROFILE_LOCAL
+    default: ORIGIN_UNSPECIFIED
+    description: "- ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+    title: 'OriginType : enum specifies the Object orgigin type'
+  NetworkDHCPType:
+    type: string
+    enum:
+    - NETWORK_DHCP_TYPE_UNSPECIFIED
+    - NETWORK_DHCP_TYPE_STATIC
+    - NETWORK_DHCP_TYPE_PASSTHROUGH
+    - NETWORK_DHCP_TYPE_DEPRECATED
+    - NETWORK_DHCP_TYPE_CLIENT
+    - NETWORK_DHCP_TYPE_STATIC_ADAPTER_SPECIFIC
+    default: NETWORK_DHCP_TYPE_UNSPECIFIED
+    title: "- NETWORK_DHCP_TYPE_STATIC: used for adapter configured DHCP static\n - NETWORK_DHCP_TYPE_PASSTHROUGH: used for adapter configured DHCP none, application will do DHCP\n - NETWORK_DHCP_TYPE_DEPRECATED: used for application simulation\n - NETWORK_DHCP_TYPE_CLIENT: used for adapter configured DHCP client\n - NETWORK_DHCP_TYPE_STATIC_ADAPTER_SPECIFIC: used to configure device adapter specific static networks"
+  NetworkProxyProto:
+    type: string
+    enum:
+    - NETWORK_PROXY_PROTO_HTTP
+    - NETWORK_PROXY_PROTO_HTTPS
+    - NETWORK_PROXY_PROTO_SOCKS
+    - NETWORK_PROXY_PROTO_FTP
+    - NETWORK_PROXY_PROTO_OTHER
+    default: NETWORK_PROXY_PROTO_HTTP
+  AdapterUsage:
+    type: string
+    enum:
+    - ADAPTER_USAGE_UNSPECIFIED
+    - ADAPTER_USAGE_MANAGEMENT
+    - ADAPTER_USAGE_APP_DIRECT
+    - ADAPTER_USAGE_APP_SHARED
+    - ADAPTER_USAGE_DISABLED
+    - ADAPTER_USAGE_VLANS_ONLY
+    - ADAPTER_USAGE_BOND_MEMBER
+    default: ADAPTER_USAGE_UNSPECIFIED
+    description: "- ADAPTER_USAGE_UNSPECIFIED: Adapter unspecified\n - ADAPTER_USAGE_MANAGEMENT: Adapter can be used by EVE as well as other Edge applications\n - ADAPTER_USAGE_APP_DIRECT: Adapter is directly used by one edge application\n - ADAPTER_USAGE_APP_SHARED: Adapter can be shared by different network instances\n - ADAPTER_USAGE_DISABLED: Adapter disabled, for future use\n - ADAPTER_USAGE_VLANS_ONLY: Adapter is used exclusively for VLANs\n - ADAPTER_USAGE_BOND_MEMBER: Adapter is used exclusively for BOND interfaces"
+    title: Adapter Usage
+  PCRTemplatesInfo:
+    type: object
+    properties:
+      templates:
+        type: array
+        items:
+          $ref: '#/definitions/PCRTemplate'
+        description: List of templates
+      next:
+        $ref: '#/definitions/Cursor'
+        description: Responded page details of filtered records
+    description: 'List of PCR templates associated with some System Model. '
+    title: PCR template list info
+  SysBrands:
+    type: object
+    properties:
+      terse:
+        $ref: '#/definitions/Summary'
+        description: Summary of filtered model records
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/SysBrand'
+        description: List of filtered Sys Models
+      next:
+        $ref: '#/definitions/Cursor'
+        description: Responded page details of filtered records
+    description: SysBrands used when listing the available brands, if  consists of various brand attributes like terse, model list and next filter.
+    title: SysBrands  payload details
+  ObjectTagsList:
+    type: object
+    properties:
+      objectTags:
+        type: array
+        items:
+          $ref: '#/definitions/ObjectTag'
+        description: Details of Object tags list records.
+      next:
+        $ref: '#/definitions/Cursor'
+        description: Returned record page.
+    description: Returned list of Object tags matched by filter criteria
+    title: Object tag list records
+  NetCellularAccessPoint:
+    type: object
+    properties:
+      simSlot:
+        type: integer
+        format: int64
+        description: 'SIM card slot to which this configuration applies.
+
+          0 - unspecified (apply to currently activated or the only available)
+
+          1 - config for SIM card in the first slot
+
+          2 - config for SIM card in the second slot
+
+          etc.'
+      apn:
+        type: string
+        description: 'Access Point Network to connect into.
+
+          By default it is "internet".'
+      authProtocol:
+        $ref: '#/definitions/evecommonCellularAuthProtocol'
+        description: Authentication protocol used by the network.
+      cipherData:
+        $ref: '#/definitions/commonCipherBlock'
+        description: 'Cipher data may contain encrypted user credentials
+
+          (inside cellNetUsername and cellNetPassword fields).'
+      preferredPlmns:
+        type: array
+        items:
+          type: string
+        description: 'The set of cellular network operators that modem should preferably try to register
+
+          and connect into.
+
+          Network operator should be referenced by PLMN (Public Land Mobile Network) code,
+
+          consisting of 3-digits MCC (Mobile Country Code) and 2 or 3-digits MNC (Mobile Network Code),
+
+          separated by a dash, e.g. "310-260".
+
+          If empty, then modem will select the network automatically based on the SIM card config.'
+      forbidRoaming:
+        type: boolean
+        description: If true, then modem will avoid connecting to networks with roaming.
+      preferredRats:
+        type: array
+        items:
+          $ref: '#/definitions/evecommonRadioAccessTechnology'
+        description: 'The list of preferred Radio Access Technologies (RATs) to use for connecting
+
+          to the network.
+
+          Order matters, first is the most preferred, second is tried next, etc.
+
+          Not listed technologies will not be tried.
+
+          If empty, then modem will select RAT automatically.'
+      ipType:
+        $ref: '#/definitions/commonCellularIPType'
+        description: The IP addressing type to use for the default bearer.
+      attachApn:
+        type: string
+        description: 'Access Point Name (APN) for the attach (initial) bearer.
+
+          This field is optional. If not specified, EVE will not send any attach bearer
+
+          configuration to the modem. Instead, the modem will use one of its pre-installed
+
+          profiles (see CellularProfile) to determine the configuration.'
+      attachIpType:
+        $ref: '#/definitions/commonCellularIPType'
+        description: 'The IP addressing type to use for the attach bearer.
+
+          Leave undefined if attach_apn is not specified.'
+      attachAuthProtocol:
+        $ref: '#/definitions/CellularAuthProtocol'
+        description: 'Authentication protocol used for the attach bearer.
+
+          Leave undefined if attach_apn is not specified.'
+      secrets:
+        $ref: '#/definitions/NetCellularAccessPointSecrets'
+      encryptedSecrets:
+        type: object
+        additionalProperties:
+          type: string
+      cryptoKey:
+        type: string
+      attachSecrets:
+        $ref: '#/definitions/NetCellularAccessPointSecrets'
+      attachEncryptedSecrets:
+        type: object
+        additionalProperties:
+          type: string
+  PCRValue:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/PCRType'
+        description: 'Type of value for the PCR item. Could be one of the following values: 0 (PCR_TYPE_UNSPECIFIED), 1 (PCR_TYPE_HASH) or 2 (PCR_TYPE_EVENT_LOG)'
+      index:
+        type: number
+        format: int64
+        description: Current index for the PCR item in the list. First element has the index 0
+      value:
+        type: string
+        description: Actual value for the PCR item.
+    description: PCR value contains the actual value of the specified PCR type
+    title: PCR value
+    required:
+    - type
+    - index
+    - value
+  StaticDNSList:
+    type: object
+    properties:
+      hostname:
+        type: string
+        description: Host name
+      addrs:
+        type: array
+        items:
+          type: string
+        description: Addresses
+    description: Static DNS list
+    title: Static DNS list
+  ObjectRevision:
+    type: object
+    properties:
+      prev:
+        type: string
+        description: Previous
+      curr:
+        type: string
+        description: Current Database version of the record
+      createdAt:
+        type: object
+        format: date-time
+        description: The time, in milliseconds since the epoch, when the record was created.
+      createdBy:
+        type: string
+        description: 'User data: Created By'
+      updatedAt:
+        type: object
+        format: date-time
+        description: The time, in milliseconds since the epoch, when the record was last updated.
+      updatedBy:
+        type: string
+        description: 'User data: Updated By'
+    description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+    title: ObjectRevision is used to store the user information.
+    required:
+    - curr
+    - createdAt
+    - createdBy
+    - updatedAt
+    - updatedBy
+  NetCellularConfig:
+    type: object
+    properties:
+      APN:
+        type: string
+        description: 'APN string - by default it is "internet".
+
+          TO BE DEPRECATED: Fill connection arguments inside access_points instead.
+
+          If access_points is non-empty, then APN field is ignored.'
+      probe:
+        $ref: '#/definitions/configCellularConnectivityProbe'
+        description: 'Optional cellular connectivity probing.
+
+          By default it is enabled.'
+      locationTracking:
+        type: boolean
+        description: 'Some LTE modems have GNSS receiver integrated and can be used for device
+
+          location tracking.
+
+          Enable this option to have location info periodically obtained from this
+
+          modem and published to controller and to applications.'
+      accessPoints:
+        type: array
+        items:
+          $ref: '#/definitions/NetCellularAccessPoint'
+        description: 'Parameters to apply for connecting to cellular networks.
+
+          Configured separately for every SIM card inserted into the modem.'
+      activatedSimSlot:
+        type: integer
+        format: int64
+        description: 'Select SIM card slot to activate.
+
+          Currently, EVE support only single-standby SIM card mode.
+
+          0 - unspecified (leave the currently activated)
+
+          1 - activate the first SIM slot
+
+          2 - activate the second SIM slot
+
+          etc.'
+  DeviceSWSubStatus:
+    type: string
+    enum:
+    - DEVICE_SW_SUB_STATUS_UNSPECIFIED
+    - DEVICE_SW_SUB_STATUS_DOWNLOAD_IN_PROGRESS
+    - DEVICE_SW_SUB_STATUS_VERIFY_IN_PROGRESS
+    - DEVICE_SW_SUB_STATUS_UPDATE_INITIALIZING
+    - DEVICE_SW_SUB_STATUS_UPDATE_REBOOTING
+    - DEVICE_SW_SUB_STATUS_UPDATE_TESTING
+    - DEVICE_SW_SUB_STATUS_UPDATE_NEED_TEST_CONFIRM
+    - DEVICE_SW_SUB_STATUS_UPDATE_DEFERRED
+    default: DEVICE_SW_SUB_STATUS_UNSPECIFIED
+  NetWifiConfigSecrets:
+    type: object
+    properties:
+      WiFiPasswd:
+        type: string
+        description: Wifi Password
+  DeviceInfo:
+    type: object
+    properties:
+      machineArch:
+        type: string
+      cpuArch:
+        type: string
+      platform:
+        type: string
+      nCpu:
+        type: integer
+        format: int64
+      memMB:
+        type: string
+        format: uint64
+      storageMB:
+        type: string
+        format: uint64
+  commonConnectivityProbeMethod:
+    type: string
+    enum:
+    - CONNECTIVITY_PROBE_METHOD_UNSPECIFIED
+    - CONNECTIVITY_PROBE_METHOD_ICMP
+    - CONNECTIVITY_PROBE_METHOD_TCP
+    default: CONNECTIVITY_PROBE_METHOD_UNSPECIFIED
+    description: "User-defined method to use to determine the connectivity status.\n\n - CONNECTIVITY_PROBE_METHOD_UNSPECIFIED: Connectivity probing method is not specified and therefore will not be used.\n - CONNECTIVITY_PROBE_METHOD_ICMP: Use ICMP ping against the probed endpoint to determine the connectivity status.\n - CONNECTIVITY_PROBE_METHOD_TCP: Try to establish TCP connection with the probed endpoint to determine the connectivity\nstatus."
+  IpSpec:
+    type: object
+    properties:
+      deprecatedDhcp:
+        type: boolean
+        title: deprecated
+      dhcp:
+        $ref: '#/definitions/NetworkDHCPType'
+      subnet:
+        type: string
+      mask:
+        type: string
+      gateway:
+        type: string
+      domain:
+        type: string
+      ntp:
+        type: string
+        title: ntp will be deprecated
+      dns:
+        type: array
+        items:
+          type: string
+      dhcpRange:
+        $ref: '#/definitions/dhcpIpRange'
+        description: 'for IPAM management when dhcp is turned on.
+
+          If none provided, system will default pool.'
+      ntpServers:
+        type: array
+        items:
+          $ref: '#/definitions/NtpServer'
+      ntpServerExclusively:
+        type: boolean
+  NetProxyConfig:
+    type: object
+    properties:
+      networkProxy:
+        type: boolean
+        description: Network proxy
+      proxies:
+        type: array
+        items:
+          $ref: '#/definitions/NetProxyServer'
+        description: 'Net Proxy: protocol level proxies'
+        title: protocol level proxies
+      exceptions:
+        type: string
+        description: Proxy exceptions
+      pacfile:
+        type: string
+        description: proxy configuration in a pacfile
+        title: proxy configuration in a pacfile
+      networkProxyURL:
+        type: string
+        description: Network Proxy URL
+        title: Direct URL for wpad.dat download
+      networkProxyCerts:
+        type: array
+        items:
+          type: string
+          format: byte
+        description: Network Proxy Certificates
+        title: Proxy Certificates
+    description: Net Proxy Configurations
+    title: Net Proxy Configurations
+  ObjectTag:
+    type: object
+    properties:
+      key:
+        type: string
+        description: object tag key identifier.
+      value:
+        type: string
+        description: value associated for the object tag key
+      description:
+        type: string
+        description: Description of the tag key
+    description: Object tag deaails.
+    title: Object Tag details
+  EnrolledCertStatus:
+    type: string
+    enum:
+    - ENROLLED_CERT_STATUS_UNSPECIFIED
+    - ENROLLED_CERT_STATUS_AVAILABLE
+    - ENROLLED_CERT_STATUS_PENDING
+    - ENROLLED_CERT_STATUS_RENEWAL_PENDING
+    - ENROLLED_CERT_STATUS_EXPIRED
+    - ENROLLED_CERT_STATUS_REVOKED
+    - ENROLLED_CERT_STATUS_ENROLLMENT_FAILED
+    - ENROLLED_CERT_STATUS_RENEWAL_FAILED
+    - ENROLLED_CERT_STATUS_INVALID_CONFIG
+    default: ENROLLED_CERT_STATUS_UNSPECIFIED
+    description: "Certificate lifecycle and availability status as reported by the device.\n\n - ENROLLED_CERT_STATUS_AVAILABLE: Certificate is present, valid, and usable for authentication.\n - ENROLLED_CERT_STATUS_PENDING: Certificate enrollment is in progress and not yet complete.\n - ENROLLED_CERT_STATUS_RENEWAL_PENDING: Certificate is present and still valid, but a renewal request\nis in progress and not yet completed.\n - ENROLLED_CERT_STATUS_EXPIRED: Certificate has expired (the current time is past notAfter).\nRenewal may have failed; see err for related errors.\n - ENROLLED_CERT_STATUS_REVOKED: Certificate has been revoked or is otherwise considered invalid.\n - ENROLLED_CERT_STATUS_ENROLLMENT_FAILED: Certificate enrollment failed and no valid certificate is available.\n - ENROLLED_CERT_STATUS_RENEWAL_FAILED: A certificate is currently present but the most recent renewal attempt failed.\n - ENROLLED_CERT_STATUS_INVALID_CONFIG: Certificate configuration is invalid or malformed, preventing enrollment or renewal."
+  SysModel:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the model.
+        readOnly: true
+        pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+        uniqueItems: true
+      name:
+        type: string
+        description: user defined model name
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+      title:
+        type: string
+        description: User defined title of the model. Title can be changed at any time.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+      brandId:
+        type: string
+        description: System defined universally unique Id of the brand.
+        pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12'
+        uniqueItems: true
+      description:
+        type: string
+        description: Detailed description of the model.
+        maxLength: 256
+      state:
+        $ref: '#/definitions/SysModelState'
+        description: SysModel State which denotes the status of the model
+      revision:
+        $ref: '#/definitions/ObjectRevision'
+        description: Object Revision  of the model
+        readOnly: true
+      type:
+        $ref: '#/definitions/ModelArchType'
+        description: Defines the Architecture type of the model
+      attr:
+        type: object
+        additionalProperties:
+          type: string
+        description: Map of <string, string> which defines attr
+      productStatus:
+        type: string
+        description: Product status
+      productURL:
+        type: string
+        description: Product URL
+      brandName:
+        type: string
+        description: Brand name.
+      ioMemberList:
+        type: array
+        items:
+          $ref: '#/definitions/ioMember'
+        description: List of IoMembers
+      logo:
+        type: object
+        additionalProperties:
+          type: string
+        description: Map of <string, string> which holds the key:url for the logo artifact of the model
+      parentDetail:
+        $ref: '#/definitions/ObjectParentDetail'
+        description: origin and parent related details
+      originType:
+        $ref: '#/definitions/Origin'
+        description: origin of object
+      PCRTemplates:
+        type: array
+        items:
+          $ref: '#/definitions/PCRTemplate'
+        description: PCR templates keyed by EVE version
+      isImported:
+        type: boolean
+        description: Flag to represent whether sysModel is imported
+    description: SysModel consists of various model attributes like id, name, title, brandId etc
+    title: SysModel  payload details
+    required:
+    - name
+    - title
+    - brandId
+    - state
+    - type
+    - attr
+    - originType
+  configCellularConnectivityProbe:
+    type: object
+    properties:
+      disable:
+        type: boolean
+        description: If true, then probing is disabled.
+      probeAddress:
+        type: string
+        description: 'IP/FQDN to periodically probe using 3 pings per iteration to determine connectivity status.
+
+          This field is now deprecated and replaced with custom_probe (see below).
+
+          To maintain backward-compatibility, EVE will check both probe_address and custom_probe
+
+          and will use whichever has non-zero value (if any), but preferring custom_probe.'
+      customProbe:
+        $ref: '#/definitions/commonConnectivityProbe'
+        description: 'User-defined probe for cellular connectivity testing.
+
+          Only IP address is allowed as ConnectivityProbe.probe_address (and port if needed),
+
+          not hostname.
+
+          The probing algorithm is more complex that just testing reachability of a remote
+
+          endpoint and the goal is to minimize generated traffic, probing time and false negatives
+
+          (that would trigger undesired re-connect).
+
+          EVE will periodically check the modem status, accessibility of DNS server(s) and potentially
+
+          also proxies in the local network, and only as the last resort (if connectivity state
+
+          is still unclear) it will probe the remote endpoint. If custom_probe is not defined,
+
+          EVE will try to ping "8.8.8.8" (Google public DNS).
+
+          It is recommended to use custom probe for private LTE networks where public DNS servers
+
+          might not be allowed by the firewall (and hence ping would fail even with a working
+
+          connectivity).'
+    description: 'CellularConnectivityProbe is used to periodically check the connectivity status of a cellular network
+
+      by probing a remote endpoint.
+
+      Whenever the probe fails, the cellular connection is automatically restarted. If the probe keeps failing
+
+      even after the restart, the failure is reported in ZCellularStatus.probeError.
+
+      The connectivity probing interval is 5 minutes and currently it is not configurable.'
+  SysBrand:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the brand.
+        readOnly: true
+        pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+        uniqueItems: true
+      name:
+        type: string
+        description: user defined sys brand name
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+      title:
+        type: string
+        description: user defined title for sys brand
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+      description:
+        type: string
+        description: Detailed description of the image.
+        maxLength: 256
+      svg:
+        type: string
+        description: 'Deprecated: base64 encoded string of svg file'
+      attr:
+        type: object
+        additionalProperties:
+          type: string
+        description: Map of <string, string>
+      state:
+        $ref: '#/definitions/SysModelState'
+        description: Sys Model Status
+      revision:
+        $ref: '#/definitions/ObjectRevision'
+        description: Object Revision  of the sys brand
+      systemMfgName:
+        type: string
+        description: System Manufacturer name
+      logo:
+        type: object
+        additionalProperties:
+          type: string
+        description: Map of <string, string> which holds the key:url for the logo artifact of the the brand
+      originType:
+        $ref: '#/definitions/Origin'
+        description: origin of object
+    description: SysModel consists of various brand attributes like id, name, title, svg, state, systemMfgName
+    title: SysBrand  payload details
+    required:
+    - name
+    - title
+    - originType
+  PCRType:
+    type: string
+    enum:
+    - PCR_TYPE_UNSPECIFIED
+    - PCR_TYPE_HASH
+    - PCR_TYPE_EVENT_LOG
+    default: PCR_TYPE_UNSPECIFIED
+    title: "- PCR_TYPE_UNSPECIFIED: Unset PCR type\n - PCR_TYPE_HASH: PCR value of type HASH\n - PCR_TYPE_EVENT_LOG: PCR value of type event log"
+  ClusterNodeStatus:
+    type: object
+    properties:
+      age:
+        type: integer
+        format: int64
+      internalIP:
+        type: string
+      conditions:
+        type: string
+      nodeType:
+        $ref: '#/definitions/ClusterNodeType'
+  Entity:
+    type: string
+    enum:
+    - ENTITY_UNSPECIFIED
+    - ENTITY_BASE_OS
+    - ENTITY_SYSTEM_ADAPTER
+    - ENTITY_VAULT
+    - ENTITY_ATTESTATION
+    - ENTITY_APP_INSTANCE
+    - ENTITY_PORT
+    - ENTITY_NETWORK
+    - ENTITY_NETWORK_INSTANCE
+    - ENTITY_CONTENT_TREE
+    - ENTITY_CONTENT_BLOB
+    - ENTITY_VOLUME
+    default: ENTITY_UNSPECIFIED
+    description: "- ENTITY_UNSPECIFIED: Invalid Device Entity\n - ENTITY_BASE_OS: Base OS entity\n - ENTITY_SYSTEM_ADAPTER: System Adapter Entity\n - ENTITY_VAULT: Vault Entity\n - ENTITY_ATTESTATION: Attestation Entity\n - ENTITY_APP_INSTANCE: App Instance Entity\n - ENTITY_PORT: Port Entity\n - ENTITY_NETWORK: Network Entity\n - ENTITY_NETWORK_INSTANCE: Network Instance Entity\n - ENTITY_CONTENT_TREE: ContentTree Entity\n - ENTITY_CONTENT_BLOB: Blob Entity\n - ENTITY_VOLUME: VOLUME Entity"
+    title: Edge node components
+  DeviceSWStatus:
+    type: string
+    enum:
+    - DEVICE_SW_STATUS_UNSPECIFIED
+    - DEVICE_SW_STATUS_DOWNLOADING
+    - DEVICE_SW_STATUS_DOWNLOADDONE
+    - DEVICE_SW_STATUS_UPDATING
+    - DEVICE_SW_STATUS_UPDATED
+    - DEVICE_SW_STATUS_FALLBACK
+    - DEVICE_SW_STATUS_FAILED
+    default: DEVICE_SW_STATUS_UNSPECIFIED
+  DeviceLocation:
+    type: object
+    properties:
+      location:
+        type: string
+      count:
+        type: integer
+        format: int64
+  NetworkWiFiKeyScheme:
+    type: string
+    enum:
+    - NETWORK_WIFIKEY_SCHEME_UNSPECIFIED
+    - NETWORK_WIFIKEY_SCHEME_WPAPSK
+    - NETWORK_WIFIKEY_SCHEME_WPAEAP
+    default: NETWORK_WIFIKEY_SCHEME_UNSPECIFIED
+  ClusterNodeType:
+    type: string
+    enum:
+    - CLUSTER_NODE_TYPE_UNSPECIFIED
+    - CLUSTER_NODE_TYPE_MASTER
+    - CLUSTER_NODE_TYPE_WORKER
+    - CLUSTER_NODE_TYPE_TIE_BREAKER
+    default: CLUSTER_NODE_TYPE_UNSPECIFIED
+  DeviceSWInfo:
+    type: object
+    properties:
+      activated:
+        type: boolean
+      partitionLabel:
+        type: string
+      partitionDevice:
+        type: string
+      partitionState:
+        type: string
+      status:
+        $ref: '#/definitions/SWState'
+      shortVersion:
+        type: string
+      longVersion:
+        type: string
+      swError:
+        $ref: '#/definitions/DeviceError'
+      downloadProgress:
+        type: integer
+        format: int64
+      swStatus:
+        $ref: '#/definitions/DeviceSWStatus'
+      swSubStatus:
+        $ref: '#/definitions/DeviceSWSubStatus'
+      swSubStatusStr:
+        type: string
+      subStatusProgress:
+        type: integer
+        format: int64
+      isLTS:
+        type: boolean
+        description: flag to indicate device running  LTS eve version or not
+  ObjectParentDetail:
+    type: object
+    properties:
+      idOfParentObject:
+        type: string
+        description: system defined unique id of parent object
+        readOnly: true
+        pattern: '[0-9A-Za-z-]+'
+        required:
+        - 'true'
+      versionOfParentObject:
+        type: integer
+        format: int64
+        description: version of object present in parent
+        readOnly: true
+        pattern: '[0-9]+'
+      updateAvailable:
+        type: boolean
+        description: Update required flag
+      referenceExists:
+        type: boolean
+        description: Relation with child and parent object exists or not
+    description: ObjectImportDetail consists of various object attributes like idOfParentObject, versionOfParentObject, updateAvailable, referenceExists
+    title: Object Import Detail
+    required:
+    - idOfParentObject
+  NetworkWirelessType:
+    type: string
+    enum:
+    - NETWORK_WIRELESS_TYPE_UNSPECIFIED
+    - NETWORK_WIRELESS_TYPE_WIFI
+    - NETWORK_WIRELESS_TYPE_CELLULAR
+    default: NETWORK_WIRELESS_TYPE_UNSPECIFIED
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  deviceStatusConfig:
+    type: object
+    properties:
+      id:
+        type: string
+        description: system generated unique id for a device
+        readOnly: true
+        pattern: '[0-9A-Za-z-]+'
+      name:
+        type: string
+        description: user specified device name
+      title:
+        type: string
+        description: user specified title
+      serialNo:
+        type: string
+        description: Device serial number
+      projectId:
+        type: string
+        description: project Id of the device
+      projectName:
+        type: string
+        description: project name of the device
+      location:
+        type: string
+        description: Device location
+      eveImageName:
+        type: string
+        description: Eve image name that was running on the device
+      isEveLatest:
+        type: string
+        description: Boolean that tells whether the active eve image is latest or not
+      appInstCount:
+        type: string
+        format: int64
+        description: Number of app instance that is running on the device
+      runState:
+        $ref: '#/definitions/RunState'
+        description: Run state of the device
+      adminState:
+        $ref: '#/definitions/AdminState'
+        description: Admin state of the device
+      dinfo:
+        $ref: '#/definitions/DeviceInfo'
+        description: Device info like storage, arch, memory etc
+      swInfo:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceSWInfo'
+        description: software info reported by the device
+      projectType:
+        type: string
+        $ref: '#/definitions/TagType'
+        description: project type of the device
+      clusterNodeStatus:
+        $ref: '#/definitions/ClusterNodeStatus'
+        description: Cluster node status
+      interfaces:
+        type: array
+        items:
+          $ref: '#/definitions/SysInterface'
+        description: System Interface list
+      modelId:
+        type: string
+        description: device model
+      enrolledCertsStatus:
+        $ref: '#/definitions/EnrolledCertStatus'
+        description: Enrolled certificate status from the device
+    description: Device status and config response details
+    title: Device status config response detail
+    required:
+    - id
+    - name
+    - serialNo
+  NetCellularAccessPointSecrets:
+    type: object
+    properties:
+      username:
+        type: string
+        description: Cellular Username
+      password:
+        type: string
+        description: Cellular Password
+  commonCipherBlock:
+    type: object
+    properties:
+      cipherContextId:
+        type: string
+        title: cipher context id
+      initialValue:
+        type: string
+        format: byte
+        title: Initial Value for Symmetric Key derivation
+      cipherData:
+        type: string
+        format: byte
+        title: encrypted sensitive data
+      clearTextSha256:
+        type: string
+        format: byte
+        title: sha256 of the plaintext sensitive data
+    title: Encrypted sensitive data information
+  DeviceError:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Description of the error
+      severity:
+        type: string
+        $ref: '#/definitions/Severity'
+        description: Severity of the error
+      timestamp:
+        type: object
+        format: date-time
+        description: Timestamp at which error had occurred
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceEntity'
+        description: objects referenced by the description or retry_condition
+      retryCondition:
+        type: string
+        description: condition for retry
+    description: DeviceError store the error occurred at the device side
+    title: DeviceError is used to store the error details of the hardware.
+    required:
+    - description
+    - severity
+    - timestamp
+    - entities
+  NetWifiConfigNetcryptoblock:
+    type: object
+    properties:
+      identity:
+        type: string
+      password:
+        type: string
+  NetProjectInfo:
+    type: object
+    properties:
+      projectId:
+        type: string
+        description: system generated unique id for a project
+        readOnly: true
+        pattern: '[0-9A-Za-z-]+'
+      projectName:
+        type: string
+        description: project name
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  NetProxyServer:
+    type: object
+    properties:
+      proto:
+        type: object
+        $ref: '#/definitions/NetworkProxyProto'
+        description: Net Proxy proto
+      server:
+        type: string
+        description: Net Proxy Server
+      port:
+        type: number
+        format: int64
+        description: Net Proxy Port
+    description: Net Proxy Server
+    title: Net Proxy Server
+  NetWifiConfig:
+    type: object
+    properties:
+      wifiSSID:
+        type: string
+      keyScheme:
+        $ref: '#/definitions/NetworkWiFiKeyScheme'
+      identity:
+        type: string
+      secret:
+        $ref: '#/definitions/NetWifiConfigSecrets'
+      crypto:
+        $ref: '#/definitions/NetWifiConfigNetcryptoblock'
+      priority:
+        type: integer
+        format: int32
+      encryptedSecrets:
+        type: object
+        additionalProperties:
+          type: string
+      cryptoKey:
+        type: string
+  SysModels:
+    type: object
+    properties:
+      terse:
+        $ref: '#/definitions/Summary'
+        description: Summary of filtered model records
+      summaryByDeviceDistribution:
+        $ref: '#/definitions/Summary'
+        description: Summary by device distribution
+      summaryByBrandDistribution:
+        $ref: '#/definitions/Summary'
+        description: Summary by brand distribution
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/SysModel'
+        description: List of filtered Sys Models
+      next:
+        $ref: '#/definitions/Cursor'
+        description: Responded page details of filtered records
+    description: SysModels used when listing the available models, if  consists of various model attributes like terse, model list and next filter.
+    title: SysModels  payload details
+  IoType:
+    type: string
+    enum:
+    - IO_TYPE_UNSPECIFIED
+    - IO_TYPE_ETH
+    - IO_TYPE_USB
+    - IO_TYPE_COM
+    - IO_TYPE_AUDIO
+    - IO_TYPE_WLAN
+    - IO_TYPE_WWAN
+    - IO_TYPE_HDMI
+    - IO_TYPE_LTE
+    - IO_TYPE_STORAGE_NVME_DEVICE
+    - IO_TYPE_STORAGE_SATA_DEVICE
+    - IO_TYPE_ETH_PF
+    - IO_TYPE_ETH_VF
+    - IO_TYPE_USB_CONTROLLER
+    - IO_TYPE_USB_DEVICE
+    - IO_TYPE_CAN
+    - IO_TYPE_VCAN
+    - IO_TYPE_LCAN
+    - IO_TYPE_VLAN
+    - IO_TYPE_OTHER
+    default: IO_TYPE_UNSPECIFIED
+    description: "- IO_TYPE_UNSPECIFIED: No operation/ Invalid peration\n - IO_TYPE_ETH: Ethernet\n - IO_TYPE_USB: USB Type - General\n - IO_TYPE_COM: Communication Port\n - IO_TYPE_AUDIO: Audio Port\n - IO_TYPE_WLAN: wireless LAN\n - IO_TYPE_WWAN: Wireless wide area network\n - IO_TYPE_HDMI: High-Definition Multimedia Interface\n - IO_TYPE_LTE: LTE Interfaces\n - IO_TYPE_STORAGE_NVME_DEVICE: Storage NVME device\n - IO_TYPE_STORAGE_SATA_DEVICE: Storage SATA device\n - IO_TYPE_ETH_PF: Physical Interface (PF) of the Virtual Functions\n - IO_TYPE_ETH_VF: Virtual Function (VF)\n - IO_TYPE_USB_CONTROLLER: USB Type - Controller\n - IO_TYPE_USB_DEVICE: USB Type - Device\n - IO_TYPE_CAN: CAN - Device\n - IO_TYPE_VCAN: VCAN - Virtual CAN device\n - IO_TYPE_LCAN: LCAN - Logical CAN device\n - IO_TYPE_VLAN: VLAN - Virtual LAN device\n - IO_TYPE_OTHER: Other Io Types"
+    title: Input/Output Type
+  SysInterface:
+    type: object
+    properties:
+      netname:
+        type: string
+        description: 'network name: if attaching a network use netname'
+      adapterSpecificNet:
+        type: string
+        $ref: '#/definitions/NetConfig'
+        description: device adapter specific network configuration
+        title: adapterSpecificNet is relevant only when the network selected for the adapter is of type NETWORK_DHCP_TYPE_STATIC_ADAPTER_SPECIFIC
+      ipaddr:
+        type: string
+        description: 'IP address: we will be needing this in cae of static network'
+      intfname:
+        type: string
+        description: name of interface in the manifest to which this network or adapter maps to
+      intfUsage:
+        type: object
+        $ref: '#/definitions/AdapterUsage'
+        description: Adapter Udage
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+        maxLength: 32
+        pattern: ^[^<%&?/\>]+$
+      macaddr:
+        type: string
+        description: mac address needs to be over-written in some cases
+      cost:
+        type: integer
+        format: int64
+        description: cost of using this interface. Default is 0.
+        maximum: 255
+      netid:
+        type: string
+        description: network identifier has to have value if the netname is not empty
+      sharedLabels:
+        type: array
+        items:
+          type: string
+        description: A set of user-defined shared labels attached to the adapter
+      netDhcp:
+        $ref: '#/definitions/NetworkDHCPType'
+        description: Network DHCP type
+      ztype:
+        type: string
+        description: Z Type
+      allowLocalModifications:
+        type: boolean
+        description: Allow the local operator to make (limited) configuration changes to this network adapter.
+      enablePortBasedNetworkAccessControl:
+        type: boolean
+        description: Enable port-based network access control (802.1X) on this interface. Only applicable for Ethernet interfaces that are not app-direct.
+    description: system interfaces that needs to be used by dom0
+    title: sysInterface payload detail
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  CellularAuthProtocol:
+    type: string
+    enum:
+    - CELLULAR_AUTH_PROTOCOL_NONE
+    - CELLULAR_AUTH_PROTOCOL_PAP
+    - CELLULAR_AUTH_PROTOCOL_CHAP
+    - CELLULAR_AUTH_PROTOCOL_PAP_AND_CHAP
+    default: CELLULAR_AUTH_PROTOCOL_NONE
+    description: " - CELLULAR_AUTH_PROTOCOL_NONE: No authentication.\n - CELLULAR_AUTH_PROTOCOL_PAP: Password Authentication Protocol.\n - CELLULAR_AUTH_PROTOCOL_CHAP: Challenge-Handshake Authentication Protocol.\n - CELLULAR_AUTH_PROTOCOL_PAP_AND_CHAP: Both PAP and CHAP."
+  PCRTemplate:
+    type: object
+    properties:
+      eveVersion:
+        type: string
+        description: EVE version related to the PCR template
+      firmwareVersion:
+        type: string
+        description: Firmware version related to the PCR template. If user doesn't set it, it will be set to '*'
+      PCRValues:
+        type: array
+        items:
+          $ref: '#/definitions/PCRValue'
+        description: List of PCR values for the PCR template
+      id:
+        type: string
+        description: System defined universally unique Id of the PCR template. If not set in POST / PUT API calls, this will be treated as a new entry and a unique System Generated ID assigned.
+        pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+        uniqueItems: true
+      name:
+        type: string
+        description: Name of the PCR template. The name is Unique among PCR templates for that System Model. If it is not specified, a system-generated name will be assigned.
+        maxLength: 256
+    description: PCR template data for the specified eve version and firmware version
+    title: PCR template
+    required:
+    - eveVersion
+    - PCRValues
+  ModelArchType:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - UNDEFINED
+    - AMD64
+    - ARM64
+    default: UNSPECIFIED
+  evecommonCellularAuthProtocol:
+    type: string
+    enum:
+    - CELLULAR_AUTH_PROTOCOL_NONE
+    - CELLULAR_AUTH_PROTOCOL_PAP
+    - CELLULAR_AUTH_PROTOCOL_CHAP
+    - CELLULAR_AUTH_PROTOCOL_PAP_AND_CHAP
+    default: CELLULAR_AUTH_PROTOCOL_NONE
+    description: "CellularAuthProtocol defines the authentication protocol used for cellular connection.\n\n - CELLULAR_AUTH_PROTOCOL_NONE: No authentication.\n - CELLULAR_AUTH_PROTOCOL_PAP: Password Authentication Protocol.\n - CELLULAR_AUTH_PROTOCOL_CHAP: Challenge-Handshake Authentication Protocol.\n - CELLULAR_AUTH_PROTOCOL_PAP_AND_CHAP: Both PAP and CHAP."
+  NetConfig:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the network
+        readOnly: true
+        pattern: '[0-9A-Za-z-]+'
+        uniqueItems: true
+      name:
+        type: string
+        description: User defined name of the network, unique across the enterprise. Once object is created, name can’t be changed
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      title:
+        type: string
+        description: User defined title of the network. Title can be changed at any time
+        maxLength: 256
+        minLength: 3
+        pattern: ^[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+$
+      description:
+        type: string
+        description: Detailed description of the network
+        maxLength: 256
+      revision:
+        $ref: '#/definitions/ObjectRevision'
+        description: system defined info
+      projectId:
+        type: string
+      kind:
+        $ref: '#/definitions/NetworkKind'
+      ip:
+        $ref: '#/definitions/IpSpec'
+      dnsList:
+        type: array
+        items:
+          $ref: '#/definitions/StaticDNSList'
+      proxy:
+        $ref: '#/definitions/NetProxyConfig'
+        title: enterprise proxy
+      enterpriseDefault:
+        type: boolean
+        title: make this network default for device
+      mtu:
+        type: integer
+        format: int64
+        title: Maximum transmission unit (MTU) to set on the associated network adapter(s)
+      wireless:
+        $ref: '#/definitions/NetWirelessConfig'
+        title: Wifi configuration
+      project:
+        $ref: '#/definitions/NetProjectInfo'
+        title: project configuration
+    description: Network provides Edge nodes a variety of connectivity choices for all types of networks. This enables physical connectivity with Ethernet, WiFi, LTE to communicate with ZEDEDA Cloud controller and Data Centres.
+    title: Network detailed configuration
+    required:
+    - name
+    - title
+    - projectId
+    - kind
+    - ip
+  commonProbeEndpoint:
+    type: object
+    properties:
+      host:
+        type: string
+        description: IP address or FQDN.
+      port:
+        type: integer
+        format: int64
+        description: 'TCP port required for CONNECTIVITY_PROBE_METHOD_TCP.
+
+          Leave empty for CONNECTIVITY_PROBE_METHOD_ICMP.'
+    description: Address of a remote endpoint to probe in order to determine connectivity status.
+  RunState:
+    type: string
+    enum:
+    - RUN_STATE_UNSPECIFIED
+    - RUN_STATE_ONLINE
+    - RUN_STATE_HALTED
+    - RUN_STATE_INIT
+    - RUN_STATE_REBOOTING
+    - RUN_STATE_OFFLINE
+    - RUN_STATE_UNKNOWN
+    - RUN_STATE_UNPROVISIONED
+    - RUN_STATE_PROVISIONED
+    - RUN_STATE_SUSPECT
+    - RUN_STATE_DOWNLOADING
+    - RUN_STATE_RESTARTING
+    - RUN_STATE_PURGING
+    - RUN_STATE_HALTING
+    - RUN_STATE_ERROR
+    - RUN_STATE_VERIFYING
+    - RUN_STATE_LOADING
+    - RUN_STATE_CREATING_VOLUME
+    - RUN_STATE_BOOTING
+    - RUN_STATE_MAINTENANCE_MODE
+    - RUN_STATE_START_DELAYED
+    - RUN_STATE_BASEOS_UPDATING
+    - RUN_STATE_PREPARING_POWEROFF
+    - RUN_STATE_POWERING_OFF
+    - RUN_STATE_PREPARED_POWEROFF
+    default: RUN_STATE_UNSPECIFIED
+    description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
+    title: RunState - On update, please update RunState_HttpRequest as well
+  PCRTemplatesReq:
+    type: object
+    properties:
+      modelId:
+        type: string
+        description: device model identifier
+      templates:
+        type: array
+        items:
+          $ref: '#/definitions/PCRTemplate'
+        description: List of templates
+    description: 'Request that contains a model id and pcr templates, which can be associated with the model. '
+    title: 'PCR templates request '
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  Severity:
+    type: string
+    enum:
+    - SEVERITY_UNSPECIFIED
+    - SEVERITY_NOTICE
+    - SEVERITY_WARNING
+    - SEVERITY_ERROR
+    default: SEVERITY_UNSPECIFIED
+    title: Severity tells the severity type
+  commonCellularIPType:
+    type: string
+    enum:
+    - CELLULAR_IP_TYPE_UNSPECIFIED
+    - CELLULAR_IP_TYPE_IPV4
+    - CELLULAR_IP_TYPE_IPV4_AND_IPV6
+    - CELLULAR_IP_TYPE_IPV6
+    default: CELLULAR_IP_TYPE_UNSPECIFIED
+    description: "The IP addressing type to use for a given attach or default bearer.\n\n - CELLULAR_IP_TYPE_UNSPECIFIED: IP type is not specified.\nWhen unspecified, EVE will not enforce an IP type in the bearer configuration.\nThe modem will instead use its built-in profiles (see CellularProfile) to determine\nthe appropriate IP type for the network.\n - CELLULAR_IP_TYPE_IPV4: IPv4 only.\n - CELLULAR_IP_TYPE_IPV4_AND_IPV6: IPv4 and IPv6.\n - CELLULAR_IP_TYPE_IPV6: IPv6 only."
+  SysModelState:
+    type: string
+    enum:
+    - SYS_MODEL_STATE_UNSPECIFIED
+    - SYS_MODEL_STATE_ARCHIVE
+    - SYS_MODEL_STATE_ACTIVE
+    default: SYS_MODEL_STATE_UNSPECIFIED
+    description: "- SYS_MODEL_STATE_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - SYS_MODEL_STATE_ARCHIVE: Archived  sysModel State\n - SYS_MODEL_STATE_ACTIVE: Active sysModel state"
+    title: 'SysModelState : enum specifies the SysModel status'
+  dhcpIpRange:
+    type: object
+    properties:
+      start:
+        type: string
+        description: starting IP
+      end:
+        type: string
+        description: ending IP
+    description: DHCP IP range
+    title: DHCP IP range
+  Cursor:
+    type: object
+    properties:
+      pageToken:
+        type: string
+        description: Page Token
+      orderBy:
+        type: array
+        items:
+          type: string
+        description: OrderBy helps in sorting the list response
+      pageNum:
+        type: number
+        format: int64
+        description: Page Number
+      pageSize:
+        type: number
+        format: int64
+        description: Defines the page size
+      totalPages:
+        type: number
+        format: int64
+        description: Total number of pages to be fetched.
+    description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+    title: Cursor is used as filter in list operation.
+  ioMember:
+    type: object
+    example:
+      ztype: 1
+      phylabel: eth0
+      logicallabel: eth0
+    properties:
+      ztype:
+        $ref: '#/definitions/IoType'
+        description: Z Type
+      phylabel:
+        type: string
+        description: Physical Label
+      phyaddrs:
+        type: object
+        additionalProperties:
+          type: string
+        description: Map of Physical Addresses
+      logicallabel:
+        type: string
+        description: Logical Label
+      assigngrp:
+        type: string
+        description: Assign Group
+      usage:
+        $ref: '#/definitions/AdapterUsage'
+        description: Adopter Usage
+      cbattr:
+        type: object
+        additionalProperties:
+          type: string
+        description: attributes
+        title: physical and logical attributes
+      usagePolicy:
+        type: object
+        additionalProperties:
+          type: boolean
+        title: usagePolicy
+      cost:
+        type: integer
+        format: int64
+        description: cost of using this ioMember. Default is 0.
+        maximum: 255
+      vfs:
+        $ref: '#/definitions/Vfs'
+        title: Single Root Input Output Virtualization (SR-IOV) support in device configuration
+      parentassigngrp:
+        type: string
+        description: Parent group for a IoMember. Can be empty if there is no parent group.
+    description: ' ioMember consists of list of various networking attributes like physical label, physical address etc  associated with SysModel'
+    title: ioMember  payload details
+    required:
+    - ztype
+    - phylabel
+    - assigngrp
+    - phyaddrs
+    - logicallabel
+    - cost
+  DeviceEntity:
+    type: object
+    properties:
+      entity:
+        $ref: '#/definitions/Entity'
+      entityId:
+        type: string
+      entityName:
+        type: string
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  Vfs:
+    type: object
+    properties:
+      count:
+        type: integer
+        format: int64
+        description: The number of Virtual Functions for given Physical Function. Only applies for IO_TYPE_ETH_PF.
+        maximum: 255
+  DeviceStatusConfigList:
+    type: object
+    properties:
+      summaryByState:
+        $ref: '#/definitions/Summary'
+        description: Device status config summary by state
+      summaryByAppInstanceCount:
+        $ref: '#/definitions/Summary'
+        description: Device status config summary by app instance count
+      summaryByEVEDistribution:
+        $ref: '#/definitions/Summary'
+        description: Device status config summary by eve distribution
+      totalCount:
+        type: integer
+        format: int64
+        description: total count of devices
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/deviceStatusConfig'
+        description: List of device status config
+      totalEvActiveCount:
+        type: integer
+        format: int64
+        description: total count of edgeview active of devices
+      next:
+        $ref: '#/definitions/Cursor'
+        description: Page details of the filtered records
+    description: Device statu sna config composite api response details
+    title: Device status config composite api response detail
+    required:
+    - summaryByState
+    - summaryByAppInstanceCount
+    - summaryByEVEDistribution
+    - totalCount
+    - list
+  evecommonRadioAccessTechnology:
+    type: string
+    enum:
+    - RADIO_ACCESS_TECHNOLOGY_UNSPECIFIED
+    - RADIO_ACCESS_TECHNOLOGY_GSM
+    - RADIO_ACCESS_TECHNOLOGY_UMTS
+    - RADIO_ACCESS_TECHNOLOGY_LTE
+    - RADIO_ACCESS_TECHNOLOGY_5GNR
+    default: RADIO_ACCESS_TECHNOLOGY_UNSPECIFIED
+    description: " - RADIO_ACCESS_TECHNOLOGY_GSM: Global System for Mobile Communications (2G).\n - RADIO_ACCESS_TECHNOLOGY_UMTS: Universal Mobile Telecommunications System (3G).\n - RADIO_ACCESS_TECHNOLOGY_LTE: Long Term Evolution (4G).\n - RADIO_ACCESS_TECHNOLOGY_5GNR: 5G New Radio."
+  commonConnectivityProbe:
+    type: object
+    properties:
+      probeMethod:
+        $ref: '#/definitions/commonConnectivityProbeMethod'
+        description: Method to use to determine the connectivity status.
+      probeEndpoint:
+        $ref: '#/definitions/commonProbeEndpoint'
+        description: 'Endpoint to probe using the selected probing mechanism to determine
+
+          the connectivity status.'
+    description: Configuration for user-defined connectivity-testing probe.
+  NetworkKind:
+    type: string
+    enum:
+    - NETWORK_KIND_UNSPECIFIED
+    - NETWORK_KIND_V4
+    - NETWORK_KIND_V6
+    - NETWORK_KIND_V4_ONLY
+    - NETWORK_KIND_V6_ONLY
+    - NETWORK_KIND_DUAL_V4_V6
+    default: NETWORK_KIND_UNSPECIFIED
+    title: "NetworkKind: Used for the network configuration, this is\n only client mode"
+  AdminState:
+    type: string
+    enum:
+    - ADMIN_STATE_UNSPECIFIED
+    - ADMIN_STATE_CREATED
+    - ADMIN_STATE_DELETED
+    - ADMIN_STATE_ACTIVE
+    - ADMIN_STATE_INACTIVE
+    - ADMIN_STATE_REGISTERED
+    - ADMIN_STATE_ARCHIVED
+    default: ADMIN_STATE_UNSPECIFIED
+    description: "- ADMIN_STATE_CREATED: Entity Created in the controller\n - ADMIN_STATE_DELETED: Entity Deleted in the controller\n - ADMIN_STATE_ACTIVE: Entity Activated in the controller\n - ADMIN_STATE_INACTIVE: Entity Deactivated in the controller\n - ADMIN_STATE_REGISTERED: Specific to Edge-node - Edge-node Registered with the controller\n - ADMIN_STATE_ARCHIVED: Entity Archived in the controller"
+    title: AdminState - On update, please update AdminState_HttpRequest as well
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  NetWirelessConfig:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/NetworkWirelessType'
+      cellularCfg:
+        $ref: '#/definitions/NetCellularConfig'
+      wifiCfg:
+        $ref: '#/definitions/NetWifiConfig'
+  DeviceLocations:
+    type: object
+    properties:
+      deviceLocations:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceLocation'
+      next:
+        $ref: '#/definitions/Cursor'
+  SWState:
+    type: string
+    enum:
+    - SW_STATE_UNSPECIFIED
+    - SW_STATE_INITIAL
+    - SW_STATE_DOWNLOAD_IN_PROGRESS
+    - SW_STATE_DOWNLOADED
+    - SW_STATE_VERIFIED
+    - SW_STATE_INSTALLED
+    - SW_STATE_BOOTING
+    - SW_STATE_RUNNING
+    - SW_STATE_HALTING
+    - SW_STATE_HALTED
+    - SW_STATE_REFRESHING
+    - SW_STATE_PURGING
+    - SW_STATE_RESOLVING_TAG
+    - SW_STATE_RESOLVED_TAG
+    - SW_STATE_CREATING_VOLUME
+    - SW_STATE_CREATED_VOLUME
+    - SW_STATE_VERIFYING
+    - SW_STATE_LOADING
+    - SW_STATE_LOADED
+    - SW_STATE_AWAITNETWORKINSTANCE
+    default: SW_STATE_UNSPECIFIED
+    description: "- SW_STATE_RESOLVING_TAG: Prior to DOWNLOAD_STARTED we go through these:\nResolving an image tag\n - SW_STATE_RESOLVED_TAG: Tag has been resolved/failed\n - SW_STATE_CREATING_VOLUME: Prior to INSTALLED we go through these:\nVolume create in progress\n - SW_STATE_CREATED_VOLUME: Volume create done/failed\n - SW_STATE_VERIFYING: Verification in-progress\n - SW_STATE_LOADING: Loading blob in CAS\n - SW_STATE_LOADED: Loaded blob in CAS\n - SW_STATE_AWAITNETWORKINSTANCE: Wait for network instance"
+    title: State of EVE/Edge Application software
+  TagType:
+    type: string
+    enum:
+    - TAG_TYPE_UNSPECIFIED
+    - TAG_TYPE_GENERIC
+    - TAG_TYPE_PROJECT
+    - TAG_TYPE_AZURE
+    - TAG_TYPE_DEPLOYMENT
+    default: TAG_TYPE_UNSPECIFIED
+    description: "- TAG_TYPE_UNSPECIFIED: Unspecified\n - TAG_TYPE_GENERIC: Generic resource group\n - TAG_TYPE_PROJECT: Project resource group\n - TAG_TYPE_AZURE: Project resource group\n - TAG_TYPE_DEPLOYMENT: Project with deployment"
+    title: Resource group types
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

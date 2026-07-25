@@ -1,0 +1,611 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService HelmChartManagement API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: HelmChartManagement
+  description: APIs for managing Helm charts in Kubernetes clusters. Provides operations for importing, creating, updating, deleting, and retrieving Helm charts from both global and enterprise-specific repositories.
+paths:
+  /v1/cluster/instances/kubernetes/helm/charts:
+    get:
+      summary: List Helm Charts
+      description: "Retrieve a list of all available Helm charts in the project repository with their versions and metadata.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/helm/charts\n```\n\n**Example Response:**\n```json\n{\n  \"api_version\": \"v2\",\n  \"generated\": \"2024-01-15T12:00:00Z\",\n  \"repo_identifier\": \"project-charts\",\n  \"repo_name\": \"Project Repository\",\n  \"entries\": {\n    \"nginx\": [\n      {\n        \"name\": \"nginx\",\n        \"version\": \"15.4.0\",\n        \"app_version\": \"1.25.3\",\n        \"description\": \"NGINX Open Source based on NGINX Alpine\",\n        \"created\": \"2024-01-10T09:00:00Z\",\n        \"digest\": \"sha256:abc123def456...\",\n        \"urls\": [\"/charts/nginx-15.4.0.tgz\"]\n      },\n      {\n        \"name\": \"nginx\",\n        \"version\": \"15.3.0\",\n        \"app_version\": \"1.25.2\",\n        \"description\": \"NGINX Open Source based on NGINX Alpine\",\n        \"created\": \"2024-01-05T14:30:00Z\",\n        \"digest\": \"sha256:def456ghi789...\",\n        \"urls\": [\"/charts/nginx-15.3.0.tgz\"]\n      }\n    ],\n    \"redis\": [\n      {\n        \"name\": \"redis\",\n        \"version\": \"18.1.0\",\n        \"app_version\": \"7.2.3\",\n        \"description\": \"Redis is an in-memory database\",\n        \"created\": \"2024-01-12T16:45:00Z\",\n        \"digest\": \"sha256:ghi789jkl012...\",\n        \"urls\": [\"/charts/redis-18.1.0.tgz\"]\n      }\n    ]\n  }\n}\n```"
+      operationId: HelmChartManagement_ListHelmCharts
+      responses:
+        '200':
+          description: OK. Successfully retrieved list of Helm charts.
+          schema:
+            $ref: '#/definitions/HelmChartListResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because of invalid credentials.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the user does not have access to the resource.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve chart list.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      tags:
+      - HelmChartManagement
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+    post:
+      summary: Create Helm Chart
+      description: "Upload and create a new Helm chart package in the project repository. The chart package should be provided as a .tgz file using multipart/form-data with the field name 'chart'.\n\n**Example Request using curl:**\n```bash\ncurl -X POST \\\n  -H \"X-API-KEY: your-api-key\" \\\n  -F \"chart=@nginx-chart-1.0.0.tgz\" \\\n  https://api.zededa.com/api/v1/cluster/instances/kubernetes/helm/charts\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"4495fb8b-187e-4fc1-8c28-6a8ac6629833\",\n  \"objectName\": \"nginx-chart\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 201,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Note:** The chart file (*.tgz) is **required** and must be a valid Helm chart package."
+      operationId: HelmChartManagement_CreateHelmChart
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '201':
+          description: Created. Helm chart successfully uploaded and created in the project repository.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid chart file format or missing required chart metadata.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because of invalid credentials.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the user does not have access to the resource.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. A chart with the same name and version already exists in the repository.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to process chart upload or repository operation.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      tags:
+      - HelmChartManagement
+      produces:
+      - application/json
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      - name: chart
+        in: formData
+        required: true
+        type: file
+        description: Helm chart package file (.tgz format)
+        x-mimetype: application/gzip
+      consumes:
+      - multipart/form-data
+  /v1/cluster/instances/kubernetes/helm/charts/name/{chartName}:
+    delete:
+      summary: Delete Helm Chart
+      description: "Delete a Helm chart from the project repository. This action is irreversible and will remove all versions of the specified chart.\n\n**Example Request:**\n```\nDELETE /v1/cluster/instances/kubernetes/helm/charts/name/nginx\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"4495fb8b-187e-4fc1-8c28-6a8ac6629833\",\n  \"objectName\": \"nginx\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Warning:** This operation will delete ALL versions of the specified chart. If you need to delete a specific version, use the update operation to remove that version from the repository.\n\n**Note:** The chart_name parameter is **required** and must be a valid chart name in the repository."
+      operationId: HelmChartManagement_DeleteHelmChart
+      responses:
+        '200':
+          description: OK. Helm chart successfully deleted from the repository.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because of invalid credentials.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the user does not have access to the resource.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The specified chart name and version combination does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Cannot delete chart because it is currently in use by deployments.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to delete chart from repository.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: chartName
+        description: 'Name of the Helm chart (required). Example: ''nginx'''
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HelmChartManagement
+  /v1/cluster/instances/kubernetes/helm/charts/name/{chartName}/version/{chartVersion}:
+    get:
+      summary: Get Helm Chart
+      description: "Retrieve detailed information about a specific Helm chart including its metadata, default values, and configuration options.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/helm/charts/name/nginx/version/15.4.0?repo_identifier=bitnami\n```\n\n**Example Response:**\n```json\n{\n  \"readme\": \"# NGINX Chart\\n\\nThis chart deploys NGINX on Kubernetes...\",\n  \"app_readme\": \"# NGINX Application\\n\\nNGINX is a web server...\",\n  \"questions\": {\n    \"replicaCount\": {\n      \"type\": \"integer\",\n      \"label\": \"Number of replicas\",\n      \"default\": 1,\n      \"min\": 1,\n      \"max\": 10\n    },\n    \"service.type\": {\n      \"type\": \"enum\",\n      \"label\": \"Service type\",\n      \"options\": [\"ClusterIP\", \"NodePort\", \"LoadBalancer\"]\n    }\n  },\n  \"values\": {\n    \"replicaCount\": 1,\n    \"image\": {\n      \"repository\": \"bitnami/nginx\",\n      \"tag\": \"1.25.3\",\n      \"pullPolicy\": \"IfNotPresent\"\n    },\n    \"service\": {\n      \"type\": \"ClusterIP\",\n      \"port\": 80\n    }\n  },\n  \"chart\": {\n    \"name\": \"nginx\",\n    \"version\": \"15.4.0\",\n    \"app_version\": \"1.25.3\",\n    \"description\": \"NGINX Open Source based on NGINX Alpine\",\n    \"home\": \"https://github.com/bitnami/charts/tree/main/bitnami/nginx\",\n    \"sources\": [\"https://github.com/bitnami/containers/tree/main/bitnami/nginx\"],\n    \"keywords\": [\"nginx\", \"http\", \"web\", \"www\", \"reverse proxy\"],\n    \"maintainers\": [\n      {\n        \"name\": \"VMware, Inc.\",\n        \"url\": \"https://github.com/bitnami/charts\"\n      }\n    ]\n  },\n  \"repo_identifier\": \"bitnami\"\n}\n```\n\n**Note:** Both chart_name and chart_version are **required** parameters. repo_identifier is **optional** and defaults to the local repository."
+      operationId: HelmChartManagement_GetHelmChart
+      responses:
+        '200':
+          description: OK. Successfully retrieved Helm chart information.
+          schema:
+            $ref: '#/definitions/HelmChartInfoResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because of invalid credentials.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the user does not have access to the resource.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The specified chart name and version combination does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve chart information.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: chartName
+        description: 'Name of the Helm chart (required). Example: ''nginx'''
+        in: path
+        required: true
+        type: string
+      - name: chartVersion
+        description: 'Version of the Helm chart (required). Example: ''15.4.0'''
+        in: path
+        required: true
+        type: string
+      - name: repoIdentifier
+        description: 'Identifier for the Helm chart repository (optional). Example: ''bitnami''. Defaults to local repository if not specified'
+        in: query
+        required: false
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - HelmChartManagement
+    put:
+      summary: Update Helm Chart
+      description: "Update an existing Helm chart with a new chart package. The chart name and version must match the existing chart being updated. The chart package should be provided as a .tgz file using multipart/form-data with the field name 'chart'.\n\n**Example Request using curl:**\n```bash\ncurl -X PUT \\\n  -H \"X-API-KEY: your-api-key\" \\\n  -F \"chart=@nginx-chart-1.0.1.tgz\" \\\n  https://api.zededa.com/api/v1/cluster/instances/kubernetes/helm/charts/name/nginx/version/1.0.0\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"4495fb8b-187e-4fc1-8c28-6a8ac6629833\",\n  \"objectName\": \"nginx-chart\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Note:** Both chart_name and chart_version path parameters are **required** and must match an existing chart."
+      operationId: HelmChartManagement_UpdateHelmChart
+      responses:
+        '200':
+          description: OK. Helm chart successfully updated in the project repository.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid chart file or version mismatch.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because of invalid credentials.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the user does not have access to the resource.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The specified chart name and version combination does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to update chart in repository.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: chartName
+        description: 'Name of the Helm chart (required). Example: ''nginx'''
+        in: path
+        required: true
+        type: string
+      - name: chartVersion
+        description: 'Version of the Helm chart (required). Example: ''1.0.0'''
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      - name: chart
+        in: formData
+        required: true
+        type: file
+        description: Helm chart package file (.tgz format)
+        x-mimetype: application/gzip
+      tags:
+      - HelmChartManagement
+      produces:
+      - application/json
+      consumes:
+      - multipart/form-data
+definitions:
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  HelmChartListResponse:
+    type: object
+    properties:
+      apiVersion:
+        type: string
+        description: API version of the chart index
+      generated:
+        type: string
+        description: Timestamp when the chart index was generated
+      repoIdentifier:
+        type: string
+        description: Identifier for the Helm chart repository
+      repoName:
+        type: string
+        description: Name of the Helm chart repository
+    description: Response containing a list of Helm charts with their metadata and versions
+    title: Helm chart list response
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  HelmChartMaintainer:
+    type: object
+    properties:
+      name:
+        type: string
+        description: 'Name of the maintainer. Example: ''Zededa Team'''
+      url:
+        type: string
+        description: 'URL or contact information for the maintainer. Example: ''https://github.com/bitnami/charts'''
+    description: Maintainer information for a Helm chart
+    title: Helm chart maintainer
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  HelmChartInfoResponse:
+    type: object
+    properties:
+      readme:
+        type: string
+        description: README content for the Helm chart
+      appReadme:
+        type: string
+        description: Application-specific README content
+      questions:
+        type: object
+        description: Configuration questions for the Helm chart
+      values:
+        type: object
+        description: Default values for the Helm chart
+      chart:
+        $ref: '#/definitions/HelmChartDetail'
+        description: Detailed chart metadata and information
+      repoIdentifier:
+        type: string
+        description: Identifier for the Helm chart repository
+    description: Comprehensive Helm chart data containing chart details, configuration, and metadata
+    title: Helm chart data
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  HelmChartDependency:
+    type: object
+    properties:
+      name:
+        type: string
+        description: 'Name of the dependency chart. Example: ''postgresql'''
+        pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+      repository:
+        type: string
+        description: 'Repository URL for the dependency. Example: ''https://charts.bitnami.com/bitnami'''
+      tags:
+        type: array
+        items:
+          type: string
+        description: 'Tags associated with the dependency. Example: [''database'', ''postgresql'']'
+      version:
+        type: string
+        description: 'Version constraint for the dependency. Example: ''^12.0.0'''
+    description: Dependency information for a Helm chart
+    title: Helm chart dependency
+  HelmChartDetail:
+    type: object
+    properties:
+      annotations:
+        type: object
+        additionalProperties:
+          type: string
+        description: Chart annotations including category, images, and licenses
+      apiVersion:
+        type: string
+        description: Helm chart API version
+      appVersion:
+        type: string
+        description: Version of the application packaged in the chart
+      dependencies:
+        type: array
+        items:
+          $ref: '#/definitions/HelmChartDependency'
+        description: List of chart dependencies
+      description:
+        type: string
+        description: Description of the Helm chart
+      home:
+        type: string
+        description: Home page URL for the chart
+      icon:
+        type: string
+        description: Icon URL for the chart
+      keywords:
+        type: array
+        items:
+          type: string
+        description: Keywords associated with the chart
+      maintainers:
+        type: array
+        items:
+          $ref: '#/definitions/HelmChartMaintainer'
+        description: List of chart maintainers
+      name:
+        type: string
+        description: Name of the Helm chart
+      sources:
+        type: array
+        items:
+          type: string
+        description: List of source code URLs for the chart
+      version:
+        type: string
+        description: Version of the Helm chart
+    description: Detailed metadata information for a Helm chart
+    title: Helm chart metadata
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

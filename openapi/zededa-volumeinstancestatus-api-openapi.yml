@@ -1,0 +1,1335 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService VolumeInstanceStatus API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: VolumeInstanceStatus
+paths:
+  /v1/volumes/instances/id/{id}/status:
+    get:
+      summary: Get edge volume instance status
+      description: Get the status of an edge volume instance record.
+      operationId: VolumeInstanceStatus_GetVolumeInstanceStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/VolInstStatusMsg'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - VolumeInstanceStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+  /v1/volumes/instances/id/{objid}/events:
+    get:
+      summary: Get edge volume instance events by id
+      description: Get configuration and status events of an edge volume by id.
+      operationId: VolumeInstanceStatus_GetVolumeInstanceEvents
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/EventQueryResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: objid
+        description: Object id
+        in: path
+        required: true
+        type: string
+      - name: startTime
+        description: start time in timestamp
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: endTime
+        description: end time
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: severity
+        description: severity
+        in: query
+        required: false
+        type: string
+      - name: resource
+        description: resource
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - VolumeInstanceStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+  /v1/volumes/instances/name/{name}/status:
+    get:
+      summary: Get edge volume instance status
+      description: Get the status of an edge volume instance record.
+      operationId: VolumeInstanceStatus_GetVolumeInstanceStatusByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/VolInstStatusMsg'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - VolumeInstanceStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+  /v1/volumes/instances/name/{objname}/events:
+    get:
+      summary: Get edge volume instance events by name
+      description: Get configuration and status events of an edge volume by name.
+      operationId: VolumeInstanceStatus_GetVolumeInstanceEventsByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/EventQueryResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: objname
+        description: Object name
+        in: path
+        required: true
+        type: string
+      - name: startTime
+        description: start time in timestamp
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: endTime
+        description: end time
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: severity
+        description: severity
+        in: query
+        required: false
+        type: string
+      - name: resource
+        description: resource
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - VolumeInstanceStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+  /v1/volumes/instances/status:
+    get:
+      summary: Query status of edge volume instances
+      description: Query the status of edge volume instance records.
+      operationId: VolumeInstanceStatus_QueryVolumeInstanceStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/VolInstStatusListMsg'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: deviceName
+        in: query
+        required: false
+        type: string
+      - name: projectName
+        in: query
+        required: false
+        type: string
+      - name: namePattern
+        in: query
+        required: false
+        type: string
+      - name: runState
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - ONLINE
+        - HALTED
+        - INIT
+        - REBOOTING
+        - OFFLINE
+        - UNKNOWN
+        - UNPROVISIONED
+        - PROVISIONED
+        - SUSPECT
+        - DOWNLOADING
+        - RESTARTING
+        - PURGING
+        - HALTING
+        - ERROR
+        - VERIFYING
+        - LOADING
+        - CREATING_VOLUME
+        - BOOTING
+        - MAINTENANCE_MODE
+        - START_DELAYED
+        - BASEOS_UPDATING
+        - PREPARING_POWEROFF
+        - POWERING_OFF
+        - PREPARED_POWEROFF
+        default: UNSPECIFIED
+      - name: type
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - EMPTYDIR
+        - BLOCKSTORAGE
+        - HOSTFS
+        - TMPFS
+        - SECRET
+        - NFS
+        - AWS_BLOCK_STORAGE
+        - CONTENT_TREE
+        default: UNSPECIFIED
+      - name: imageName
+        in: query
+        required: false
+        type: string
+      - name: appInstName
+        in: query
+        required: false
+        type: string
+      - name: deviceNamePattern
+        in: query
+        required: false
+        type: string
+      - name: projectNamePattern
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: summary
+        in: query
+        required: false
+        type: boolean
+      - name: fields
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - VolumeInstanceStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+  /v1/volumes/instances/status-config:
+    get:
+      summary: Query status and config of edge volume instances
+      description: Query the status and config of edge volume instance records.
+      operationId: VolumeInstanceStatus_QueryVolumeInstanceStatusConfig
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/VolInstStatusListMsg'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: deviceName
+        in: query
+        required: false
+        type: string
+      - name: projectName
+        in: query
+        required: false
+        type: string
+      - name: namePattern
+        in: query
+        required: false
+        type: string
+      - name: runState
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - ONLINE
+        - HALTED
+        - INIT
+        - REBOOTING
+        - OFFLINE
+        - UNKNOWN
+        - UNPROVISIONED
+        - PROVISIONED
+        - SUSPECT
+        - DOWNLOADING
+        - RESTARTING
+        - PURGING
+        - HALTING
+        - ERROR
+        - VERIFYING
+        - LOADING
+        - CREATING_VOLUME
+        - BOOTING
+        - MAINTENANCE_MODE
+        - START_DELAYED
+        - BASEOS_UPDATING
+        - PREPARING_POWEROFF
+        - POWERING_OFF
+        - PREPARED_POWEROFF
+        default: UNSPECIFIED
+      - name: type
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - EMPTYDIR
+        - BLOCKSTORAGE
+        - HOSTFS
+        - TMPFS
+        - SECRET
+        - NFS
+        - AWS_BLOCK_STORAGE
+        - CONTENT_TREE
+        default: UNSPECIFIED
+      - name: imageName
+        in: query
+        required: false
+        type: string
+      - name: appInstName
+        in: query
+        required: false
+        type: string
+      - name: deviceNamePattern
+        in: query
+        required: false
+        type: string
+      - name: projectNamePattern
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: summary
+        in: query
+        required: false
+        type: boolean
+      - name: fields
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - VolumeInstanceStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
+definitions:
+  BlobInfo:
+    type: object
+    properties:
+      sha256:
+        type: string
+      resource:
+        $ref: '#/definitions/VolInstResource'
+      usage:
+        $ref: '#/definitions/DeviceObjectUsageInfo'
+      State:
+        $ref: '#/definitions/SWState'
+      progressPercentage:
+        type: integer
+        format: int64
+      errInfo:
+        $ref: '#/definitions/DeviceError'
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  VolInstResource:
+    type: object
+    properties:
+      curSizeBytes:
+        type: string
+        format: uint64
+      maxSizeBytes:
+        type: string
+        format: uint64
+  Severity:
+    type: string
+    enum:
+    - SEVERITY_UNSPECIFIED
+    - SEVERITY_NOTICE
+    - SEVERITY_WARNING
+    - SEVERITY_ERROR
+    default: SEVERITY_UNSPECIFIED
+    title: Severity tells the severity type
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  Summary:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Summary description
+      total:
+        type: number
+        format: int64
+        description: Total
+      values:
+        type: object
+        additionalProperties:
+          type: integer
+          format: int64
+        description: 'Values: Map for storing <string, uint32>'
+    description: Summary is used to store the Summary details
+    title: Summary is used to store the Summary details
+  EventQueryResponseItem:
+    type: object
+    properties:
+      user:
+        type: string
+        description: User name
+      project:
+        type: string
+        description: project name
+      device:
+        type: string
+        description: device name
+      instance:
+        type: string
+        description: instance name
+      severity:
+        type: string
+        description: 'severity: FIXME: should be ENUM'
+      description:
+        type: string
+        description: Event description
+      timestamp:
+        type: object
+        format: date-time
+        description: event timestamp
+      source:
+        type: object
+        $ref: '#/definitions/EventSource'
+        description: source
+      resource:
+        type: string
+        description: Event resources
+      eventType:
+        type: string
+        description: Event type
+      tags:
+        type: array
+        items:
+          type: string
+        description: Event tags
+      resourceName:
+        type: string
+        description: Event resources
+      jsonData:
+        type: object
+        description: Event resources
+      clusterInstance:
+        type: string
+        description: clusterInstance name
+    description: Event query response item payload
+    title: Event query response item payload detail
+  infoStorageVolumeState:
+    type: string
+    enum:
+    - STORAGE_VOLUME_STATE_UNSPECIFIED
+    - STORAGE_VOLUME_STATE_CREATING
+    - STORAGE_VOLUME_STATE_ATTACHED
+    - STORAGE_VOLUME_STATE_DETACHED
+    - STORAGE_VOLUME_STATE_ATTACHING
+    - STORAGE_VOLUME_STATE_DETACHING
+    - STORAGE_VOLUME_STATE_DELETING
+    default: STORAGE_VOLUME_STATE_UNSPECIFIED
+    title: "StorageVolumeState is the kubernetes 'state' field of a replicated csi-driver volume.\n Refer to: https://github.com/longhorn/longhorn-manager/blob/v1.6.2/k8s/pkg/apis/longhorn/v1beta1/volume.go#L14"
+  Entity:
+    type: string
+    enum:
+    - ENTITY_UNSPECIFIED
+    - ENTITY_BASE_OS
+    - ENTITY_SYSTEM_ADAPTER
+    - ENTITY_VAULT
+    - ENTITY_ATTESTATION
+    - ENTITY_APP_INSTANCE
+    - ENTITY_PORT
+    - ENTITY_NETWORK
+    - ENTITY_NETWORK_INSTANCE
+    - ENTITY_CONTENT_TREE
+    - ENTITY_CONTENT_BLOB
+    - ENTITY_VOLUME
+    default: ENTITY_UNSPECIFIED
+    description: "- ENTITY_UNSPECIFIED: Invalid Device Entity\n - ENTITY_BASE_OS: Base OS entity\n - ENTITY_SYSTEM_ADAPTER: System Adapter Entity\n - ENTITY_VAULT: Vault Entity\n - ENTITY_ATTESTATION: Attestation Entity\n - ENTITY_APP_INSTANCE: App Instance Entity\n - ENTITY_PORT: Port Entity\n - ENTITY_NETWORK: Network Entity\n - ENTITY_NETWORK_INSTANCE: Network Instance Entity\n - ENTITY_CONTENT_TREE: ContentTree Entity\n - ENTITY_CONTENT_BLOB: Blob Entity\n - ENTITY_VOLUME: VOLUME Entity"
+    title: Edge node components
+  VolumeInstanceReplicaStatus:
+    type: object
+    properties:
+      nodeName:
+        type: string
+      rebuildProgressPercentage:
+        type: integer
+        format: int64
+      status:
+        $ref: '#/definitions/infoStorageVolumeReplicaStatus'
+  DeviceError:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Description of the error
+      severity:
+        type: string
+        $ref: '#/definitions/Severity'
+        description: Severity of the error
+      timestamp:
+        type: object
+        format: date-time
+        description: Timestamp at which error had occurred
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceEntity'
+        description: objects referenced by the description or retry_condition
+      retryCondition:
+        type: string
+        description: condition for retry
+    description: DeviceError store the error occurred at the device side
+    title: DeviceError is used to store the error details of the hardware.
+    required:
+    - description
+    - severity
+    - timestamp
+    - entities
+  infoStorageVolumePVCStatus:
+    type: string
+    enum:
+    - STORAGE_VOLUME_PVC_STATUS_UNSPECIFIED
+    - STORAGE_VOLUME_PVC_STATUS_BOUND
+    - STORAGE_VOLUME_PVC_STATUS_PENDING
+    - STORAGE_VOLUME_PVC_STATUS_AVAILABLE
+    - STORAGE_VOLUME_PVC_STATUS_RELEASED
+    - STORAGE_VOLUME_PVC_STATUS_FAILED
+    default: STORAGE_VOLUME_PVC_STATUS_UNSPECIFIED
+    title: "StorageVolumePVCStatus is the kubernetes 'phase' of a PVC. Listed as status in cli.\n Refer to: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase"
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  Cursor:
+    type: object
+    properties:
+      pageToken:
+        type: string
+        description: Page Token
+      orderBy:
+        type: array
+        items:
+          type: string
+        description: OrderBy helps in sorting the list response
+      pageNum:
+        type: number
+        format: int64
+        description: Page Number
+      pageSize:
+        type: number
+        format: int64
+        description: Defines the page size
+      totalPages:
+        type: number
+        format: int64
+        description: Total number of pages to be fetched.
+    description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+    title: Cursor is used as filter in list operation.
+  VolumeInstanceType:
+    type: string
+    enum:
+    - VOLUME_INSTANCE_TYPE_UNSPECIFIED
+    - VOLUME_INSTANCE_TYPE_EMPTYDIR
+    - VOLUME_INSTANCE_TYPE_BLOCKSTORAGE
+    - VOLUME_INSTANCE_TYPE_HOSTFS
+    - VOLUME_INSTANCE_TYPE_TMPFS
+    - VOLUME_INSTANCE_TYPE_SECRET
+    - VOLUME_INSTANCE_TYPE_NFS
+    - VOLUME_INSTANCE_TYPE_AWS_BLOCK_STORAGE
+    - VOLUME_INSTANCE_TYPE_CONTENT_TREE
+    default: VOLUME_INSTANCE_TYPE_UNSPECIFIED
+    title: VolumeInstanceType - On update, please update VolumeInstanceType_HttpRequest as well
+  EventQueryResponse:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/EventQueryResponseItem'
+        description: Event Query response list
+      next:
+        type: object
+        $ref: '#/definitions/Cursor'
+        description: Cursor filter
+      summary:
+        $ref: '#/definitions/Summary'
+        description: Summary of filtered events.
+    description: Event query response request payload
+    title: Event query Response payload detail
+    required:
+    - list
+    - next
+  DeviceEntity:
+    type: object
+    properties:
+      entity:
+        $ref: '#/definitions/Entity'
+      entityId:
+        type: string
+      entityName:
+        type: string
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  DeviceObjectUsageInfo:
+    type: object
+    properties:
+      createTime:
+        type: object
+        format: date-time
+        description: Timestamp at which object was created
+      refCount:
+        type: number
+        format: int64
+        description: Object refcount
+      lastRefCountChangeTime:
+        type: object
+        format: date-time
+        description: Timestamp at which object refcount was last changed
+    description: DeviceObjectUsageInfo provides the metadata of object usage on the device
+    title: DeviceObjectUsageInfo carries metadata of object usage on the device.
+    required:
+    - createTime
+    - refCount
+    - lastRefCountChangeTime
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  VolInstStatusMsg:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      deviceId:
+        type: string
+        title: device on which this volume is located
+      runState:
+        $ref: '#/definitions/RunState'
+      projectId:
+        type: string
+      progressPercentage:
+        type: integer
+        format: int64
+      usage:
+        $ref: '#/definitions/DeviceObjectUsageInfo'
+      resource:
+        $ref: '#/definitions/VolInstResource'
+      sha256:
+        type: string
+      type:
+        $ref: '#/definitions/VolumeInstanceType'
+      deviceState:
+        $ref: '#/definitions/SWState'
+      blobs:
+        type: array
+        items:
+          $ref: '#/definitions/BlobInfo'
+      errInfo:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceError'
+      rawStatus:
+        type: string
+      clusterVolInstanceStatus:
+        $ref: '#/definitions/ClusterVolInstanceStatus'
+  VolInstStatusListMsg:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/VolInstStatusSummaryMsg'
+      summaryByState:
+        $ref: '#/definitions/Summary'
+      summaryByType:
+        $ref: '#/definitions/Summary'
+      totalCount:
+        type: integer
+        format: int64
+      next:
+        $ref: '#/definitions/Cursor'
+  ClusterVolInstanceStatus:
+    type: object
+    properties:
+      state:
+        $ref: '#/definitions/infoStorageVolumeState'
+      replicas:
+        type: array
+        items:
+          $ref: '#/definitions/VolumeInstanceReplicaStatus'
+      attachmentState:
+        $ref: '#/definitions/infoStorageVolumePVCStatus'
+      creationTime:
+        type: string
+        format: date-time
+      size:
+        type: string
+        format: uint64
+      actualSize:
+        type: string
+        format: uint64
+      robustness:
+        $ref: '#/definitions/infoStorageVolumeRobustness'
+      robustnessSubstate:
+        $ref: '#/definitions/infoStorageHealthStatus'
+  infoStorageHealthStatus:
+    type: string
+    enum:
+    - STORAGE_HEALTH_STATUS_UNSPECIFIED
+    - STORAGE_HEALTH_STATUS_HEALTHY
+    - STORAGE_HEALTH_STATUS_DEGRADED_2_REPLICA_AVAILABLE_REPLICATING
+    - STORAGE_HEALTH_STATUS_DEGRADED_2_REPLICA_AVAILABLE_NOT_REPLICATING
+    - STORAGE_HEALTH_STATUS_DEGRADED_1_REPLICA_AVAILABLE_REPLICATING
+    - STORAGE_HEALTH_STATUS_DEGRADED_1_REPLICA_AVAILABLE_NOT_REPLICATING
+    - STORAGE_HEALTH_STATUS_FAILED
+    default: STORAGE_HEALTH_STATUS_UNSPECIFIED
+    description: 'StorageHealthStatus is a higher level tracking status to show redundancy/failure-zone level
+
+      and rebuild progress.'
+  EventSource:
+    type: string
+    enum:
+    - EVENT_SOURCE_UNSPECIFIED
+    - EVENT_SOURCE_SYSTEM
+    - EVENT_SOURCE_USER
+    default: EVENT_SOURCE_UNSPECIFIED
+    description: "- EVENT_SOURCE_UNSPECIFIED: Default\n - EVENT_SOURCE_SYSTEM: Event is generated as a result of status change reported by edge node / application\n - EVENT_SOURCE_USER: Event is generated as a result of an user's configuration action"
+    title: Source of events
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  infoStorageVolumeReplicaStatus:
+    type: string
+    enum:
+    - STORAGE_VOLUME_REPLICA_STATUS_UNSPECIFIED
+    - STORAGE_VOLUME_REPLICA_STATUS_REBUILDING
+    - STORAGE_VOLUME_REPLICA_STATUS_ONLINE
+    - STORAGE_VOLUME_REPLICA_STATUS_FAILED
+    - STORAGE_VOLUME_REPLICA_STATUS_OFFLINE
+    - STORAGE_VOLUME_REPLICA_STATUS_STARTING
+    - STORAGE_VOLUME_REPLICA_STATUS_STOPPING
+    default: STORAGE_VOLUME_REPLICA_STATUS_UNSPECIFIED
+    description: "StorageVolumeReplicaStatus is a higher level status which combines replica and engine\n   status to show a simplified view of a replica rebuild state."
+  RunState:
+    type: string
+    enum:
+    - RUN_STATE_UNSPECIFIED
+    - RUN_STATE_ONLINE
+    - RUN_STATE_HALTED
+    - RUN_STATE_INIT
+    - RUN_STATE_REBOOTING
+    - RUN_STATE_OFFLINE
+    - RUN_STATE_UNKNOWN
+    - RUN_STATE_UNPROVISIONED
+    - RUN_STATE_PROVISIONED
+    - RUN_STATE_SUSPECT
+    - RUN_STATE_DOWNLOADING
+    - RUN_STATE_RESTARTING
+    - RUN_STATE_PURGING
+    - RUN_STATE_HALTING
+    - RUN_STATE_ERROR
+    - RUN_STATE_VERIFYING
+    - RUN_STATE_LOADING
+    - RUN_STATE_CREATING_VOLUME
+    - RUN_STATE_BOOTING
+    - RUN_STATE_MAINTENANCE_MODE
+    - RUN_STATE_START_DELAYED
+    - RUN_STATE_BASEOS_UPDATING
+    - RUN_STATE_PREPARING_POWEROFF
+    - RUN_STATE_POWERING_OFF
+    - RUN_STATE_PREPARED_POWEROFF
+    default: RUN_STATE_UNSPECIFIED
+    description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
+    title: RunState - On update, please update RunState_HttpRequest as well
+  SWState:
+    type: string
+    enum:
+    - SW_STATE_UNSPECIFIED
+    - SW_STATE_INITIAL
+    - SW_STATE_DOWNLOAD_IN_PROGRESS
+    - SW_STATE_DOWNLOADED
+    - SW_STATE_VERIFIED
+    - SW_STATE_INSTALLED
+    - SW_STATE_BOOTING
+    - SW_STATE_RUNNING
+    - SW_STATE_HALTING
+    - SW_STATE_HALTED
+    - SW_STATE_REFRESHING
+    - SW_STATE_PURGING
+    - SW_STATE_RESOLVING_TAG
+    - SW_STATE_RESOLVED_TAG
+    - SW_STATE_CREATING_VOLUME
+    - SW_STATE_CREATED_VOLUME
+    - SW_STATE_VERIFYING
+    - SW_STATE_LOADING
+    - SW_STATE_LOADED
+    - SW_STATE_AWAITNETWORKINSTANCE
+    default: SW_STATE_UNSPECIFIED
+    description: "- SW_STATE_RESOLVING_TAG: Prior to DOWNLOAD_STARTED we go through these:\nResolving an image tag\n - SW_STATE_RESOLVED_TAG: Tag has been resolved/failed\n - SW_STATE_CREATING_VOLUME: Prior to INSTALLED we go through these:\nVolume create in progress\n - SW_STATE_CREATED_VOLUME: Volume create done/failed\n - SW_STATE_VERIFYING: Verification in-progress\n - SW_STATE_LOADING: Loading blob in CAS\n - SW_STATE_LOADED: Loaded blob in CAS\n - SW_STATE_AWAITNETWORKINSTANCE: Wait for network instance"
+    title: State of EVE/Edge Application software
+  VolInstStatusSummaryMsg:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      deviceId:
+        type: string
+      runState:
+        $ref: '#/definitions/RunState'
+      createTime:
+        type: string
+        format: date-time
+      projectId:
+        type: string
+      type:
+        $ref: '#/definitions/VolumeInstanceType'
+      deviceState:
+        $ref: '#/definitions/SWState'
+      progressPercentage:
+        type: integer
+        format: int64
+      deviceName:
+        type: string
+      projectName:
+        type: string
+      edgeNodeClusterID:
+        type: string
+      clusterVolInstanceStatus:
+        $ref: '#/definitions/ClusterVolInstanceStatus'
+  infoStorageVolumeRobustness:
+    type: string
+    enum:
+    - STORAGE_VOLUME_ROBUSTNESS_UNSPECIFIED
+    - STORAGE_VOLUME_ROBUSTNESS_HEALTHY
+    - STORAGE_VOLUME_ROBUSTNESS_DEGRADED
+    - STORAGE_VOLUME_ROBUSTNESS_FAULTED
+    default: STORAGE_VOLUME_ROBUSTNESS_UNSPECIFIED
+    title: "StorageVolumeRobustness is the 'robustness' of a replicated csi-driver volume.\n Refer to: https://github.com/longhorn/longhorn-manager/blob/v1.6.2/k8s/pkg/apis/longhorn/v1beta1/volume.go#L25"
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

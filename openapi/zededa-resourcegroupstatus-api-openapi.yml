@@ -1,0 +1,779 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService ResourceGroupStatus API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: ResourceGroupStatus
+paths:
+  /v1/projects/id/{id}/status:
+    get:
+      summary: Get resource group status
+      description: Get the status (without security details) of a resource group record.
+      operationId: ResourceGroupStatus_GetResourceGroupStatusById
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/TagStatusMsg'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the resource group
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ResourceGroupStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/projects/name/{name}/status:
+    get:
+      summary: Get resource group status
+      description: Get the status (without security details) of a resource group record.
+      operationId: ResourceGroupStatus_GetResourceGroupStatusByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/TagStatusMsg'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        description: User defined name of the resource group, unique across the enterprise. Once resource group is created, name can’t be changed.
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ResourceGroupStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/projects/status:
+    get:
+      summary: Query resource groups status
+      description: Query the resource group status records.
+      operationId: ResourceGroupStatus_QueryResourceGroupStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/TagStatusListMsg'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        description: Only summary of the records required
+        in: query
+        required: false
+        type: boolean
+      - name: namePattern
+        description: Resource group name pattern to be matched.
+        in: query
+        required: false
+        type: string
+      - name: status
+        description: Resource group status to be matched.
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: type
+        description: "Resource group type to ne matched.\n\n - TAG_TYPE_UNSPECIFIED: Unspecified\n - TAG_TYPE_GENERIC: Generic resource group\n - TAG_TYPE_PROJECT: Project resource group\n - TAG_TYPE_AZURE: Project resource group\n - TAG_TYPE_DEPLOYMENT: Project with deployment"
+        in: query
+        required: false
+        type: string
+        enum:
+        - TAG_TYPE_UNSPECIFIED
+        - TAG_TYPE_GENERIC
+        - TAG_TYPE_PROJECT
+        - TAG_TYPE_AZURE
+        - TAG_TYPE_DEPLOYMENT
+        default: TAG_TYPE_UNSPECIFIED
+      - name: tags
+        description: Resource group type to be matched with tags.
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: fields
+        description: 'Fields to select: id, name, status'
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ResourceGroupStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/projects/status-config:
+    get:
+      summary: Query resource groups status and config
+      description: Query the resource group status and config records.
+      operationId: ResourceGroupStatus_QueryResourceGroupStatusConfig
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/TagsConfigStatus'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        description: Only summary of the records required
+        in: query
+        required: false
+        type: boolean
+      - name: namePattern
+        description: Resource group name pattern to be matched.
+        in: query
+        required: false
+        type: string
+      - name: status
+        description: Resource group status to be matched.
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: type
+        description: "Resource group type to ne matched.\n\n - TAG_TYPE_UNSPECIFIED: Unspecified\n - TAG_TYPE_GENERIC: Generic resource group\n - TAG_TYPE_PROJECT: Project resource group\n - TAG_TYPE_AZURE: Project resource group\n - TAG_TYPE_DEPLOYMENT: Project with deployment"
+        in: query
+        required: false
+        type: string
+        enum:
+        - TAG_TYPE_UNSPECIFIED
+        - TAG_TYPE_GENERIC
+        - TAG_TYPE_PROJECT
+        - TAG_TYPE_AZURE
+        - TAG_TYPE_DEPLOYMENT
+        default: TAG_TYPE_UNSPECIFIED
+      - name: tags
+        description: Resource group type to be matched with tags.
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: fields
+        description: 'Fields to select: id, name, status'
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - ResourceGroupStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+definitions:
+  tagConfigStatus:
+    type: object
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the resource group.
+        readOnly: true
+        pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+        uniqueItems: true
+      name:
+        type: string
+        description: User defined name of the resource group, unique across the enterprise. Once resource group is created, name can’t be changed.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      status:
+        $ref: '#/definitions/TagStatus'
+        description: Resource group status
+        readOnly: true
+      cloudPolicyType:
+        $ref: '#/definitions/PolicyType'
+        description: type of cloud policy
+      attestPolicyType:
+        $ref: '#/definitions/AttestPolicyType'
+        description: type of attestation policy
+      appPolicyId:
+        type: string
+        description: app policy Id
+      appPolicyName:
+        type: string
+        description: app policy name
+      networkPolicyId:
+        type: string
+        description: network policy Id
+      networkDeviceDefault:
+        type: boolean
+        description: flag to indicate if this is the default network instance for the device
+      edgeviewAllow:
+        type: boolean
+        description: edgeview is allowed or not for devices in project
+      edgeviewSessionCount:
+        type: integer
+        format: int64
+        description: total count of devices enabled with edgeview session
+      type:
+        $ref: '#/definitions/TagType'
+        description: Resource group type
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+        maxLength: 32
+        pattern: ^[^<%&?/\>]+$
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  Cursor:
+    type: object
+    properties:
+      pageToken:
+        type: string
+        description: Page Token
+      orderBy:
+        type: array
+        items:
+          type: string
+        description: OrderBy helps in sorting the list response
+      pageNum:
+        type: number
+        format: int64
+        description: Page Number
+      pageSize:
+        type: number
+        format: int64
+        description: Defines the page size
+      totalPages:
+        type: number
+        format: int64
+        description: Total number of pages to be fetched.
+    description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+    title: Cursor is used as filter in list operation.
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  TagStatusListMsg:
+    type: object
+    properties:
+      summaryByState:
+        $ref: '#/definitions/Summary'
+        description: Summary of filtered resource group records
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/TagStatusMsg'
+        description: List of filtered resource group records
+      next:
+        $ref: '#/definitions/Cursor'
+        description: Responded page details of filtered records
+      summaryByType:
+        $ref: '#/definitions/Summary'
+        description: Summary of filtered resource group records
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  Summary:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Summary description
+      total:
+        type: number
+        format: int64
+        description: Total
+      values:
+        type: object
+        additionalProperties:
+          type: integer
+          format: int64
+        description: 'Values: Map for storing <string, uint32>'
+    description: Summary is used to store the Summary details
+    title: Summary is used to store the Summary details
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  TagsConfigStatus:
+    type: object
+    properties:
+      summaryByState:
+        $ref: '#/definitions/Summary'
+        description: Summary of filtered resource group records
+      summaryByType:
+        $ref: '#/definitions/Summary'
+        description: Summary of filtered resource group records
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/tagConfigStatus'
+        description: List of filtered resource group records
+      totalCount:
+        type: integer
+        format: int32
+        description: total count of projects
+      next:
+        $ref: '#/definitions/Cursor'
+        description: Responded page details of filtered records
+  TagStatusMsg:
+    type: object
+    example:
+      id: d1125b0f-633d-459c-99c6-f47e7467cebc
+      name: my-test-project
+      status: TAG_STATUS_ACTIVE
+    properties:
+      id:
+        type: string
+        description: System defined universally unique Id of the resource group.
+        readOnly: true
+        pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+        uniqueItems: true
+      name:
+        type: string
+        description: User defined name of the resource group, unique across the enterprise. Once resource group is created, name can’t be changed.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      status:
+        $ref: '#/definitions/TagStatus'
+        description: Resource group status
+        readOnly: true
+      type:
+        $ref: '#/definitions/TagType'
+        description: Resource group type
+      edgeviewSessionCount:
+        type: integer
+        format: int64
+        description: total count of devices enabled with edgeview session
+    description: Resource group for edge gateway Base OS or for eedge applications.
+    title: Resource group detail
+  PolicyType:
+    type: string
+    enum:
+    - POLICY_TYPE_UNSPECIFIED
+    - POLICY_TYPE_APP
+    - POLICY_TYPE_AZURE
+    - POLICY_TYPE_AWS
+    - POLICY_TYPE_GCP
+    - POLICY_TYPE_MODULE
+    - POLICY_TYPE_ATTESTATION
+    - POLICY_TYPE_NETWORK
+    - POLICY_TYPE_CLUSTER
+    - POLICY_TYPE_EDGEVIEW
+    - POLICY_TYPE_LOC
+    - POLICY_TYPE_CONFIGURATION_LOCK
+    - POLICY_TYPE_PCR
+    - POLICY_TYPE_PORT_BASED_NETWORK_ACCESS_CONTROL
+    default: POLICY_TYPE_UNSPECIFIED
+    description: type of policy.
+  TagStatus:
+    type: string
+    enum:
+    - TAG_STATUS_UNSPECIFIED
+    - TAG_STATUS_ARCHIVE
+    - TAG_STATUS_ACTIVE
+    - TAG_STATUS_INACTIVE
+    - TAG_STATUS_INITIALIZED
+    - TAG_STATUS_FAILED
+    default: TAG_STATUS_UNSPECIFIED
+    description: "- TAG_STATUS_UNSPECIFIED: Tag Status : UNSPECIFIED\n - TAG_STATUS_ARCHIVE: Tag Status : ARCHIVE\n - TAG_STATUS_ACTIVE: Tag Status : ACTIVE\n - TAG_STATUS_INACTIVE: Tag Status : INACTIVE"
+    title: Resource group status
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  TagType:
+    type: string
+    enum:
+    - TAG_TYPE_UNSPECIFIED
+    - TAG_TYPE_GENERIC
+    - TAG_TYPE_PROJECT
+    - TAG_TYPE_AZURE
+    - TAG_TYPE_DEPLOYMENT
+    default: TAG_TYPE_UNSPECIFIED
+    description: "- TAG_TYPE_UNSPECIFIED: Unspecified\n - TAG_TYPE_GENERIC: Generic resource group\n - TAG_TYPE_PROJECT: Project resource group\n - TAG_TYPE_AZURE: Project resource group\n - TAG_TYPE_DEPLOYMENT: Project with deployment"
+    title: Resource group types
+  AttestPolicyType:
+    type: string
+    enum:
+    - ATTEST_POLICY_TYPE_UNSPECIFIED
+    - ATTEST_POLICY_TYPE_ACCEPT
+    - ATTEST_POLICY_TYPE_ENFORCE
+    default: ATTEST_POLICY_TYPE_UNSPECIFIED
+    description: " - ATTEST_POLICY_TYPE_ACCEPT: Do not enforce attestation. All devices are marked as successfully attested.\n - ATTEST_POLICY_TYPE_ENFORCE: Enforce attestation. Devices failing attestation are marked accordingly."
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

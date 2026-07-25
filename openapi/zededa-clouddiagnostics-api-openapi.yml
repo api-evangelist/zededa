@@ -1,0 +1,801 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService CloudDiagnostics API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: CloudDiagnostics
+paths:
+  /v1/cloud/healthreport:
+    get:
+      summary: Get Cloud services health report
+      description: Get Cloud services health report.
+      operationId: CloudDiagnostics_GetClusterHealthReport
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/HealthServiceResp'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      tags:
+      - CloudDiagnostics
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com/hc/en-us/articles/30323173611931-ZEDEDA-API-Overview
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+  /v1/cloud/ping:
+    get:
+      summary: Check Cloud reachability
+      description: Check Cloud reachability by sending a ping message to API gateway. API gateway will echo back either "pong" or the id specified.
+      operationId: CloudDiagnostics_checkClusterHealth
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PingMsgSendResp'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: pingId
+        in: query
+        required: false
+        type: string
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - CloudDiagnostics
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com/hc/en-us/articles/30323173611931-ZEDEDA-API-Overview
+  /v1/cloud/ping/id/{pingId}:
+    get:
+      summary: Check Cloud reachability
+      description: Check Cloud reachability by sending a ping message to API gateway. API gateway will echo back either "pong" or the id specified.
+      operationId: CloudDiagnostics_checkClusterHealth2
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PingMsgSendResp'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: pingId
+        in: path
+        required: true
+        type: string
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - CloudDiagnostics
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com/hc/en-us/articles/30323173611931-ZEDEDA-API-Overview
+  /v1/cloud/policies:
+    get:
+      summary: Query Cloud policies
+      description: Query policy records of latest version of Cloud policies.
+      operationId: CloudDiagnostics_QueryCloudPolicies
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PolicyDocVersionResp'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: all
+        in: query
+        required: false
+        type: boolean
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - CloudDiagnostics
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com/hc/en-us/articles/30323173611931-ZEDEDA-API-Overview
+    post:
+      summary: Create Cloud policy document
+      description: Create policy document
+      operationId: CloudDiagnostics_CreateCloudPolicyDocument
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PolicyDocVersionResp'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/PolicyDocVersion'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - CloudDiagnostics
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com/hc/en-us/articles/30323173611931-ZEDEDA-API-Overview
+  /v1/cloud/policies/id/{id}:
+    get:
+      summary: Get Cloud policy document
+      description: Get policy document for specific version of Cloud policy.
+      operationId: CloudDiagnostics_GetCloudPolicyDocument
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PolicyDocVersionResp'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - CloudDiagnostics
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com/hc/en-us/articles/30323173611931-ZEDEDA-API-Overview
+    delete:
+      summary: Delete Cloud policy specific version
+      description: Delete policy record for specific version of Cloud policy.
+      operationId: CloudDiagnostics_DeleteCloudPolicyDocument
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PolicyDocVersionResp'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - CloudDiagnostics
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com/hc/en-us/articles/30323173611931-ZEDEDA-API-Overview
+  /v1/cloud/policies/latest:
+    put:
+      summary: Update Cloud policy specific version
+      description: Update Cloud policy specific version
+      operationId: CloudDiagnostics_MarkCloudPolicyLatest
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/PolicyDocVersionResp'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/PolicyDocVersion'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - CloudDiagnostics
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com/hc/en-us/articles/30323173611931-ZEDEDA-API-Overview
+  /v1/cloud/version:
+    get:
+      summary: Get Cloud controller software version
+      description: Get Cloud controller software version.
+      operationId: CloudDiagnostics_GetClusterVersion
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/CloudVersionResp'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      tags:
+      - CloudDiagnostics
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com/hc/en-us/articles/30323173611931-ZEDEDA-API-Overview
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+  /v1/hello:
+    post:
+      summary: Check Cloud services health
+      description: Check Cloud services health by sending a hello name to microservice behind API Gateway. Microservice will echo back the name.
+      operationId: CloudDiagnostics_checkMicroserviceHealth
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/HelloResp'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/HelloName'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - CloudDiagnostics
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://help.zededa.com/hc/en-us/articles/30323173611931-ZEDEDA-API-Overview
+definitions:
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  HealthDesc:
+    type: object
+    properties:
+      hostName:
+        type: string
+      envName:
+        type: string
+      serviceName:
+        type: string
+      serviceInstance:
+        type: string
+      briefHealth:
+        $ref: '#/definitions/BriefHealth'
+  Summary:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Summary description
+      total:
+        type: number
+        format: int64
+        description: Total
+      values:
+        type: object
+        additionalProperties:
+          type: integer
+          format: int64
+        description: 'Values: Map for storing <string, uint32>'
+    description: Summary is used to store the Summary details
+    title: Summary is used to store the Summary details
+  HelloResp:
+    type: object
+    properties:
+      response:
+        type: string
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  HealthServiceResp:
+    type: object
+    properties:
+      healthService:
+        $ref: '#/definitions/HealthServiceSubType'
+      hresult:
+        $ref: '#/definitions/ZsrvResponse'
+      healthDesc:
+        type: array
+        items:
+          $ref: '#/definitions/HealthDesc'
+  Cursor:
+    type: object
+    properties:
+      pageToken:
+        type: string
+        description: Page Token
+      orderBy:
+        type: array
+        items:
+          type: string
+        description: OrderBy helps in sorting the list response
+      pageNum:
+        type: number
+        format: int64
+        description: Page Number
+      pageSize:
+        type: number
+        format: int64
+        description: Defines the page size
+      totalPages:
+        type: number
+        format: int64
+        description: Total number of pages to be fetched.
+    description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+    title: Cursor is used as filter in list operation.
+  CloudVersion:
+    type: object
+    properties:
+      comp:
+        type: string
+      ver:
+        type: string
+  HealthServiceSubType:
+    type: string
+    enum:
+    - Publisher
+    - Subscriber
+    default: Publisher
+  PolicyDocVersionResp:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/ZsrvResponse'
+      pinfo:
+        $ref: '#/definitions/PolicyDocVersion'
+      plist:
+        $ref: '#/definitions/PolicyDocVersionList'
+  ObjectRevision:
+    type: object
+    properties:
+      prev:
+        type: string
+        description: Previous
+      curr:
+        type: string
+        description: Current Database version of the record
+      createdAt:
+        type: object
+        format: date-time
+        description: The time, in milliseconds since the epoch, when the record was created.
+      createdBy:
+        type: string
+        description: 'User data: Created By'
+      updatedAt:
+        type: object
+        format: date-time
+        description: The time, in milliseconds since the epoch, when the record was last updated.
+      updatedBy:
+        type: string
+        description: 'User data: Updated By'
+    description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+    title: ObjectRevision is used to store the user information.
+    required:
+    - curr
+    - createdAt
+    - createdBy
+    - updatedAt
+    - updatedBy
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  PingMsgSendResp:
+    type: object
+    properties:
+      pingId:
+        type: string
+        format: int64
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  PolicyDocVersionList:
+    type: object
+    properties:
+      summary:
+        $ref: '#/definitions/Summary'
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/PolicyDocVersion'
+      next:
+        $ref: '#/definitions/Cursor'
+  PolicyDocVersion:
+    type: object
+    properties:
+      policy:
+        type: string
+      version:
+        type: string
+      fileURL:
+        type: string
+      revision:
+        $ref: '#/definitions/ObjectRevision'
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  BriefHealth:
+    type: object
+    properties:
+      serviceHealthStatus:
+        type: string
+  HelloName:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      encryptedSecrets:
+        type: object
+        additionalProperties:
+          type: string
+      cryptoKey:
+        type: string
+  CloudVersionResp:
+    type: object
+    properties:
+      version:
+        $ref: '#/definitions/CloudVersion'
+      result:
+        $ref: '#/definitions/ZsrvResponse'
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

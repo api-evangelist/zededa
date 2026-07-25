@@ -1,0 +1,3310 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService EdgeNodeStatus API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: EdgeNodeStatus
+paths:
+  /v1/devices/id/{id}/status:
+    get:
+      summary: Get edge node status
+      description: Get the status of an edge node as reported by the edge node itself
+      operationId: EdgeNodeStatus_GetEdgeNodeStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DeviceStatusMsg'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/id/{id}/status/edgeview:
+    get:
+      summary: Get edge node edgeview status
+      description: Get the edgeview status of an edge node as reported by the edge node itself
+      operationId: EdgeNodeStatus_GetEdgeNodeEdgeviewStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DeviceRawMetrics'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/id/{id}/status/info:
+    get:
+      summary: Get edge node info
+      description: Get the info of an edge node as reported by the edge node itself
+      operationId: EdgeNodeStatus_GetEdgeNodeInfo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DeviceInfoMsg'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/id/{id}/status/metrics/raw:
+    get:
+      summary: Get edge node raw status
+      description: Get the raw status of an edge node as reported by the edge node itself
+      operationId: EdgeNodeStatus_GetEdgeNodeRawStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DeviceRawMetrics'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/id/{objid}/events:
+    get:
+      summary: Get edge node events by id
+      description: Get configuration and status events of an edge node by id.
+      operationId: EdgeNodeStatus_GetEdgeNodeEvents
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/EventQueryResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: objid
+        description: Object id
+        in: path
+        required: true
+        type: string
+      - name: startTime
+        description: start time in timestamp
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: endTime
+        description: end time
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: severity
+        description: severity
+        in: query
+        required: false
+        type: string
+      - name: resource
+        description: resource
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/id/{objid}/timeSeries/{mType}:
+    get:
+      summary: Get edge node resource usage timeline
+      description: Get the resource usage timeline of an edge node
+      operationId: EdgeNodeStatus_GetEdgeNodeResourceMetricsById
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/MetricQueryResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: objid
+        in: path
+        required: true
+        type: string
+      - name: mType
+        in: path
+        required: true
+        type: string
+        enum:
+        - UNSPECIFIED
+        - CPU_TOTAL
+        - CPU_USAGE
+        - MEMORY_TOTAL
+        - MEMORY_UTILIZATION
+        - NETWORK_TOTAL
+        - NETWORK_RATES
+        - EVENTS_COUNT
+        - STORAGE_UTILIZATION
+        - STORAGE_IO_ZPOOL
+        - STORAGE_IO_ZVOL
+      - name: startTime
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: endTime
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: interval
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/name/{name}/status:
+    get:
+      summary: Get edge node status
+      description: Get the status of an edge node as reported by the edge node itself
+      operationId: EdgeNodeStatus_GetEdgeNodeStatusByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DeviceStatusMsg'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/name/{name}/status/edgeview:
+    get:
+      summary: Get edge node edgeview status by edge node name
+      description: Get the edgeview status of an edge node as reported by the edge node itself
+      operationId: EdgeNodeStatus_GetEdgeNodeEdgeviewStatusByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DeviceRawMetrics'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/name/{name}/status/info:
+    get:
+      summary: Get edge node info
+      description: Get the info of an edge node as reported by the edge node itself
+      operationId: EdgeNodeStatus_GetEdgeNodeInfoByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DeviceInfoMsg'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/name/{name}/status/metrics/raw:
+    get:
+      summary: Get edge node raw status
+      description: Get the raw status of an edge node as reported by the edge node itself
+      operationId: EdgeNodeStatus_GetEdgeNodeRawStatusByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DeviceRawMetrics'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/name/{objname}/events:
+    get:
+      summary: Get edge node events by id
+      description: Get configuration and status events of an edge node by id.
+      operationId: EdgeNodeStatus_GetEdgeNodeEventsByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/EventQueryResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: objname
+        description: Object name
+        in: path
+        required: true
+        type: string
+      - name: startTime
+        description: start time in timestamp
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: endTime
+        description: end time
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: severity
+        description: severity
+        in: query
+        required: false
+        type: string
+      - name: resource
+        description: resource
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/name/{objname}/timeSeries/{mType}:
+    get:
+      summary: Get edge node resource usage timeline
+      description: Get the resource usage timeline of an edge node
+      operationId: EdgeNodeStatus_GetEdgeNodeResourceMetricsByName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/MetricQueryResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. The API gateway did not process the request because the requested resource could not be found.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: objname
+        in: path
+        required: true
+        type: string
+      - name: mType
+        in: path
+        required: true
+        type: string
+        enum:
+        - UNSPECIFIED
+        - CPU_TOTAL
+        - CPU_USAGE
+        - MEMORY_TOTAL
+        - MEMORY_UTILIZATION
+        - NETWORK_TOTAL
+        - NETWORK_RATES
+        - EVENTS_COUNT
+        - STORAGE_UTILIZATION
+        - STORAGE_IO_ZPOOL
+        - STORAGE_IO_ZVOL
+      - name: startTime
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: endTime
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: interval
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+  /v1/devices/status:
+    get:
+      summary: Query status of edge nodes
+      description: Query the status of edge nodes as reported by the edge nodes themselves
+      operationId: EdgeNodeStatus_QueryEdgeNodeStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/DeviceStatusListMsg'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '504':
+          description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: summary
+        in: query
+        required: false
+        type: boolean
+      - name: runState
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - ONLINE
+        - HALTED
+        - INIT
+        - REBOOTING
+        - OFFLINE
+        - UNKNOWN
+        - UNPROVISIONED
+        - PROVISIONED
+        - SUSPECT
+        - DOWNLOADING
+        - RESTARTING
+        - PURGING
+        - HALTING
+        - ERROR
+        - VERIFYING
+        - LOADING
+        - CREATING_VOLUME
+        - BOOTING
+        - MAINTENANCE_MODE
+        - START_DELAYED
+        - BASEOS_UPDATING
+        - PREPARING_POWEROFF
+        - POWERING_OFF
+        - PREPARED_POWEROFF
+        default: UNSPECIFIED
+      - name: projectName
+        in: query
+        required: false
+        type: string
+      - name: load
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - FREE
+        - MODERATE
+        - HEAVY
+        default: UNSPECIFIED
+      - name: namePattern
+        in: query
+        required: false
+        type: string
+      - name: tags
+        in: query
+        required: false
+        type: string
+      - name: projectNamePattern
+        in: query
+        required: false
+        type: string
+      - name: deviceName
+        in: query
+        required: false
+        type: string
+      - name: next.pageToken
+        description: Page Token
+        in: query
+        required: false
+        type: string
+      - name: next.orderBy
+        description: OrderBy helps in sorting the list response
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: next.pageNum
+        description: Page Number
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.pageSize
+        description: Defines the page size
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: next.totalPages
+        description: Total number of pages to be fetched.
+        in: query
+        required: false
+        type: number
+        format: int64
+      - name: fields
+        description: 'Fields to select for composite api: id, name, title, serialNo, projectId, projectName, isEveLatest, appInstCount, runState, adminState.'
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: adminState
+        description: " - CREATED: Entity Created in the controller\n - DELETED: Entity Deleted in the controller\n - ACTIVE: Entity Activated in the controller\n - INACTIVE: Entity Deactivated in the controller\n - REGISTERED: Specific to Edge-node - Edge-node Registered with the controller\n - ARCHIVED: Entity Archived in the controller"
+        in: query
+        required: false
+        type: string
+        enum:
+        - UNSPECIFIED
+        - CREATED
+        - DELETED
+        - ACTIVE
+        - INACTIVE
+        - REGISTERED
+        - ARCHIVED
+        default: UNSPECIFIED
+      - name: eveLtsSupportType
+        description: filter devices by eve version support type i.e LTS OR NON_LTS
+        in: query
+        required: false
+        type: string
+        enum:
+        - SUPPORT_TYPE_UNSPECIFIED
+        - SUPPORT_TYPE_LTS
+        - SUPPORT_TYPE_NON_LTS
+        default: SUPPORT_TYPE_UNSPECIFIED
+      - name: includeInterfaces
+        description: flag to indicate whether to include network interface details in the response
+        in: query
+        required: false
+        type: boolean
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - EdgeNodeStatus
+      externalDocs:
+        description: ZEDEDA Product Documentation
+        url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
+definitions:
+  DevDataSecAtRest:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/DeviceDataSecurityAtRestStatus'
+      name:
+        type: string
+      errInfo:
+        $ref: '#/definitions/DeviceError'
+  Summary:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Summary description
+      total:
+        type: number
+        format: int64
+        description: Total
+      values:
+        type: object
+        additionalProperties:
+          type: integer
+          format: int64
+        description: 'Values: Map for storing <string, uint32>'
+    description: Summary is used to store the Summary details
+    title: Summary is used to store the Summary details
+  NetworkStatus:
+    type: object
+    properties:
+      up:
+        type: boolean
+        description: Network Status flag
+      macAddr:
+        type: string
+        description: mac Address
+      ifName:
+        type: string
+        description: ifName
+      ipAddrs:
+        type: array
+        items:
+          type: string
+        description: Array of IP addresses
+      defaultRouters:
+        type: array
+        items:
+          type: string
+        description: Default Routers
+      dns:
+        type: object
+        $ref: '#/definitions/DNSInfo'
+        description: DNS Configuration
+      location:
+        type: object
+        $ref: '#/definitions/GeoLocation'
+        description: Geo Location Details
+      uplink:
+        type: boolean
+        description: Uplink flag
+      proxy:
+        type: object
+        $ref: '#/definitions/NetProxyStatus'
+        description: Network Proxy status
+      errInfo:
+        type: object
+        $ref: '#/definitions/DeviceError'
+        description: Network error details
+      gpsLocation:
+        type: object
+        $ref: '#/definitions/GPSLocation'
+        description: Location from GNSS receivers on WWAN type adapters
+      cellular:
+        type: object
+        $ref: '#/definitions/CellularStatus'
+        description: Cellular network status
+      mtu:
+        type: integer
+        format: int64
+        description: Network MTU
+      pnacStatus:
+        $ref: '#/definitions/PNACPortStatus'
+        description: PNAC 802.1X authentication status for this port
+        title: PNAC (802.1X) authentication status for this port
+      configSource:
+        $ref: '#/definitions/commonPortConfigSource'
+        description: Identifies the source of this network port configuration
+    description: NetworkStatus is used to store the Network status
+    title: NetworkStatus is used to store the Network Status
+  GeoLocation:
+    type: object
+    properties:
+      underlayIP:
+        type: string
+        description: Single IP address, either in IPv4 or in IPv6 format
+      hostname:
+        type: string
+        description: Host name
+      city:
+        type: string
+        description: City
+      region:
+        type: string
+        description: Region
+      country:
+        type: string
+        description: Country code consisting of 2 capital letters as per ISO 3166-1 alpha2 standard
+      loc:
+        type: string
+        description: Ordered pair of (latitude, longitude) separated by comma (,). Latitude is the horizontal component used for geographic positioning; it is the angle between 0° (the equator) and ±90° (north or south) at the poles measured in decimal degrees. It is the first value in an ordered pair. A negative number denotes a location south of the equator; a positive number is north. Longitude is the vertical component used for geographic positioning; it is the angle between 0° (the Prime Meridian) and ±180° (westward or eastward) measured in decimal degrees. It is the second number in an ordered pair. A negative number indicates a location west of Greenwich, England; a positive number east.
+      org:
+        type: string
+        description: The name of the recipient, firm, or company at this geographical location.
+      postal:
+        type: string
+        description: Postal code (ZIP code for USA) of the geographical location
+      latlong:
+        type: string
+        description: 'Deprecated field: comma, separated lat, long'
+      freeloc:
+        type: string
+        description: Free formatted location string
+    description: Geographic location of an edge node determined by a variety of data collection mechanisms (e.g. network routing addresses or internal GPS devices).
+    title: Geographic location of an edge node
+  EventQueryResponseItem:
+    type: object
+    properties:
+      user:
+        type: string
+        description: User name
+      project:
+        type: string
+        description: project name
+      device:
+        type: string
+        description: device name
+      instance:
+        type: string
+        description: instance name
+      severity:
+        type: string
+        description: 'severity: FIXME: should be ENUM'
+      description:
+        type: string
+        description: Event description
+      timestamp:
+        type: object
+        format: date-time
+        description: event timestamp
+      source:
+        type: object
+        $ref: '#/definitions/EventSource'
+        description: source
+      resource:
+        type: string
+        description: Event resources
+      eventType:
+        type: string
+        description: Event type
+      tags:
+        type: array
+        items:
+          type: string
+        description: Event tags
+      resourceName:
+        type: string
+        description: Event resources
+      jsonData:
+        type: object
+        description: Event resources
+      clusterInstance:
+        type: string
+        description: clusterInstance name
+    description: Event query response item payload
+    title: Event query response item payload detail
+  ECCMemoryControllerInfo:
+    type: object
+    properties:
+      controllerName:
+        type: string
+      ceCount:
+        type: string
+        format: int64
+      ueCount:
+        type: string
+        format: int64
+      ranks:
+        type: array
+        items:
+          $ref: '#/definitions/DimmRankInfo'
+    title: Info per memory controller in the system
+  ZCellularOperatingState:
+    type: string
+    enum:
+    - Z_CELLULAR_OPERATING_STATE_UNSPECIFIED
+    - Z_CELLULAR_OPERATING_STATE_OFFLINE
+    - Z_CELLULAR_OPERATING_STATE_RADIO_OFF
+    - Z_CELLULAR_OPERATING_STATE_ONLINE
+    - Z_CELLULAR_OPERATING_STATE_ONLINE_AND_CONNECTED
+    - Z_CELLULAR_OPERATING_STATE_UNRECOGNIZED
+    default: Z_CELLULAR_OPERATING_STATE_UNSPECIFIED
+  NetworkProxyProto:
+    type: string
+    enum:
+    - NETWORK_PROXY_PROTO_HTTP
+    - NETWORK_PROXY_PROTO_HTTPS
+    - NETWORK_PROXY_PROTO_SOCKS
+    - NETWORK_PROXY_PROTO_FTP
+    - NETWORK_PROXY_PROTO_OTHER
+    default: NETWORK_PROXY_PROTO_HTTP
+  ECCMemoryReportStatus:
+    type: string
+    enum:
+    - ECC_MEMORY_REPORT_STATUS_NOT_APPLICABLE
+    - ECC_MEMORY_REPORT_STATUS_PASS
+    - ECC_MEMORY_REPORT_STATUS_DEGRADED
+    - ECC_MEMORY_REPORT_STATUS_FAILED
+    default: ECC_MEMORY_REPORT_STATUS_NOT_APPLICABLE
+  DeviceDataSecurityAtRestStatus:
+    type: string
+    enum:
+    - DEVICE_DATA_SECURITY_AT_REST_UNKNOWN
+    - DEVICE_DATA_SECURITY_AT_REST_DISABLED
+    - DEVICE_DATA_SECURITY_AT_REST_ENABLED
+    - DEVICE_DATA_SECURITY_AT_REST_ERROR
+    default: DEVICE_DATA_SECURITY_AT_REST_UNKNOWN
+  MetricQueryResponseItem:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        format: date-time
+      values:
+        type: array
+        items:
+          type: number
+          format: double
+  NtpSource:
+    type: object
+    properties:
+      authenticated:
+        type: boolean
+      reachable:
+        type: boolean
+      reachability:
+        type: integer
+        format: int64
+      state:
+        $ref: '#/definitions/NtpSourceState'
+      mode:
+        $ref: '#/definitions/NtpSourceMode'
+      hostname:
+        type: string
+      srcAddr:
+        type: string
+      srcPort:
+        type: integer
+        format: int64
+      dstAddr:
+        type: string
+      dstPort:
+        type: integer
+        format: int64
+      leap:
+        type: integer
+        format: int64
+      stratum:
+        type: integer
+        format: int64
+      precision:
+        type: integer
+        format: int64
+      refId:
+        type: string
+      refTime:
+        type: string
+        format: date-time
+      poll:
+        type: integer
+        format: int32
+      flags:
+        type: integer
+        format: int64
+      offset:
+        type: number
+        format: double
+      delay:
+        type: number
+        format: double
+      dispersion:
+        type: number
+        format: double
+      jitter:
+        type: number
+        format: double
+      rootDelay:
+        type: number
+        format: double
+      rootDisp:
+        type: number
+        format: double
+  NetProxyStatus:
+    type: object
+    properties:
+      networkProxy:
+        type: boolean
+        description: Use pacfile (Auto discover or manual upload)
+        title: Enable, the proxy configuration coming from network
+      proxies:
+        type: array
+        items:
+          $ref: '#/definitions/NetProxyServer'
+        description: protocol level proxies
+        title: protocol level proxies
+      exceptions:
+        type: string
+        description: exceptions
+      pacfile:
+        type: string
+        description: proxy configuration in a pacfile
+        title: proxy configuration in a pacfile
+      networkProxyURL:
+        type: string
+        description: Network Proxy URL
+        title: Direct URL for wpad.dat download
+      wpadProxyURL:
+        type: string
+        description: WPAD Proxy URL
+    description: NetProxyStatus is used to store the proxy configurations
+    title: NetProxyStatus is used to store the proxy configurations
+  RadioAccessTechnology:
+    type: string
+    enum:
+    - RADIO_ACCESS_TECHNOLOGY_UNSPECIFIED
+    - RADIO_ACCESS_TECHNOLOGY_GSM
+    - RADIO_ACCESS_TECHNOLOGY_UMTS
+    - RADIO_ACCESS_TECHNOLOGY_LTE
+    - RADIO_ACCESS_TECHNOLOGY_5GNR
+    default: RADIO_ACCESS_TECHNOLOGY_UNSPECIFIED
+    description: " - RADIO_ACCESS_TECHNOLOGY_GSM: Global System for Mobile Communications (2G).\n - RADIO_ACCESS_TECHNOLOGY_UMTS: Universal Mobile Telecommunications System (3G).\n - RADIO_ACCESS_TECHNOLOGY_LTE: Long Term Evolution (4G).\n - RADIO_ACCESS_TECHNOLOGY_5GNR: 5G New Radio."
+  Capabilities:
+    type: object
+    properties:
+      HWAssistedVirtualization:
+        type: boolean
+        title: VMX/SVM for amd64 or Arm virtualization extensions for arm64
+      IOVirtualization:
+        type: boolean
+        title: I/O Virtualization support
+  LTEAdapter:
+    type: object
+    properties:
+      simName:
+        type: string
+        description: Name of SIM card.
+      cellModuleName:
+        type: string
+        description: Name of Cell Module
+      imsi:
+        type: string
+        description: imsi of the SIM
+      iccid:
+        type: string
+        description: iccid of the SIM
+      simcardState:
+        type: string
+        $ref: '#/definitions/SimcardState'
+        description: State of SimCard
+      imei:
+        type: string
+        description: IMEI of Cell Radio.
+      firmwareVersion:
+        type: string
+        description: Firmware Version of Cell Radio.
+    description: Details of LTE Adapter
+    title: LTE Adapter
+  NtpSourceState:
+    type: string
+    enum:
+    - NTP_SOURCE_STATE_UNSPECIFIED
+    - NTP_SOURCE_STATE_SYNC
+    - NTP_SOURCE_STATE_UNREACH
+    - NTP_SOURCE_STATE_FALSETICKER
+    - NTP_SOURCE_STATE_JITTERY
+    - NTP_SOURCE_STATE_CANDIDATE
+    - NTP_SOURCE_STATE_OUTLIER
+    default: NTP_SOURCE_STATE_UNSPECIFIED
+    description: 'Enum for describing the NTP source state, see chrony client
+
+      sources https://gitlab.com/chrony/chrony/-/blob/master/client.c
+
+      and its output of the command ''sources''.'
+  DeviceSWSubStatus:
+    type: string
+    enum:
+    - DEVICE_SW_SUB_STATUS_UNSPECIFIED
+    - DEVICE_SW_SUB_STATUS_DOWNLOAD_IN_PROGRESS
+    - DEVICE_SW_SUB_STATUS_VERIFY_IN_PROGRESS
+    - DEVICE_SW_SUB_STATUS_UPDATE_INITIALIZING
+    - DEVICE_SW_SUB_STATUS_UPDATE_REBOOTING
+    - DEVICE_SW_SUB_STATUS_UPDATE_TESTING
+    - DEVICE_SW_SUB_STATUS_UPDATE_NEED_TEST_CONFIRM
+    - DEVICE_SW_SUB_STATUS_UPDATE_DEFERRED
+    default: DEVICE_SW_SUB_STATUS_UNSPECIFIED
+  DeviceInfo:
+    type: object
+    properties:
+      machineArch:
+        type: string
+      cpuArch:
+        type: string
+      platform:
+        type: string
+      nCpu:
+        type: integer
+        format: int64
+      memMB:
+        type: string
+        format: uint64
+      storageMB:
+        type: string
+        format: uint64
+  StorageDiskInfo:
+    type: object
+    properties:
+      diskName:
+        type: string
+      wwn:
+        type: string
+      serialNumber:
+        type: string
+      model:
+        type: string
+      collectorErrors:
+        type: string
+      smartAttr:
+        type: array
+        items:
+          $ref: '#/definitions/SmartAttr'
+  MemorySummary:
+    type: object
+    properties:
+      TotalMB:
+        type: number
+        format: double
+        description: Total memory for the device in MBs
+      UsedMB:
+        type: number
+        format: double
+        description: Total memory used by the device in MBs within allocated memory
+      AllocatedMB:
+        type: number
+        format: double
+        description: Total allocated memory in MBs
+    description: Memory Summary
+    title: Memory Summary
+  EventSource:
+    type: string
+    enum:
+    - EVENT_SOURCE_UNSPECIFIED
+    - EVENT_SOURCE_SYSTEM
+    - EVENT_SOURCE_USER
+    default: EVENT_SOURCE_UNSPECIFIED
+    description: "- EVENT_SOURCE_UNSPECIFIED: Default\n - EVENT_SOURCE_SYSTEM: Event is generated as a result of status change reported by edge node / application\n - EVENT_SOURCE_USER: Event is generated as a result of an user's configuration action"
+    title: Source of events
+  DeviceInfoMsg:
+    type: object
+    properties:
+      name:
+        type: string
+      id:
+        type: string
+      adminState:
+        $ref: '#/definitions/AdminState'
+      runState:
+        $ref: '#/definitions/RunState'
+      upTime:
+        type: string
+        format: date-time
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+        title: deprecated = 6;
+        maxLength: 32
+        pattern: ^[^<%&?/\>]+$
+      lastUpdate:
+        type: string
+        format: date-time
+      bootTime:
+        type: string
+        format: date-time
+      netStatusList:
+        type: array
+        items:
+          $ref: '#/definitions/NetworkStatus'
+      dns:
+        $ref: '#/definitions/DNSInfo'
+      ioStatusList:
+        type: array
+        items:
+          $ref: '#/definitions/IoBundleStatus'
+      storageList:
+        type: array
+        items:
+          $ref: '#/definitions/StorageStatus'
+      blobList:
+        type: array
+        items:
+          $ref: '#/definitions/BlobStatus'
+      netCounterList:
+        type: array
+        items:
+          $ref: '#/definitions/NetworkCounters'
+      hostName:
+        type: string
+      swInfo:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceSWInfo'
+      zcCounters:
+        type: array
+        items:
+          $ref: '#/definitions/ZedcloudCounters'
+      rawStatus:
+        type: string
+      Memory:
+        $ref: '#/definitions/MemorySummary'
+        description: memory - OBSOLETE. Use memorySummary instead.
+      Storage:
+        $ref: '#/definitions/StorageSummary'
+      minfo:
+        $ref: '#/definitions/ZManufacturerInfo'
+      dinfo:
+        $ref: '#/definitions/DeviceInfo'
+      Cpu:
+        $ref: '#/definitions/CpuSummary'
+      lastRebootReason:
+        type: string
+      lastRebootTime:
+        type: string
+        format: date-time
+      dataSecInfo:
+        type: array
+        items:
+          $ref: '#/definitions/DevDataSecAtRest'
+      devError:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceError'
+      projectId:
+        type: string
+      title:
+        type: string
+      attestState:
+        $ref: '#/definitions/AttestState'
+      deviceRebootReason:
+        $ref: '#/definitions/DeviceBootReason'
+      clusterID:
+        type: string
+        description: System defined universally unique clusterInstance ID, unique across the enterprise.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      memorySummary:
+        $ref: '#/definitions/DeviceMemorySummary'
+        description: Device memory Info
+      capabilities:
+        $ref: '#/definitions/Capabilities'
+        description: Edge node virtualization capabilities.
+        title: Information about hardware capabilities
+      debugKnob:
+        type: boolean
+        title: debug knob expiry time
+      debugKnobExpiryTime:
+        type: string
+        format: date-time
+      physicalStorage:
+        type: array
+        items:
+          $ref: '#/definitions/PhysicalStorage'
+      zpoolMetrics:
+        $ref: '#/definitions/StorageDeviceMetrics'
+        description: Last received counters for zpool metrics.
+      cellularMetrics:
+        type: array
+        items:
+          $ref: '#/definitions/CellularMetrics'
+        description: Last received cellular metrics.
+      ntpSources:
+        $ref: '#/definitions/NtpSources'
+        description: List of peers describing to which NTP daemon (e.g. chronyd) is synchronized on EVE side
+      optionalCapabilities:
+        $ref: '#/definitions/OptionalCapabilities'
+        description: Optional capabilities of the device
+      clusterNodeStatus:
+        $ref: '#/definitions/ClusterNodeStatus'
+        description: Cluster node status
+      apiCapability:
+        $ref: '#/definitions/infoAPICapability'
+        title: API Capabilities
+      memoryReport:
+        $ref: '#/definitions/ECCMemoryReport'
+      hardwareInfo:
+        $ref: '#/definitions/HardwareInfo'
+      memoryReportStatus:
+        $ref: '#/definitions/ECCMemoryReportStatus'
+      enrolledCerts:
+        type: array
+        items:
+          $ref: '#/definitions/EnrolledCertInfo'
+        description: Certificates enrolled via SCEP on the device
+        title: Certificates enrolled via SCEP
+      pnacMetrics:
+        type: array
+        items:
+          $ref: '#/definitions/PNACMetricInfo'
+        description: PNAC 802.1X authentication metrics per network port
+        title: PNAC (802.1X) authentication metrics per port
+  PNACSupplicantState:
+    type: string
+    enum:
+    - PNAC_SUPPLICANT_STATE_UNSPECIFIED
+    - PNAC_SUPPLICANT_STATE_DISCONNECTED
+    - PNAC_SUPPLICANT_STATE_CONNECTING
+    - PNAC_SUPPLICANT_STATE_AUTHENTICATING
+    - PNAC_SUPPLICANT_STATE_AUTHENTICATED
+    - PNAC_SUPPLICANT_STATE_FAILED
+    - PNAC_SUPPLICANT_STATE_HELD
+    default: PNAC_SUPPLICANT_STATE_UNSPECIFIED
+    description: "PNACSupplicantState describes the 802.1X supplicant state for PNAC.\n\n - PNAC_SUPPLICANT_STATE_DISCONNECTED: Supplicant is idle or link is down; no authentication in progress.\n - PNAC_SUPPLICANT_STATE_CONNECTING: Link is up and the supplicant is initiating authentication.\n - PNAC_SUPPLICANT_STATE_AUTHENTICATING: Active EAP authentication exchange is in progress.\n - PNAC_SUPPLICANT_STATE_AUTHENTICATED: Authentication completed successfully; port is authorized.\n - PNAC_SUPPLICANT_STATE_FAILED: Authentication failed and access was not granted.\n - PNAC_SUPPLICANT_STATE_HELD: Supplicant is in a held or backoff state following repeated failures."
+  OptionalCapabilities:
+    type: object
+    properties:
+      hvTypeKubevirt:
+        type: boolean
+        title: Virtualization type Kubevirt
+      etcdSnapshot:
+        type: boolean
+        title: Device supports etcd snapshots (e.g. eve-k flavor)
+  StorageStatus:
+    type: object
+    properties:
+      name:
+        type: string
+      mountPath:
+        type: string
+      sizeMB:
+        type: string
+        format: uint64
+  EnrolledCertStatus:
+    type: string
+    enum:
+    - ENROLLED_CERT_STATUS_UNSPECIFIED
+    - ENROLLED_CERT_STATUS_AVAILABLE
+    - ENROLLED_CERT_STATUS_PENDING
+    - ENROLLED_CERT_STATUS_RENEWAL_PENDING
+    - ENROLLED_CERT_STATUS_EXPIRED
+    - ENROLLED_CERT_STATUS_REVOKED
+    - ENROLLED_CERT_STATUS_ENROLLMENT_FAILED
+    - ENROLLED_CERT_STATUS_RENEWAL_FAILED
+    - ENROLLED_CERT_STATUS_INVALID_CONFIG
+    default: ENROLLED_CERT_STATUS_UNSPECIFIED
+    description: "Certificate lifecycle and availability status as reported by the device.\n\n - ENROLLED_CERT_STATUS_AVAILABLE: Certificate is present, valid, and usable for authentication.\n - ENROLLED_CERT_STATUS_PENDING: Certificate enrollment is in progress and not yet complete.\n - ENROLLED_CERT_STATUS_RENEWAL_PENDING: Certificate is present and still valid, but a renewal request\nis in progress and not yet completed.\n - ENROLLED_CERT_STATUS_EXPIRED: Certificate has expired (the current time is past notAfter).\nRenewal may have failed; see err for related errors.\n - ENROLLED_CERT_STATUS_REVOKED: Certificate has been revoked or is otherwise considered invalid.\n - ENROLLED_CERT_STATUS_ENROLLMENT_FAILED: Certificate enrollment failed and no valid certificate is available.\n - ENROLLED_CERT_STATUS_RENEWAL_FAILED: A certificate is currently present but the most recent renewal attempt failed.\n - ENROLLED_CERT_STATUS_INVALID_CONFIG: Certificate configuration is invalid or malformed, preventing enrollment or renewal."
+  NtpSources:
+    type: object
+    properties:
+      source:
+        type: array
+        items:
+          $ref: '#/definitions/NtpSource'
+  IoMemberStatus:
+    type: object
+    properties:
+      name:
+        type: string
+        description: IoBundle Member name
+      ioAddress:
+        $ref: '#/definitions/IoAddresses'
+        description: IO addresses of the member. Each address corresponds to the member in the members array
+  ClusterNodeStatus:
+    type: object
+    properties:
+      age:
+        type: integer
+        format: int64
+      internalIP:
+        type: string
+      conditions:
+        type: string
+      nodeType:
+        $ref: '#/definitions/ClusterNodeType'
+  EnrolledCertInfo:
+    type: object
+    properties:
+      certEnrollmentProfileName:
+        type: string
+        description: Certificate enrollment profile name used to obtain this certificate
+      subject:
+        $ref: '#/definitions/CertDistinguishedName'
+        description: Subject distinguished name (DN) of the certificate.
+      issuer:
+        $ref: '#/definitions/CertDistinguishedName'
+        description: Issuer distinguished name (DN) of the certificate.
+      sanDns:
+        type: array
+        items:
+          type: string
+        description: DNS names from SAN
+      sanIp:
+        type: array
+        items:
+          type: string
+        description: IP addresses from SAN
+      sanUri:
+        type: array
+        items:
+          type: string
+        description: URIs from SAN
+      sanEmail:
+        type: array
+        items:
+          type: string
+        description: Email addresses from SAN
+      issueTimestamp:
+        type: string
+        format: date-time
+        description: Certificate validity period.
+      expirationTimestamp:
+        type: string
+        format: date-time
+      renewPeriodPercent:
+        type: integer
+        format: int64
+        description: Percentage of validity period after which renewal begins
+      sha256Fingerprint:
+        type: string
+        description: SHA-256 fingerprint of the certificate
+      status:
+        $ref: '#/definitions/EnrolledCertStatus'
+        description: Current status of the certificate as observed by the device.
+      err:
+        type: object
+        $ref: '#/definitions/DeviceError'
+        description: Error details for enrollment or renewal failures
+    description: 'EnrolledCertInfo describes a certificate enrolled on the device via a
+
+      network enrollment protocol such as SCEP.'
+  ZManufacturerInfo:
+    type: object
+    properties:
+      manufacturer:
+        type: string
+      productName:
+        type: string
+      version:
+        type: string
+      serialNumber:
+        type: string
+      uuid:
+        type: string
+      compatible:
+        type: string
+      biosVendor:
+        type: string
+      biosVersion:
+        type: string
+      biosReleaseDate:
+        type: string
+      hSMStatus:
+        $ref: '#/definitions/DeviceHWSecurityModuleStatus'
+      hSMInfo:
+        type: string
+      endorsementKey:
+        type: string
+  IoBundleStatus:
+    type: object
+    properties:
+      type:
+        type: object
+        $ref: '#/definitions/IoType'
+        description: IoType specifies the type of the Input output of the device
+      name:
+        type: string
+        description: Io Bundle status name
+      members:
+        type: array
+        items:
+          type: string
+        description: Member Array
+        title: members - Deprecated by memberList
+      appName:
+        type: string
+        description: Application name
+      lteInfo:
+        type: object
+        $ref: '#/definitions/LTEAdapter'
+        description: LTE information
+      err:
+        $ref: '#/definitions/DeviceError'
+        description: Device error details
+        title: 6 - DEPRECATED
+      memberList:
+        type: array
+        items:
+          $ref: '#/definitions/IoMemberStatus'
+        description: List of IO members
+    description: IoBundleStatus is used to store the status of the Input Output bundle
+    title: IoBundleStatus is used to store the status of the Input Output bundle
+    required:
+    - type
+    - name
+    - members
+    - appName
+  Entity:
+    type: string
+    enum:
+    - ENTITY_UNSPECIFIED
+    - ENTITY_BASE_OS
+    - ENTITY_SYSTEM_ADAPTER
+    - ENTITY_VAULT
+    - ENTITY_ATTESTATION
+    - ENTITY_APP_INSTANCE
+    - ENTITY_PORT
+    - ENTITY_NETWORK
+    - ENTITY_NETWORK_INSTANCE
+    - ENTITY_CONTENT_TREE
+    - ENTITY_CONTENT_BLOB
+    - ENTITY_VOLUME
+    default: ENTITY_UNSPECIFIED
+    description: "- ENTITY_UNSPECIFIED: Invalid Device Entity\n - ENTITY_BASE_OS: Base OS entity\n - ENTITY_SYSTEM_ADAPTER: System Adapter Entity\n - ENTITY_VAULT: Vault Entity\n - ENTITY_ATTESTATION: Attestation Entity\n - ENTITY_APP_INSTANCE: App Instance Entity\n - ENTITY_PORT: Port Entity\n - ENTITY_NETWORK: Network Entity\n - ENTITY_NETWORK_INSTANCE: Network Instance Entity\n - ENTITY_CONTENT_TREE: ContentTree Entity\n - ENTITY_CONTENT_BLOB: Blob Entity\n - ENTITY_VOLUME: VOLUME Entity"
+    title: Edge node components
+  ModemDetail:
+    type: object
+    properties:
+      manufacturer:
+        type: string
+        description: Modem manufacturer
+      model:
+        type: string
+        description: Modem model
+      firmwareVersion:
+        type: string
+        description: Modem firmware version
+      imei:
+        type: string
+        description: Modem IMEI
+      operatingState:
+        type: string
+        $ref: '#/definitions/ZCellularOperatingState'
+        description: Modem operating state
+      controlProtocol:
+        type: string
+        $ref: '#/definitions/ZCellularControlProtocol'
+        description: Modem control protocol
+    description: ModemDetail describes a cellular Modem
+    title: ModemDetail describes a cellular Modem
+  CertDistinguishedName:
+    type: object
+    properties:
+      commonName:
+        type: string
+        description: Common Name (CN)
+      serialNumber:
+        type: string
+        description: Serial Number (SERIALNUMBER)
+      organization:
+        type: array
+        items:
+          type: string
+        description: Organization (O)
+      organizationalUnit:
+        type: array
+        items:
+          type: string
+        description: Organizational Unit (OU)
+      country:
+        type: array
+        items:
+          type: string
+        description: Country (C)
+      stateOrProvince:
+        type: array
+        items:
+          type: string
+        description: State or Province (ST)
+      locality:
+        type: array
+        items:
+          type: string
+        description: Locality (L)
+    description: CertDistinguishedName represents an X.509 distinguished name.
+  DeviceSWStatus:
+    type: string
+    enum:
+    - DEVICE_SW_STATUS_UNSPECIFIED
+    - DEVICE_SW_STATUS_DOWNLOADING
+    - DEVICE_SW_STATUS_DOWNLOADDONE
+    - DEVICE_SW_STATUS_UPDATING
+    - DEVICE_SW_STATUS_UPDATED
+    - DEVICE_SW_STATUS_FALLBACK
+    - DEVICE_SW_STATUS_FAILED
+    default: DEVICE_SW_STATUS_UNSPECIFIED
+  SIMCard:
+    type: object
+    properties:
+      slotNumber:
+        type: number
+        format: int64
+        description: Slot number
+      slotActivated:
+        type: boolean
+        description: Is Slot activated
+      iccid:
+        type: string
+        description: Integrated Circuit Card Identifier
+      imsi:
+        type: string
+        description: International Mobile Subscriber Identity
+      state:
+        type: string
+        description: Current state of the SIM card
+    description: SIMCard describes a SIM slot
+    title: SIMCard describes a SIM slot
+  ECCMemoryReport:
+    type: object
+    properties:
+      memoryControllers:
+        type: array
+        items:
+          $ref: '#/definitions/ECCMemoryControllerInfo'
+    title: A report for all memory controllers
+  NetworkProvider:
+    type: object
+    properties:
+      plmn:
+        type: string
+        description: PLMN code
+      name:
+        type: string
+        description: Human-friendly name
+      rat:
+        type: string
+        $ref: '#/definitions/RadioAccessTechnology'
+        description: Radio Access Technology
+      roaming:
+        type: boolean
+        description: Is Roaming ON
+      connectedAt:
+        type: string
+        format: date-time
+        description: Time when was the connection established
+    description: NetworkProvider describes a cellular Network Provider
+    title: NetworkProvider describes a cellular Network Provider
+  StorageSummary:
+    type: object
+    properties:
+      TotalMB:
+        type: number
+        format: double
+        description: Total Storage for the device in MBs
+      UsedMB:
+        type: number
+        format: double
+        description: How much is used within the allocated total storage
+      AllocatedMB:
+        type: number
+        format: double
+        description: Total reserved for running applications + temp. images etc
+      sharedStorageSummary:
+        type: array
+        items:
+          $ref: '#/definitions/SharedStorageSummary'
+        description: Shared storage summary
+      Id:
+        type: string
+        description: Id
+      Name:
+        type: string
+        description: Name
+    description: Storage Summary
+    title: Storage Summary
+  commonNetworkConfigOrigin:
+    type: string
+    enum:
+    - NETWORK_CONFIG_ORIGIN_UNSPECIFIED
+    - NETWORK_CONFIG_ORIGIN_CONTROLLER
+    - NETWORK_CONFIG_ORIGIN_BOOTSTRAP
+    - NETWORK_CONFIG_ORIGIN_OVERRIDE
+    - NETWORK_CONFIG_ORIGIN_LASTRESORT
+    - NETWORK_CONFIG_ORIGIN_TUI
+    - NETWORK_CONFIG_ORIGIN_LOC
+    - NETWORK_CONFIG_ORIGIN_LPS
+    default: NETWORK_CONFIG_ORIGIN_UNSPECIFIED
+    description: "NetworkConfigOrigin enumerates all possible origins of a network port configuration.\n\n - NETWORK_CONFIG_ORIGIN_UNSPECIFIED: Unknown or unset origin.\n - NETWORK_CONFIG_ORIGIN_CONTROLLER: Config received from the controller.\n - NETWORK_CONFIG_ORIGIN_BOOTSTRAP: Initial device config embedded in the EVE installer, signed by the controller.\n - NETWORK_CONFIG_ORIGIN_OVERRIDE: Manually created JSON config injected into the installer.\n - NETWORK_CONFIG_ORIGIN_LASTRESORT: Fallback configuration automatically generated to enable DHCP on all Ethernet ports.\nUsed when no network config is available or when \"network.fallback.any.eth\" is enabled\nand none of the existing configs provide controller connectivity.\n - NETWORK_CONFIG_ORIGIN_TUI: Config entered via the terminal UI (TUI).\n - NETWORK_CONFIG_ORIGIN_LOC: Configuration signed by the controller and delivered through the\nLocal Operator Console (LOC) in an air-gapped environment.\n - NETWORK_CONFIG_ORIGIN_LPS: Config changes made locally through the Local Profile Server (LPS)."
+  ClusterNodeType:
+    type: string
+    enum:
+    - CLUSTER_NODE_TYPE_UNSPECIFIED
+    - CLUSTER_NODE_TYPE_MASTER
+    - CLUSTER_NODE_TYPE_WORKER
+    - CLUSTER_NODE_TYPE_TIE_BREAKER
+    default: CLUSTER_NODE_TYPE_UNSPECIFIED
+  PhysicalStorageStatus:
+    type: string
+    enum:
+    - PHYSICAL_STORAGE_STATUS_UNSPECIFIED
+    - PHYSICAL_STORAGE_STATUS_ONLINE
+    - PHYSICAL_STORAGE_STATUS_DEGRADED
+    - PHYSICAL_STORAGE_STATUS_FAULTED
+    - PHYSICAL_STORAGE_STATUS_OFFLINE
+    - PHYSICAL_STORAGE_STATUS_UNAVAIL
+    - PHYSICAL_STORAGE_STATUS_REMOVED
+    - PHYSICAL_STORAGE_STATUS_SUSPENDED
+    default: PHYSICAL_STORAGE_STATUS_UNSPECIFIED
+  DeviceSWInfo:
+    type: object
+    properties:
+      activated:
+        type: boolean
+      partitionLabel:
+        type: string
+      partitionDevice:
+        type: string
+      partitionState:
+        type: string
+      status:
+        $ref: '#/definitions/SWState'
+      shortVersion:
+        type: string
+      longVersion:
+        type: string
+      swError:
+        $ref: '#/definitions/DeviceError'
+      downloadProgress:
+        type: integer
+        format: int64
+      swStatus:
+        $ref: '#/definitions/DeviceSWStatus'
+      swSubStatus:
+        $ref: '#/definitions/DeviceSWSubStatus'
+      swSubStatusStr:
+        type: string
+      subStatusProgress:
+        type: integer
+        format: int64
+      isLTS:
+        type: boolean
+        description: flag to indicate device running  LTS eve version or not
+  CellularStatus:
+    type: object
+    properties:
+      providers:
+        type: array
+        items:
+          $ref: '#/definitions/NetworkProvider'
+        description: List of network providers
+      modem:
+        type: object
+        $ref: '#/definitions/ModemDetail'
+        description: Modem detail
+      simCards:
+        type: array
+        items:
+          $ref: '#/definitions/SIMCard'
+        description: List of SIM Cards
+    description: CellularStatus contains status information for a single cellular network
+    title: CellularStatus contains status information for a single cellular network
+  PhysicalStorageTypeInfo:
+    type: string
+    enum:
+    - PHYSICAL_STORAGE_TYPE_INFO_UNSPECIFIED
+    - PHYSICAL_STORAGE_TYPE_INFO_EXT4
+    - PHYSICAL_STORAGE_TYPE_INFO_ZFS
+    default: PHYSICAL_STORAGE_TYPE_INFO_UNSPECIFIED
+  infoAPICapability:
+    type: string
+    enum:
+    - API_CAPABILITY_UNSPECIFIED
+    - API_CAPABILITY_RETRY_UPDATE
+    - API_CAPABILITY_SHUTDOWN
+    - API_CAPABILITY_START_DELAY_IN_SECONDS
+    - API_CAPABILITY_EDGEVIEW
+    - API_CAPABILITY_VOLUME_SNAPSHOTS
+    - API_CAPABILITY_NETWORK_INSTANCE_ROUTING
+    - API_CAPABILITY_BOOT_MODE
+    - API_CAPABILITY_MTU
+    - API_CAPABILITY_ADAPTER_USER_LABELS
+    - API_CAPABILITY_ENFORCED_NET_INTERFACE_ORDER
+    - API_CAPABILITY_NTPS_FQDN
+    - API_CAPABILITY_WIN_LIC_PASSTHROUGH
+    - API_CAPABILITY_VOLUME_SNAPSHOTS_IMMEDIATE
+    - API_CAPABILITY_ENCRYPTED_PATCH_ENVELOPE
+    - API_CAPABILITY_SINGLE_STACK_IP_NETWORK
+    - API_CAPABILITY_CELLULAR_ATTACH_CONFIG
+    - API_CAPABILITY_EDGEVIEW_AUTHENTICATION
+    - API_CAPABILITY_DISABLE_VTPM
+    - API_CAPABILITY_LOC_REBOOT_COLLECT_INFO
+    - API_CAPABILITY_SMART_REPORT
+    - API_CAPABILITY_REPORT_TPM_EVENTLOG
+    default: API_CAPABILITY_UNSPECIFIED
+    description: 'Capabilities indicates features in the EdgeDevConfig where there is
+
+      no easy way to otherwise determine whether or not they are parsed and
+
+      supported by EVE-OS
+
+      A larger number indicates all lower numbers are also supported thus
+
+      this works similar to a version field for the EdgeDevConfig support.'
+  MetricQueryResponse:
+    type: object
+    properties:
+      threshold:
+        $ref: '#/definitions/MetricThreshold'
+      metricType:
+        type: string
+      xLabel:
+        type: string
+      yLabels:
+        type: array
+        items:
+          type: string
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/MetricQueryResponseItem'
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  DeviceHWSecurityModuleStatus:
+    type: string
+    enum:
+    - DEVICE_HW_SECURITY_MODULE_STATUS_UNSPECIFIED
+    - DEVICE_HW_SECURITY_MODULE_STATUS_NOT_FOUND
+    - DEVICE_HW_SECURITY_MODULE_STATUS_DISABLED
+    - DEVICE_HW_SECURITY_MODULE_STATUS_ENABLED
+    default: DEVICE_HW_SECURITY_MODULE_STATUS_UNSPECIFIED
+  MetricThreshold:
+    type: object
+    properties:
+      yellow:
+        type: number
+        format: double
+      red:
+        type: number
+        format: double
+  ZCellularControlProtocol:
+    type: string
+    enum:
+    - Z_CELLULAR_CONTROL_PROTOCOL_UNSPECIFIED
+    - Z_CELLULAR_CONTROL_PROTOCOL_QMI
+    - Z_CELLULAR_CONTROL_PROTOCOL_MBIM
+    default: Z_CELLULAR_CONTROL_PROTOCOL_UNSPECIFIED
+  DeviceError:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Description of the error
+      severity:
+        type: string
+        $ref: '#/definitions/Severity'
+        description: Severity of the error
+      timestamp:
+        type: object
+        format: date-time
+        description: Timestamp at which error had occurred
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceEntity'
+        description: objects referenced by the description or retry_condition
+      retryCondition:
+        type: string
+        description: condition for retry
+    description: DeviceError store the error occurred at the device side
+    title: DeviceError is used to store the error details of the hardware.
+    required:
+    - description
+    - severity
+    - timestamp
+    - entities
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  DeviceMemorySummary:
+    type: object
+    properties:
+      deviceMemoryMB:
+        type: number
+        format: double
+        description: Total memory on the device.
+        title: deviceMemoryMB >= allocatedForAppsMB + allocatedForEveMB
+      allocatedAppsMB:
+        type: number
+        format: double
+        description: Total memory allocated to app instances.
+      allocatedEveMB:
+        type: number
+        format: double
+        description: Total memory allocated to EVE on the device.
+      usedEveMB:
+        type: number
+        format: double
+        description: Memory currently used by EVE on the device.
+        title: usedByEveMB <= allocatedForEveMB
+      availableForNewApps:
+        type: number
+        format: double
+        description: Memory Available for new app-instances on the device.
+        title: availableForNewApps = deviceMemoryMB - ( allocatedForAppsMB + allocatedForEveMB )
+    description: DeviceMemorySummary encapsulates the memory status of the device.
+    title: Device Memory Information message
+  DiskDescription:
+    type: object
+    properties:
+      name:
+        type: string
+      logicalName:
+        type: string
+      serial:
+        type: string
+  EventQueryResponse:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/EventQueryResponseItem'
+        description: Event Query response list
+      next:
+        type: object
+        $ref: '#/definitions/Cursor'
+        description: Cursor filter
+      summary:
+        $ref: '#/definitions/Summary'
+        description: Summary of filtered events.
+    description: Event query response request payload
+    title: Event query Response payload detail
+    required:
+    - list
+    - next
+  NetProxyServer:
+    type: object
+    properties:
+      proto:
+        type: object
+        $ref: '#/definitions/NetworkProxyProto'
+        description: Net Proxy proto
+      server:
+        type: string
+        description: Net Proxy Server
+      port:
+        type: number
+        format: int64
+        description: Net Proxy Port
+    description: Net Proxy Server
+    title: Net Proxy Server
+  CellularMetrics:
+    type: object
+    properties:
+      ifName:
+        type: string
+        description: Network Interface name
+      signalRSSI:
+        type: number
+        format: int32
+        description: Signal RSSI
+      signalRSRQ:
+        type: number
+        format: int32
+        description: Signal RSRQ
+      signalRSRP:
+        type: number
+        format: int32
+        description: Signal RSRP
+      signalSNR:
+        type: number
+        format: int32
+        description: Signal SNR
+      rxTotalPackets:
+        type: number
+        format: uint64
+        description: Rx Total Packets
+      rxDrops:
+        type: number
+        format: uint64
+        description: Rx Drops
+      rxTotalBytes:
+        type: number
+        format: uint64
+        description: Rx Total Bytes
+      txTotalPackets:
+        type: number
+        format: uint64
+        description: Tx Total Packets
+      txDrops:
+        type: number
+        format: uint64
+        description: Tx Drops
+      txTotalBytes:
+        type: number
+        format: uint64
+        description: Tx Total Bytes
+    description: CellularMetrics stores the Cellular Network Stats and Counters
+    title: CellularMetrics stores the Cellular Network Stats and Counters
+  IoType:
+    type: string
+    enum:
+    - IO_TYPE_UNSPECIFIED
+    - IO_TYPE_ETH
+    - IO_TYPE_USB
+    - IO_TYPE_COM
+    - IO_TYPE_AUDIO
+    - IO_TYPE_WLAN
+    - IO_TYPE_WWAN
+    - IO_TYPE_HDMI
+    - IO_TYPE_LTE
+    - IO_TYPE_STORAGE_NVME_DEVICE
+    - IO_TYPE_STORAGE_SATA_DEVICE
+    - IO_TYPE_ETH_PF
+    - IO_TYPE_ETH_VF
+    - IO_TYPE_USB_CONTROLLER
+    - IO_TYPE_USB_DEVICE
+    - IO_TYPE_CAN
+    - IO_TYPE_VCAN
+    - IO_TYPE_LCAN
+    - IO_TYPE_VLAN
+    - IO_TYPE_OTHER
+    default: IO_TYPE_UNSPECIFIED
+    description: "- IO_TYPE_UNSPECIFIED: No operation/ Invalid peration\n - IO_TYPE_ETH: Ethernet\n - IO_TYPE_USB: USB Type - General\n - IO_TYPE_COM: Communication Port\n - IO_TYPE_AUDIO: Audio Port\n - IO_TYPE_WLAN: wireless LAN\n - IO_TYPE_WWAN: Wireless wide area network\n - IO_TYPE_HDMI: High-Definition Multimedia Interface\n - IO_TYPE_LTE: LTE Interfaces\n - IO_TYPE_STORAGE_NVME_DEVICE: Storage NVME device\n - IO_TYPE_STORAGE_SATA_DEVICE: Storage SATA device\n - IO_TYPE_ETH_PF: Physical Interface (PF) of the Virtual Functions\n - IO_TYPE_ETH_VF: Virtual Function (VF)\n - IO_TYPE_USB_CONTROLLER: USB Type - Controller\n - IO_TYPE_USB_DEVICE: USB Type - Device\n - IO_TYPE_CAN: CAN - Device\n - IO_TYPE_VCAN: VCAN - Virtual CAN device\n - IO_TYPE_LCAN: LCAN - Logical CAN device\n - IO_TYPE_VLAN: VLAN - Virtual LAN device\n - IO_TYPE_OTHER: Other Io Types"
+    title: Input/Output Type
+  PNACPortStatus:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+        description: Whether 802.1X authentication is enabled on this port
+      supplicantState:
+        $ref: '#/definitions/PNACSupplicantState'
+        description: 802.1X supplicant state
+      lastAuthTimestamp:
+        type: string
+        format: date-time
+        description: Timestamp of the most recent successful 802.1X authentication.
+      err:
+        type: object
+        $ref: '#/definitions/DeviceError'
+        description: Supplicant authentication error details
+    description: PNACPortStatus reports the 802.1X authentication status of a network port.
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  HardwareInfo:
+    type: object
+    properties:
+      disks:
+        type: array
+        items:
+          $ref: '#/definitions/StorageDiskInfo'
+    title: Information about the system that is sent once when the system boots
+  DeviceBootReason:
+    type: string
+    enum:
+    - DEVICE_BOOT_REASON_UNSPECIFIED
+    - DEVICE_BOOT_REASON_FIRST
+    - DEVICE_BOOT_REASON_REBOOT_CMD
+    - DEVICE_BOOT_REASON_UPDATE
+    - DEVICE_BOOT_REASON_FALLBACK
+    - DEVICE_BOOT_REASON_DISCONNECT
+    - DEVICE_BOOT_REASON_FATAL
+    - DEVICE_BOOT_REASON_OOM
+    - DEVICE_BOOT_REASON_WATCHDOG_HUNG
+    - DEVICE_BOOT_REASON_WATCHDOG_PID
+    - DEVICE_BOOT_REASON_KERNEL
+    - DEVICE_BOOT_REASON_POWER_FAIL
+    - DEVICE_BOOT_REASON_UNKNOWN
+    - DEVICE_BOOT_REASON_VAULT_FAILED
+    - DEVICE_BOOT_REASON_POWEROFF_CMD
+    - DEVICE_BOOT_REASON_PARSE_FAIL
+    default: DEVICE_BOOT_REASON_UNSPECIFIED
+  SmartAttr:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      value:
+        type: string
+        format: uint64
+      worst:
+        type: string
+        format: uint64
+      thresh:
+        type: string
+        format: uint64
+      whenFailed:
+        type: string
+      rawValue:
+        type: string
+        format: uint64
+      type:
+        type: string
+      attributeName:
+        type: string
+  PhysicalStorageRaidType:
+    type: string
+    enum:
+    - PHYSICAL_STORAGE_RAID_TYPE_UNSPECIFIED
+    - PHYSICAL_STORAGE_RAID_TYPE_RAID0
+    - PHYSICAL_STORAGE_RAID_TYPE_RAID_MIRROR
+    - PHYSICAL_STORAGE_RAID_TYPE_RAIDZ1
+    - PHYSICAL_STORAGE_RAID_TYPE_RAIDZ2
+    - PHYSICAL_STORAGE_RAID_TYPE_RAIDZ3
+    - PHYSICAL_STORAGE_RAID_TYPE_NORAID
+    default: PHYSICAL_STORAGE_RAID_TYPE_UNSPECIFIED
+  SharedStorageSummary:
+    type: object
+    properties:
+      Id:
+        type: string
+        description: Id
+      Name:
+        type: string
+        description: Name
+      AllocatedMB:
+        type: number
+        format: double
+        description: Allocated Storage in MBs
+      UsedMB:
+        type: number
+        format: double
+        description: How much is used within the allocated total storage
+    description: Shared Storage Summary
+    title: Shared Storage Summary
+  AttestState:
+    type: string
+    enum:
+    - ATTEST_STATE_UNSPECIFIED
+    - ATTEST_STATE_NONE
+    - ATTEST_STATE_FAIL
+    - ATTEST_STATE_PASS
+    - ATTEST_STATE_PASS_NO_PCR
+    - ATTEST_STATE_FAIL_NO_PCR
+    default: ATTEST_STATE_UNSPECIFIED
+  StorageDeviceMetrics:
+    type: object
+    properties:
+      readErrors:
+        type: number
+        format: int64
+        description: read errors counter
+      writeErrors:
+        type: number
+        format: int64
+        description: write errors counter
+      checksumErrors:
+        type: number
+        format: int64
+        description: checksum errors counter
+      bytesRead:
+        type: number
+        format: int64
+        description: read bytes counter
+      bytesWrite:
+        type: number
+        format: int64
+        description: write bytes counter
+  PhysicalStorage:
+    type: object
+    properties:
+      poolName:
+        type: string
+      storageType:
+        $ref: '#/definitions/PhysicalStorageTypeInfo'
+      storageState:
+        $ref: '#/definitions/PhysicalStorageStatus'
+      zfsVersion:
+        type: string
+      countZvols:
+        type: integer
+        format: int64
+      currentRaid:
+        $ref: '#/definitions/PhysicalStorageRaidType'
+      compressionRatio:
+        type: number
+        format: double
+      zpoolSize:
+        type: string
+        format: uint64
+      disks:
+        type: array
+        items:
+          $ref: '#/definitions/PhysicalStorageDiskState'
+      poolStatusMsg:
+        type: string
+        description: Zpool Status message sent by EVE
+  PNACMetricInfo:
+    type: object
+    properties:
+      logicalLabel:
+        type: string
+        description: Logical label of the network port
+      eapolFramesRx:
+        type: string
+        format: uint64
+        description: Total EAPOL frames received
+      eapolFramesTx:
+        type: string
+        format: uint64
+        description: Total EAPOL frames transmitted
+      eapolStartFramesTx:
+        type: string
+        format: uint64
+        description: EAPOL-Start frames transmitted
+      eapolLogoffFramesTx:
+        type: string
+        format: uint64
+        description: EAPOL-Logoff frames transmitted
+      eapolRespFramesTx:
+        type: string
+        format: uint64
+        description: EAP-Response frames transmitted
+      eapolReqIdFramesRx:
+        type: string
+        format: uint64
+        description: EAP-Request Identity frames received
+      eapolReqFramesRx:
+        type: string
+        format: uint64
+        description: EAP-Request frames received
+      invalidEapolFramesRx:
+        type: string
+        format: uint64
+        description: Invalid EAPOL frames received
+      eapLengthErrorFramesRx:
+        type: string
+        format: uint64
+        description: EAPOL frames with length errors received
+    description: PNACMetricInfo reports 802.1X EAPOL frame counters for a network port.
+  RunState:
+    type: string
+    enum:
+    - RUN_STATE_UNSPECIFIED
+    - RUN_STATE_ONLINE
+    - RUN_STATE_HALTED
+    - RUN_STATE_INIT
+    - RUN_STATE_REBOOTING
+    - RUN_STATE_OFFLINE
+    - RUN_STATE_UNKNOWN
+    - RUN_STATE_UNPROVISIONED
+    - RUN_STATE_PROVISIONED
+    - RUN_STATE_SUSPECT
+    - RUN_STATE_DOWNLOADING
+    - RUN_STATE_RESTARTING
+    - RUN_STATE_PURGING
+    - RUN_STATE_HALTING
+    - RUN_STATE_ERROR
+    - RUN_STATE_VERIFYING
+    - RUN_STATE_LOADING
+    - RUN_STATE_CREATING_VOLUME
+    - RUN_STATE_BOOTING
+    - RUN_STATE_MAINTENANCE_MODE
+    - RUN_STATE_START_DELAYED
+    - RUN_STATE_BASEOS_UPDATING
+    - RUN_STATE_PREPARING_POWEROFF
+    - RUN_STATE_POWERING_OFF
+    - RUN_STATE_PREPARED_POWEROFF
+    default: RUN_STATE_UNSPECIFIED
+    description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
+    title: RunState - On update, please update RunState_HttpRequest as well
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  Severity:
+    type: string
+    enum:
+    - SEVERITY_UNSPECIFIED
+    - SEVERITY_NOTICE
+    - SEVERITY_WARNING
+    - SEVERITY_ERROR
+    default: SEVERITY_UNSPECIFIED
+    title: Severity tells the severity type
+  BlobStatus:
+    type: object
+    properties:
+      hash:
+        type: string
+      refCount:
+        type: string
+        format: uint64
+      swState:
+        $ref: '#/definitions/SWState'
+      sizeMB:
+        type: string
+        format: uint64
+  ZedcloudCounters:
+    type: object
+    properties:
+      ifName:
+        type: string
+        description: ifName
+      failures:
+        type: number
+        format: uint64
+        description: Failures
+      success:
+        type: number
+        format: uint64
+        description: Success
+      lastFailure:
+        type: object
+        format: date-time
+        description: Timestamp of last failure
+      lastSuccess:
+        type: object
+        format: date-time
+        description: Timestamp of last success
+    description: ZedcloudCounters is used to store the Zedcloud Stats and Counters
+    title: ZedcloudCounters is used to store the Zedcloud Stats and Counters
+  CpuSummary:
+    type: object
+    properties:
+      Utilization:
+        type: number
+        format: double
+        description: CPU Utilization
+    description: CPU Summary
+    title: CPU Summary
+  PhysicalStorageDiskState:
+    type: object
+    properties:
+      disk:
+        $ref: '#/definitions/DiskDescription'
+      status:
+        $ref: '#/definitions/PhysicalStorageStatus'
+      smartStatus:
+        type: string
+  DimmRankInfo:
+    type: object
+    properties:
+      rankName:
+        type: string
+      ceCount:
+        type: string
+        format: int64
+      ueCount:
+        type: string
+        format: int64
+    title: Info per memory rank in the dimm
+  Cursor:
+    type: object
+    properties:
+      pageToken:
+        type: string
+        description: Page Token
+      orderBy:
+        type: array
+        items:
+          type: string
+        description: OrderBy helps in sorting the list response
+      pageNum:
+        type: number
+        format: int64
+        description: Page Number
+      pageSize:
+        type: number
+        format: int64
+        description: Defines the page size
+      totalPages:
+        type: number
+        format: int64
+        description: Total number of pages to be fetched.
+    description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+    title: Cursor is used as filter in list operation.
+  DeviceStatusMsg:
+    type: object
+    properties:
+      name:
+        type: string
+      id:
+        type: string
+      adminState:
+        $ref: '#/definitions/AdminState'
+      runState:
+        $ref: '#/definitions/RunState'
+      upTime:
+        type: string
+        format: date-time
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+        title: deprecated = 6;
+        maxLength: 32
+        pattern: ^[^<%&?/\>]+$
+      lastUpdate:
+        type: string
+        format: date-time
+      bootTime:
+        type: string
+        format: date-time
+      netStatusList:
+        type: array
+        items:
+          $ref: '#/definitions/NetworkStatus'
+      dns:
+        $ref: '#/definitions/DNSInfo'
+      ioStatusList:
+        type: array
+        items:
+          $ref: '#/definitions/IoBundleStatus'
+      storageList:
+        type: array
+        items:
+          $ref: '#/definitions/StorageStatus'
+      blobList:
+        type: array
+        items:
+          $ref: '#/definitions/BlobStatus'
+      netCounterList:
+        type: array
+        items:
+          $ref: '#/definitions/NetworkCounters'
+      hostName:
+        type: string
+      swInfo:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceSWInfo'
+      zcCounters:
+        type: array
+        items:
+          $ref: '#/definitions/ZedcloudCounters'
+      rawStatus:
+        type: string
+      rawMetrics:
+        type: string
+      Memory:
+        $ref: '#/definitions/MemorySummary'
+        description: memory - OBSOLETE. Use memorySummary instead.
+      Storage:
+        $ref: '#/definitions/StorageSummary'
+      minfo:
+        $ref: '#/definitions/ZManufacturerInfo'
+      dinfo:
+        $ref: '#/definitions/DeviceInfo'
+      Cpu:
+        $ref: '#/definitions/CpuSummary'
+      lastRebootReason:
+        type: string
+      lastRebootTime:
+        type: string
+        format: date-time
+      dataSecInfo:
+        type: array
+        items:
+          $ref: '#/definitions/DevDataSecAtRest'
+      devError:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceError'
+      projectId:
+        type: string
+      title:
+        type: string
+      attestState:
+        $ref: '#/definitions/AttestState'
+      deviceRebootReason:
+        $ref: '#/definitions/DeviceBootReason'
+      clusterID:
+        type: string
+        description: System defined universally unique clusterInstance ID, unique across the enterprise.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      memorySummary:
+        $ref: '#/definitions/DeviceMemorySummary'
+        description: Device memory Info
+      capabilities:
+        $ref: '#/definitions/Capabilities'
+        description: Edge node virtualization capabilities.
+        title: Information about hardware capabilities
+      zpoolMetrics:
+        $ref: '#/definitions/StorageDeviceMetrics'
+        description: Last received counters for zpool metrics.
+      clusterNodeStatus:
+        $ref: '#/definitions/ClusterNodeStatus'
+        description: Cluster node status
+    title: to be deprecated
+  DeviceEntity:
+    type: object
+    properties:
+      entity:
+        $ref: '#/definitions/Entity'
+      entityId:
+        type: string
+      entityName:
+        type: string
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  SimcardState:
+    type: string
+    enum:
+    - SIMCARD_STATE_INVALID
+    - SIMCARD_STATE_ASSIGNED
+    - SIMCARD_STATE_PROVISIONED
+    - SIMCARD_STATE_ACTIVE
+    - SIMCARD_STATE_SUSPENDED
+    - SIMCARD_STATE_CANCELLED
+    default: SIMCARD_STATE_INVALID
+  DeviceRawMetrics:
+    type: object
+    properties:
+      name:
+        type: string
+      id:
+        type: string
+      rawMetrics:
+        type: string
+  commonPortConfigSource:
+    type: object
+    properties:
+      origin:
+        $ref: '#/definitions/commonNetworkConfigOrigin'
+        description: Indicates where EVE obtained the network config.
+      submittedAt:
+        type: string
+        format: date-time
+        description: 'Timestamp when this port’s configuration was originally submitted
+
+          or created at its source.
+
+
+          Meaning depends on the origin:
+
+          - Controller, LOC, bootstrap: timestamp provided by the controller.
+
+          - Local override.json: when the file was first loaded by EVE.
+
+          - Last-resort: when EVE generated the fallback config.
+
+          - LPS modifications: when the modified config was received.
+
+          - TUI: when the user submitted the configuration.
+
+
+          This is different from DevicePortStatus.timePriority, which is used
+
+          to compare and prioritize different sources of network configuration
+
+          (and may be synthetic for some sources, e.g. year 2000 for override.json,
+
+          epoch 0 for last-resort). By contrast, submitted_at represents when this
+
+          port’s configuration first came into existence, regardless of when or whether
+
+          the device applied it.
+
+
+          Note: this is a per-port timestamp. The underlying network config may
+
+          cover multiple ports, but only the portion relevant to this port is
+
+          reflected here.'
+    description: 'PortConfigSource describes the origin of the configuration used for a network port.
+
+      It helps distinguish between controller-provided, locally-modified, or initial configs.'
+  NtpSourceMode:
+    type: string
+    enum:
+    - NTP_SOURCE_MODE_UNSPECIFIED
+    - NTP_SOURCE_MODE_CLIENT
+    - NTP_SOURCE_MODE_PEER
+    - NTP_SOURCE_MODE_REF
+    default: NTP_SOURCE_MODE_UNSPECIFIED
+    description: 'Enum for describing the NTP source mode, see chrony client
+
+      https://gitlab.com/chrony/chrony/-/blob/master/client.c
+
+      and its output of the command ''sources''.'
+  IoAddresses:
+    type: object
+    properties:
+      macAddress:
+        type: string
+  GPSLocation:
+    type: object
+    properties:
+      latitude:
+        type: number
+        format: double
+        description: Latitude
+      longitude:
+        type: number
+        format: double
+        description: Longitude
+      altitude:
+        type: number
+        format: double
+        description: Altitude from mean sea level
+      timestamp:
+        type: object
+        format: date-time
+        description: UTC timestamp
+      horizontalReliability:
+        type: number
+        format: int64
+        description: Horizontal reliability
+      verticalReliability:
+        type: number
+        format: int64
+        description: Vertical reliability
+      horizontalUncertainty:
+        type: number
+        format: double
+        description: Horizontal uncertainty
+      verticalUncertainty:
+        type: number
+        format: double
+        description: Vertical uncertainty
+      logicalLabel:
+        type: string
+        description: Logical label of the adapter used to get GPS coordinates
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  DNSInfo:
+    type: object
+    properties:
+      servers:
+        type: array
+        items:
+          type: string
+        description: Array of dns server
+      domain:
+        type: string
+        description: domain name
+      search:
+        type: array
+        items:
+          type: string
+        description: Array of search strings
+    description: 'DNSInfo is used to store Domain Name Server configuration. '
+    title: DNSInfo consists of DNS Configurations.
+    required:
+    - servers
+    - domain
+    - search
+  AdminState:
+    type: string
+    enum:
+    - ADMIN_STATE_UNSPECIFIED
+    - ADMIN_STATE_CREATED
+    - ADMIN_STATE_DELETED
+    - ADMIN_STATE_ACTIVE
+    - ADMIN_STATE_INACTIVE
+    - ADMIN_STATE_REGISTERED
+    - ADMIN_STATE_ARCHIVED
+    default: ADMIN_STATE_UNSPECIFIED
+    description: "- ADMIN_STATE_CREATED: Entity Created in the controller\n - ADMIN_STATE_DELETED: Entity Deleted in the controller\n - ADMIN_STATE_ACTIVE: Entity Activated in the controller\n - ADMIN_STATE_INACTIVE: Entity Deactivated in the controller\n - ADMIN_STATE_REGISTERED: Specific to Edge-node - Edge-node Registered with the controller\n - ADMIN_STATE_ARCHIVED: Entity Archived in the controller"
+    title: AdminState - On update, please update AdminState_HttpRequest as well
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  DeviceStatusListMsg:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceStatusSummaryMsg'
+      summaryByState:
+        $ref: '#/definitions/Summary'
+      summaryByAppInstanceCount:
+        $ref: '#/definitions/Summary'
+      summaryByEVEDistribution:
+        $ref: '#/definitions/Summary'
+      totalCount:
+        type: integer
+        format: int64
+      totalEdgeviewActive:
+        type: integer
+        format: int64
+      next:
+        $ref: '#/definitions/Cursor'
+  NetworkCounters:
+    type: object
+    properties:
+      ifName:
+        type: string
+        description: ifName
+      txBytes:
+        type: number
+        format: uint64
+        description: Tx Bytes
+      rxBytes:
+        type: number
+        format: uint64
+        description: Rx Bytes
+      txPkts:
+        type: number
+        format: uint64
+        description: Tx Packets
+      rxPkts:
+        type: number
+        format: uint64
+        description: Rx packets
+      txErrors:
+        type: number
+        format: uint64
+        description: Tx Errors
+      rxErrors:
+        type: number
+        format: uint64
+        description: Rx Errors
+      txDrops:
+        type: number
+        format: uint64
+        description: Tx Drops
+      rxDrops:
+        type: number
+        format: uint64
+        description: Rx Drops
+      txAclDrops:
+        type: number
+        format: uint64
+        description: Tx ACL Rate Drops
+      rxAclDrops:
+        type: number
+        format: uint64
+        description: Rx ACL Rate Drops
+      txAclRateLimitDrops:
+        type: number
+        format: uint64
+        description: Tx ACL Rate Limit Drops
+      rxAclRateLimitDrops:
+        type: number
+        format: uint64
+        description: Rx ACL Rate Limit Drops
+    description: NetworkCounter is used to store the Network Stats and Counters
+    title: NetworkCounter is used to store the Network Stats and Counters
+  DeviceStatusSummaryMsg:
+    type: object
+    properties:
+      name:
+        type: string
+      id:
+        type: string
+      adminState:
+        $ref: '#/definitions/AdminState'
+      runState:
+        $ref: '#/definitions/RunState'
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+        title: deprecated = 5;
+        maxLength: 32
+        pattern: ^[^<%&?/\>]+$
+      netStatusList:
+        type: array
+        items:
+          $ref: '#/definitions/NetworkStatus'
+      swInfo:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceSWInfo'
+      minfo:
+        $ref: '#/definitions/ZManufacturerInfo'
+      dinfo:
+        $ref: '#/definitions/DeviceInfo'
+      Memory:
+        $ref: '#/definitions/MemorySummary'
+        description: Memory - OBSOLETE. Use memorySummary instead.
+      Storage:
+        $ref: '#/definitions/StorageSummary'
+      Cpu:
+        $ref: '#/definitions/CpuSummary'
+      devError:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceError'
+      projectId:
+        type: string
+      title:
+        type: string
+      clusterID:
+        type: string
+        description: System defined universally unique clusterInstance ID, unique across the enterprise.
+        maxLength: 256
+        minLength: 3
+        pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        uniqueItems: true
+      memorySummary:
+        $ref: '#/definitions/DeviceMemorySummary'
+        description: Device memory Info
+      debugKnob:
+        type: boolean
+        title: debug knob expiry time
+      debugKnobExpiryTime:
+        type: string
+        format: date-time
+      projectName:
+        type: string
+        description: Project name to which device is associated with
+      appInstCount:
+        type: integer
+        format: int64
+        description: App instance count that is actively running on the device
+      location:
+        type: string
+        description: Device location
+      edgeviewActive:
+        type: boolean
+        description: Device edgeview session active
+      projectType:
+        $ref: '#/definitions/TagType'
+        description: Tag group type
+      clusterNodeStatus:
+        $ref: '#/definitions/ClusterNodeStatus'
+        description: Cluster node status
+      enrolledCertsStatus:
+        $ref: '#/definitions/EnrolledCertStatus'
+        description: Enrolled certificate status from the device
+  SWState:
+    type: string
+    enum:
+    - SW_STATE_UNSPECIFIED
+    - SW_STATE_INITIAL
+    - SW_STATE_DOWNLOAD_IN_PROGRESS
+    - SW_STATE_DOWNLOADED
+    - SW_STATE_VERIFIED
+    - SW_STATE_INSTALLED
+    - SW_STATE_BOOTING
+    - SW_STATE_RUNNING
+    - SW_STATE_HALTING
+    - SW_STATE_HALTED
+    - SW_STATE_REFRESHING
+    - SW_STATE_PURGING
+    - SW_STATE_RESOLVING_TAG
+    - SW_STATE_RESOLVED_TAG
+    - SW_STATE_CREATING_VOLUME
+    - SW_STATE_CREATED_VOLUME
+    - SW_STATE_VERIFYING
+    - SW_STATE_LOADING
+    - SW_STATE_LOADED
+    - SW_STATE_AWAITNETWORKINSTANCE
+    default: SW_STATE_UNSPECIFIED
+    description: "- SW_STATE_RESOLVING_TAG: Prior to DOWNLOAD_STARTED we go through these:\nResolving an image tag\n - SW_STATE_RESOLVED_TAG: Tag has been resolved/failed\n - SW_STATE_CREATING_VOLUME: Prior to INSTALLED we go through these:\nVolume create in progress\n - SW_STATE_CREATED_VOLUME: Volume create done/failed\n - SW_STATE_VERIFYING: Verification in-progress\n - SW_STATE_LOADING: Loading blob in CAS\n - SW_STATE_LOADED: Loaded blob in CAS\n - SW_STATE_AWAITNETWORKINSTANCE: Wait for network instance"
+    title: State of EVE/Edge Application software
+  TagType:
+    type: string
+    enum:
+    - TAG_TYPE_UNSPECIFIED
+    - TAG_TYPE_GENERIC
+    - TAG_TYPE_PROJECT
+    - TAG_TYPE_AZURE
+    - TAG_TYPE_DEPLOYMENT
+    default: TAG_TYPE_UNSPECIFIED
+    description: "- TAG_TYPE_UNSPECIFIED: Unspecified\n - TAG_TYPE_GENERIC: Generic resource group\n - TAG_TYPE_PROJECT: Project resource group\n - TAG_TYPE_AZURE: Project resource group\n - TAG_TYPE_DEPLOYMENT: Project with deployment"
+    title: Resource group types
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles

@@ -1,0 +1,679 @@
+swagger: '2.0'
+info:
+  title: ZEDEDA App Profiles Service AppProfileService KubernetesDeployments API
+  description: The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- BearerToken: []
+tags:
+- name: KubernetesDeployments
+  description: APIs for managing Kubernetes deployments
+paths:
+  /v1/cluster/instances/kubernetes/deployments:
+    get:
+      summary: List all deployments
+      description: "Retrieve a list of all Kubernetes deployments. Includes summary statistics and deployment status information.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/deployments\n```\n\n**Example Response:**\n```json\n{\n  \"total_count\": 3,\n  \"state_summary\": {\n    \"ready\": 2,\n    \"pending\": 1,\n    \"failed\": 0\n  },\n  \"deployments\": [\n    {\n      \"id\": \"dep-abc123\",\n      \"name\": \"nginx-deployment\",\n      \"title\": \"NGINX Web Server\",\n      \"description\": \"Production NGINX deployment\",\n      \"project_id\": \"proj-12345\",\n      \"type\": \"HELMCHART\",\n      \"deployment_status\": \"Ready\",\n      \"created_at\": \"2024-01-15T10:30:00Z\",\n      \"updated_at\": \"2024-01-15T11:00:00Z\"\n    },\n    {\n      \"id\": \"dep-def456\",\n      \"name\": \"redis-cache\",\n      \"title\": \"Redis Cache\",\n      \"description\": \"Redis caching layer\",\n      \"project_id\": \"proj-12345\",\n      \"type\": \"HELMCHART\",\n      \"deployment_status\": \"Ready\",\n      \"created_at\": \"2024-01-14T15:20:00Z\",\n      \"updated_at\": \"2024-01-14T15:25:00Z\"\n    }\n  ]\n}\n```"
+      operationId: KubernetesDeployments_ListDeployments
+      responses:
+        '200':
+          description: Successfully retrieved deployment list
+          schema:
+            $ref: '#/definitions/DeploymentListResponse'
+        '400':
+          description: Bad Request. The API gateway did not process the request because of invalid value of filter parameters.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to list deployments.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve deployments due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      tags:
+      - KubernetesDeployments
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+    post:
+      summary: Create a new Kubernetes deployment
+      description: "Create a new Kubernetes deployment with Helm charts or other supported deployment types. This API supports both single-cluster and multi-cluster deployments.\n\n**Example Request:**\n```json\n{\n  \"type\": \"HELMCHART\",\n  \"metadata\": {\n    \"name\": \"nginx-deployment\",\n    \"title\": \"NGINX Web Server\",\n    \"description\": \"Production NGINX deployment with custom configuration\",\n    \"project_id\": \"proj-12345\"\n  },\n  \"data\": {\n    \"helm_chart_data\": {\n      \"chart\": {\n        \"name\": \"nginx\",\n        \"version\": \"15.4.0\",\n        \"custom_values\": {\n          \"replicaCount\": 3,\n          \"service\": {\n            \"type\": \"LoadBalancer\",\n            \"port\": 80\n          },\n          \"ingress\": {\n            \"enabled\": true,\n            \"hosts\": [\"nginx.example.com\"]\n          }\n        },\n        \"repo_identifier\": \"bitnami\"\n      },\n      \"target_clusters\": {\n        \"is_multi_cluster\": false,\n        \"cluster_metadata\": {\n          \"cluster_id\": \"cluster-abc123\",\n          \"orchestrator_cluster_id\": \"rancher-cluster-123\",\n          \"cluster_name\": \"production-k8s\",\n          \"kube_version\": \"v1.28.0\"\n        }\n      }\n    }\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"dep-abc123\",\n  \"objectName\": \"nginx-deployment\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 201,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```"
+      operationId: KubernetesDeployments_CreateDeployment
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '201':
+          description: Successfully created deployment
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid deployment configuration or missing required fields.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to create deployments.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Deployment with the same name already exists.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to create deployment due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/DeploymentRequest'
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - KubernetesDeployments
+  /v1/cluster/instances/kubernetes/deployments/id/{deploymentId}:
+    get:
+      summary: Get deployment by ID
+      description: "Retrieve detailed information about a specific Kubernetes deployment including its current status, configuration, and metadata.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/deployments/id/dep-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"dep-abc123\",\n  \"name\": \"nginx-deployment\",\n  \"title\": \"NGINX Web Server\",\n  \"description\": \"Production NGINX deployment with custom configuration\",\n  \"project_id\": \"proj-12345\",\n  \"type\": \"HELMCHART\",\n  \"spec\": {\n    \"helm_chart_data\": {\n      \"chart\": {\n        \"name\": \"nginx\",\n        \"version\": \"15.4.0\",\n        \"custom_values\": {\n          \"replicaCount\": 3,\n          \"service\": {\n            \"type\": \"LoadBalancer\",\n            \"port\": 80\n          }\n        },\n        \"repo_identifier\": \"bitnami\"\n      },\n      \"target_clusters\": {\n        \"is_multi_cluster\": false,\n        \"cluster_metadata\": {\n          \"cluster_id\": \"cluster-abc123\",\n          \"cluster_name\": \"production-k8s\"\n        }\n      }\n    }\n  },\n  \"deployment_status\": \"Ready\",\n  \"created_at\": \"2024-01-15T10:30:00Z\",\n  \"updated_at\": \"2024-01-15T11:00:00Z\",\n  \"created_by\": \"user@example.com\",\n  \"updated_by\": \"user@example.com\"\n}\n```"
+      operationId: KubernetesDeployments_GetDeployment
+      responses:
+        '200':
+          description: Successfully retrieved deployment
+          schema:
+            $ref: '#/definitions/DeploymentGetResponse'
+        '400':
+          description: Bad Request. Invalid deployment ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view this deployment.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. Deployment with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve deployment due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: deploymentId
+        description: 'Unique identifier of the deployment (required). Example: ''dep-abc123'''
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - KubernetesDeployments
+    delete:
+      summary: Delete a deployment
+      description: "Delete a Kubernetes deployment and all its associated resources. This action is irreversible and will remove the deployment from all target clusters.\n\n**Example Request:**\n```\nDELETE /v1/cluster/instances/kubernetes/deployments/id/dep-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"dep-abc123\",\n  \"objectName\": \"nginx-deployment\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Note:** The deployment_id parameter is **required** and must be a valid deployment identifier."
+      operationId: KubernetesDeployments_DeleteDeployment
+      responses:
+        '200':
+          description: Successfully deleted deployment
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid deployment ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to delete this deployment.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. Deployment with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Cannot delete deployment due to dependencies or current state.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to delete deployment due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: deploymentId
+        description: 'Unique identifier of the deployment (required). Example: ''dep-abc123'''
+        in: path
+        required: true
+        type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - KubernetesDeployments
+    put:
+      summary: Update a deployment
+      description: "Update an existing Kubernetes deployment configuration. This can include updating Helm chart values, changing target clusters, or modifying deployment metadata.\n\n**Example Request:**\n```\nPUT /v1/cluster/instances/kubernetes/deployments/id/dep-abc123\n```\n\n```json\n{\n  \"deployment_id\": \"dep-abc123\",\n  \"deployment_request\": {\n    \"type\": \"HELMCHART\",\n    \"metadata\": {\n      \"name\": \"nginx-deployment\",\n      \"title\": \"NGINX Web Server - Updated\",\n      \"description\": \"Updated NGINX deployment with SSL configuration\",\n      \"project_id\": \"proj-12345\"\n    },\n    \"data\": {\n      \"helm_chart_data\": {\n        \"chart\": {\n          \"name\": \"nginx\",\n          \"version\": \"15.5.0\",\n          \"custom_values\": {\n            \"replicaCount\": 5,\n            \"service\": {\n              \"type\": \"LoadBalancer\",\n              \"port\": 80\n            },\n            \"ingress\": {\n              \"enabled\": true,\n              \"hosts\": [\"nginx.example.com\"],\n              \"tls\": {\n                \"enabled\": true,\n                \"secretName\": \"nginx-tls\"\n              }\n            }\n          },\n          \"repo_identifier\": \"bitnami\"\n        },\n        \"target_clusters\": {\n          \"is_multi_cluster\": false,\n          \"cluster_metadata\": {\n            \"cluster_id\": \"cluster-abc123\",\n            \"orchestrator_cluster_id\": \"rancher-cluster-123\",\n            \"cluster_name\": \"production-k8s\",\n            \"kube_version\": \"v1.28.0\"\n          }\n        }\n      }\n    }\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"dep-abc123\",\n  \"objectName\": \"nginx-deployment\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```"
+      operationId: KubernetesDeployments_UpdateDeployment
+      responses:
+        '200':
+          description: Successfully updated deployment
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid deployment configuration or ID format.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to update this deployment.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '404':
+          description: Not Found. Deployment with the specified ID does not exist.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '409':
+          description: Conflict. Update conflicts with current deployment state.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to update deployment due to server error.
+          schema:
+            $ref: '#/definitions/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+      - name: deploymentId
+        description: 'Unique identifier of the deployment to update (required). Example: ''dep-abc123'''
+        in: path
+        required: true
+        type: string
+      - name: body
+        description: Updated deployment configuration (required)
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/DeploymentRequest'
+          description: Updated deployment configuration (required)
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        type: string
+      tags:
+      - KubernetesDeployments
+definitions:
+  ZcOpsType:
+    type: string
+    enum:
+    - OPS_TYPE_UNSPECIFIED
+    - OPS_TYPE_READ
+    - OPS_TYPE_DELETE
+    - OPS_TYPE_CREATE
+    - OPS_TYPE_UPDATE
+    - OPS_TYPE_LIST
+    default: OPS_TYPE_UNSPECIFIED
+    title: ZedCloud internal operation type
+  ObjectType:
+    type: string
+    enum:
+    - OBJECT_TYPE_UNSPECIFIED
+    - OBJECT_TYPE_USER
+    - OBJECT_TYPE_EDGE_NODE
+    - OBJECT_TYPE_EDGE_APP
+    - OBJECT_TYPE_IMAGE
+    - OBJECT_TYPE_EDGE_APP_INSTANCE
+    - OBJECT_TYPE_PROJECT
+    - OBJECT_TYPE_NETWORK
+    - OBJECT_TYPE_DATASTORE
+    - OBJECT_TYPE_SERVICE
+    - OBJECT_TYPE_SERVICE_INSTANCE
+    - OBJECT_TYPE_ENTERPRISE
+    - OBJECT_TYPE_ROLE
+    - OBJECT_TYPE_CREDENTIAL
+    - OBJECT_TYPE_NETWORK_INSTANCE
+    - OBJECT_TYPE_VOLUME_INSTANCE
+    - OBJECT_TYPE_REALM
+    - OBJECT_TYPE_AUTHPROFILE
+    - OBJECT_TYPE_POLICY
+    - OBJECT_TYPE_APP_POLICY
+    - OBJECT_TYPE_CLUSTER_INSTANCE
+    - OBJECT_TYPE_PLUGIN
+    - OBJECT_TYPE_DOC_POLICY
+    - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+    - OBJECT_TYPE_TAGS
+    - OBJECT_TYPE_EDGE_NODE_INTERFACE
+    - OBJECT_TYPE_DEPLOYMENT
+    - OBJECT_TYPE_ENTITLEMENTS
+    - OBJECT_TYPE_DATA_STREAM
+    - OBJECT_TYPE_API_USAGE
+    - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+    - OBJECT_TYPE_PATCH_ENVELOPE
+    - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+    - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+    - OBJECT_TYPE_DEV_PASSTHROUGH
+    - OBJECT_TYPE_EDGE_NODE_CLUSTER
+    - OBJECT_TYPE_ASSET_GROUP
+    - OBJECT_TYPE_APP_PROFILE
+    - OBJECT_TYPE_PROFILE_DEPLOYMENT
+    - OBJECT_TYPE_ZKS_INSTANCE
+    - OBJECT_TYPE_CLUSTER_GROUP
+    default: OBJECT_TYPE_UNSPECIFIED
+  Summary:
+    type: object
+    properties:
+      description:
+        type: string
+        description: Summary description
+      total:
+        type: number
+        format: int64
+        description: Total
+      values:
+        type: object
+        additionalProperties:
+          type: integer
+          format: int64
+        description: 'Values: Map for storing <string, uint32>'
+    description: Summary is used to store the Summary details
+    title: Summary is used to store the Summary details
+  DeploymentGetResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Deployment ID
+      name:
+        type: string
+        description: Release name
+      title:
+        type: string
+        description: Title of the deployment
+      description:
+        type: string
+        description: Description of the deployment
+      projectId:
+        type: string
+        description: Project ID associated with the deployment
+      type:
+        $ref: '#/definitions/K8sDeploymentType'
+        description: Type of deployment
+      spec:
+        $ref: '#/definitions/DeploymentData'
+        description: Deployment spec
+      deploymentStatus:
+        type: string
+        description: Deployment status
+      resourceStatusMap:
+        type: array
+        items:
+          type: object
+        description: Map of resource status details
+      createdAt:
+        type: string
+        format: date-time
+        description: Creation timestamp
+      updatedAt:
+        type: string
+        format: date-time
+        description: Last update timestamp
+      createdBy:
+        type: string
+        description: User who created the deployment
+      updatedBy:
+        type: string
+        description: User who last updated the deployment
+    description: Deployment get response
+    title: Deployment get response
+  protobufAny:
+    type: object
+    properties:
+      typeUrl:
+        type: string
+      value:
+        type: string
+        format: byte
+  HelmChartData:
+    type: object
+    properties:
+      chart:
+        $ref: '#/definitions/Chart'
+        description: Helm chart details for the deployment
+      targetClusters:
+        $ref: '#/definitions/TargetClusters'
+        description: Target clusters for the deployment
+    description: Data for the Helm chart deployment
+    title: Helm chart data
+    required:
+    - chart
+    - targetClusters
+  DeploymentListResponse:
+    type: object
+    properties:
+      totalCount:
+        type: integer
+        format: int64
+        description: Total number of deployments
+      stateSummary:
+        $ref: '#/definitions/Summary'
+        description: Summary of deployment states
+      deployments:
+        type: array
+        items:
+          $ref: '#/definitions/DeploymentGetResponse'
+        description: List of deployments
+    description: Response containing a list of deployments
+    title: Deployment list response
+  ZcOpsStatus:
+    type: string
+    enum:
+    - OPS_STATUS_UNSPECIFIED
+    - OPS_STATUS_PENDING
+    - OPS_STATUS_ONGOING
+    - OPS_STATUS_COMPLETE
+    default: OPS_STATUS_UNSPECIFIED
+    description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+    title: ZedCloud internal operation status
+  ZsrvError:
+    type: object
+    properties:
+      ec:
+        $ref: '#/definitions/ZsrvErrorCode'
+        title: 'Enumrated error code, describes more granular numerical
+
+          value than just httpStatus'
+      location:
+        type: string
+        title: 'Ignore: Internal field only'
+      details:
+        type: string
+        title: Field captures string description of details
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  K8sDeploymentType:
+    type: string
+    enum:
+    - K8sDeploymentType_UNSPECIFIED
+    - HELMCHART
+    default: K8sDeploymentType_UNSPECIFIED
+  Metadata:
+    type: object
+    properties:
+      name:
+        type: string
+        description: 'Name of the deployment. Example: ''nginx-deployment'''
+      title:
+        type: string
+        description: 'Human-readable title of the deployment. Example: ''NGINX Web Server'''
+      description:
+        type: string
+        description: 'Description of the deployment. Example: ''Production NGINX deployment with custom configuration'''
+      projectId:
+        type: string
+        description: Project ID associated with the deployment
+    description: Metadata for the deployment
+    title: Metadata for deployment
+    required:
+    - name
+    - projectId
+  TargetClusters:
+    type: object
+    properties:
+      isMultiCluster:
+        type: boolean
+        description: 'Indicates if the deployment is for multiple clusters. Example: false'
+      clusterTags:
+        type: object
+        additionalProperties:
+          type: string
+        description: 'Tags for the clusters where the deployment will be applied. Example: {''environment'': ''production'', ''region'': ''us-west-2''}. This field is reserved for future use and not currently implemented.'
+      clusterMetadata:
+        $ref: '#/definitions/ClusterMetadata'
+        description: Metadata for the target cluster when is_multi_cluster is false
+    description: Clusters where the deployment will be applied
+    title: Target clusters for deployment
+    required:
+    - isMultiCluster
+    - clusterMetadata
+  ZsrvResponse:
+    type: object
+    properties:
+      operationType:
+        $ref: '#/definitions/ZcOpsType'
+        title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+      operationStatus:
+        $ref: '#/definitions/ZcOpsStatus'
+        title: if this is log running job
+      objectKind:
+        type: string
+        title: zedcloud object kind on which the operation was performed
+      objectId:
+        type: string
+        title: Unique value identifies the object that was operated on
+      objectName:
+        type: string
+        title: name of the object
+      objectRevision:
+        type: string
+        title: 'object revision post the operation, note Read operation
+
+          doesn''t change the revision'
+      objectType:
+        $ref: '#/definitions/ObjectType'
+      operationTime:
+        type: string
+        title: time of operation
+      startTime:
+        type: string
+        title: total time taken by operations
+      endTime:
+        type: string
+      user:
+        type: string
+        title: the operation is performed on behalf of this user
+      httpStatusCode:
+        type: integer
+        format: int32
+        title: http response
+      httpStatusMsg:
+        type: string
+        title: summary of the error in text format
+      jobId:
+        type: string
+        title: for tracking asynchronous tasks
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/ZsrvError'
+        title: 'one or more errors will be set if the operation failed
+
+          i.e. httpStatusCode != 2xx'
+  DeploymentRequest:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/K8sDeploymentType'
+        description: Type of deployment (required). Currently only 'HELMCHART' is supported.
+      metadata:
+        $ref: '#/definitions/Metadata'
+        description: Metadata for the deployment (required)
+      data:
+        $ref: '#/definitions/DeploymentData'
+        description: Data for the deployment (required)
+    description: Deployment create request
+    title: Deployment create request
+    required:
+    - type
+    - metadata
+    - data
+  ZsrvErrorCode:
+    type: string
+    enum:
+    - zMsgErrorNone
+    - zMsgSucess
+    - NotFound
+    - AlreadyExists
+    - VersionMismatch
+    - RangeError
+    - LargeResult
+    - IncompleteData
+    - InvalidData
+    - FunctionUnsupported
+    - NoMemory
+    - SendFailure
+    - Timeout
+    - BadReqBody
+    - BadReqParam
+    - InvalidFieldFormat
+    - UrlNotFound
+    - ApiVersionNotSupported
+    - Unauthorized
+    - Forbidden
+    - Conflict
+    - NotModified
+    - DependencyConflict
+    - JsonFmtError
+    - ProtoFmtError
+    - CertError
+    - DataBaseConnection
+    - DBError
+    - zMsgAccepted
+    - zMsgCreated
+    - PreConditionFailed
+    - InternalServerError
+    default: zMsgErrorNone
+    description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+    title: ZedCould internal error code
+  ClusterMetadata:
+    type: object
+    properties:
+      clusterId:
+        type: string
+        description: 'ID of the target cluster. Example: ''cluster-abc123'''
+      orchestratorClusterId:
+        type: string
+        description: 'Orchestrator cluster ID. Example: ''rancher-cluster-123'''
+      clusterName:
+        type: string
+        description: 'Name of the target cluster. Example: ''production-k8s'''
+      kubeVersion:
+        type: string
+        description: 'Kubernetes version of the target cluster. Example: ''v1.28.0'''
+    description: Metadata for the target cluster
+    title: Cluster metadata
+    required:
+    - clusterId
+    - orchestratorClusterId
+  Chart:
+    type: object
+    properties:
+      name:
+        type: string
+        description: 'Name of the Helm chart. Example: ''nginx'''
+      version:
+        type: string
+        description: 'Version of the Helm chart. Example: ''15.4.0'''
+      customValues:
+        type: object
+        description: 'Custom values for the Helm chart. Example: {''replicaCount'': 3, ''service'': {''type'': ''LoadBalancer'', ''port'': 80}}'
+      repoIdentifier:
+        type: string
+        description: 'Repository identifier for the Helm chart. Example: ''bitnami'''
+    description: Details of the Helm chart
+    title: Helm chart details
+    required:
+    - name
+    - version
+  DeploymentData:
+    type: object
+    properties:
+      helmChartData:
+        $ref: '#/definitions/HelmChartData'
+        description: Helm chart data for the deployment
+    description: Data for the deployment
+    title: Deployment data
+    required:
+    - helmChartData
+securityDefinitions:
+  BearerToken:
+    type: apiKey
+    description: Bearer token for user session
+    name: Authorization
+    in: header
+externalDocs:
+  description: ZEDEDA Product Documentation
+  url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/app-profiles
