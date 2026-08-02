@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for ZEDEDA Edge-Node Cluster Service
+  version: 1.0.0
+extends: openapi/zededa-node_cluster_service-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-21'
+    x-api-base-url: https://zedcontrol.zededa.net/api
+    x-api-docs: https://zedcontrol.zededa.net/api/v1/docs/
+    x-authentication: apiKey header (X-API-KEY or Authorization bearer)
+    x-pagination: next.* page/cursor params, next response field
+    x-error-envelope: google.rpc.Status + ZsrvError code registry
+    x-provider: ZEDEDA (zededa.com)

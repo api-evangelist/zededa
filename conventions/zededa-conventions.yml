@@ -1,0 +1,49 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/*-openapi.json + ZEDEDA developer docs
+base_url: https://zedcontrol.zededa.net/api
+api_docs: https://zedcontrol.zededa.net/api/v1/docs/
+authentication:
+  style: apiKey (header)
+  schemes:
+  - name: BearerToken
+    header: Authorization
+    note: Bearer token for user session
+  - name: ApiKeyAuth
+    header: X-API-KEY
+    note: Long-lived API key for programmatic access
+  ref: authentication/zededa-authentication.yml
+pagination:
+  style: page + cursor
+  request_params:
+  - next.pageSize
+  - next.pageNum
+  - next.pageToken
+  - next.orderBy
+  - next.totalPages
+  response_field: next
+  note: List/Query endpoints accept a next.* object and return a next block with pageToken/totalPages.
+request_tracing:
+  header: X-Request-Id
+  direction: request
+  note: Optional client-supplied correlation id echoed for tracing.
+versioning:
+  scheme: uri-path
+  current: v1
+  note: API served under /api/v1; error code ApiVersionNotSupported signals an unsupported version.
+  ref: lifecycle/zededa-lifecycle.yml
+idempotency:
+  supported: false
+  note: No idempotency-key header is documented; writes use optimistic concurrency (VersionMismatch /
+    412 preconditions) instead.
+concurrency:
+  model: optimistic
+  signal: VersionMismatch error code / 412 Precondition Failed
+  note: Objects carry a revision; updates can be rejected on version mismatch.
+error_envelope:
+  default: googlerpcStatus (code/message/details)
+  granular: ZsrvError (ec/details)
+  ref: errors/zededa-problem-types.yml, errors/zededa-error-codes.yml
+resource_identity:
+  id_format: UUID
+  projects: Resources are scoped to projects/resource-groups (tags).

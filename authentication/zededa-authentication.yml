@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/zededa-app_profile_service-openapi.json, openapi/zededa-app_service-openapi.json,
+  openapi/zededa-diag_service-openapi.json, openapi/zededa-job_service-openapi.json, openapi/zededa-kubernetes_service-openapi.json,
+  openapi/zededa-network_service-openapi.json, openapi/zededa-node_cluster_service-openapi.json,
+  openapi/zededa-node_service-openapi.json, openapi/zededa-storage_service-openapi.json, openapi/zededa-user_service-openapi.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: BearerToken
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Bearer token for user session
+  sources:
+  - openapi/zededa-app_profile_service-openapi.json
+  - openapi/zededa-app_service-openapi.json
+  - openapi/zededa-diag_service-openapi.json
+  - openapi/zededa-job_service-openapi.json
+  - openapi/zededa-network_service-openapi.json
+  - openapi/zededa-node_cluster_service-openapi.json
+  - openapi/zededa-node_service-openapi.json
+  - openapi/zededa-storage_service-openapi.json
+  - openapi/zededa-user_service-openapi.json
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-KEY
+  sources:
+  - openapi/zededa-kubernetes_service-openapi.json

@@ -1,0 +1,73 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/*-openapi.json ZsrvErrorCode enum
+envelope:
+  schema: ZsrvError
+  fields:
+  - ec (ZsrvErrorCode enum)
+  - details (string)
+error_codes:
+- code: zMsgErrorNone
+  meaning: No error
+- code: zMsgSucess
+  meaning: Success
+- code: NotFound
+  meaning: Requested resource not found
+- code: AlreadyExists
+  meaning: Resource with the same identity already exists
+- code: VersionMismatch
+  meaning: Object version does not match (optimistic-concurrency conflict)
+- code: RangeError
+  meaning: A value is outside its allowed range
+- code: LargeResult
+  meaning: Result set too large to return
+- code: IncompleteData
+  meaning: Required data is missing from the request
+- code: InvalidData
+  meaning: Submitted data is invalid
+- code: FunctionUnsupported
+  meaning: Requested function is not supported
+- code: NoMemory
+  meaning: Server ran out of memory
+- code: SendFailure
+  meaning: Failed to send a downstream message
+- code: Timeout
+  meaning: Operation timed out
+- code: BadReqBody
+  meaning: Malformed request body
+- code: BadReqParam
+  meaning: Invalid request parameter
+- code: InvalidFieldFormat
+  meaning: A field is in an invalid format
+- code: UrlNotFound
+  meaning: Request URL/path not found
+- code: ApiVersionNotSupported
+  meaning: Requested API version is not supported
+- code: Unauthorized
+  meaning: Missing or invalid authentication
+- code: Forbidden
+  meaning: Authenticated identity lacks permission
+- code: Conflict
+  meaning: Request conflicts with current resource state
+- code: NotModified
+  meaning: Resource not modified
+- code: DependencyConflict
+  meaning: A dependency prevents the operation
+- code: JsonFmtError
+  meaning: JSON formatting error
+- code: ProtoFmtError
+  meaning: Protobuf formatting error
+- code: CertError
+  meaning: Certificate error
+- code: DataBaseConnection
+  meaning: Database connection failure
+- code: DBError
+  meaning: Database error
+- code: zMsgAccepted
+  meaning: Request accepted for async processing
+- code: zMsgCreated
+  meaning: Resource created
+- code: PreConditionFailed
+  meaning: A precondition failed
+- code: InternalServerError
+  meaning: Unexpected internal server error

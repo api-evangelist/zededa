@@ -1,0 +1,5327 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/zededa-app_profile_service-openapi.json, openapi/zededa-app_service-openapi.json,
+  openapi/zededa-diag_service-openapi.json, openapi/zededa-job_service-openapi.json, openapi/zededa-kubernetes_service-openapi.json,
+  openapi/zededa-network_service-openapi.json, openapi/zededa-node_cluster_service-openapi.json,
+  openapi/zededa-node_service-openapi.json, openapi/zededa-storage_service-openapi.json, openapi/zededa-user_service-openapi.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 421
+  by_action_class:
+    connected: 242
+    acting: 179
+  by_consequence:
+    read: 242
+    write: 163
+    physical: 11
+    safety-critical: 5
+  human_in_the_loop_required: 5
+operations:
+- path: /v1/appprofiles
+  method: get
+  operationId: AppProfileService_QueryAppProfiles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/appprofiles
+  method: post
+  operationId: AppProfileService_CreateAppProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/appprofiles/id/{id}
+  method: get
+  operationId: AppProfileService_GetAppProfile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/appprofiles/id/{id}
+  method: delete
+  operationId: AppProfileService_DeleteAppProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/appprofiles/id/{id}
+  method: put
+  operationId: AppProfileService_UpdateAppProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/appprofiles/id/{id}/version
+  method: get
+  operationId: AppProfileService_QueryAppProfileRevisionById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/appprofiles/name/{name}
+  method: get
+  operationId: AppProfileService_GetAppProfileByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/appprofiles/name/{name}/version
+  method: get
+  operationId: AppProfileService_QueryAppProfileRevisionByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/assetgroups
+  method: get
+  operationId: AssetGroupService_QueryAssetGroups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/assetgroups
+  method: post
+  operationId: AssetGroupService_CreateAssetGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/assetgroups/id/{id}
+  method: get
+  operationId: AssetGroupService_GetAssetGroup
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/assetgroups/id/{id}
+  method: delete
+  operationId: AssetGroupService_DeleteAssetGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/assetgroups/id/{id}
+  method: put
+  operationId: AssetGroupService_UpdateAssetGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/assetgroups/name/{name}
+  method: get
+  operationId: AssetGroupService_GetAssetGroupByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/profiledeployments
+  method: get
+  operationId: ProfileDeploymentService_QueryProfileDeployments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/profiledeployments
+  method: post
+  operationId: ProfileDeploymentService_CreateProfileDeployment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/profiledeployments/id/{id}
+  method: get
+  operationId: ProfileDeploymentService_GetProfileDeployment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/profiledeployments/id/{id}
+  method: delete
+  operationId: ProfileDeploymentService_DeleteProfileDeployment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/profiledeployments/id/{id}
+  method: put
+  operationId: ProfileDeploymentService_UpdateProfileDeployment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/profiledeployments/id/{id}/resourcestatus
+  method: get
+  operationId: ProfileDeploymentService_QueryProfileDeploymentResourceStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/profiledeployments/name/{name}
+  method: get
+  operationId: ProfileDeploymentService_GetProfileDeploymentByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/apps
+  method: get
+  operationId: EdgeApplicationConfiguration_QueryBetaEdgeApplicationBundles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps
+  method: get
+  operationId: EdgeApplicationConfiguration_QueryEdgeApplicationBundles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps
+  method: post
+  operationId: EdgeApplicationConfiguration_CreateEdgeApplicationBundle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/global
+  method: get
+  operationId: EdgeApplicationConfiguration_QueryGlobalEdgeApplicationBundles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/global/id/{id}
+  method: get
+  operationId: EdgeApplicationConfiguration_GetGlobalEdgeApplicationBundle
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/global/name/{name}
+  method: get
+  operationId: EdgeApplicationConfiguration_GetGlobalEdgeApplicationBundleByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/id/{id}
+  method: get
+  operationId: EdgeApplicationConfiguration_GetEdgeApplicationBundle
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/id/{id}
+  method: delete
+  operationId: EdgeApplicationConfiguration_DeleteEdgeApplicationBundle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/id/{id}
+  method: put
+  operationId: EdgeApplicationConfiguration_UpdateEdgeApplicationBundle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/id/{id}/projects
+  method: get
+  operationId: EdgeApplicationConfiguration_QueryEdgeApplicationBundleProjectList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances
+  method: get
+  operationId: EdgeApplicationInstanceConfiguration_QueryEdgeApplicationInstances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances
+  method: post
+  operationId: EdgeApplicationInstanceConfiguration_CreateEdgeApplicationInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/instances/id/{appInstanceId}/snapshot/name/{name}
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetAppInstanceSnapshot
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/id/{appInstanceId}/snapshot/name/{name}
+  method: delete
+  operationId: EdgeApplicationInstanceStatus_DeleteAppInstanceSnapshot
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/instances/id/{id}
+  method: get
+  operationId: EdgeApplicationInstanceConfiguration_GetEdgeApplicationInstance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/id/{id}
+  method: delete
+  operationId: EdgeApplicationInstanceConfiguration_DeleteEdgeApplicationInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/instances/id/{id}
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_UpdateEdgeApplicationInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/instances/id/{id}/activate
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_ActivateEdgeApplicationInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/instances/id/{id}/console/remote
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_ConnectToEdgeApplicationInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/instances/id/{id}/deactivate
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_DeActivateEdgeApplicationInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/instances/id/{id}/flowlog/classification
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceTrafficFlows
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/id/{id}/flowlog/toptalkers
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceTopTalkers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/id/{id}/logs
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceLogs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/id/{id}/opaque-status
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceOpaqueStatusById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/id/{id}/refresh
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_RefreshEdgeApplicationInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/instances/id/{id}/refresh/purge
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_RefreshPurgeEdgeApplicationInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/instances/id/{id}/restart
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_RestartEdgeApplicationInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/instances/id/{id}/snapshots
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetAppInstanceSnapshots
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/id/{id}/status
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/id/{objid}/events
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/id/{objid}/timeSeries/{mType}
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceResourceMetricsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/name/{name}
+  method: get
+  operationId: EdgeApplicationInstanceConfiguration_GetEdgeApplicationInstanceByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/name/{name}/flowlog/classification
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceTrafficFlows2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/name/{name}/flowlog/toptalkers
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceTopTalkers2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/name/{name}/opaque-status
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceOpaqueStatusByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/name/{name}/status
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceStatusByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/name/{objname}/events
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceEventsByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/name/{objname}/timeSeries/{mType}
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceResourceMetricsByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/patch-reference-update
+  method: post
+  operationId: EdgeApplicationInstanceConfiguration_UpdatePatchEnvelopeReferencetoAppInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/instances/snapshot/id/{id}
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetAppInstanceSnapshotByID
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/snapshot/id/{id}/state
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetAppInstanceSnapshotState
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/status
+  method: get
+  operationId: EdgeApplicationInstanceStatus_QueryEdgeApplicationInstanceStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/status-config
+  method: get
+  operationId: EdgeApplicationInstanceStatus_QueryEdgeApplicationInstanceStatusConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/instances/tags
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetApplicationInterfaceTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/name/{name}
+  method: get
+  operationId: EdgeApplicationConfiguration_GetEdgeApplicationBundleByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/patch-envelope
+  method: get
+  operationId: PatchEnvelopeConfiguration_GetPatchEnvelope
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/patch-envelope
+  method: post
+  operationId: PatchEnvelopeConfiguration_CreatePatchEnvelope
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/patch-envelope/id/{id}
+  method: get
+  operationId: PatchEnvelopeConfiguration_GetPatchEnvelopeById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/patch-envelope/id/{id}
+  method: delete
+  operationId: PatchEnvelopeConfiguration_DeleteAppInstanceSnapshot
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/patch-envelope/id/{id}
+  method: put
+  operationId: PatchEnvelopeConfiguration_UpdatePatchEnvelope
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/patch-envelope/name/{name}
+  method: get
+  operationId: PatchEnvelopeConfiguration_GetPatchEnvelopeByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/patch-envelope/status
+  method: get
+  operationId: PatchEnvelopeConfiguration_GetPatchEnvelopeStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances
+  method: get
+  operationId: EdgeApplicationInstanceConfiguration_QueryEdgeApplicationInstancesV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances
+  method: post
+  operationId: EdgeApplicationInstanceConfiguration_CreateEdgeApplicationInstanceV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/apps/instances/id/{id}
+  method: get
+  operationId: EdgeApplicationInstanceConfiguration_GetEdgeApplicationInstanceV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/id/{id}
+  method: delete
+  operationId: EdgeApplicationInstanceConfiguration_DeleteEdgeApplicationInstanceV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/apps/instances/id/{id}
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_UpdateEdgeApplicationInstanceV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/apps/instances/id/{id}/activate
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_ActivateEdgeApplicationInstanceV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/apps/instances/id/{id}/console/remote
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_ConnectToEdgeApplicationInstanceV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/apps/instances/id/{id}/deactivate
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_DeActivateEdgeApplicationInstanceV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/apps/instances/id/{id}/flowlog/classification
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceTrafficFlowsV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/id/{id}/flowlog/toptalkers
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceTopTalkersV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/id/{id}/logs
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceLogsV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/id/{id}/opaque-status
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceOpaqueStatusByIdV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/id/{id}/refresh
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_RefreshEdgeApplicationInstanceV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/apps/instances/id/{id}/refresh/purge
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_RefreshPurgeEdgeApplicationInstanceV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/apps/instances/id/{id}/restart
+  method: put
+  operationId: EdgeApplicationInstanceConfiguration_RestartEdgeApplicationInstanceV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/apps/instances/id/{id}/status
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceStatusV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/id/{objid}/events
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceEventsV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/id/{objid}/timeSeries/{mType}
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceResourceMetricsByIdV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/name/{name}
+  method: get
+  operationId: EdgeApplicationInstanceConfiguration_GetEdgeApplicationInstanceByNameV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/name/{name}/flowlog/classification
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceTrafficFlowsV22
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/name/{name}/flowlog/toptalkers
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceTopTalkersV22
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/name/{name}/opaque-status
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceOpaqueStatusByNameV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/name/{name}/status
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceStatusByNameV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/name/{objname}/events
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceEventsByNameV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/name/{objname}/timeSeries/{mType}
+  method: get
+  operationId: EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceResourceMetricsByNameV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/patch-reference-update
+  method: post
+  operationId: EdgeApplicationInstanceConfiguration_UpdatePatchEnvelopeReferencetoAppInstanceV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/apps/instances/status
+  method: get
+  operationId: EdgeApplicationInstanceStatus_QueryEdgeApplicationInstanceStatusV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/apps/instances/status-config
+  method: get
+  operationId: EdgeApplicationInstanceStatus_QueryEdgeApplicationInstanceStatusConfigV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cloud/healthreport
+  method: get
+  operationId: CloudDiagnostics_GetClusterHealthReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cloud/ping
+  method: get
+  operationId: CloudDiagnostics_checkClusterHealth
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cloud/ping/id/{pingId}
+  method: get
+  operationId: CloudDiagnostics_checkClusterHealth2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cloud/policies
+  method: get
+  operationId: CloudDiagnostics_QueryCloudPolicies
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cloud/policies
+  method: post
+  operationId: CloudDiagnostics_CreateCloudPolicyDocument
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cloud/policies/id/{id}
+  method: get
+  operationId: CloudDiagnostics_GetCloudPolicyDocument
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cloud/policies/id/{id}
+  method: delete
+  operationId: CloudDiagnostics_DeleteCloudPolicyDocument
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cloud/policies/latest
+  method: put
+  operationId: CloudDiagnostics_MarkCloudPolicyLatest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cloud/version
+  method: get
+  operationId: CloudDiagnostics_GetClusterVersion
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/config
+  method: get
+  operationId: EdgeDiagnostics_GetDeviceTwinConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/config
+  method: put
+  operationId: EdgeDiagnostics_RegenDeviceConfig
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}/config/bootstrap
+  method: get
+  operationId: EdgeDiagnostics_GetDeviceTwinBootstrapConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/config/next
+  method: get
+  operationId: EdgeDiagnostics_GetDeviceTwinNextConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/config/offline
+  method: get
+  operationId: EdgeDiagnostics_GetDeviceTwinOfflineNextConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/name/{name}/config
+  method: get
+  operationId: EdgeDiagnostics_GetDeviceTwinConfigByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/name/{name}/config/bootstrap
+  method: get
+  operationId: EdgeDiagnostics_GetDeviceTwinBootstrapConfigByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/name/{name}/config/next
+  method: get
+  operationId: EdgeDiagnostics_GetDeviceTwinNextConfigByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/name/{name}/config/offline
+  method: get
+  operationId: EdgeDiagnostics_GetDeviceTwinOfflineConfigByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/events
+  method: get
+  operationId: EdgeDiagnostics_GetEventsTimeline
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/events/timeSeries/{mType}
+  method: get
+  operationId: EdgeDiagnostics_GetResourceMetricsTimeline
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/events/topUsers
+  method: get
+  operationId: EdgeDiagnostics_GetTopUsers2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/hello
+  method: post
+  operationId: CloudDiagnostics_checkMicroserviceHealth
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/timeSeries/{mType}
+  method: get
+  operationId: EdgeDiagnostics_GetResourceMetricsTimeline2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/jobs
+  method: get
+  operationId: BulkJobOps_QueryJobs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/jobs
+  method: post
+  operationId: BulkJobOps_CreateJob
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/apps/bundles/import
+  method: put
+  operationId: BulkJobOps_BulkImportEdgeApplications
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/apps/instances/create
+  method: put
+  operationId: BulkJobOps_BulkCreateEdgeApplicationInstances
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/apps/instances/refresh
+  method: put
+  operationId: BulkJobOps_BulkRefreshEdgeApplicationInstances
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/apps/instances/refresh/purge
+  method: put
+  operationId: BulkJobOps_BulkRefreshAndPurgeEdgeApplicationInstances
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/devices/baseos/upgrade
+  method: put
+  operationId: BulkJobOps_BulkUpdateEdgeNodeBaseOS
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/devices/baseos/upgrade/retry
+  method: put
+  operationId: BulkJobOps_BulkUpdateEdgeNodeBaseOSRetry
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/devices/deployment/tags
+  method: put
+  operationId: BulkJobOps_BulkUpdateEdgeNodeBaseOSDeploymentTag
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/devices/project/target
+  method: put
+  operationId: BulkJobOps_BulkUpdateEdgeNodeBaseOSProject
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/devices/tags
+  method: put
+  operationId: BulkJobOps_BulkUpdateEdgeNodeBaseOSTag
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/id/{id}
+  method: get
+  operationId: BulkJobOps_GetJobById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/jobs/id/{id}
+  method: put
+  operationId: BulkJobOps_UpdateJob
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/id/{id}/objectType/{objectType}
+  method: get
+  operationId: BulkJobOps_GetJob
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/jobs/id/{id}/objectType/{objectType}
+  method: delete
+  operationId: BulkJobOps_DeleteJob
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/models/import
+  method: put
+  operationId: BulkJobOps_BulkImportHardwareModels
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/name/{name}/objectType/{objectType}
+  method: get
+  operationId: BulkJobOps_GetJobByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/instances/kubernetes/deployments
+  method: get
+  operationId: KubernetesDeployments_ListDeployments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/instances/kubernetes/deployments
+  method: post
+  operationId: KubernetesDeployments_CreateDeployment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/deployments/id/{deploymentId}
+  method: get
+  operationId: KubernetesDeployments_GetDeployment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/instances/kubernetes/deployments/id/{deploymentId}
+  method: delete
+  operationId: KubernetesDeployments_DeleteDeployment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/deployments/id/{deploymentId}
+  method: put
+  operationId: KubernetesDeployments_UpdateDeployment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/gitrepos
+  method: get
+  operationId: KubernetesGitOps_ListGitRepos
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/instances/kubernetes/gitrepos
+  method: post
+  operationId: KubernetesGitOps_CreateGitRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/gitrepos/id/{gitrepoId}
+  method: get
+  operationId: KubernetesGitOps_GetGitRepo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/instances/kubernetes/gitrepos/id/{gitrepoId}
+  method: delete
+  operationId: KubernetesGitOps_DeleteGitRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/gitrepos/id/{gitrepoId}
+  method: put
+  operationId: KubernetesGitOps_UpdateGitRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/helm/charts
+  method: get
+  operationId: HelmChartManagement_ListHelmCharts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/instances/kubernetes/helm/charts
+  method: post
+  operationId: HelmChartManagement_CreateHelmChart
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/helm/charts/name/{chartName}
+  method: delete
+  operationId: HelmChartManagement_DeleteHelmChart
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/helm/charts/name/{chartName}/version/{chartVersion}
+  method: get
+  operationId: HelmChartManagement_GetHelmChart
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/instances/kubernetes/helm/charts/name/{chartName}/version/{chartVersion}
+  method: put
+  operationId: HelmChartManagement_UpdateHelmChart
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/helm/repository
+  method: get
+  operationId: PrivateHelmRepositories_ListPrivateRepos
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/instances/kubernetes/helm/repository
+  method: post
+  operationId: PrivateHelmRepositories_CreatePrivateRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/helm/repository/id/{id}
+  method: put
+  operationId: PrivateHelmRepositories_UpdatePrivateRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/helm/repository/id/{privateRepoId}
+  method: get
+  operationId: PrivateHelmRepositories_GetPrivateRepo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/instances/kubernetes/helm/repository/id/{privateRepoId}
+  method: delete
+  operationId: PrivateHelmRepositories_DeletePrivateRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/helm/repository/id/{privateRepoId}/charts
+  method: get
+  operationId: PrivateHelmRepositories_GetPrivateRepoCharts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/instances/kubernetes/secrets
+  method: get
+  operationId: KubernetesSecrets_ListSecrets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/instances/kubernetes/secrets
+  method: post
+  operationId: KubernetesSecrets_CreateSecret
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/instances/kubernetes/secrets/id/{secretId}
+  method: get
+  operationId: KubernetesSecrets_GetSecret
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/zks/cluster/groups
+  method: post
+  operationId: ClusterGroups_CreateClusterGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/zks/cluster/groups/id/{clusterGroupId}
+  method: delete
+  operationId: ClusterGroups_DeleteClusterGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/zks/cluster/groups/id/{id}
+  method: put
+  operationId: ClusterGroups_UpdateClusterGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/zks/cluster/groups/manifest
+  method: get
+  operationId: ClusterGroups_GetClusterGroupManifest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/zks/cluster/groups/status
+  method: get
+  operationId: ClusterGroups_GetClusterGroupsStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/zks/instances
+  method: get
+  operationId: ZKSClusterInstances_ListZKSInstances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/zks/instances
+  method: post
+  operationId: ZKSClusterInstances_CreateZKSInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/zks/instances
+  method: put
+  operationId: ZKSClusterInstances_BulkUpdateZKSInstances
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/zks/instances/id/{id}
+  method: put
+  operationId: ZKSClusterInstances_UpdateZKSInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/zks/instances/id/{zksId}
+  method: get
+  operationId: ZKSClusterInstances_GetZKSInstance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/zks/instances/id/{zksId}
+  method: delete
+  operationId: ZKSClusterInstances_DeleteZKSInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/zks/instances/id/{zksId}/metrics
+  method: get
+  operationId: ZKSClusterInstances_GetZKSInstanceMetrics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/zks/instances/id/{zksId}/nodes
+  method: put
+  operationId: ZKSClusterInstances_UpdateZKSInstanceNodes
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/zks/instances/id/{zksId}/registration-commands
+  method: get
+  operationId: ZKSClusterInstances_GetZKSInstanceRegistrationCommands
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/zks/instances/id/{zksId}/upgrade
+  method: put
+  operationId: ZKSClusterInstances_UpgradeZKSInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/zks/instances/import
+  method: post
+  operationId: ZKSClusterInstances_ImportZKSInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/zks/instances/k3s-upgrade
+  method: put
+  operationId: ZKSClusterInstances_BulkUpgradeK3s
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/zks/instances/k3s-versions
+  method: get
+  operationId: ZKSClusterInstances_GetK3sVersions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/zks/instances/name/{zksName}
+  method: get
+  operationId: ZKSClusterInstances_GetZKSInstanceByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/zks/instances/name/{zksName}/metrics
+  method: get
+  operationId: ZKSClusterInstances_GetZKSInstanceMetricsByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/zks/instances/name/{zksName}/registration-commands
+  method: get
+  operationId: ZKSClusterInstances_GetZKSInstanceRegistrationCommandsByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/zks/instances/status
+  method: get
+  operationId: ZKSClusterInstances_GetZKSInstancesStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/netinsts
+  method: get
+  operationId: EdgeNetworkInstanceConfiguration_QueryEdgeNetworkInstances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/netinsts
+  method: post
+  operationId: EdgeNetworkInstanceConfiguration_CreateEdgeNetworkInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/netinsts/id/{id}
+  method: get
+  operationId: EdgeNetworkInstanceConfiguration_GetEdgeNetworkInstance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/netinsts/id/{id}
+  method: delete
+  operationId: EdgeNetworkInstanceConfiguration_DeleteEdgeNetworkInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/netinsts/id/{id}
+  method: put
+  operationId: EdgeNetworkInstanceConfiguration_UpdateEdgeNetworkInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/netinsts/id/{id}/status
+  method: get
+  operationId: EdgeNetworkInstanceStatus_GetEdgeNetworkInstanceStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/netinsts/name/{name}
+  method: get
+  operationId: EdgeNetworkInstanceConfiguration_GetEdgeNetworkInstanceByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/netinsts/name/{name}/status
+  method: get
+  operationId: EdgeNetworkInstanceStatus_GetEdgeNetworkInstanceStatusByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/netinsts/status
+  method: get
+  operationId: EdgeNetworkInstanceStatus_QueryEdgeNetworkInstanceStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/netinsts/status-config
+  method: get
+  operationId: EdgeNetworkInstanceStatus_QueryEdgeNetworkInstanceStatusConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/netinsts/tags
+  method: get
+  operationId: EdgeNetworkInstanceStatus_GetNetworkInstanceInterfaceTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/networks
+  method: get
+  operationId: EdgeNetworkConfiguration_QueryEdgeNetworks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/networks
+  method: post
+  operationId: EdgeNetworkConfiguration_CreateEdgeNetwork
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/networks/id/{id}
+  method: get
+  operationId: EdgeNetworkConfiguration_GetEdgeNetwork
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/networks/id/{id}
+  method: delete
+  operationId: EdgeNetworkConfiguration_DeleteEdgeNetwork
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/networks/id/{id}
+  method: put
+  operationId: EdgeNetworkConfiguration_UpdateEdgeNetwork
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/networks/id/{id}/devices
+  method: get
+  operationId: EdgeNetworkConfiguration_GetEdgeNetworkDevicesById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/networks/name/{name}
+  method: get
+  operationId: EdgeNetworkConfiguration_GetEdgeNetworkByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster
+  method: get
+  operationId: EdgeNodeClusterConfiguration_QueryClusters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster
+  method: post
+  operationId: EdgeNodeClusterConfiguration_CreateCluster
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/available/projects
+  method: get
+  operationId: EdgeNodeClusterConfiguration_GetAvailableProjectsForCluster
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/id/{id}
+  method: get
+  operationId: EdgeNodeClusterConfiguration_GetCluster
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/id/{id}
+  method: delete
+  operationId: EdgeNodeClusterConfiguration_DeleteCluster
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/id/{id}
+  method: put
+  operationId: EdgeNodeClusterConfiguration_UpdateCluster
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/id/{id}/ports
+  method: get
+  operationId: EdgeNodeClusterConfiguration_GetClusterPorts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/id/{id}/raw/status
+  method: get
+  operationId: ClusterStatus_GetClusterRawStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/id/{id}/status
+  method: get
+  operationId: ClusterStatus_GetClusterStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/id/{id}/upgrade
+  method: put
+  operationId: EdgeNodeClusterConfiguration_UpgradeCluster
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cluster/id/{id}/upgrade/status
+  method: get
+  operationId: ClusterStatus_GetClusterUpgradeStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/name/{name}
+  method: get
+  operationId: EdgeNodeClusterConfiguration_GetClusterByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cluster/node/id/{id}
+  method: get
+  operationId: EdgeNodeClusterConfiguration_GetClusterByNodeId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/brands
+  method: get
+  operationId: HardwareModel_QueryHardwareBrands
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/brands
+  method: post
+  operationId: HardwareModel_CreateHardwareBrand
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/brands/global
+  method: get
+  operationId: HardwareModel_QueryGlobalHardwareBrands
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/brands/global/id/{id}
+  method: get
+  operationId: HardwareModel_GetGlobalHardwareBrand
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/brands/global/name/{name}
+  method: get
+  operationId: HardwareModel_GetGlobalHardwareBrandByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/brands/id/{id}
+  method: get
+  operationId: HardwareModel_GetHardwareBrand
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/brands/id/{id}
+  method: delete
+  operationId: HardwareModel_DeleteHardwareBrand
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/brands/id/{id}
+  method: put
+  operationId: HardwareModel_UpdateHardwareBrand
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/brands/name/{name}
+  method: get
+  operationId: HardwareModel_GetHardwareBrandByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ceps
+  method: get
+  operationId: CertificateEnrollmentProfileConfiguration_QueryCEPs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ceps
+  method: post
+  operationId: CertificateEnrollmentProfileConfiguration_CreateCEP
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/ceps/id/{id}
+  method: get
+  operationId: CertificateEnrollmentProfileConfiguration_GetCEPById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ceps/id/{id}
+  method: delete
+  operationId: CertificateEnrollmentProfileConfiguration_DeleteCEP
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/ceps/id/{id}
+  method: put
+  operationId: CertificateEnrollmentProfileConfiguration_UpdateCEP
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/ceps/name/{name}
+  method: get
+  operationId: CertificateEnrollmentProfileConfiguration_GetCEPByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices
+  method: get
+  operationId: EdgeNodeConfiguration_QueryEdgeNodes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices
+  method: post
+  operationId: EdgeNodeConfiguration_CreateEdgeNode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}
+  method: get
+  operationId: EdgeNodeConfiguration_GetEdgeNode
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}
+  method: delete
+  operationId: EdgeNodeConfiguration_DeleteEdgeNode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}
+  method: put
+  operationId: EdgeNodeConfiguration_UpdateEdgeNode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}/activate
+  method: put
+  operationId: EdgeNodeConfiguration_ActivateEdgeNode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}/apply
+  method: put
+  operationId: EdgeNodeConfiguration_UpdateEdgeNodeBaseOS
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}/attestation
+  method: get
+  operationId: EdgeNodeConfiguration_GetEdgeNodeAttestation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/baseos/upgrade/retry
+  method: put
+  operationId: EdgeNodeConfiguration_BaseOsUpgradeRetryEdgeNode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}/deactivate
+  method: put
+  operationId: EdgeNodeConfiguration_DeActivateEdgeNode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}/debug/disable
+  method: put
+  operationId: EdgeNodeConfiguration_StopDebugEdgeNode
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/devices/id/{id}/debug/enable
+  method: put
+  operationId: EdgeNodeConfiguration_StartDebugEdgeNode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}/edgeview/clientscript
+  method: get
+  operationId: EdgeNodeConfiguration_GetEdgeviewClientScript
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/edgeview/disable
+  method: put
+  operationId: EdgeNodeConfiguration_StopEdgeviewEdgeNode
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/devices/id/{id}/edgeview/enable
+  method: put
+  operationId: EdgeNodeConfiguration_StartEdgeviewEdgeNode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}/offboard
+  method: put
+  operationId: EdgeNodeConfiguration_Offboard
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}/onboarding
+  method: get
+  operationId: EdgeNodeConfiguration_GetEdgeNodeOnboarding
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/preparepoweroff
+  method: put
+  operationId: EdgeNodeConfiguration_PreparePowerOff
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/devices/id/{id}/publish
+  method: put
+  operationId: EdgeNodeConfiguration_UpdateEdgeNodeBaseOS2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}/reboot
+  method: put
+  operationId: EdgeNodeConfiguration_Reboot
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/devices/id/{id}/status
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/status/edgeview
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeEdgeviewStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/status/info
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/status/metrics/raw
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeRawStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/suimage
+  method: get
+  operationId: EdgeNodeConfiguration_GetEdgeNodeSingleUseEVEImage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/suimage
+  method: post
+  operationId: EdgeNodeConfiguration_CreateEdgeNodeSingleUseEVEImage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{id}/suimage/link
+  method: get
+  operationId: EdgeNodeConfiguration_GetEdgeNodeSingleUseEVEImageDownloadLink
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{id}/unpublish
+  method: put
+  operationId: EdgeNodeConfiguration_UpdateEdgeNodeBaseOS3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/devices/id/{objid}/events
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/id/{objid}/timeSeries/{mType}
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeResourceMetricsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/interfaces/tags
+  method: get
+  operationId: EdgeNodeConfiguration_GetDeviceInterfaceTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/name/{name}
+  method: get
+  operationId: EdgeNodeConfiguration_GetEdgeNodeByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/name/{name}/status
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeStatusByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/name/{name}/status/edgeview
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeEdgeviewStatusByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/name/{name}/status/info
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeInfoByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/name/{name}/status/metrics/raw
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeRawStatusByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/name/{objname}/events
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeEventsByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/name/{objname}/timeSeries/{mType}
+  method: get
+  operationId: EdgeNodeStatus_GetEdgeNodeResourceMetricsByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/serial/{serialno}
+  method: get
+  operationId: EdgeNodeConfiguration_GetEdgeNodeBySerial
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/status
+  method: get
+  operationId: EdgeNodeStatus_QueryEdgeNodeStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/status-config
+  method: get
+  operationId: HardwareModel_GetDeviceStatusConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/status/locations
+  method: get
+  operationId: HardwareModel_GetDeviceStatusLocation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/devices/tags
+  method: get
+  operationId: HardwareModel_GetDeviceTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/pcrtemplate/id/{id}
+  method: put
+  operationId: HardwareModel_UpdatePCRTemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/pcrtemplates/id/{id}
+  method: get
+  operationId: HardwareModel_GetPCRTemplateById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/pcrtemplates/id/{id}
+  method: delete
+  operationId: HardwareModel_DeleteEdgeNode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/projects
+  method: get
+  operationId: ResourceGroup_QueryResourceGroups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects
+  method: post
+  operationId: ResourceGroup_CreateResourceGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/projects/id/{id}
+  method: get
+  operationId: ResourceGroup_GetResourceGroup
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/id/{id}
+  method: delete
+  operationId: ResourceGroup_DeleteResourceGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/projects/id/{id}
+  method: put
+  operationId: ResourceGroup_UpdateResourceGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/projects/id/{id}/status
+  method: get
+  operationId: ResourceGroupStatus_GetResourceGroupStatusById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/id/{objid}/events
+  method: get
+  operationId: ResourceGroup_GetResourceGroupEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/id/{objid}/timeSeries/{mType}
+  method: get
+  operationId: ResourceGroup_GetResourceGroupResourceMetricsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/name/{name}
+  method: get
+  operationId: ResourceGroup_GetResourceGroupByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/name/{name}/status
+  method: get
+  operationId: ResourceGroupStatus_GetResourceGroupStatusByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/name/{objname}/events
+  method: get
+  operationId: ResourceGroup_GetResourceGroupEventsByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/name/{objname}/timeSeries/{mType}
+  method: get
+  operationId: ResourceGroup_GetResourceGroupResourceMetricsByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/status
+  method: get
+  operationId: ResourceGroupStatus_QueryResourceGroupStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/status-config
+  method: get
+  operationId: ResourceGroupStatus_QueryResourceGroupStatusConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/tags
+  method: get
+  operationId: ResourceGroup_GetResourceGroupTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sysmodels
+  method: get
+  operationId: HardwareModel_QueryHardwareModels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sysmodels
+  method: post
+  operationId: HardwareModel_CreateHardwareModel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/sysmodels/global
+  method: get
+  operationId: HardwareModel_QueryGlobalHardwareModels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sysmodels/global/id/{id}
+  method: get
+  operationId: HardwareModel_GetGlobalHardwareModel
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sysmodels/global/name/{name}
+  method: get
+  operationId: HardwareModel_GetGlobalHardwareModelByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sysmodels/id/{id}
+  method: get
+  operationId: HardwareModel_GetHardwareModel
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sysmodels/id/{id}
+  method: delete
+  operationId: HardwareModel_DeleteHardwareModel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/sysmodels/id/{id}
+  method: put
+  operationId: HardwareModel_UpdateHardwareModel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/sysmodels/id/{id}/import
+  method: put
+  operationId: HardwareModel_ImportHardwareModel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/sysmodels/id/{id}/pcrtemplates
+  method: get
+  operationId: HardwareModel_GetPCRTemplates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sysmodels/id/{id}/pcrtemplates
+  method: post
+  operationId: HardwareModel_CreatePCRTemplates
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/sysmodels/id/{modelId}/pcrtemplates/name/{name}
+  method: get
+  operationId: HardwareModel_GetPCRTemplateByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sysmodels/name/{name}
+  method: get
+  operationId: HardwareModel_GetHardwareModelByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/projects
+  method: post
+  operationId: ResourceGroup_CreateResourceGroupV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/projects/id/{projectId}/deployments
+  method: get
+  operationId: ResourceGroup_GetDeploymentListbyIdv2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/projects/id/{projectId}/deployments
+  method: delete
+  operationId: ResourceGroup_DeleteResourceGroupAllV2
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/projects/id/{projectId}/deployments
+  method: post
+  operationId: ResourceGroup_CreateDeployment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/projects/id/{projectId}/deployments/id/{id}
+  method: get
+  operationId: ResourceGroup_GetDeploymentByIdV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/projects/id/{projectId}/deployments/id/{id}
+  method: delete
+  operationId: ResourceGroup_DeleteResourceGroupV2
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/projects/id/{projectId}/deployments/id/{id}
+  method: put
+  operationId: ResourceGroup_UpdateResourceGroupV2
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/images
+  method: get
+  operationId: ImageConfiguration_QueryImages
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/images
+  method: post
+  operationId: ImageConfiguration_CreateImage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/images/baseos/latest
+  method: get
+  operationId: ImageConfiguration_QueryLatestImageVersions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/images/baseos/latest
+  method: delete
+  operationId: ImageConfiguration_DeleteLatestImage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/images/baseos/latest
+  method: put
+  operationId: ImageConfiguration_MarkEveImageLatest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/images/baseos/latest/hwclass/{imageArch}
+  method: get
+  operationId: ImageConfiguration_GetLatestImageVersion
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/images/baseos/latest/hwclass/{imageArch}
+  method: put
+  operationId: ImageConfiguration_MarkEveImageLatest2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/images/id/{id}
+  method: get
+  operationId: ImageConfiguration_GetImage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/images/id/{id}
+  method: delete
+  operationId: ImageConfiguration_DeleteImage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/images/id/{id}
+  method: put
+  operationId: ImageConfiguration_UpdateImage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/images/id/{id}/uplink
+  method: put
+  operationId: ImageConfiguration_UplinkImage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/images/name/{name}
+  method: get
+  operationId: ImageConfiguration_GetImageByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/apps/images/name/{name}/upload/chunked
+  method: put
+  operationId: ImageConfiguration_UploadImageChunked
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/images/name/{name}/upload/file
+  method: put
+  operationId: ImageConfiguration_UploadImageFile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/apps/images/projects
+  method: get
+  operationId: ImageConfiguration_QueryImageProjectList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/artifacts
+  method: get
+  operationId: ArtifactManager_QueryArtifacts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/artifacts
+  method: post
+  operationId: ArtifactManager_CreateArtifact
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/artifacts/id/{id}
+  method: get
+  operationId: ArtifactManager_GetArtifactStream
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/artifacts/id/{id}
+  method: delete
+  operationId: ArtifactManager_DeleteArtifact
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/artifacts/id/{id}/upload/chunked
+  method: put
+  operationId: ArtifactManager_UploadArtifact
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/artifacts/id/{id}/url
+  method: get
+  operationId: ArtifactManager_GetArtifactSignedUrl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/datastores
+  method: get
+  operationId: DatastoreConfiguration_QueryDatastores
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/datastores
+  method: post
+  operationId: DatastoreConfiguration_CreateDatastore
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/datastores/id/{id}
+  method: get
+  operationId: DatastoreConfiguration_GetDatastore
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/datastores/id/{id}
+  method: delete
+  operationId: DatastoreConfiguration_DeleteDatastore
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/datastores/id/{id}
+  method: put
+  operationId: DatastoreConfiguration_UpdateDatastore
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/datastores/name/{name}
+  method: get
+  operationId: DatastoreConfiguration_GetDatastoreByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/datastores/projects
+  method: get
+  operationId: DatastoreConfiguration_QueryDatastoreProjectList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/volumes/instances
+  method: get
+  operationId: VolumeInstanceConfiguration_QueryVolumeInstances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/volumes/instances
+  method: post
+  operationId: VolumeInstanceConfiguration_CreateVolumeInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/volumes/instances/id/{id}
+  method: get
+  operationId: VolumeInstanceConfiguration_GetVolumeInstance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/volumes/instances/id/{id}
+  method: delete
+  operationId: VolumeInstanceConfiguration_DeleteVolumeInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/volumes/instances/id/{id}
+  method: put
+  operationId: VolumeInstanceConfiguration_UpdateVolumeInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/volumes/instances/id/{id}/status
+  method: get
+  operationId: VolumeInstanceStatus_GetVolumeInstanceStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/volumes/instances/id/{objid}/events
+  method: get
+  operationId: VolumeInstanceStatus_GetVolumeInstanceEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/volumes/instances/name/{name}
+  method: get
+  operationId: VolumeInstanceConfiguration_GetVolumeInstanceByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/volumes/instances/name/{name}/status
+  method: get
+  operationId: VolumeInstanceStatus_GetVolumeInstanceStatusByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/volumes/instances/name/{objname}/events
+  method: get
+  operationId: VolumeInstanceStatus_GetVolumeInstanceEventsByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/volumes/instances/status
+  method: get
+  operationId: VolumeInstanceStatus_QueryVolumeInstanceStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/volumes/instances/status-config
+  method: get
+  operationId: VolumeInstanceStatus_QueryVolumeInstanceStatusConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/authorization/profiles
+  method: get
+  operationId: IdentityAccessManagement_QueryAuthProfiles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/authorization/profiles
+  method: post
+  operationId: IdentityAccessManagement_CreateAuthProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorization/profiles/id/{id}
+  method: get
+  operationId: IdentityAccessManagement_GetAuthProfile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/authorization/profiles/id/{id}
+  method: delete
+  operationId: IdentityAccessManagement_DeleteAuthProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorization/profiles/id/{id}
+  method: put
+  operationId: IdentityAccessManagement_UpdateAuthProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorization/profiles/name/{name}
+  method: get
+  operationId: IdentityAccessManagement_GetAuthProfileByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cloud/policies
+  method: get
+  operationId: IdentityAccessManagement_QueryDocPolicy
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cloud/policies
+  method: post
+  operationId: IdentityAccessManagement_CreateDocPolicy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cloud/policies/id/{id}
+  method: get
+  operationId: IdentityAccessManagement_GetDocPolicy
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cloud/policies/id/{id}
+  method: delete
+  operationId: IdentityAccessManagement_DeleteDocPolicy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/cloud/policies/latest
+  method: put
+  operationId: IdentityAccessManagement_UpdateDocPolicyLatest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/credentials
+  method: post
+  operationId: IdentityAccessManagement_CreateCredential
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/credentials
+  method: put
+  operationId: IdentityAccessManagement_UpdateCredential
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/credentials/id/{id}
+  method: delete
+  operationId: IdentityAccessManagement_DeleteCredential
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/credentials/self
+  method: put
+  operationId: IdentityAccessManagement_UpdateCredentialSelf
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/enterprises
+  method: get
+  operationId: IdentityAccessManagement_QueryEnterprises
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/enterprises
+  method: post
+  operationId: IdentityAccessManagement_CreateEnterprise
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/enterprises/id/{id}
+  method: get
+  operationId: IdentityAccessManagement_GetEnterprise
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/enterprises/id/{id}
+  method: delete
+  operationId: IdentityAccessManagement_DeleteEnterprise
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/enterprises/id/{id}
+  method: put
+  operationId: IdentityAccessManagement_UpdateEnterprise2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/enterprises/name/{name}
+  method: get
+  operationId: IdentityAccessManagement_GetEnterpriseByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/enterprises/self
+  method: get
+  operationId: IdentityAccessManagement_GetEnterpriseSelf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/enterprises/self
+  method: put
+  operationId: IdentityAccessManagement_UpdateEnterprise
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/entitlements
+  method: get
+  operationId: EnterpriseEntitlementsReport_GetEnterpriseEntitlementData
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/entitlements
+  method: put
+  operationId: EnterpriseEntitlementsReport_CreateEnterpriseEntitlementData
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/entitlements/allowedenterprises
+  method: get
+  operationId: EnterpriseEntitlementsReport_GetAllowedEnterprisesForEntitlements
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/login
+  method: post
+  operationId: IdentityAccessManagement_Login
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/login/external
+  method: post
+  operationId: IdentityAccessManagement_LoginExternal
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/login/forgot
+  method: post
+  operationId: IdentityAccessManagement_LoginForgotPassword
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/login/mode
+  method: post
+  operationId: IdentityAccessManagement_LoginMode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/login/oauth/callback
+  method: post
+  operationId: IdentityAccessManagement_LoginExternalOAuth2Callback
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/login/signup/enterprise
+  method: post
+  operationId: IdentityAccessManagement_SignupEnterprise
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/login/signup/user
+  method: post
+  operationId: IdentityAccessManagement_SignupUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/logout
+  method: post
+  operationId: IdentityAccessManagement_Logout
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/realms
+  method: get
+  operationId: IdentityAccessManagement_QueryRealms
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/realms
+  method: post
+  operationId: IdentityAccessManagement_CreateRealm
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/realms/id/{id}
+  method: get
+  operationId: IdentityAccessManagement_GetRealm
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/realms/id/{id}
+  method: delete
+  operationId: IdentityAccessManagement_DeleteRealm
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/realms/id/{id}
+  method: put
+  operationId: IdentityAccessManagement_UpdateRealm
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/realms/name/{name}
+  method: get
+  operationId: IdentityAccessManagement_GetRealmByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/reports/allowedenterprises
+  method: get
+  operationId: EnterpriseEntitlementsReport_GetAllowedEnterprises
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/reports/apps/instance
+  method: get
+  operationId: EnterpriseEntitlementsReport_GetAppInstReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/reports/device
+  method: get
+  operationId: EnterpriseEntitlementsReport_GetDeviceReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/reports/plugin
+  method: get
+  operationId: EnterpriseEntitlementsReport_GetPluginReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/reports/project
+  method: get
+  operationId: EnterpriseEntitlementsReport_GetProjectReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/reports/user
+  method: get
+  operationId: EnterpriseEntitlementsReport_GetUserReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/roles
+  method: get
+  operationId: IdentityAccessManagement_QueryRoles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/roles
+  method: post
+  operationId: IdentityAccessManagement_CreateRole
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/roles/id/{id}
+  method: get
+  operationId: IdentityAccessManagement_GetRole
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/roles/id/{id}
+  method: delete
+  operationId: IdentityAccessManagement_DeleteRole
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/roles/id/{id}
+  method: put
+  operationId: IdentityAccessManagement_UpdateRole
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/roles/name/{name}
+  method: get
+  operationId: IdentityAccessManagement_GetRoleByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/roles/self
+  method: get
+  operationId: IdentityAccessManagement_GetRoleSelf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sessions
+  method: get
+  operationId: IdentityAccessManagement_QueryUserSessions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sessions/refresh
+  method: put
+  operationId: IdentityAccessManagement_RefreshUserSession
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/sessions/self
+  method: get
+  operationId: IdentityAccessManagement_GetUserSessionSelf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sessions/token
+  method: get
+  operationId: IdentityAccessManagement_GetUserSession2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/sessions/token/self
+  method: post
+  operationId: IdentityAccessManagement_CreateUserSessionSelf
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/sessions/token/{sessionToken.base64}
+  method: get
+  operationId: IdentityAccessManagement_GetUserSession
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/users
+  method: get
+  operationId: IdentityAccessManagement_QueryUsers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/users
+  method: post
+  operationId: IdentityAccessManagement_CreateUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/users/id/{id}
+  method: get
+  operationId: IdentityAccessManagement_GetUser
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/users/id/{id}
+  method: delete
+  operationId: IdentityAccessManagement_DeleteUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/users/id/{id}
+  method: put
+  operationId: IdentityAccessManagement_UpdateUser2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/users/name/{name}
+  method: get
+  operationId: IdentityAccessManagement_GetUserByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/users/self
+  method: get
+  operationId: IdentityAccessManagement_GetUserSelf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/users/self
+  method: put
+  operationId: IdentityAccessManagement_UpdateUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

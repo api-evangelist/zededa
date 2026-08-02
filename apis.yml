@@ -1,8 +1,13 @@
 aid: zededa
 name: Zededa
-description: 'Zededa is a company surfaced as a portfolio company of lux-capital and added to the API
-  Evangelist network as a stub for enrichment. Sector: edge-computing. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: 'ZEDEDA is an edge intelligence platform that helps enterprises deploy, manage, and secure
+  AI workloads and applications across thousands of distributed edge sites. Its ZedCloud control plane
+  orchestrates EVE-OS edge nodes, edge applications, virtual networks, storage, and managed Kubernetes
+  (ZKS) through a REST API served under https://zedcontrol.zededa.net/api. The API is grpc-gateway generated
+  and published as ten Swagger 2.0 service specifications (App Profiles, Edge Applications, Diagnostics,
+  Jobs, Kubernetes, Networks, Node Clusters, Edge Nodes, Storage, and IAM) totaling 421 operations, with
+  an official Terraform provider for infrastructure-as-code. ZEDEDA was surfaced as a portfolio company
+  of lux-capital and enriched by the API Evangelist pipeline.'
 url: https://raw.githubusercontent.com/api-evangelist/zededa/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,18 +15,467 @@ x-backed-by:
 - lux-capital
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
+image: https://avatars.githubusercontent.com/u/25070488?v=4
 tags:
 - Company
 - Edge Computing
-apis: []
+- Edge Intelligence
+- IoT
+- Kubernetes
+- Device Management
+- Orchestration
+- AI at the Edge
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: zededa:zededa-appprofileservice-api
+  name: Zededa AppProfileService API
+  description: The AppProfileService API from Zededa — 5 operation(s) for appprofileservice.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - AppProfileService
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-appprofileservice-api-openapi.yml
+- aid: zededa:zededa-artifactmanager-api
+  name: Zededa ArtifactManager API
+  description: The ArtifactManager API from Zededa — 4 operation(s) for artifactmanager.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - ArtifactManager
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-artifactmanager-api-openapi.yml
+- aid: zededa:zededa-assetgroupservice-api
+  name: Zededa AssetGroupService API
+  description: The AssetGroupService API from Zededa — 3 operation(s) for assetgroupservice.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - AssetGroupService
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-assetgroupservice-api-openapi.yml
+- aid: zededa:zededa-bulkjobops-api
+  name: Zededa BulkJobOps API
+  description: The BulkJobOps API from Zededa — 14 operation(s) for bulkjobops.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - BulkJobOps
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-bulkjobops-api-openapi.yml
+- aid: zededa:zededa-certificateenrollmentprofileconfiguration-api
+  name: Zededa CertificateEnrollmentProfileConfiguration API
+  description: >-
+    The CertificateEnrollmentProfileConfiguration API from Zededa — 3 operation(s) for certificateenrollmentprofileconfiguration.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - CertificateEnrollmentProfileConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-certificateenrollmentprofileconfiguration-api-openapi.yml
+- aid: zededa:zededa-clouddiagnostics-api
+  name: Zededa CloudDiagnostics API
+  description: The CloudDiagnostics API from Zededa — 8 operation(s) for clouddiagnostics.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - CloudDiagnostics
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-clouddiagnostics-api-openapi.yml
+- aid: zededa:zededa-clustergroups-api
+  name: Zededa ClusterGroups API
+  description: >-
+    APIs for managing cluster groups including creation, deletion, status monitoring, and manifest generation
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - ClusterGroups
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-clustergroups-api-openapi.yml
+- aid: zededa:zededa-clusterstatus-api
+  name: Zededa ClusterStatus API
+  description: The ClusterStatus API from Zededa — 3 operation(s) for clusterstatus.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - ClusterStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-clusterstatus-api-openapi.yml
+- aid: zededa:zededa-datastoreconfiguration-api
+  name: Zededa DatastoreConfiguration API
+  description: The DatastoreConfiguration API from Zededa — 4 operation(s) for datastoreconfiguration.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - DatastoreConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-datastoreconfiguration-api-openapi.yml
+- aid: zededa:zededa-edgeapplicationconfiguration-api
+  name: Zededa EdgeApplicationConfiguration API
+  description: >-
+    The EdgeApplicationConfiguration API from Zededa — 8 operation(s) for edgeapplicationconfiguration.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - EdgeApplicationConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-edgeapplicationconfiguration-api-openapi.yml
+- aid: zededa:zededa-edgeapplicationinstanceconfiguration-api
+  name: Zededa EdgeApplicationInstanceConfiguration API
+  description: >-
+    The EdgeApplicationInstanceConfiguration API from Zededa — 20 operation(s) for edgeapplicationinstanceconfiguration.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - EdgeApplicationInstanceConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-edgeapplicationinstanceconfiguration-api-openapi.yml
+- aid: zededa:zededa-edgeapplicationinstancestatus-api
+  name: Zededa EdgeApplicationInstanceStatus API
+  description: >-
+    The EdgeApplicationInstanceStatus API from Zededa — 35 operation(s) for edgeapplicationinstancestatus.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - EdgeApplicationInstanceStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-edgeapplicationinstancestatus-api-openapi.yml
+- aid: zededa:zededa-edgediagnostics-api
+  name: Zededa EdgeDiagnostics API
+  description: The EdgeDiagnostics API from Zededa — 12 operation(s) for edgediagnostics.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - EdgeDiagnostics
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-edgediagnostics-api-openapi.yml
+- aid: zededa:zededa-edgenetworkconfiguration-api
+  name: Zededa EdgeNetworkConfiguration API
+  description: >-
+    The EdgeNetworkConfiguration API from Zededa — 4 operation(s) for edgenetworkconfiguration.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - EdgeNetworkConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-edgenetworkconfiguration-api-openapi.yml
+- aid: zededa:zededa-edgenetworkinstanceconfiguration-api
+  name: Zededa EdgeNetworkInstanceConfiguration API
+  description: >-
+    The EdgeNetworkInstanceConfiguration API from Zededa — 3 operation(s) for edgenetworkinstanceconfiguration.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - EdgeNetworkInstanceConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-edgenetworkinstanceconfiguration-api-openapi.yml
+- aid: zededa:zededa-edgenetworkinstancestatus-api
+  name: Zededa EdgeNetworkInstanceStatus API
+  description: >-
+    The EdgeNetworkInstanceStatus API from Zededa — 5 operation(s) for edgenetworkinstancestatus.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - EdgeNetworkInstanceStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-edgenetworkinstancestatus-api-openapi.yml
+- aid: zededa:zededa-edgenodeclusterconfiguration-api
+  name: Zededa EdgeNodeClusterConfiguration API
+  description: >-
+    The EdgeNodeClusterConfiguration API from Zededa — 7 operation(s) for edgenodeclusterconfiguration.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - EdgeNodeClusterConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-edgenodeclusterconfiguration-api-openapi.yml
+- aid: zededa:zededa-edgenodeconfiguration-api
+  name: Zededa EdgeNodeConfiguration API
+  description: The EdgeNodeConfiguration API from Zededa — 23 operation(s) for edgenodeconfiguration.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - EdgeNodeConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-edgenodeconfiguration-api-openapi.yml
+- aid: zededa:zededa-edgenodestatus-api
+  name: Zededa EdgeNodeStatus API
+  description: The EdgeNodeStatus API from Zededa — 13 operation(s) for edgenodestatus.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - EdgeNodeStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-edgenodestatus-api-openapi.yml
+- aid: zededa:zededa-enterpriseentitlementsreport-api
+  name: Zededa EnterpriseEntitlementsReport API
+  description: >-
+    The EnterpriseEntitlementsReport API from Zededa — 8 operation(s) for enterpriseentitlementsreport.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - EnterpriseEntitlementsReport
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-enterpriseentitlementsreport-api-openapi.yml
+- aid: zededa:zededa-hardwaremodel-api
+  name: Zededa HardwareModel API
+  description: The HardwareModel API from Zededa — 20 operation(s) for hardwaremodel.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - HardwareModel
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-hardwaremodel-api-openapi.yml
+- aid: zededa:zededa-helmchartmanagement-api
+  name: Zededa HelmChartManagement API
+  description: >-
+    APIs for managing Helm charts in Kubernetes clusters. Provides operations for importing, creating,
+    updating, deleting, and retrieving Helm charts from both global and enterprise-specific repositories.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - HelmChartManagement
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-helmchartmanagement-api-openapi.yml
+- aid: zededa:zededa-identityaccessmanagement-api
+  name: Zededa IdentityAccessManagement API
+  description: >-
+    The IdentityAccessManagement API from Zededa — 38 operation(s) for identityaccessmanagement.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - IdentityAccessManagement
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-identityaccessmanagement-api-openapi.yml
+- aid: zededa:zededa-imageconfiguration-api
+  name: Zededa ImageConfiguration API
+  description: The ImageConfiguration API from Zededa — 9 operation(s) for imageconfiguration.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - ImageConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-imageconfiguration-api-openapi.yml
+- aid: zededa:zededa-kubernetesdeployments-api
+  name: Zededa KubernetesDeployments API
+  description: APIs for managing Kubernetes deployments
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - KubernetesDeployments
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-kubernetesdeployments-api-openapi.yml
+- aid: zededa:zededa-kubernetesgitops-api
+  name: Zededa KubernetesGitOps API
+  description: >-
+    APIs for managing GitOps configurations and continuous deployment from Git repositories to Kubernetes
+    clusters
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - KubernetesGitOps
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-kubernetesgitops-api-openapi.yml
+- aid: zededa:zededa-kubernetessecrets-api
+  name: Zededa KubernetesSecrets API
+  description: >-
+    APIs for managing Kubernetes secrets including SSH keys, basic authentication credentials, and other
+    sensitive data. Supports create, read, and list operations.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - KubernetesSecrets
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-kubernetessecrets-api-openapi.yml
+- aid: zededa:zededa-patchenvelopeconfiguration-api
+  name: Zededa PatchEnvelopeConfiguration API
+  description: >-
+    The PatchEnvelopeConfiguration API from Zededa — 4 operation(s) for patchenvelopeconfiguration.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - PatchEnvelopeConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-patchenvelopeconfiguration-api-openapi.yml
+- aid: zededa:zededa-privatehelmrepositories-api
+  name: Zededa PrivateHelmRepositories API
+  description: APIs for managing private Helm repositories and their authentication configurations
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - PrivateHelmRepositories
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-privatehelmrepositories-api-openapi.yml
+- aid: zededa:zededa-profiledeploymentservice-api
+  name: Zededa ProfileDeploymentService API
+  description: >-
+    The ProfileDeploymentService API from Zededa — 4 operation(s) for profiledeploymentservice.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - ProfileDeploymentService
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-profiledeploymentservice-api-openapi.yml
+- aid: zededa:zededa-resourcegroup-api
+  name: Zededa ResourceGroup API
+  description: The ResourceGroup API from Zededa — 11 operation(s) for resourcegroup.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - ResourceGroup
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-resourcegroup-api-openapi.yml
+- aid: zededa:zededa-resourcegroupstatus-api
+  name: Zededa ResourceGroupStatus API
+  description: The ResourceGroupStatus API from Zededa — 4 operation(s) for resourcegroupstatus.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - ResourceGroupStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-resourcegroupstatus-api-openapi.yml
+- aid: zededa:zededa-volumeinstanceconfiguration-api
+  name: Zededa VolumeInstanceConfiguration API
+  description: >-
+    The VolumeInstanceConfiguration API from Zededa — 3 operation(s) for volumeinstanceconfiguration.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - VolumeInstanceConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-volumeinstanceconfiguration-api-openapi.yml
+- aid: zededa:zededa-volumeinstancestatus-api
+  name: Zededa VolumeInstanceStatus API
+  description: The VolumeInstanceStatus API from Zededa — 6 operation(s) for volumeinstancestatus.
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - VolumeInstanceStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-volumeinstancestatus-api-openapi.yml
+- aid: zededa:zededa-zksclusterinstances-api
+  name: Zededa ZKSClusterInstances API
+  description: >-
+    APIs for managing ZKS (ZEDEDA Kubernetes Service) cluster instances including creation, management,
+    node operations, and status monitoring
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - ZKSClusterInstances
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-zksclusterinstances-api-openapi.yml
 common:
+- type: APIReference
+  url: https://zedcontrol.zededa.net/api/v1/docs/
+- type: Documentation
+  url: https://help.zededa.com/hc/en-us
+- type: Authentication
+  url: authentication/zededa-authentication.yml
+- type: OpenAPI
+  url: openapi/zededa-node_service-openapi.json
+- type: Conventions
+  url: conventions/zededa-conventions.yml
+- type: ErrorCatalog
+  url: errors/zededa-problem-types.yml
+- type: ErrorCatalog
+  name: ZsrvError code registry
+  url: errors/zededa-error-codes.yml
+- type: DataModel
+  url: data-model/zededa-data-model.yml
+- type: Lifecycle
+  url: lifecycle/zededa-lifecycle.yml
+- type: Conformance
+  url: conformance/zededa-conformance.yml
+- type: Compliance
+  url: https://trust.zededa.com/
+- type: Packages
+  url: packages/zededa-packages.yml
+- type: SDKs
+  url: packages/zededa-packages.yml
+- type: MCPServer
+  url: mcp/zededa-mcp.yml
+- type: LLMsTxt
+  url: llms/zededa-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/zededa-node_service-overlay.yaml
+- type: AgenticAccess
+  url: agentic-access/zededa-agentic-access.yml
+- type: TrustCenter
+  url: security/zededa-trust-center.yml
+- type: DomainSecurity
+  url: security/zededa-domain-security.yml
+- type: GitHubOrganization
+  url: https://github.com/ZEDEDA
+- type: Support
+  url: https://help.zededa.com/hc/en-us
+- type: Blog
+  url: https://zededa.com/resources/blog/
+- type: Login
+  url: https://zedcontrol.gmwtus.zededa.net/login
+- type: TermsOfService
+  url: https://zededa.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://zededa.com/privacy-policy
 - type: Website
   url: https://zededa.com
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v1

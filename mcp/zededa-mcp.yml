@@ -1,0 +1,274 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: derived from openapi/*-openapi.json operations (no official ZEDEDA MCP server found)
+server:
+  name: zededa-zedcloud
+  transport: http
+  note: Candidate — ZEDEDA publishes no hosted MCP server; tools mapped from ZedCloud REST operations.
+auth:
+  type: apiKey
+  header: X-API-KEY
+tool_count_note: Curated representative subset of 313+ ZedCloud operations; full surface has 421 operations.
+tools:
+- name: AppProfileService_QueryAppProfiles
+  description: Query app profiles
+  source_operation: openapi/zededa-app_profile_service-openapi.json#AppProfileService_QueryAppProfiles
+- name: AppProfileService_CreateAppProfile
+  description: Create app profile
+  source_operation: openapi/zededa-app_profile_service-openapi.json#AppProfileService_CreateAppProfile
+- name: AppProfileService_GetAppProfile
+  description: Get app profile
+  source_operation: openapi/zededa-app_profile_service-openapi.json#AppProfileService_GetAppProfile
+- name: AppProfileService_DeleteAppProfile
+  description: Delete app profile
+  source_operation: openapi/zededa-app_profile_service-openapi.json#AppProfileService_DeleteAppProfile
+- name: AppProfileService_UpdateAppProfile
+  description: Update app profile
+  source_operation: openapi/zededa-app_profile_service-openapi.json#AppProfileService_UpdateAppProfile
+- name: AssetGroupService_QueryAssetGroups
+  description: Query asset groups
+  source_operation: openapi/zededa-app_profile_service-openapi.json#AssetGroupService_QueryAssetGroups
+- name: AssetGroupService_CreateAssetGroup
+  description: Create asset group
+  source_operation: openapi/zededa-app_profile_service-openapi.json#AssetGroupService_CreateAssetGroup
+- name: AssetGroupService_GetAssetGroup
+  description: Get asset group
+  source_operation: openapi/zededa-app_profile_service-openapi.json#AssetGroupService_GetAssetGroup
+- name: AssetGroupService_DeleteAssetGroup
+  description: Delete asset group
+  source_operation: openapi/zededa-app_profile_service-openapi.json#AssetGroupService_DeleteAssetGroup
+- name: EdgeApplicationConfiguration_QueryBetaEdgeApplicationBundles
+  description: Query edge application bundles
+  source_operation: openapi/zededa-app_service-openapi.json#EdgeApplicationConfiguration_QueryBetaEdgeApplicationBundles
+- name: EdgeApplicationConfiguration_QueryEdgeApplicationBundles
+  description: Query edge application bundles
+  source_operation: openapi/zededa-app_service-openapi.json#EdgeApplicationConfiguration_QueryEdgeApplicationBundles
+- name: EdgeApplicationConfiguration_CreateEdgeApplicationBundle
+  description: Create edge application bundle
+  source_operation: openapi/zededa-app_service-openapi.json#EdgeApplicationConfiguration_CreateEdgeApplicationBundle
+- name: EdgeApplicationConfiguration_QueryGlobalEdgeApplicationBundles
+  description: Query global edge application bundles
+  source_operation: openapi/zededa-app_service-openapi.json#EdgeApplicationConfiguration_QueryGlobalEdgeApplicationBundles
+- name: EdgeApplicationConfiguration_GetGlobalEdgeApplicationBundle
+  description: Get global edge application bundle
+  source_operation: openapi/zededa-app_service-openapi.json#EdgeApplicationConfiguration_GetGlobalEdgeApplicationBundle
+- name: EdgeApplicationConfiguration_GetEdgeApplicationBundle
+  description: Get edge application bundle
+  source_operation: openapi/zededa-app_service-openapi.json#EdgeApplicationConfiguration_GetEdgeApplicationBundle
+- name: EdgeApplicationConfiguration_DeleteEdgeApplicationBundle
+  description: Delete edge application bundle
+  source_operation: openapi/zededa-app_service-openapi.json#EdgeApplicationConfiguration_DeleteEdgeApplicationBundle
+- name: EdgeApplicationConfiguration_UpdateEdgeApplicationBundle
+  description: Update edge application bundle
+  source_operation: openapi/zededa-app_service-openapi.json#EdgeApplicationConfiguration_UpdateEdgeApplicationBundle
+- name: EdgeApplicationConfiguration_QueryEdgeApplicationBundleProjectList
+  description: Query the project access list of an edge application bundle
+  source_operation: openapi/zededa-app_service-openapi.json#EdgeApplicationConfiguration_QueryEdgeApplicationBundleProjectList
+- name: CloudDiagnostics_GetClusterHealthReport
+  description: Get Cloud services health report
+  source_operation: openapi/zededa-diag_service-openapi.json#CloudDiagnostics_GetClusterHealthReport
+- name: CloudDiagnostics_QueryCloudPolicies
+  description: Query Cloud policies
+  source_operation: openapi/zededa-diag_service-openapi.json#CloudDiagnostics_QueryCloudPolicies
+- name: CloudDiagnostics_CreateCloudPolicyDocument
+  description: Create Cloud policy document
+  source_operation: openapi/zededa-diag_service-openapi.json#CloudDiagnostics_CreateCloudPolicyDocument
+- name: CloudDiagnostics_GetCloudPolicyDocument
+  description: Get Cloud policy document
+  source_operation: openapi/zededa-diag_service-openapi.json#CloudDiagnostics_GetCloudPolicyDocument
+- name: CloudDiagnostics_DeleteCloudPolicyDocument
+  description: Delete Cloud policy specific version
+  source_operation: openapi/zededa-diag_service-openapi.json#CloudDiagnostics_DeleteCloudPolicyDocument
+- name: CloudDiagnostics_GetClusterVersion
+  description: Get Cloud controller software version
+  source_operation: openapi/zededa-diag_service-openapi.json#CloudDiagnostics_GetClusterVersion
+- name: EdgeDiagnostics_GetDeviceTwinConfig
+  description: Get current Device twin configuration
+  source_operation: openapi/zededa-diag_service-openapi.json#EdgeDiagnostics_GetDeviceTwinConfig
+- name: EdgeDiagnostics_GetDeviceTwinBootstrapConfig
+  description: Get bootstrap Device twin configuration
+  source_operation: openapi/zededa-diag_service-openapi.json#EdgeDiagnostics_GetDeviceTwinBootstrapConfig
+- name: EdgeDiagnostics_GetDeviceTwinNextConfig
+  description: Get next Device twin configuration
+  source_operation: openapi/zededa-diag_service-openapi.json#EdgeDiagnostics_GetDeviceTwinNextConfig
+- name: BulkJobOps_QueryJobs
+  description: Query asynchronous job requests
+  source_operation: openapi/zededa-job_service-openapi.json#BulkJobOps_QueryJobs
+- name: BulkJobOps_CreateJob
+  description: Create asynchronous job request
+  source_operation: openapi/zededa-job_service-openapi.json#BulkJobOps_CreateJob
+- name: BulkJobOps_GetJobById
+  description: Get asynchronous job request
+  source_operation: openapi/zededa-job_service-openapi.json#BulkJobOps_GetJobById
+- name: BulkJobOps_UpdateJob
+  description: Update asynchronous job request
+  source_operation: openapi/zededa-job_service-openapi.json#BulkJobOps_UpdateJob
+- name: BulkJobOps_GetJob
+  description: Get asynchronous job request
+  source_operation: openapi/zededa-job_service-openapi.json#BulkJobOps_GetJob
+- name: BulkJobOps_DeleteJob
+  description: Delete asynchronous job request
+  source_operation: openapi/zededa-job_service-openapi.json#BulkJobOps_DeleteJob
+- name: KubernetesDeployments_CreateDeployment
+  description: Create a new Kubernetes deployment
+  source_operation: openapi/zededa-kubernetes_service-openapi.json#KubernetesDeployments_CreateDeployment
+- name: KubernetesDeployments_GetDeployment
+  description: Get deployment by ID
+  source_operation: openapi/zededa-kubernetes_service-openapi.json#KubernetesDeployments_GetDeployment
+- name: KubernetesDeployments_DeleteDeployment
+  description: Delete a deployment
+  source_operation: openapi/zededa-kubernetes_service-openapi.json#KubernetesDeployments_DeleteDeployment
+- name: KubernetesDeployments_UpdateDeployment
+  description: Update a deployment
+  source_operation: openapi/zededa-kubernetes_service-openapi.json#KubernetesDeployments_UpdateDeployment
+- name: KubernetesGitOps_CreateGitRepo
+  description: Create a new GitRepo configuration
+  source_operation: openapi/zededa-kubernetes_service-openapi.json#KubernetesGitOps_CreateGitRepo
+- name: KubernetesGitOps_GetGitRepo
+  description: Get GitRepo configuration by ID
+  source_operation: openapi/zededa-kubernetes_service-openapi.json#KubernetesGitOps_GetGitRepo
+- name: KubernetesGitOps_DeleteGitRepo
+  description: Delete GitRepo configuration
+  source_operation: openapi/zededa-kubernetes_service-openapi.json#KubernetesGitOps_DeleteGitRepo
+- name: KubernetesGitOps_UpdateGitRepo
+  description: Update GitRepo configuration
+  source_operation: openapi/zededa-kubernetes_service-openapi.json#KubernetesGitOps_UpdateGitRepo
+- name: HelmChartManagement_CreateHelmChart
+  description: Create Helm Chart
+  source_operation: openapi/zededa-kubernetes_service-openapi.json#HelmChartManagement_CreateHelmChart
+- name: EdgeNetworkInstanceConfiguration_QueryEdgeNetworkInstances
+  description: Query edge network instances
+  source_operation: openapi/zededa-network_service-openapi.json#EdgeNetworkInstanceConfiguration_QueryEdgeNetworkInstances
+- name: EdgeNetworkInstanceConfiguration_CreateEdgeNetworkInstance
+  description: Create edge network instance
+  source_operation: openapi/zededa-network_service-openapi.json#EdgeNetworkInstanceConfiguration_CreateEdgeNetworkInstance
+- name: EdgeNetworkInstanceConfiguration_GetEdgeNetworkInstance
+  description: Get edge network instance
+  source_operation: openapi/zededa-network_service-openapi.json#EdgeNetworkInstanceConfiguration_GetEdgeNetworkInstance
+- name: EdgeNetworkInstanceConfiguration_DeleteEdgeNetworkInstance
+  description: Delete edge network instance
+  source_operation: openapi/zededa-network_service-openapi.json#EdgeNetworkInstanceConfiguration_DeleteEdgeNetworkInstance
+- name: EdgeNetworkInstanceConfiguration_UpdateEdgeNetworkInstance
+  description: Update edge network instance
+  source_operation: openapi/zededa-network_service-openapi.json#EdgeNetworkInstanceConfiguration_UpdateEdgeNetworkInstance
+- name: EdgeNetworkInstanceStatus_GetEdgeNetworkInstanceStatus
+  description: Get edge network instance status
+  source_operation: openapi/zededa-network_service-openapi.json#EdgeNetworkInstanceStatus_GetEdgeNetworkInstanceStatus
+- name: EdgeNetworkInstanceStatus_QueryEdgeNetworkInstanceStatus
+  description: Query status of edge network instances
+  source_operation: openapi/zededa-network_service-openapi.json#EdgeNetworkInstanceStatus_QueryEdgeNetworkInstanceStatus
+- name: EdgeNetworkInstanceStatus_QueryEdgeNetworkInstanceStatusConfig
+  description: Query status and config of edge network instances
+  source_operation: openapi/zededa-network_service-openapi.json#EdgeNetworkInstanceStatus_QueryEdgeNetworkInstanceStatusConfig
+- name: EdgeNetworkInstanceStatus_GetNetworkInstanceInterfaceTags
+  description: Query Network instance tags
+  source_operation: openapi/zededa-network_service-openapi.json#EdgeNetworkInstanceStatus_GetNetworkInstanceInterfaceTags
+- name: EdgeNodeClusterConfiguration_QueryClusters
+  description: Query Edge-Node Clusters.
+  source_operation: openapi/zededa-node_cluster_service-openapi.json#EdgeNodeClusterConfiguration_QueryClusters
+- name: EdgeNodeClusterConfiguration_CreateCluster
+  description: Create Edge-Node Cluster.
+  source_operation: openapi/zededa-node_cluster_service-openapi.json#EdgeNodeClusterConfiguration_CreateCluster
+- name: EdgeNodeClusterConfiguration_GetAvailableProjectsForCluster
+  description: Get Edge-Node Cluster Available Projects.
+  source_operation: openapi/zededa-node_cluster_service-openapi.json#EdgeNodeClusterConfiguration_GetAvailableProjectsForCluster
+- name: EdgeNodeClusterConfiguration_GetCluster
+  description: Get Edge-Node Cluster.
+  source_operation: openapi/zededa-node_cluster_service-openapi.json#EdgeNodeClusterConfiguration_GetCluster
+- name: EdgeNodeClusterConfiguration_DeleteCluster
+  description: Delete Edge-Node Cluster.
+  source_operation: openapi/zededa-node_cluster_service-openapi.json#EdgeNodeClusterConfiguration_DeleteCluster
+- name: EdgeNodeClusterConfiguration_UpdateCluster
+  description: Update Edge-Node Cluster.
+  source_operation: openapi/zededa-node_cluster_service-openapi.json#EdgeNodeClusterConfiguration_UpdateCluster
+- name: EdgeNodeClusterConfiguration_GetClusterPorts
+  description: Get Edge-Node Cluster Interface Ports.
+  source_operation: openapi/zededa-node_cluster_service-openapi.json#EdgeNodeClusterConfiguration_GetClusterPorts
+- name: ClusterStatus_GetClusterRawStatus
+  description: Get Edge-Node Cluster raw status.
+  source_operation: openapi/zededa-node_cluster_service-openapi.json#ClusterStatus_GetClusterRawStatus
+- name: ClusterStatus_GetClusterStatus
+  description: Get Edge-Node Cluster status.
+  source_operation: openapi/zededa-node_cluster_service-openapi.json#ClusterStatus_GetClusterStatus
+- name: HardwareModel_QueryHardwareBrands
+  description: Query hardware brands
+  source_operation: openapi/zededa-node_service-openapi.json#HardwareModel_QueryHardwareBrands
+- name: HardwareModel_CreateHardwareBrand
+  description: Create hardware brand
+  source_operation: openapi/zededa-node_service-openapi.json#HardwareModel_CreateHardwareBrand
+- name: HardwareModel_QueryGlobalHardwareBrands
+  description: Query global hardware brands
+  source_operation: openapi/zededa-node_service-openapi.json#HardwareModel_QueryGlobalHardwareBrands
+- name: HardwareModel_GetGlobalHardwareBrand
+  description: Get global hardware brand
+  source_operation: openapi/zededa-node_service-openapi.json#HardwareModel_GetGlobalHardwareBrand
+- name: HardwareModel_GetHardwareBrand
+  description: Get hardware brand
+  source_operation: openapi/zededa-node_service-openapi.json#HardwareModel_GetHardwareBrand
+- name: HardwareModel_DeleteHardwareBrand
+  description: Delete hardware brand
+  source_operation: openapi/zededa-node_service-openapi.json#HardwareModel_DeleteHardwareBrand
+- name: HardwareModel_UpdateHardwareBrand
+  description: Update hardware brand
+  source_operation: openapi/zededa-node_service-openapi.json#HardwareModel_UpdateHardwareBrand
+- name: CertificateEnrollmentProfileConfiguration_QueryCEPs
+  description: List certificate enrollment profiles
+  source_operation: openapi/zededa-node_service-openapi.json#CertificateEnrollmentProfileConfiguration_QueryCEPs
+- name: CertificateEnrollmentProfileConfiguration_CreateCEP
+  description: Create a certificate enrollment profile
+  source_operation: openapi/zededa-node_service-openapi.json#CertificateEnrollmentProfileConfiguration_CreateCEP
+- name: ImageConfiguration_QueryImages
+  description: Query edge application images
+  source_operation: openapi/zededa-storage_service-openapi.json#ImageConfiguration_QueryImages
+- name: ImageConfiguration_CreateImage
+  description: Create edge application image
+  source_operation: openapi/zededa-storage_service-openapi.json#ImageConfiguration_CreateImage
+- name: ImageConfiguration_QueryLatestImageVersions
+  description: Query latest version of EVE image for each hardware architecture
+  source_operation: openapi/zededa-storage_service-openapi.json#ImageConfiguration_QueryLatestImageVersions
+- name: ImageConfiguration_DeleteLatestImage
+  description: Delete edge application image
+  source_operation: openapi/zededa-storage_service-openapi.json#ImageConfiguration_DeleteLatestImage
+- name: ImageConfiguration_GetLatestImageVersion
+  description: Get latest version of EVE image
+  source_operation: openapi/zededa-storage_service-openapi.json#ImageConfiguration_GetLatestImageVersion
+- name: ImageConfiguration_GetImage
+  description: Get edge application image
+  source_operation: openapi/zededa-storage_service-openapi.json#ImageConfiguration_GetImage
+- name: ImageConfiguration_DeleteImage
+  description: Delete edge application image
+  source_operation: openapi/zededa-storage_service-openapi.json#ImageConfiguration_DeleteImage
+- name: ImageConfiguration_UpdateImage
+  description: Update edge application image
+  source_operation: openapi/zededa-storage_service-openapi.json#ImageConfiguration_UpdateImage
+- name: ImageConfiguration_QueryImageProjectList
+  description: Query common project access list among a list of images
+  source_operation: openapi/zededa-storage_service-openapi.json#ImageConfiguration_QueryImageProjectList
+- name: IdentityAccessManagement_QueryAuthProfiles
+  description: Query AAA profiles
+  source_operation: openapi/zededa-user_service-openapi.json#IdentityAccessManagement_QueryAuthProfiles
+- name: IdentityAccessManagement_CreateAuthProfile
+  description: Create AAA profile
+  source_operation: openapi/zededa-user_service-openapi.json#IdentityAccessManagement_CreateAuthProfile
+- name: IdentityAccessManagement_GetAuthProfile
+  description: Get AAA profile
+  source_operation: openapi/zededa-user_service-openapi.json#IdentityAccessManagement_GetAuthProfile
+- name: IdentityAccessManagement_DeleteAuthProfile
+  description: Delete AAA profile
+  source_operation: openapi/zededa-user_service-openapi.json#IdentityAccessManagement_DeleteAuthProfile
+- name: IdentityAccessManagement_UpdateAuthProfile
+  description: Update AAA profile
+  source_operation: openapi/zededa-user_service-openapi.json#IdentityAccessManagement_UpdateAuthProfile
+- name: IdentityAccessManagement_QueryDocPolicy
+  description: Query document policy
+  source_operation: openapi/zededa-user_service-openapi.json#IdentityAccessManagement_QueryDocPolicy
+- name: IdentityAccessManagement_CreateDocPolicy
+  description: Create document policy
+  source_operation: openapi/zededa-user_service-openapi.json#IdentityAccessManagement_CreateDocPolicy
+- name: IdentityAccessManagement_GetDocPolicy
+  description: Get document policy by id
+  source_operation: openapi/zededa-user_service-openapi.json#IdentityAccessManagement_GetDocPolicy
+- name: IdentityAccessManagement_DeleteDocPolicy
+  description: Deletes document policy by id
+  source_operation: openapi/zededa-user_service-openapi.json#IdentityAccessManagement_DeleteDocPolicy

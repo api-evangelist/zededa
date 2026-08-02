@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/*-openapi.json (operationIds verified against the specs)
+skills:
+  - file: zededa-onboard-edge-node.md
+    name: Onboard and activate a ZEDEDA edge node
+    api: openapi/zededa-node_service-openapi.json
+    operations: [ResourceGroup_CreateResourceGroup, EdgeNodeConfiguration_CreateEdgeNode, EdgeNodeConfiguration_GetEdgeNodeOnboarding, EdgeNodeConfiguration_ActivateEdgeNode, EdgeNodeStatus_GetEdgeNodeStatus]
+  - file: zededa-deploy-edge-application.md
+    name: Deploy an edge application to a node
+    api: openapi/zededa-app_service-openapi.json
+    operations: [EdgeApplicationConfiguration_CreateEdgeApplicationBundle, EdgeApplicationInstanceConfiguration_CreateEdgeApplicationInstance, EdgeApplicationInstanceConfiguration_ActivateEdgeApplicationInstance, EdgeApplicationInstanceConfiguration_GetEdgeApplicationInstance, EdgeApplicationInstanceStatus_GetEdgeApplicationInstanceStatus]
+  - file: zededa-provision-kubernetes-cluster.md
+    name: Provision a ZEDEDA Kubernetes (ZKS) cluster
+    api: openapi/zededa-kubernetes_service-openapi.json
+    operations: [ZKSClusterInstances_CreateZKSInstance, ZKSClusterInstances_ListZKSInstances, ZKSClusterInstances_GetZKSInstance, ZKSClusterInstances_UpdateZKSInstance, ClusterGroups_GetClusterGroupManifest]

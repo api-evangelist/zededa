@@ -1,0 +1,17 @@
+generated: '2026-07-21'
+method: searched
+source: https://zedcontrol.zededa.net/api/v1/docs/ + ZEDEDA docs
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://zedcontrol.zededa.net/api/v1/docs/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No public deprecation policy or Sunset/Deprecation header support found.
+sla:
+  url: null
+  note: No public SLA document found.
+status_page: null
+support: https://help.zededa.com/hc/en-us
+deprecated_operations: []

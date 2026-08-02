@@ -1,0 +1,58 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/*-openapi.json (googlerpcStatus default error envelope)
+format: grpc-gateway (google.rpc.Status)
+envelope:
+  schema: googlerpcStatus
+  fields:
+  - code (int32)
+  - message (string)
+  - details[] (protobufAny)
+notes: Default (unexpected) errors return a google.rpc.Status body; ZEDEDA also returns a granular ZsrvError
+  code (see zededa-error-codes.yml).
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad Request. The API gateway did not process the request because of invalid value of filter
+    parameters.
+  remediation: Fix the request body/parameters and retry.
+- status: 401
+  title: Unauthorized
+  description: Unauthorized. The API gateway did not process the request because it lacks valid authentication
+    credentials for the target resource. The request header has either no authorization details or an
+    authorization that has been refused.
+  remediation: Provide a valid Authorization bearer token or X-API-KEY header.
+- status: 403
+  title: Forbidden
+  description: Forbidden. The API gateway did not process the request because the requestor does not have
+    application level access permission for the operation or does not have access scope to the project.
+  remediation: Ensure the authenticated identity has permission for this resource/project.
+- status: 404
+  title: Not Found
+  description: Not Found. The API gateway did not process the request because the requested resource could
+    not be found.
+  remediation: Verify the resource id/name and project scope.
+- status: 405
+  title: Method not allowed
+  description: Method not allowed. The API request can't be performed due to a wrong edge node's admin
+    status.
+  remediation: Use a method/edge-node state that supports this operation.
+- status: 409
+  title: Conflict
+  description: Conflict. The API gateway did not process the request because this app profile record will
+    conflict with an already existing app profile record.
+  remediation: Resolve the resource conflict (name/version) before retrying.
+- status: 412
+  title: Precondition failed
+  description: Precondition failed. Some of preconditions haven't been met to start request processing.
+  remediation: Satisfy the stated preconditions before retrying.
+- status: 500
+  title: Internal Server Error
+  description: Internal Server Error. The API gateway experienced an unexpected condition. Specific error
+    condition is indicated in error codes.
+  remediation: Retry later; contact ZEDEDA support if it persists.
+- status: 504
+  title: Gateway Timeout
+  description: Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice
+    it needed to communicate with in order to complete the request.
+  remediation: Retry; an upstream service did not respond in time.

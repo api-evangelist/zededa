@@ -1,0 +1,129 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/*-openapi.json ($ref + id-reference fields) + https://zedcontrol.zededa.net/api/v1/docs/
+notes: ZedCloud is project-scoped; edge nodes, applications, networks and storage belong to a project
+  (resource-group/tag). Derived from id-reference fields (projectId, deviceId, appId, clusterID, datastoreId,
+  ...).
+entities:
+- name: Project
+  aka: ResourceGroup / Tag
+  service: user_service / node_service
+  id: UUID
+  summary: Top-level container that scopes all edge resources.
+- name: Enterprise
+  aka: Tenant
+  service: user_service
+  id: enterpriseId
+  summary: Top-level tenancy owning projects and users.
+- name: User
+  service: user_service (IAM)
+  id: userId
+  summary: IAM identity with roles/permissions.
+- name: EdgeNode
+  aka: Device
+  service: node_service
+  id: deviceId
+  summary: A physical/virtual edge node running EVE-OS.
+- name: EdgeNodeCluster
+  service: node_cluster_service
+  id: clusterID
+  summary: A cluster of edge nodes.
+- name: EdgeApplication
+  aka: App Bundle
+  service: app_service
+  id: appId
+  summary: Application definition/manifest deployable to nodes.
+- name: EdgeApplicationInstance
+  service: app_service
+  id: id
+  summary: A running instance of an app on an edge node.
+- name: AppProfile
+  service: app_profile_service
+  id: id
+  summary: Profile grouping app configuration for deployment.
+- name: EdgeNetwork
+  service: network_service
+  id: networkPolicyId
+  summary: Network definition attached to nodes.
+- name: NetworkInstance
+  service: network_service
+  id: netinstid
+  summary: Instantiated network on an edge node.
+- name: Datastore
+  service: storage_service
+  id: datastoreId
+  summary: Backing store for images/artifacts.
+- name: Image
+  service: storage_service
+  id: imageid
+  summary: OS/app image stored in a datastore.
+- name: VolumeInstance
+  service: storage_service
+  id: imvolid
+  summary: Persistent volume attached to an app instance.
+- name: KubernetesCluster
+  aka: ZKS
+  service: kubernetes_service
+  id: clusterId
+  summary: Managed Kubernetes (ZKS) cluster on edge nodes.
+- name: Job
+  service: job_service
+  id: jobId
+  summary: Async bulk/ops job.
+- name: HardwareModel
+  service: node_service
+  id: modelId
+  summary: Hardware model/brand definition for nodes.
+relationships:
+- from: Enterprise
+  type: has_many
+  to: Project
+  via: enterpriseId
+- from: Project
+  type: has_many
+  to: EdgeNode
+  via: projectId
+- from: Project
+  type: has_many
+  to: EdgeApplication
+  via: projectId
+- from: Project
+  type: has_many
+  to: EdgeNetwork
+  via: projectId
+- from: EdgeNode
+  type: belongs_to
+  to: HardwareModel
+  via: modelId
+- from: EdgeNode
+  type: belongs_to
+  to: EdgeNodeCluster
+  via: clusterID
+- from: EdgeApplicationInstance
+  type: belongs_to
+  to: EdgeApplication
+  via: appId
+- from: EdgeApplicationInstance
+  type: belongs_to
+  to: EdgeNode
+  via: deviceId
+- from: AppProfile
+  type: has_many
+  to: EdgeApplicationInstance
+  via: appProfileId
+- from: NetworkInstance
+  type: belongs_to
+  to: EdgeNode
+  via: deviceId
+- from: Image
+  type: belongs_to
+  to: Datastore
+  via: datastoreId
+- from: VolumeInstance
+  type: belongs_to
+  to: EdgeApplicationInstance
+  via: imvolid
+- from: KubernetesCluster
+  type: has_many
+  to: EdgeNode
+  via: clusterId

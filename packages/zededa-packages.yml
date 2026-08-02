@@ -1,0 +1,19 @@
+generated: '2026-07-21'
+method: searched
+source: ZEDEDA GitHub org + Terraform Registry
+packages:
+- language: hcl
+  registry: terraform
+  name: zededa/zedcloud
+  url: https://registry.terraform.io/providers/zededa/zedcloud/latest
+  source: https://github.com/zededa/terraform-provider-zedcloud
+  install: terraform { required_providers { zedcloud = { source = "zededa/zedcloud" } } }
+  official: true
+  note: Official first-party Terraform provider for the ZedCloud API (IaC client).
+- language: python
+  registry: github
+  name: ZEDEDA/examples
+  url: https://github.com/ZEDEDA/examples
+  install: git clone https://github.com/ZEDEDA/examples
+  official: true
+  note: Official example scripts to interface with the ZedCloud API (not a published package).

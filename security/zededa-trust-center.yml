@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: searched
+probe: true
+source: https://trust.zededa.com/
+url: https://trust.zededa.com/
+certifications:
+- ISO 27001
+- HIPAA
+- FedRAMP
+evidence:
+- source: https://trust.zededa.com/
+  keywords:
+  - iso/iec 27001
+  - hipaa
+  - fedramp
+  - trust center
