@@ -426,7 +426,7 @@ common:
 - type: Authentication
   url: authentication/zededa-authentication.yml
 - type: OpenAPI
-  url: openapi/zededa-node_service-openapi.json
+  url: openapi/_original/zededa-node_service-openapi.json
 - type: Conventions
   url: conventions/zededa-conventions.yml
 - type: ErrorCatalog
