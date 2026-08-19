@@ -1,0 +1,3577 @@
+{
+  "item": [
+    {
+      "id": "581be7dc-869e-424b-a9d5-92b4c0207976",
+      "name": "VolumeInstanceConfiguration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "164adbfb-3962-42d0-a4cb-3968db63b896",
+          "name": "Query edge volume instances",
+          "request": {
+            "name": "Query edge volume instances",
+            "description": {
+              "content": "Query the edge volume instance records.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "volumes",
+                "instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "summary",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "deviceName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "projectName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "namePattern",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "labelName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "appInstName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "deviceNamePattern",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "projectNamePattern",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageToken",
+                  "value": "<string>",
+                  "description": "Page Token"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.orderBy",
+                  "value": "<string>",
+                  "description": "OrderBy helps in sorting the list response"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.orderBy",
+                  "value": "<string>",
+                  "description": "OrderBy helps in sorting the list response"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageNum",
+                  "value": "<int64>",
+                  "description": "Page Number"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageSize",
+                  "value": "<int64>",
+                  "description": "Defines the page size"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.totalPages",
+                  "value": "<int64>",
+                  "description": "Total number of pages to be fetched."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86918787-6efc-46fb-b459-99ce7ec2c6e7",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appInstName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deviceNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"list\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n      \"deviceId\": \"string\",\n      \"projectId\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n      \"deviceId\": \"string\",\n      \"projectId\": \"string\"\n    }\n  ],\n  \"cfgList\": [\n    {\n      \"id\": \"8aB6a02b-6C16-fD9b-fAfd-225caEef0fd3\",\n      \"name\": \"MWG\",\n      \"title\": \"HrfzEwOgZe}uuG1QE\",\n      \"description\": \"string\",\n      \"revision\": {\n        \"curr\": \"string\",\n        \"createdAt\": {},\n        \"createdBy\": \"string\",\n        \"updatedAt\": {},\n        \"updatedBy\": \"string\",\n        \"prev\": \"string\"\n      },\n      \"projectId\": \"string\",\n      \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n      \"deviceId\": \"string\",\n      \"multiattach\": true,\n      \"cleartext\": false,\n      \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n      \"sizeBytes\": 7429,\n      \"image\": \"string\",\n      \"implicit\": true,\n      \"contentTreeId\": \"string\",\n      \"label\": \"string\",\n      \"purge\": {\n        \"counter\": 2520.6981640743998,\n        \"opsTime\": {}\n      },\n      \"tags\": \"UlP^ic+Gj\\\\9\",\n      \"patchartifactvolume\": \"string\",\n      \"edgeNodeCluster\": {\n        \"id\": \"string\",\n        \"designatedNodeID\": \"string\"\n      }\n    },\n    {\n      \"id\": \"b6FE0eab-4EFD-C6BC-DAA6-CAE81cED6412\",\n      \"name\": \"IhIh\",\n      \"title\": \"SOWyoqBq337D2\",\n      \"description\": \"string\",\n      \"revision\": {\n        \"curr\": \"string\",\n        \"createdAt\": {},\n        \"createdBy\": \"string\",\n        \"updatedAt\": {},\n        \"updatedBy\": \"string\",\n        \"prev\": \"string\"\n      },\n      \"projectId\": \"string\",\n      \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n      \"deviceId\": \"string\",\n      \"multiattach\": true,\n      \"cleartext\": false,\n      \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n      \"sizeBytes\": 8813,\n      \"image\": \"string\",\n      \"implicit\": true,\n      \"contentTreeId\": \"string\",\n      \"label\": \"string\",\n      \"purge\": {\n        \"counter\": 7485.740108412993,\n        \"opsTime\": {}\n      },\n      \"tags\": \"y!zJ,V^S\",\n      \"patchartifactvolume\": \"string\",\n      \"edgeNodeCluster\": {\n        \"id\": \"string\",\n        \"designatedNodeID\": \"string\"\n      }\n    }\n  ],\n  \"summaryByType\": {\n    \"description\": \"string\",\n    \"total\": 6527.189461738901,\n    \"values\": {\n      \"key_0\": 698\n    }\n  },\n  \"next\": {\n    \"pageToken\": \"string\",\n    \"orderBy\": [\n      \"string\",\n      \"string\"\n    ],\n    \"pageNum\": 8959.306899034802,\n    \"pageSize\": 3497.4399994478035,\n    \"totalPages\": 9910.929959787214\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b89bef04-0f0f-4ee3-aecb-9ae7e509db61",
+              "name": "Bad Request. The API gateway did not process the request because of invalid value of filter parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appInstName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deviceNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4305,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b376e954-8b4f-401f-9f5a-28bab143e2c6",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appInstName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deviceNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a260a8a4-6317-413f-9d64-0c332d9d3899",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appInstName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deviceNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e653b01-8700-4bb2-9949-3954021e0467",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appInstName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deviceNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0640491e-8064-44ec-83ac-1cdcb9e2071d",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appInstName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deviceNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f3af856-ccd7-49c0-bdaf-dac8e30a4128",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appInstName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deviceNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4242,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8baf60cb-90dc-4925-ac36-4f2e0d543f5d",
+          "name": "Create edge volume instance",
+          "request": {
+            "name": "Create edge volume instance",
+            "description": {
+              "content": "Create an edge volume instance record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "volumes",
+                "instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \",jW\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "31e67ac6-ecbb-4b2e-81bd-d0b3323b8103",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"G1l\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3bf8e2f-0f98-49c0-b277-cdd35f777320",
+              "name": "Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"G1l\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d4fe3a2-6f58-42f0-9542-5b4fb8e87991",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"G1l\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2693db1-2383-4859-9ea5-f86b9573ea98",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"G1l\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a5e90e8-748a-4b92-8ba3-8fbe7deb561d",
+              "name": "Conflict. The API gateway did not process the request because this edge volume instance record will conflict with an already existing edge volume instance record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"G1l\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45557045-7704-4955-9b0a-87edba17c505",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"G1l\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87c61b69-82f8-42c8-a5fc-eb1aab723ff0",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"G1l\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9961707-4114-4421-a70b-b0c992b2835a",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"G1l\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 646,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a00e513-88ad-44d2-a72a-3c5bf702094e",
+          "name": "Get edge volume instance",
+          "request": {
+            "name": "Get edge volume instance",
+            "description": {
+              "content": "Get the configuration (without security details) of an edge volume instance record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "volumes",
+                "instances",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "087de24c-b290-4980-99ac-71b32c9a0f31",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7e00eBDf-a6ff-80Ac-05De-95fe78f00c6B\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"9x-KW .SXXK\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab410974-9a9c-44af-8158-9f8052153ead",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "813feed5-b644-4087-bc4b-8a8aaec24b42",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d875a2ee-fb1a-44a1-8e1a-510cc5bb2f1d",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6e1f119-0be4-4922-bff2-2a4c3c1aa7b1",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f9bbfae-ffa4-4deb-85da-be0b5ebef803",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9e88bfc-f4eb-46a0-a6df-5d82b9252ff5",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 646,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c53dc6f-6e9a-4224-8b8c-c1321b2d7363",
+          "name": "Delete volume instance",
+          "request": {
+            "name": "Delete volume instance",
+            "description": {
+              "content": "Delete a volume instance record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "volumes",
+                "instances",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e29769c-a267-433a-ab7b-ec8f97347c06",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8337c8c-9ff2-4e81-98bf-0a0930b966db",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e9a874f-7d6d-4565-b06a-e1bc33941057",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c24ea0fa-e4fe-4ceb-b65e-e707dee39072",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd604cf1-9db1-40cb-9a78-82f1703c2f52",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba710cdd-532e-4b42-a954-906a5d9b09ba",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5104dea-d932-4275-a156-15ee37271ed0",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 646,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de996e26-d44f-47ee-a19c-aa997dbb3d7a",
+          "name": "Update edge volume instance",
+          "request": {
+            "name": "Update edge volume instance",
+            "description": {
+              "content": "Update an edge volume instance. The usual pattern to update an edge volume instance record is to retrieve the record and update with the modified values in a new body to update the edge volume instance record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "volumes",
+                "instances",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"f\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c34a576d-8492-4877-8d49-b029ec58286d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"UGM\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37dabf9e-ab5b-42ce-8e8b-3d7eecbd11b2",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"UGM\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9005d83d-49cb-440c-80a4-914ce4022a82",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"UGM\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b24def4f-dc59-425d-aff2-e5a000dffd86",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"UGM\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67503f72-4020-414d-965c-c6ce88f81ba9",
+              "name": "Conflict. The API gateway did not process the request because this operation will conflict with an already existing edge volume instance record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"UGM\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc07db04-e6d4-4bcf-ba05-cd0ec594be68",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"UGM\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "214de1da-e4e2-4b1d-b1c0-bdb18341ec98",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"UGM\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69e3d87b-2059-48e4-bd6b-fa79e0a02681",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"UGM\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 646,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8aed233-bad2-4483-bf45-855efa8accdb",
+          "name": "Get edge volume instance",
+          "request": {
+            "name": "Get edge volume instance",
+            "description": {
+              "content": "Get the configuration (without security details) of an edge volume instance record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "volumes",
+                "instances",
+                "name",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a41282d9-a32e-4ca7-8d47-785cb9f5bb14",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7e00eBDf-a6ff-80Ac-05De-95fe78f00c6B\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"type\": \"VOLUME_INSTANCE_TYPE_UNSPECIFIED\",\n  \"deviceId\": \"<string>\",\n  \"multiattach\": \"<boolean>\",\n  \"cleartext\": \"<boolean>\",\n  \"accessmode\": \"VOLUME_INSTANCE_ACCESS_MODE_INVALID\",\n  \"sizeBytes\": \"<uint64>\",\n  \"image\": \"<string>\",\n  \"implicit\": \"<boolean>\",\n  \"contentTreeId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"purge\": {\n    \"counter\": \"<int64>\",\n    \"opsTime\": \"<object>\"\n  },\n  \"tags\": \"9x-KW .SXXK\",\n  \"patchartifactvolume\": \"<string>\",\n  \"edgeNodeCluster\": {\n    \"id\": \"<string>\",\n    \"designatedNodeID\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "934c5cbb-60b9-4264-a396-8b6e37c8022b",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31d0440f-8b46-4a89-93a6-9422735205be",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07955eaf-b600-4365-9d3e-f7a098d86ab6",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "420639d5-8e60-4958-9a48-68fe8bf57035",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19e2c915-5213-4112-b41f-b02f751c3060",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 260,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29e55a88-754a-4f22-8d24-63cbfc9bad23",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "volumes",
+                    "instances",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 646,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7a26331f-10b2-41fd-8d89-3fca0ec4b307",
+    "name": "ZEDEDA App Profiles Service AppProfileService VolumeInstanceConfiguration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.\n\nContact Support:\n Name: ZEDEDA API Support\n Email: support@zededa.com",
+      "type": "text/plain"
+    }
+  }
+}

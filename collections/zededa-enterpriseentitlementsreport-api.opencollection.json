@@ -1,0 +1,363 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService EnterpriseEntitlementsReport API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EnterpriseEntitlementsReport",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get entitlement data for a enterprise",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/entitlements",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "query",
+                "description": "Enterprise id for which we want to get summary report for all objects"
+              }
+            ]
+          },
+          "docs": "Get entitlement data for a enterprise"
+        },
+        {
+          "info": {
+            "name": "Set entitlement data for a enterprise",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/entitlements",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Set entitlement data for a enterprise."
+        },
+        {
+          "info": {
+            "name": "Get the list of enterprises of which the logged user can view/edit entitlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/entitlements/allowedenterprises",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "SfdcId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "HubspotId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "all",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roleName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get the list of enterprises of which the logged user can view/edit entitlements"
+        },
+        {
+          "info": {
+            "name": "Get the list of enterprises of which the logged user can query reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/reports/allowedenterprises",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "SfdcId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "HubspotId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "all",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roleName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get the list of enterprises of which the logged user can query reports"
+        },
+        {
+          "info": {
+            "name": "Get appInst report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/reports/apps/instance",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "query",
+                "description": "Enterprise id for which we want to get summary report for all objects"
+              }
+            ]
+          },
+          "docs": "Get appInst report"
+        },
+        {
+          "info": {
+            "name": "Get device report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/reports/device",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "query",
+                "description": "Enterprise id for which we want to get summary report for all objects"
+              }
+            ]
+          },
+          "docs": "Get device report"
+        },
+        {
+          "info": {
+            "name": "Get plugin report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/reports/plugin",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "query",
+                "description": "Enterprise id for which we want to get summary report for all objects"
+              }
+            ]
+          },
+          "docs": "Get plugin report"
+        },
+        {
+          "info": {
+            "name": "Get project report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/reports/project",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "query",
+                "description": "Enterprise id for which we want to get summary report for all objects"
+              }
+            ]
+          },
+          "docs": "Get project report"
+        },
+        {
+          "info": {
+            "name": "Get user report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/reports/user",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "query",
+                "description": "Enterprise id for which we want to get summary report for all objects"
+              }
+            ]
+          },
+          "docs": "Get user report"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

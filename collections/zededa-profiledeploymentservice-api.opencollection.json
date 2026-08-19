@@ -1,0 +1,251 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService ProfileDeploymentService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ProfileDeploymentService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query profile deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/profiledeployments",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filter.profileDeploymentId",
+                "value": "",
+                "type": "query",
+                "description": "Unique id of the asset, unique across the enterprise."
+              },
+              {
+                "name": "filter.namePattern",
+                "value": "",
+                "type": "query",
+                "description": "deployment name pattern"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query the profile deployment records."
+        },
+        {
+          "info": {
+            "name": "Create profile deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/profiledeployments",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a profile deployment record. When an assetgroup is associated with the app profiles via profile deployments, the policies will be applied onto the assets present in that group."
+        },
+        {
+          "info": {
+            "name": "Get profile deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/profiledeployments/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "unique Id of the deployment"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a profile deployment record."
+        },
+        {
+          "info": {
+            "name": "Update profile deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/profiledeployments/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "unique Id of the deployment."
+              }
+            ]
+          },
+          "docs": "Update a profile deployment record. The usual pattern to update a profile deployment record is to retrieve the record and update with the modified values in a new body to update the profile deployment record."
+        },
+        {
+          "info": {
+            "name": "Delete profile deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/profiledeployments/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "unique Id of the deployment"
+              }
+            ]
+          },
+          "docs": "Delete a profile deployment record."
+        },
+        {
+          "info": {
+            "name": "Query profile deployments resource status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/profiledeployments/id/:id/resourcestatus",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "unique Id of the deployment."
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query the profile deployment resourcs status."
+        },
+        {
+          "info": {
+            "name": "Get profile deployment by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/profiledeployments/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the deployment, unique across the enterprise. Once object is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a profile deployment record by name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

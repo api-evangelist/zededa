@@ -1,0 +1,3451 @@
+{
+  "item": [
+    {
+      "id": "747e57ae-9d48-4e84-b1a9-e4be9f94c4eb",
+      "name": "CertificateEnrollmentProfileConfiguration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ed77d004-a0a7-43d1-b9d7-ff625ea60a54",
+          "name": "List certificate enrollment profiles",
+          "request": {
+            "name": "List certificate enrollment profiles",
+            "description": {
+              "content": "List all certificate enrollment profiles with optional filtering and pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ceps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "namePattern",
+                  "value": "<string>",
+                  "description": "query param : \"name-pattern\" . Search * namePattern * in name field to filter records"
+                },
+                {
+                  "disabled": false,
+                  "key": "summary",
+                  "value": "<boolean>",
+                  "description": "Only summary of the records required"
+                },
+                {
+                  "disabled": false,
+                  "key": "showProjectsList",
+                  "value": "<boolean>",
+                  "description": "If true, include the list of projects referencing each CEP profile"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageToken",
+                  "value": "<string>",
+                  "description": "Page Token"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.orderBy",
+                  "value": "<string>",
+                  "description": "OrderBy helps in sorting the list response"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.orderBy",
+                  "value": "<string>",
+                  "description": "OrderBy helps in sorting the list response"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageNum",
+                  "value": "<int64>",
+                  "description": "Page Number"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageSize",
+                  "value": "<int64>",
+                  "description": "Defines the page size"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.totalPages",
+                  "value": "<int64>",
+                  "description": "Total number of pages to be fetched."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c43b777-ade5-4ac2-ab19-f297be7ec209",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"list\": [\n    {\n      \"name\": \"PB01nZ5qH-D8\",\n      \"scepUrl\": \"string\",\n      \"caCertPem\": [\n        \"string\",\n        \"string\"\n      ],\n      \"csrProfile\": {\n        \"commonName\": \"string\",\n        \"organization\": \"string\",\n        \"organizationalUnit\": \"string\",\n        \"country\": \"string\",\n        \"state\": \"string\",\n        \"locality\": \"string\",\n        \"sanUri\": [\n          \"string\",\n          \"string\"\n        ],\n        \"sanEmail\": [\n          \"string\",\n          \"string\"\n        ],\n        \"renewPeriodPercent\": 7438,\n        \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n        \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n      },\n      \"id\": \"string\",\n      \"title\": \"1AMIrTR?oj_4p(\",\n      \"description\": \"string\",\n      \"useControllerProxy\": true,\n      \"secret\": {\n        \"challengePassword\": \"string\"\n      },\n      \"encryptedSecrets\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"cryptoKey\": \"string\",\n      \"enterpriseId\": \"string\",\n      \"revision\": {\n        \"curr\": \"string\",\n        \"createdAt\": {},\n        \"createdBy\": \"string\",\n        \"updatedAt\": {},\n        \"updatedBy\": \"string\",\n        \"prev\": \"string\"\n      },\n      \"projectsList\": [\n        {\n          \"projectId\": \"string\",\n          \"projectName\": \"string\"\n        },\n        {\n          \"projectId\": \"string\",\n          \"projectName\": \"string\"\n        }\n      ]\n    },\n    {\n      \"name\": \"mSZ\",\n      \"scepUrl\": \"string\",\n      \"caCertPem\": [\n        \"string\",\n        \"string\"\n      ],\n      \"csrProfile\": {\n        \"commonName\": \"string\",\n        \"organization\": \"string\",\n        \"organizationalUnit\": \"string\",\n        \"country\": \"string\",\n        \"state\": \"string\",\n        \"locality\": \"string\",\n        \"sanUri\": [\n          \"string\",\n          \"string\"\n        ],\n        \"sanEmail\": [\n          \"string\",\n          \"string\"\n        ],\n        \"renewPeriodPercent\": 8351,\n        \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n        \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n      },\n      \"id\": \"string\",\n      \"title\": \"WTARNRUSDAH2`|*)X\",\n      \"description\": \"string\",\n      \"useControllerProxy\": true,\n      \"secret\": {\n        \"challengePassword\": \"string\"\n      },\n      \"encryptedSecrets\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"cryptoKey\": \"string\",\n      \"enterpriseId\": \"string\",\n      \"revision\": {\n        \"curr\": \"string\",\n        \"createdAt\": {},\n        \"createdBy\": \"string\",\n        \"updatedAt\": {},\n        \"updatedBy\": \"string\",\n        \"prev\": \"string\"\n      },\n      \"projectsList\": [\n        {\n          \"projectId\": \"string\",\n          \"projectName\": \"string\"\n        },\n        {\n          \"projectId\": \"string\",\n          \"projectName\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"next\": {\n    \"pageToken\": \"string\",\n    \"orderBy\": [\n      \"string\",\n      \"string\"\n    ],\n    \"pageNum\": 7647.500420612894,\n    \"pageSize\": 7416.581658665018,\n    \"totalPages\": 3926.3545712799164\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59b6f65c-017c-41aa-9ae6-59735cd5ff76",
+              "name": "Bad Request. The API gateway did not process the request because of invalid filter parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 2942,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b0cf4ff-33f9-4638-b690-df6d1008dd82",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38dc6058-1050-430e-be09-1694b2d033cb",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6a21f34-a294-47ea-8523-1b5c64ad2f86",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80697292-caa9-496a-9529-6e23a51661fd",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8931cf5-7366-4175-9867-c9693f2def8c",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6844,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cf6023c-5256-45b9-9c65-ee5f628e0275",
+          "name": "Create a certificate enrollment profile",
+          "request": {
+            "name": "Create a certificate enrollment profile",
+            "description": {
+              "content": "Create a certificate enrollment profile (CEP) for SCEP-based certificate provisioning on edge devices.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ceps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ac22c1ff-afc3-49d3-a2b2-508013598964",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ed3ed60-265f-4919-929a-64cf0ce4a47a",
+              "name": "Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1a13345-45ba-458e-afe7-5d2e9b3328a4",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f668af1c-9bbe-495e-8777-686cc1be5b33",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4377fbed-7df6-4f40-83f3-4759aa4600ac",
+              "name": "Conflict. The API gateway did not process the request because this CEP record will conflict with an already existing CEP record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c15b051-0d69-4d39-b74d-eb83b686b2a2",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "993bcf32-f8ad-4165-b47b-aee01ff7658c",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3257cc2-87ef-40a9-aa02-5d5499102dee",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3372,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "682d0b1d-5911-491c-ba77-99c03f30acfc",
+          "name": "Get certificate enrollment profile by ID",
+          "request": {
+            "name": "Get certificate enrollment profile by ID",
+            "description": {
+              "content": "Get the configuration of a certificate enrollment profile by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ceps",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "showProjectsList",
+                  "value": "<boolean>",
+                  "description": "If true, include the list of projects referencing this CEP profile"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) System defined universally unique Id of the CEP profile"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fbc7310-06a3-4ef0-963c-5dc164a94e7a",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"id\": \"string\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"enterpriseId\": \"string\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectsList\": [\n    {\n      \"projectId\": \"string\",\n      \"projectName\": \"string\"\n    },\n    {\n      \"projectId\": \"string\",\n      \"projectName\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57a79294-e210-4c5a-8907-84680d54f931",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2f066c5-0f76-4d3a-aefb-1d235c1dcf1e",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "260e28b8-4fa6-4d08-a81b-97449366e2e6",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4249fb6-2262-43f1-a6b0-42e95c431e73",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db561877-4503-475e-b834-6167746297e0",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2737a04b-ec4b-4d9e-947a-c52dfb5735ea",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3372,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af96854a-e554-44d0-9178-4bf1c6398516",
+          "name": "Delete a certificate enrollment profile",
+          "request": {
+            "name": "Delete a certificate enrollment profile",
+            "description": {
+              "content": "Delete a certificate enrollment profile by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ceps",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "showProjectsList",
+                  "value": "<boolean>",
+                  "description": "If true, include the list of projects referencing this CEP profile"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) System defined universally unique Id of the CEP profile"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da5499da-4943-469b-8e4e-df0b3b769c6d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d135c13b-8c71-4b19-b337-c2a8a550fa57",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d69c527-428b-4011-95ae-4f41c9655e32",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3076063-4535-4cef-9154-7a90e642c5e6",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09000867-559b-4199-ae51-b9e1f5b70627",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd1d1a16-319a-4d0e-81d4-a9dc34366faf",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "664f2e62-4e5f-4270-a473-0626216a93ad",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showProjectsList",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3372,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc8d92d1-6f9d-4f05-b75b-8c2d9e00f596",
+          "name": "Update a certificate enrollment profile",
+          "request": {
+            "name": "Update a certificate enrollment profile",
+            "description": {
+              "content": "Update a certificate enrollment profile. Fields id, name, enterprise_id, and status are immutable and cannot be changed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ceps",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) System-generated unique identifier (UUID)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1a59a684-2059-458e-b7f4-5db9904de745",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System-generated unique identifier (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa5b3ca4-7740-479b-98f5-43eab3d5611f",
+              "name": "Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System-generated unique identifier (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ecaac08-013d-469f-96cf-e578f7c97233",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System-generated unique identifier (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a29c63ba-e067-4bad-aebf-ce006a317f06",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System-generated unique identifier (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0943e1b1-c2e0-407b-afd7-c07e70917a20",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System-generated unique identifier (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1cef303-ca4c-40bc-a1fb-293b083a272e",
+              "name": "Conflict. The API gateway did not process the request because of a version conflict with the current state of the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System-generated unique identifier (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "780c1fdd-41c6-4cd3-9b45-02be584fd5d3",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System-generated unique identifier (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1bb5dae-376b-4077-a6b5-a1fc819ddfda",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System-generated unique identifier (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62f524c3-6bf5-48ff-87c7-af08aa4dfc81",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System-generated unique identifier (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3372,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32e610a3-3739-4057-88e1-f4181731a04c",
+          "name": "Get certificate enrollment profile by name",
+          "request": {
+            "name": "Get certificate enrollment profile by name",
+            "description": {
+              "content": "Get the configuration of a certificate enrollment profile by its unique name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ceps",
+                "name",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) User defined name of the CEP profile"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c64b8c8-c1f7-47ca-9d78-16c7cf0a5d02",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"scepUrl\": \"<string>\",\n  \"caCertPem\": [\n    \"<byte>\",\n    \"<byte>\"\n  ],\n  \"csrProfile\": {\n    \"commonName\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"sanUri\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sanEmail\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"renewPeriodPercent\": \"<long>\",\n    \"keyType\": \"KEY_TYPE_UNSPECIFIED\",\n    \"hashAlgorithm\": \"HASH_ALGORITHM_UNSPECIFIED\"\n  },\n  \"id\": \"string\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"useControllerProxy\": \"<boolean>\",\n  \"secret\": {\n    \"challengePassword\": \"<string>\"\n  },\n  \"encryptedSecrets\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"cryptoKey\": \"<string>\",\n  \"enterpriseId\": \"string\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"projectsList\": [\n    {\n      \"projectId\": \"string\",\n      \"projectName\": \"string\"\n    },\n    {\n      \"projectId\": \"string\",\n      \"projectName\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a3075d5-b52c-4c61-9988-f7cf7ce68b8d",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76491f41-e1ec-4743-be78-fd4844313d73",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have edge-node level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e24fd543-4f98-43eb-a90e-b55f65460c4f",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c43de666-a1a5-4f7f-835f-e1e367dc5207",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fa99374-d638-4a35-b2e0-11ef1bdf2b49",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6023,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a38d8868-20ee-4213-aca0-366496616c0a",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ceps",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the CEP profile"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3372,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b366f9b9-3b34-4689-ac1d-288ecdef0af0",
+    "name": "ZEDEDA App Profiles Service AppProfileService CertificateEnrollmentProfileConfiguration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.\n\nContact Support:\n Name: ZEDEDA API Support\n Email: support@zededa.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,2688 @@
+{
+  "item": [
+    {
+      "id": "a0b8d8bf-fac1-4f8f-a3b6-8b5d245dd73b",
+      "name": "HelmChartManagement",
+      "description": {
+        "content": "APIs for managing Helm charts in Kubernetes clusters. Provides operations for importing, creating, updating, deleting, and retrieving Helm charts from both global and enterprise-specific repositories.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d875c4f6-75ae-4fb8-a28a-e53e633ce781",
+          "name": "List Helm Charts",
+          "request": {
+            "name": "List Helm Charts",
+            "description": {
+              "content": "Retrieve a list of all available Helm charts in the project repository with their versions and metadata.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/helm/charts\n```\n\n**Example Response:**\n```json\n{\n  \"api_version\": \"v2\",\n  \"generated\": \"2024-01-15T12:00:00Z\",\n  \"repo_identifier\": \"project-charts\",\n  \"repo_name\": \"Project Repository\",\n  \"entries\": {\n    \"nginx\": [\n      {\n        \"name\": \"nginx\",\n        \"version\": \"15.4.0\",\n        \"app_version\": \"1.25.3\",\n        \"description\": \"NGINX Open Source based on NGINX Alpine\",\n        \"created\": \"2024-01-10T09:00:00Z\",\n        \"digest\": \"sha256:abc123def456...\",\n        \"urls\": [\"/charts/nginx-15.4.0.tgz\"]\n      },\n      {\n        \"name\": \"nginx\",\n        \"version\": \"15.3.0\",\n        \"app_version\": \"1.25.2\",\n        \"description\": \"NGINX Open Source based on NGINX Alpine\",\n        \"created\": \"2024-01-05T14:30:00Z\",\n        \"digest\": \"sha256:def456ghi789...\",\n        \"urls\": [\"/charts/nginx-15.3.0.tgz\"]\n      }\n    ],\n    \"redis\": [\n      {\n        \"name\": \"redis\",\n        \"version\": \"18.1.0\",\n        \"app_version\": \"7.2.3\",\n        \"description\": \"Redis is an in-memory database\",\n        \"created\": \"2024-01-12T16:45:00Z\",\n        \"digest\": \"sha256:ghi789jkl012...\",\n        \"urls\": [\"/charts/redis-18.1.0.tgz\"]\n      }\n    ]\n  }\n}\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cluster",
+                "instances",
+                "kubernetes",
+                "helm",
+                "charts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "301eff58-1c53-459c-9167-c61c6e002613",
+              "name": "OK. Successfully retrieved list of Helm charts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"generated\": \"string\",\n  \"repoIdentifier\": \"string\",\n  \"repoName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afa7b79c-af19-4fbe-9c44-f383f4c1536f",
+              "name": "Bad Request. The API gateway did not process the request because of invalid value of filter parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 3603,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c27ae767-0e91-4063-bd44-8acc0815cc23",
+              "name": "Unauthorized. The API gateway did not process the request because of invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63265773-6b97-4dba-b120-7e46451a8cc1",
+              "name": "Forbidden. The API gateway did not process the request because the user does not have access to the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ab36107-f6c7-4843-82ba-076f0dc9dd90",
+              "name": "Internal Server Error. Failed to retrieve chart list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f57d82ef-f637-4469-91e1-07393d6e4d44",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3699,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0f7f6b1-c57b-4827-ad0b-e7045553e581",
+          "name": "Create Helm Chart",
+          "request": {
+            "name": "Create Helm Chart",
+            "description": {
+              "content": "Upload and create a new Helm chart package in the project repository. The chart package should be provided as a .tgz file using multipart/form-data with the field name 'chart'.\n\n**Example Request using curl:**\n```bash\ncurl -X POST \\\n  -H \"X-API-KEY: your-api-key\" \\\n  -F \"chart=@nginx-chart-1.0.0.tgz\" \\\n  https://api.zededa.com/api/v1/cluster/instances/kubernetes/helm/charts\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"4495fb8b-187e-4fc1-8c28-6a8ac6629833\",\n  \"objectName\": \"nginx-chart\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 201,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Note:** The chart file (*.tgz) is **required** and must be a valid Helm chart package.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cluster",
+                "instances",
+                "kubernetes",
+                "helm",
+                "charts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "chart",
+                  "type": "file",
+                  "description": "(Required) Helm chart package file (.tgz format)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3148bf18-3fce-4b29-811f-07f484838a6c",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cf69446-0edd-4ccc-8d52-cc14cb7e358b",
+              "name": "Created. Helm chart successfully uploaded and created in the project repository.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3e854ab-0190-40cd-a41d-fe9fb41d919f",
+              "name": "Bad Request. Invalid chart file format or missing required chart metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d64570c9-b84c-496f-bf04-cae2836b99a3",
+              "name": "Unauthorized. The API gateway did not process the request because of invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bbab1f1-15f3-46ec-8bbd-6ba99606eff7",
+              "name": "Forbidden. The API gateway did not process the request because the user does not have access to the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c718403e-e2f5-4a9f-9d6e-c3be3fd062c5",
+              "name": "Conflict. A chart with the same name and version already exists in the repository.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e9a543e-b874-4a96-ae43-d8c10ac9a00e",
+              "name": "Internal Server Error. Failed to process chart upload or repository operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1973addd-2fd8-46d0-a484-aec219b5f67c",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1945,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f328d2d1-e377-47d2-bfc1-9ea7d09eccd8",
+          "name": "Delete Helm Chart",
+          "request": {
+            "name": "Delete Helm Chart",
+            "description": {
+              "content": "Delete a Helm chart from the project repository. This action is irreversible and will remove all versions of the specified chart.\n\n**Example Request:**\n```\nDELETE /v1/cluster/instances/kubernetes/helm/charts/name/nginx\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"4495fb8b-187e-4fc1-8c28-6a8ac6629833\",\n  \"objectName\": \"nginx\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Warning:** This operation will delete ALL versions of the specified chart. If you need to delete a specific version, use the update operation to remove that version from the repository.\n\n**Note:** The chart_name parameter is **required** and must be a valid chart name in the repository.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cluster",
+                "instances",
+                "kubernetes",
+                "helm",
+                "charts",
+                "name",
+                ":chartName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chartName",
+                  "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a624cbe-9bb0-41d9-a123-fb1e02109dbe",
+              "name": "OK. Helm chart successfully deleted from the repository.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19d9f610-4f46-49a3-8548-09c0b0cfd03a",
+              "name": "Bad Request. The API gateway did not process the request because of invalid value of filter parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e313f0e-2df9-42c9-a76e-2fab7e2cc018",
+              "name": "Unauthorized. The API gateway did not process the request because of invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b24b9806-f6f5-4f45-bed1-ed771c3bbc41",
+              "name": "Forbidden. The API gateway did not process the request because the user does not have access to the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dffa776-8f2e-437c-8bcc-9f641fb88f45",
+              "name": "Not Found. The specified chart name and version combination does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e6491b0-474f-4fa0-ab01-4a10221b7fbf",
+              "name": "Conflict. Cannot delete chart because it is currently in use by deployments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95cecab1-a255-44dc-9545-68f9a6f5d97a",
+              "name": "Internal Server Error. Failed to delete chart from repository.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59800634-c449-4f47-be70-4361e8e1099f",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1945,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14431436-70c5-4cd9-9e8f-e349e66eeda8",
+          "name": "Get Helm Chart",
+          "request": {
+            "name": "Get Helm Chart",
+            "description": {
+              "content": "Retrieve detailed information about a specific Helm chart including its metadata, default values, and configuration options.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/helm/charts/name/nginx/version/15.4.0?repo_identifier=bitnami\n```\n\n**Example Response:**\n```json\n{\n  \"readme\": \"# NGINX Chart\\n\\nThis chart deploys NGINX on Kubernetes...\",\n  \"app_readme\": \"# NGINX Application\\n\\nNGINX is a web server...\",\n  \"questions\": {\n    \"replicaCount\": {\n      \"type\": \"integer\",\n      \"label\": \"Number of replicas\",\n      \"default\": 1,\n      \"min\": 1,\n      \"max\": 10\n    },\n    \"service.type\": {\n      \"type\": \"enum\",\n      \"label\": \"Service type\",\n      \"options\": [\"ClusterIP\", \"NodePort\", \"LoadBalancer\"]\n    }\n  },\n  \"values\": {\n    \"replicaCount\": 1,\n    \"image\": {\n      \"repository\": \"bitnami/nginx\",\n      \"tag\": \"1.25.3\",\n      \"pullPolicy\": \"IfNotPresent\"\n    },\n    \"service\": {\n      \"type\": \"ClusterIP\",\n      \"port\": 80\n    }\n  },\n  \"chart\": {\n    \"name\": \"nginx\",\n    \"version\": \"15.4.0\",\n    \"app_version\": \"1.25.3\",\n    \"description\": \"NGINX Open Source based on NGINX Alpine\",\n    \"home\": \"https://github.com/bitnami/charts/tree/main/bitnami/nginx\",\n    \"sources\": [\"https://github.com/bitnami/containers/tree/main/bitnami/nginx\"],\n    \"keywords\": [\"nginx\", \"http\", \"web\", \"www\", \"reverse proxy\"],\n    \"maintainers\": [\n      {\n        \"name\": \"VMware, Inc.\",\n        \"url\": \"https://github.com/bitnami/charts\"\n      }\n    ]\n  },\n  \"repo_identifier\": \"bitnami\"\n}\n```\n\n**Note:** Both chart_name and chart_version are **required** parameters. repo_identifier is **optional** and defaults to the local repository.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cluster",
+                "instances",
+                "kubernetes",
+                "helm",
+                "charts",
+                "name",
+                ":chartName",
+                "version",
+                ":chartVersion"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "repoIdentifier",
+                  "value": "<string>",
+                  "description": "Identifier for the Helm chart repository (optional). Example: 'bitnami'. Defaults to local repository if not specified"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chartName",
+                  "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chartVersion",
+                  "description": "(Required) Version of the Helm chart (required). Example: '15.4.0'"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37706e6d-2d47-4d7e-aea7-7a7fc6370c19",
+              "name": "OK. Successfully retrieved Helm chart information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "repoIdentifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '15.4.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"readme\": \"string\",\n  \"appReadme\": \"string\",\n  \"questions\": {},\n  \"values\": {},\n  \"chart\": {\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"apiVersion\": \"string\",\n    \"appVersion\": \"string\",\n    \"dependencies\": [\n      {\n        \"name\": \"4ev1pu-k\",\n        \"repository\": \"string\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"version\": \"string\"\n      },\n      {\n        \"name\": \"b\",\n        \"repository\": \"string\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"version\": \"string\"\n      }\n    ],\n    \"description\": \"string\",\n    \"home\": \"string\",\n    \"icon\": \"string\",\n    \"keywords\": [\n      \"string\",\n      \"string\"\n    ],\n    \"maintainers\": [\n      {\n        \"name\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"url\": \"string\"\n      }\n    ],\n    \"name\": \"string\",\n    \"sources\": [\n      \"string\",\n      \"string\"\n    ],\n    \"version\": \"string\"\n  },\n  \"repoIdentifier\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d27ec7e5-12e8-4cf2-8d08-338c075f7ec9",
+              "name": "Bad Request. The API gateway did not process the request because of invalid value of filter parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "repoIdentifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '15.4.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65e33e2a-87b2-4fb8-a0c5-9632639cd715",
+              "name": "Unauthorized. The API gateway did not process the request because of invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "repoIdentifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '15.4.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae2f4ebe-ac08-46dc-9417-cf2d41c7eae3",
+              "name": "Forbidden. The API gateway did not process the request because the user does not have access to the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "repoIdentifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '15.4.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "237ee7ca-04fa-47d4-a126-aa2e85b7e531",
+              "name": "Not Found. The specified chart name and version combination does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "repoIdentifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '15.4.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8d74a5f-b5d9-46fc-bed6-6c292fd99052",
+              "name": "Internal Server Error. Failed to retrieve chart information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "repoIdentifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '15.4.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a58fa65f-b979-41e3-8ec8-4a47018f5ced",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "repoIdentifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '15.4.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1945,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61506e12-9469-49c3-9d24-adc311069c4d",
+          "name": "Update Helm Chart",
+          "request": {
+            "name": "Update Helm Chart",
+            "description": {
+              "content": "Update an existing Helm chart with a new chart package. The chart name and version must match the existing chart being updated. The chart package should be provided as a .tgz file using multipart/form-data with the field name 'chart'.\n\n**Example Request using curl:**\n```bash\ncurl -X PUT \\\n  -H \"X-API-KEY: your-api-key\" \\\n  -F \"chart=@nginx-chart-1.0.1.tgz\" \\\n  https://api.zededa.com/api/v1/cluster/instances/kubernetes/helm/charts/name/nginx/version/1.0.0\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"4495fb8b-187e-4fc1-8c28-6a8ac6629833\",\n  \"objectName\": \"nginx-chart\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Note:** Both chart_name and chart_version path parameters are **required** and must match an existing chart.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cluster",
+                "instances",
+                "kubernetes",
+                "helm",
+                "charts",
+                "name",
+                ":chartName",
+                "version",
+                ":chartVersion"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chartName",
+                  "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chartVersion",
+                  "description": "(Required) Version of the Helm chart (required). Example: '1.0.0'"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "chart",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "(Required) Helm chart package file (.tgz format)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "805331bb-62cf-4636-8aa1-97b71e519638",
+              "name": "OK. Helm chart successfully updated in the project repository.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '1.0.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0253398-b21e-417a-8cae-e5a5678167ad",
+              "name": "Bad Request. Invalid chart file or version mismatch.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '1.0.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de2d96d3-bf72-4db8-89e9-edce27b8f25c",
+              "name": "Unauthorized. The API gateway did not process the request because of invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '1.0.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff84f417-63b6-4898-8b2a-025350cf7ae6",
+              "name": "Forbidden. The API gateway did not process the request because the user does not have access to the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '1.0.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf748dca-5c5d-4439-a5ad-77e67fbf7ffb",
+              "name": "Not Found. The specified chart name and version combination does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '1.0.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5684dfe-0563-4fba-80bd-9676e6bb6fb4",
+              "name": "Internal Server Error. Failed to update chart in repository.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '1.0.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 903,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9d2995e-b885-4714-a41f-4c83cdc29677",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "helm",
+                    "charts",
+                    "name",
+                    ":chartName",
+                    "version",
+                    ":chartVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartName",
+                      "description": "(Required) Name of the Helm chart (required). Example: 'nginx'"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chartVersion",
+                      "description": "(Required) Version of the Helm chart (required). Example: '1.0.0'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1945,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "676be7c0-d5ab-4820-b76e-88081c4311c4",
+    "name": "ZEDEDA App Profiles Service AppProfileService HelmChartManagement API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.\n\nContact Support:\n Name: ZEDEDA API Support\n Email: support@zededa.com",
+      "type": "text/plain"
+    }
+  }
+}

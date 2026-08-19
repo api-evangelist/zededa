@@ -1,0 +1,3359 @@
+{
+  "item": [
+    {
+      "id": "36d35aee-4490-4b42-8d3d-c83a24485ba7",
+      "name": "AssetGroupService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "969c0643-bdea-4b03-9ead-92988ed06e5f",
+          "name": "Query asset groups",
+          "request": {
+            "name": "Query asset groups",
+            "description": {
+              "content": "Query the asset group records.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "assetgroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "projectNamePattern",
+                  "value": "<string>",
+                  "description": "project name pattern"
+                },
+                {
+                  "disabled": false,
+                  "key": "namePattern",
+                  "value": "<string>",
+                  "description": "asset group name pattern"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageToken",
+                  "value": "<string>",
+                  "description": "Page Token"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.orderBy",
+                  "value": "<string>",
+                  "description": "OrderBy helps in sorting the list response"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.orderBy",
+                  "value": "<string>",
+                  "description": "OrderBy helps in sorting the list response"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageNum",
+                  "value": "<int64>",
+                  "description": "Page Number"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageSize",
+                  "value": "<int64>",
+                  "description": "Defines the page size"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.totalPages",
+                  "value": "<int64>",
+                  "description": "Total number of pages to be fetched."
+                },
+                {
+                  "disabled": false,
+                  "key": "summary",
+                  "value": "<boolean>",
+                  "description": "Only summary of the records required"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52f4e77e-0357-449f-a819-42bdedb46235",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {\n    \"pageToken\": \"string\",\n    \"orderBy\": [\n      \"string\",\n      \"string\"\n    ],\n    \"pageNum\": 4679.860225918154,\n    \"pageSize\": 3694.4878878976606,\n    \"totalPages\": 6539.018950505609\n  },\n  \"list\": [\n    {\n      \"name\": \"Foqhw\",\n      \"id\": \"60e90ce8-a6a0-eD73-d70e-cdCF956e77d7\",\n      \"title\": \"ItUgkZE1kNdgZlH=+I\",\n      \"description\": \"string\",\n      \"projectId\": \"string\",\n      \"assetIds\": {\n        \"ids\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"assetTags\": {\n        \"assetTag\": [\n          {\n            \"tag\": \"HO9D\"\n          },\n          {\n            \"tag\": \"]\\\"[+\"\n          }\n        ]\n      }\n    },\n    {\n      \"name\": \"bA8u\",\n      \"id\": \"eEA8E3Ac-A5e0-07E8-e4B7-a8b7Bd49be3f\",\n      \"title\": \"Y8j3NZ3dxmJ5jq0t(\",\n      \"description\": \"string\",\n      \"projectId\": \"string\",\n      \"assetIds\": {\n        \"ids\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"assetTags\": {\n        \"assetTag\": [\n          {\n            \"tag\": \"`Q\"\n          },\n          {\n            \"tag\": \"U`XU\"\n          }\n        ]\n      }\n    }\n  ],\n  \"totalCount\": 1884\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0fe0a2d-4eab-4400-97de-1586d7e4d31b",
+              "name": "Bad Request. The API gateway did not process the request because of invalid value of filter parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 8258,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "732715f0-20df-4d77-be04-d030c0a50384",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1302663b-7cb4-48b3-9acf-be231164b1c2",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d32050f5-3422-4289-9bc1-11406ade7c64",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd72a58d-f2fd-4f04-bde6-89073ede0658",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06657043-63d5-4965-8d86-ae4b2ffbcb03",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3540,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df27b845-69a3-4462-a5e6-0898dd8ae0a1",
+          "name": "Create asset group",
+          "request": {
+            "name": "Create asset group",
+            "description": {
+              "content": "Create a asset group record. An assetGroup is a subset of entities in a project identified by assetIds",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "assetgroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"{9vj!pbM\"\n      },\n      {\n        \"tag\": \"g\\\\3l^ghH1\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a13721af-ba15-460d-a0ae-746df031ed9d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53369c33-f28c-4422-a08b-d3038223b85e",
+              "name": "Bad Request. The API gateway did not process the request because of missing parameter or invalid value of parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39b8017e-7c84-427c-8f01-b86fb14de9d6",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a45133d-83fd-47da-a017-4d984bd7b2aa",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c28d36e3-272c-4cd0-be48-9c982c7d3355",
+              "name": "Conflict. The API gateway did not process the request because this asset group record will conflict with an already existing asset group record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd42b6e5-e062-4de0-953a-0f550e386a3d",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f38e9d6-dab2-4fd5-9e87-def242c5374c",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ab066d6-3b92-46e6-b7c2-cb4edea5931d",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8897,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "805e9a57-7f88-4b91-a4d5-12fa74d9a666",
+          "name": "Get asset group",
+          "request": {
+            "name": "Get asset group",
+            "description": {
+              "content": "Get the configuration (without security details) of a asset group record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "assetgroups",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) unique Id of the asset group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34dfa80f-a5de-4068-ab02-64ae62d959aa",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"b6F51B0b-5C5f-c414-fA2e-dCDb551ADFC6\",\n  \"name\": \"VYLSJa\",\n  \"title\": \"SxdtwpRmMbIP\",\n  \"description\": \"string\",\n  \"projectId\": \"string\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"W'@\"\n      },\n      {\n        \"tag\": \"qvSH(v4\"\n      }\n    ]\n  },\n  \"assetCount\": 3714\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "105883d2-a400-41f6-8a16-d0918c91eb22",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0dc5988-a714-47f0-bf2f-f5fca424f92e",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "faf29e1c-bcc5-421d-ab73-d9ae51c35b5d",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d03361ee-bbd1-419a-8480-596bc6ddca73",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1c5292a-b5c8-4ba4-bd0d-c8cd65483f56",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ff966b6-5357-486b-b548-499fc13ef3d4",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8897,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4b9ca8b-acff-4f27-990a-22564c2f62f0",
+          "name": "Delete asset group",
+          "request": {
+            "name": "Delete asset group",
+            "description": {
+              "content": "Delete a asset group record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "assetgroups",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) unique Id of the asset group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a730369-6a3a-48b1-bc08-84641b98fec3",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bdbdd3c-81f5-47ee-b353-d5f8f31f0b05",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c2c4dc5-de8e-4e1f-84ea-b5720d84cce5",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11064170-80e2-4c11-8c6b-64cdbcc41509",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28fcec97-b087-42f1-804e-bf94f2c79826",
+              "name": "Conflict. The API gateway did not process the request because there are instances of this asset group deployed in edge node(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "828339bd-06c3-4178-bbc3-97aebcbeaa14",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a743792f-5bad-4ee8-8226-af8f2057e81c",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "848ba530-435a-4dcc-b60a-89243ee3f17f",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8897,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d60c7f8-07c9-45e2-9888-0aebefa4db30",
+          "name": "Update asset group",
+          "request": {
+            "name": "Update asset group",
+            "description": {
+              "content": "Update a asset group record. The usual pattern to update a asset group record is to retrieve the record and update with the modified values in a new body to update the asset group record. If the asset group has a profile deployment associated with it, the newly added assets will automatically be applied with the corresponding app profile. Similarly if the assets are removed from this asset group, corresponding policies will be removed from these assets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "assetgroups",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) unique Id of the asset group."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"{9vj!pbM\"\n      },\n      {\n        \"tag\": \"g\\\\3l^ghH1\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80b7dc82-163a-490a-9010-44e1c29f2893",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ab28430-2ef0-4e3b-8601-6a4ccc4bdf08",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af5f0f72-5f59-4634-963b-87877e06bd73",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "079611f5-5c51-4cc3-b824-11f004a9e99a",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd576bb7-ba07-4222-a7fa-a26c28e677c3",
+              "name": "Conflict. The API gateway did not process the request because this operation will conflict with an already existing asset group record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80a8cbab-2b92-4ad7-9054-ef1dd5ef0075",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38fe8bb5-fd76-4cc4-94dc-cff25232581e",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3baf060d-00ec-423f-b4c4-fc7b663f1e0c",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) unique Id of the asset group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"(DQF\"\n      },\n      {\n        \"tag\": \"o U\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8897,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0dc2e82-110b-41b0-96d1-365aec98d4dc",
+          "name": "Get asset group by name",
+          "request": {
+            "name": "Get asset group by name",
+            "description": {
+              "content": "Get the configuration (without security details) of a asset group record by name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "assetgroups",
+                "name",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) User defined name of the asset group, unique across the enterprise. Once object is created, name can’t be changed"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "685123a4-d52c-4ec6-b69e-a49b8868b25e",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the asset group, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"b6F51B0b-5C5f-c414-fA2e-dCDb551ADFC6\",\n  \"name\": \"VYLSJa\",\n  \"title\": \"SxdtwpRmMbIP\",\n  \"description\": \"string\",\n  \"projectId\": \"string\",\n  \"assetIds\": {\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"assetTags\": {\n    \"assetTag\": [\n      {\n        \"tag\": \"W'@\"\n      },\n      {\n        \"tag\": \"qvSH(v4\"\n      }\n    ]\n  },\n  \"assetCount\": 3714\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03e8610f-e65f-4edb-9014-8f81e86fc53e",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the asset group, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "863434bb-5d32-45be-b994-ec6e205bae0b",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the asset group, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4363307-ca0f-49c9-8785-c6ce276e14cd",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the asset group, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e313fe8c-3864-42a0-bbae-04a7c7381d07",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the asset group, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f874f9a2-c97a-4f93-bd40-bad2321dd48e",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the asset group, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 6745,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33091633-be05-49a6-9f22-71e2990c19f9",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assetgroups",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the asset group, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8897,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c020228a-3417-4937-b056-a3cf3d71db17",
+    "name": "ZEDEDA App Profiles Service AppProfileService AssetGroupService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.\n\nContact Support:\n Name: ZEDEDA API Support\n Email: support@zededa.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,3680 @@
+{
+  "item": [
+    {
+      "id": "958bf4ca-8484-4f26-a133-3ecf1f04429b",
+      "name": "PatchEnvelopeConfiguration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "96b24437-5191-4450-9e1d-268b03986d4a",
+          "name": "Get all the patch envelopes",
+          "request": {
+            "name": "Get all the patch envelopes",
+            "description": {
+              "content": "Get the list of patch envelope details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "patch-envelope"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "projectNamePattern",
+                  "value": "<string>",
+                  "description": "project name pattern"
+                },
+                {
+                  "disabled": false,
+                  "key": "namePattern",
+                  "value": "<string>",
+                  "description": "patch envelope name pattern"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageToken",
+                  "value": "<string>",
+                  "description": "Page Token"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.orderBy",
+                  "value": "<string>",
+                  "description": "OrderBy helps in sorting the list response"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.orderBy",
+                  "value": "<string>",
+                  "description": "OrderBy helps in sorting the list response"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageNum",
+                  "value": "<int64>",
+                  "description": "Page Number"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageSize",
+                  "value": "<int64>",
+                  "description": "Defines the page size"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.totalPages",
+                  "value": "<int64>",
+                  "description": "Total number of pages to be fetched."
+                },
+                {
+                  "disabled": false,
+                  "key": "summary",
+                  "value": "<boolean>",
+                  "description": "Only summary of the records required"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d54f38e-63af-4df7-b331-460fbc418fb1",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {\n    \"pageToken\": \"string\",\n    \"orderBy\": [\n      \"string\",\n      \"string\"\n    ],\n    \"pageNum\": 7288.332434525846,\n    \"pageSize\": 5698.523751232935,\n    \"totalPages\": 4916.25712973229\n  },\n  \"list\": [\n    {\n      \"name\": \"bgOtln1h\",\n      \"title\": \"XVyCRGd|EH6\",\n      \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n      \"artifacts\": [\n        {\n          \"format\": \"OpaqueObjectCategoryUnknown\",\n          \"base64Artifact\": {\n            \"base64Data\": \"string\",\n            \"fileNameToUse\": \"string\",\n            \"base64MetaData\": \"string\"\n          },\n          \"binaryArtifact\": {\n            \"imageName\": \"string\",\n            \"fileNameToUse\": \"string\",\n            \"blobMetaData\": \"string\",\n            \"imageId\": \"string\"\n          },\n          \"artifactMetaData\": \"string\",\n          \"id\": \"f0BDfFBb-B7BE-F240-d23b-63833df743FF\"\n        },\n        {\n          \"format\": \"OpaqueObjectCategoryUnknown\",\n          \"base64Artifact\": {\n            \"base64Data\": \"string\",\n            \"fileNameToUse\": \"string\",\n            \"base64MetaData\": \"string\"\n          },\n          \"binaryArtifact\": {\n            \"imageName\": \"string\",\n            \"fileNameToUse\": \"string\",\n            \"blobMetaData\": \"string\",\n            \"imageId\": \"string\"\n          },\n          \"artifactMetaData\": \"string\",\n          \"id\": \"9D9b1ff6-E9BD-AAB5-ca03-e7E5D99d514F\"\n        }\n      ],\n      \"id\": \"cfDF7af4-9ECe-eB9f-9a5B-2bE37cF36b37\",\n      \"description\": \"string\",\n      \"revision\": {\n        \"curr\": \"string\",\n        \"createdAt\": {},\n        \"createdBy\": \"string\",\n        \"updatedAt\": {},\n        \"updatedBy\": \"string\",\n        \"prev\": \"string\"\n      },\n      \"userDefinedVersion\": \"string\",\n      \"projectId\": \"string\",\n      \"deviceCount\": 5636.624825967228,\n      \"projectName\": \"string\"\n    },\n    {\n      \"name\": \"ODLev5.oanp\",\n      \"title\": \"z67An8OFm\",\n      \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n      \"artifacts\": [\n        {\n          \"format\": \"OpaqueObjectCategoryUnknown\",\n          \"base64Artifact\": {\n            \"base64Data\": \"string\",\n            \"fileNameToUse\": \"string\",\n            \"base64MetaData\": \"string\"\n          },\n          \"binaryArtifact\": {\n            \"imageName\": \"string\",\n            \"fileNameToUse\": \"string\",\n            \"blobMetaData\": \"string\",\n            \"imageId\": \"string\"\n          },\n          \"artifactMetaData\": \"string\",\n          \"id\": \"c28EECFD-AEaF-77B9-67Fa-e8b8e5CDe58B\"\n        },\n        {\n          \"format\": \"OpaqueObjectCategoryUnknown\",\n          \"base64Artifact\": {\n            \"base64Data\": \"string\",\n            \"fileNameToUse\": \"string\",\n            \"base64MetaData\": \"string\"\n          },\n          \"binaryArtifact\": {\n            \"imageName\": \"string\",\n            \"fileNameToUse\": \"string\",\n            \"blobMetaData\": \"string\",\n            \"imageId\": \"string\"\n          },\n          \"artifactMetaData\": \"string\",\n          \"id\": \"E601D7c6-6D8e-D702-F1aa-16D2A4f0a5BD\"\n        }\n      ],\n      \"id\": \"CEaEaf76-D79B-bAef-E7c5-4DD3a3b9Db1C\",\n      \"description\": \"string\",\n      \"revision\": {\n        \"curr\": \"string\",\n        \"createdAt\": {},\n        \"createdBy\": \"string\",\n        \"updatedAt\": {},\n        \"updatedBy\": \"string\",\n        \"prev\": \"string\"\n      },\n      \"userDefinedVersion\": \"string\",\n      \"projectId\": \"string\",\n      \"deviceCount\": 4772.120951361109,\n      \"projectName\": \"string\"\n    }\n  ],\n  \"summaryByAction\": {\n    \"description\": \"string\",\n    \"total\": 5674.572294773634,\n    \"values\": {\n      \"key_0\": 2261\n    }\n  },\n  \"totalCount\": 7364\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d4c9a98-03ab-4686-b1b1-52265c176d3d",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 5558,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77fe4b06-b872-4925-b904-a9a8ffe9227b",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51f78347-d7bf-4389-a34b-c8ed47461984",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7dceb16c-296b-4142-a08c-d58271bf12a6",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3eccfced-af81-439c-92d3-31acc1d1ca1b",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8817,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b381d41-fcf8-4875-bf26-23969caaaff6",
+          "name": "Create patch envelope",
+          "request": {
+            "name": "Create patch envelope",
+            "description": {
+              "content": "Create a patch envelope record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "patch-envelope"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fdd53a4c-6928-4d80-bb57-84c754ea3d26",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60719612-0b30-4b5e-87a6-c192497dee82",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03cbccb1-f9e9-4ca8-a253-07a78e88a942",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3d1ff40-11d5-4b86-bb71-4577513f0b83",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d621aaa2-201e-49b5-b91d-eed3d8e6677b",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43d13f2e-88a7-4af4-9233-fbfd4ccc7a91",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8261,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "761beb13-4e4b-4431-ad01-44b2f39aabec",
+          "name": "Get patch envelope by id",
+          "request": {
+            "name": "Get patch envelope by id",
+            "description": {
+              "content": "Get patch envelope detail by patch envelope id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "patch-envelope",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) System defined universally unique Id of the patch envelope"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "642efbea-6173-4821-bd9b-77536030b957",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\",\n      \"id\": \"6ba4dE2D-7fC9-c732-E8B4-3dDc828Ae61a\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\",\n      \"id\": \"0F9D107B-fd9D-d2E1-342A-a3BDACfcCdEF\"\n    }\n  ],\n  \"id\": \"ae8A92EA-9c5e-Cc2f-cf1C-717330e24cED\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe1bdba2-e1b4-41ee-a5c2-d736a793cdcb",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3023c40-7aef-4603-b622-d9265b0a92f7",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a70ce519-40da-401b-bbc8-51e47ef56640",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a66a2976-a8f0-4f4d-9ad1-5f945323cc44",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51bfc585-7c04-4951-bc90-ee4e1c82e94a",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98331093-e787-43c1-9b3a-48e26fb9a83e",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8261,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b02d3c05-79cd-48d5-b695-1ed09cd04419",
+          "name": "Delete patch envelope",
+          "request": {
+            "name": "Delete patch envelope",
+            "description": {
+              "content": "Deletes patch envelope with specified id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "patch-envelope",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) System defined universally unique Id of the patch envelope"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ab75764-bd87-4ca3-87c8-da3f9dac0b18",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a18ef6e4-8a9a-4548-a186-c7f70e7d3a5b",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f3804f0-56ad-4a02-999d-d1286d1ecc2a",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e143cdd0-18a7-4e97-af6d-8df40170d944",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69b7ac8c-9d84-4e0e-84b3-7e22dcaa85a8",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4610fd1e-173c-493c-9a6f-1a69b36b07a1",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29b3115b-05f0-4f6a-81bf-664fa21e25a7",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8261,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d38003b-0aa1-47df-9e33-a74df0782a4d",
+          "name": "Update patch envelope",
+          "request": {
+            "name": "Update patch envelope",
+            "description": {
+              "content": "Update apatch envelope record. The usual pattern to update a patch envelope bundle record is to retrieve the record and update with the modified values in a new body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "patch-envelope",
+                "id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) System defined universally unique Id of the patch envelope."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "36260457-e1b1-4433-ad7d-95e790506c79",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b01f29e-ada7-4c95-92ca-ba6943556dc1",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e27868b0-6637-41d9-91ed-54b70060521a",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74190f56-7d71-4ca2-afb0-123b049746ec",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b33e05b-c753-4bd0-8da3-c4f0158fb342",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b09f7cc-cb7e-4ab7-a246-c85b686c616e",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f40bb2d9-5e8d-43fb-82b1-0c355ceeb1bf",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) System defined universally unique Id of the patch envelope."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8261,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9d5410f-90a9-4b98-a984-5395d9ac42f9",
+          "name": "Get patch envelope by name",
+          "request": {
+            "name": "Get patch envelope by name",
+            "description": {
+              "content": "Get patch envelope detail by patch envelope name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "patch-envelope",
+                "name",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) User defined name of the patch envelope, unique across the enterprise. Once object is created, name can’t be changed"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0321828e-3a68-4738-a194-1624ed88075c",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the patch envelope, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"action\": \"PATCH_ENVELOPE_ACTION_UNSPECIFIED\",\n  \"artifacts\": [\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\",\n      \"id\": \"6ba4dE2D-7fC9-c732-E8B4-3dDc828Ae61a\"\n    },\n    {\n      \"format\": \"OpaqueObjectCategoryUnknown\",\n      \"base64Artifact\": {\n        \"base64Data\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"base64MetaData\": \"<string>\"\n      },\n      \"binaryArtifact\": {\n        \"imageName\": \"<string>\",\n        \"fileNameToUse\": \"<string>\",\n        \"blobMetaData\": \"<string>\",\n        \"imageId\": \"<string>\"\n      },\n      \"artifactMetaData\": \"<string>\",\n      \"id\": \"0F9D107B-fd9D-d2E1-342A-a3BDACfcCdEF\"\n    }\n  ],\n  \"id\": \"ae8A92EA-9c5e-Cc2f-cf1C-717330e24cED\",\n  \"description\": \"<string>\",\n  \"revision\": {\n    \"curr\": \"<string>\",\n    \"createdAt\": \"<object>\",\n    \"createdBy\": \"<string>\",\n    \"updatedAt\": \"<object>\",\n    \"updatedBy\": \"<string>\",\n    \"prev\": \"<string>\"\n  },\n  \"userDefinedVersion\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"deviceCount\": \"<int64>\",\n  \"projectName\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce827aba-5ce1-4fd9-b906-5ae02fe8ce24",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the patch envelope, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efb08e39-1957-4145-9944-b7f4f7e0dc63",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the patch envelope, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24906f91-5d69-4a34-ad19-43206011db16",
+              "name": "Not Found. The API gateway did not process the request because the requested resource could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the patch envelope, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa782ad7-a5e9-45cb-b18c-d579628a086d",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the patch envelope, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f9ec60e-b4bf-45d0-95c1-35b758d836f9",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the patch envelope, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6911faee-e912-416b-87a5-32bd03b2dcd2",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "name",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) User defined name of the patch envelope, unique across the enterprise. Once object is created, name can’t be changed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8261,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e29f725-cb47-49b1-aac1-a177c6769d5b",
+          "name": "Get patch envelope status",
+          "request": {
+            "name": "Get patch envelope status",
+            "description": {
+              "content": "Get patch envelope status information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "patch-envelope",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "summary",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter.deviceName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageToken",
+                  "value": "<string>",
+                  "description": "Page Token"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.orderBy",
+                  "value": "<string>",
+                  "description": "OrderBy helps in sorting the list response"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.orderBy",
+                  "value": "<string>",
+                  "description": "OrderBy helps in sorting the list response"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageNum",
+                  "value": "<int64>",
+                  "description": "Page Number"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.pageSize",
+                  "value": "<int64>",
+                  "description": "Defines the page size"
+                },
+                {
+                  "disabled": false,
+                  "key": "next.totalPages",
+                  "value": "<int64>",
+                  "description": "Total number of pages to be fetched."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4772b24f-7343-4aee-a562-5b3132a65803",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter.deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"list\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"ucuc\",\n      \"userDefinedVersion\": \"string\",\n      \"state\": \"PatchEnvelopeStateUnknown\",\n      \"errors\": [\n        \"string\",\n        \"string\"\n      ],\n      \"projectId\": \"string\",\n      \"projectName\": \"string\",\n      \"deviceId\": \"string\",\n      \"deviceName\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"mNT\",\n      \"userDefinedVersion\": \"string\",\n      \"state\": \"PatchEnvelopeStateUnknown\",\n      \"errors\": [\n        \"string\",\n        \"string\"\n      ],\n      \"projectId\": \"string\",\n      \"projectName\": \"string\",\n      \"deviceId\": \"string\",\n      \"deviceName\": \"string\"\n    }\n  ],\n  \"totalCount\": 5232,\n  \"next\": {\n    \"pageToken\": \"string\",\n    \"orderBy\": [\n      \"string\",\n      \"string\"\n    ],\n    \"pageNum\": 4508.543652839619,\n    \"pageSize\": 7440.507642523693,\n    \"totalPages\": 7273.686437838026\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd400dee-2380-4da4-864c-598f7f88216a",
+              "name": "Unauthorized. The API gateway did not process the request because it lacks valid authentication credentials for the target resource. The request header has either no authorization details or an authorization that has been refused.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter.deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b290ebb6-1a0f-401f-8e3c-bede1dbadae5",
+              "name": "Forbidden. The API gateway did not process the request because the requestor does not have application level access permission for the operation or does not have access scope to the project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter.deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e3929b4-fb32-47c6-8604-ca4a6fda90bd",
+              "name": "Internal Server Error. The API gateway experienced an unexpected condition. Specific error condition is indicated in error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter.deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bdfe043-6b53-4377-a906-0dcff75e9f20",
+              "name": "Gateway Timeout. The API gateway did not receive a timely response from an upstream microservice it needed to communicate with in order to complete the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter.deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4324,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e50c3d69-1ae8-41ea-a4c0-b484233b5bd7",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patch-envelope",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter.deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next.pageNum",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.pageSize",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "next.totalPages",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8261,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b3147f26-2c69-4191-b378-3ebd2d539983",
+    "name": "ZEDEDA App Profiles Service AppProfileService PatchEnvelopeConfiguration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.\n\nContact Support:\n Name: ZEDEDA API Support\n Email: support@zededa.com",
+      "type": "text/plain"
+    }
+  }
+}

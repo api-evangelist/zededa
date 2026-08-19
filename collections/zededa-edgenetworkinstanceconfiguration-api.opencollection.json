@@ -1,0 +1,223 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService EdgeNetworkInstanceConfiguration API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EdgeNetworkInstanceConfiguration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query edge network instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/netinsts",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceNamePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query the edge network instance records."
+        },
+        {
+          "info": {
+            "name": "Create edge network instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/netinsts",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create an edge network instance record."
+        },
+        {
+          "info": {
+            "name": "Get edge network instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/netinsts/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the network instance"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an edge network instance record."
+        },
+        {
+          "info": {
+            "name": "Update edge network instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/netinsts/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update an edge network instance. The usual pattern to update an edge network instance record is to retrieve the record and update with the modified values in a new body to update the edge network instance record."
+        },
+        {
+          "info": {
+            "name": "Delete edge network instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/netinsts/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the network instance"
+              }
+            ]
+          },
+          "docs": "Delete an edge network instance record."
+        },
+        {
+          "info": {
+            "name": "Get edge network instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/netinsts/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the network instance, unique across the enterprise. Once object is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an edge network instance record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

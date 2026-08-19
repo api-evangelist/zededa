@@ -1,0 +1,238 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService ResourceGroupStatus API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ResourceGroupStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get resource group status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/id/:id/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the resource group"
+              }
+            ]
+          },
+          "docs": "Get the status (without security details) of a resource group record."
+        },
+        {
+          "info": {
+            "name": "Get resource group status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/name/:name/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the resource group, unique across the enterprise. Once resource group is created, name can’t be changed."
+              }
+            ]
+          },
+          "docs": "Get the status (without security details) of a resource group record."
+        },
+        {
+          "info": {
+            "name": "Query resource groups status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "Resource group name pattern to be matched."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Resource group status to be matched."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Resource group type to ne matched.\n\n - TAG_TYPE_UNSPECIFIED: Unspecified\n - TAG_TYPE_GENERIC: Generic resource group\n - TAG_TYPE_PROJECT: Project resource group\n - TAG_TYPE_AZURE: Project resource group\n - TAG_TYPE_DEPLOYMENT: Project with deployment"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Resource group type to be matched with tags."
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select: id, name, status"
+              }
+            ]
+          },
+          "docs": "Query the resource group status records."
+        },
+        {
+          "info": {
+            "name": "Query resource groups status and config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/status-config",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "Resource group name pattern to be matched."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Resource group status to be matched."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Resource group type to ne matched.\n\n - TAG_TYPE_UNSPECIFIED: Unspecified\n - TAG_TYPE_GENERIC: Generic resource group\n - TAG_TYPE_PROJECT: Project resource group\n - TAG_TYPE_AZURE: Project resource group\n - TAG_TYPE_DEPLOYMENT: Project with deployment"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Resource group type to be matched with tags."
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select: id, name, status"
+              }
+            ]
+          },
+          "docs": "Query the resource group status and config records."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService KubernetesDeployments API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KubernetesDeployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/deployments",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all Kubernetes deployments. Includes summary statistics and deployment status information.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/deployments\n```\n\n**Example Response:**\n```json\n{\n  \"total_count\": 3,\n  \"state_summary\": {\n    \"ready\": 2,\n    \"pending\": 1,\n    \"failed\": 0\n  },\n  \"deployments\": [\n    {\n      \"id\": \"dep-abc123\",\n      \"name\": \"nginx-deployment\",\n      \"title\": \"NGINX Web Server\",\n      \"description\": \"Production NGINX deployment\",\n      \"pro"
+        },
+        {
+          "info": {
+            "name": "Create a new Kubernetes deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/deployments",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a new Kubernetes deployment with Helm charts or other supported deployment types. This API supports both single-cluster and multi-cluster deployments.\n\n**Example Request:**\n```json\n{\n  \"type\": \"HELMCHART\",\n  \"metadata\": {\n    \"name\": \"nginx-deployment\",\n    \"title\": \"NGINX Web Server\",\n    \"description\": \"Production NGINX deployment with custom configuration\",\n    \"project_id\": \"proj-12345\"\n  },\n  \"data\": {\n    \"helm_chart_data\": {\n      \"chart\": {\n        \"name\": \"nginx\",\n        \"versio"
+        },
+        {
+          "info": {
+            "name": "Get deployment by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/deployments/id/:deploymentId",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the deployment (required). Example: 'dep-abc123'"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific Kubernetes deployment including its current status, configuration, and metadata.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/deployments/id/dep-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"dep-abc123\",\n  \"name\": \"nginx-deployment\",\n  \"title\": \"NGINX Web Server\",\n  \"description\": \"Production NGINX deployment with custom configuration\",\n  \"project_id\": \"proj-12345\",\n  \"type\": \"HELMCHART\",\n  \"spec\": {\n    \"helm_chart_data\": {"
+        },
+        {
+          "info": {
+            "name": "Update a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/deployments/id/:deploymentId",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the deployment to update (required). Example: 'dep-abc123'"
+              }
+            ]
+          },
+          "docs": "Update an existing Kubernetes deployment configuration. This can include updating Helm chart values, changing target clusters, or modifying deployment metadata.\n\n**Example Request:**\n```\nPUT /v1/cluster/instances/kubernetes/deployments/id/dep-abc123\n```\n\n```json\n{\n  \"deployment_id\": \"dep-abc123\",\n  \"deployment_request\": {\n    \"type\": \"HELMCHART\",\n    \"metadata\": {\n      \"name\": \"nginx-deployment\",\n      \"title\": \"NGINX Web Server - Updated\",\n      \"description\": \"Updated NGINX deployment with SS"
+        },
+        {
+          "info": {
+            "name": "Delete a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/deployments/id/:deploymentId",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the deployment (required). Example: 'dep-abc123'"
+              }
+            ]
+          },
+          "docs": "Delete a Kubernetes deployment and all its associated resources. This action is irreversible and will remove the deployment from all target clusters.\n\n**Example Request:**\n```\nDELETE /v1/cluster/instances/kubernetes/deployments/id/dep-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"dep-abc123\",\n  \"objectName\": \"nginx-deployment\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

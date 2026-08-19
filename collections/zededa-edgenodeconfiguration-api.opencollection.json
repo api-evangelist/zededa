@@ -1,0 +1,785 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService EdgeNodeConfiguration API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EdgeNodeConfiguration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query edge nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Summary flag"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "name pattern"
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query",
+                "description": "project name"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "project name pattern"
+              },
+              {
+                "name": "adminState",
+                "value": "",
+                "type": "query",
+                "description": "admin state of the device\n\n - CREATED: Entity Created in the controller\n - DELETED: Entity Deleted in the controller\n - ACTIVE: Entity Activated in the controller\n - INACTIVE: Entity Deactivated in the controller\n - REGISTERED: Specific to Edge-node - Edge-node Registered with the controller\n - ARCHIVED: Entity Archived in the controller"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select: id, name, title, description, tags, utype, projectId, serialno, adminState, modelId, clusterID, baseImage, interfaces, debugKnob"
+              },
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "query",
+                "description": "cluster name"
+              },
+              {
+                "name": "clusterNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "cluster name pattern"
+              },
+              {
+                "name": "createdByPattern",
+                "value": "",
+                "type": "query",
+                "description": "username pattern who created the device"
+              }
+            ]
+          },
+          "docs": "Query the edge node records."
+        },
+        {
+          "info": {
+            "name": "Create edge node",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/devices",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create an edge node record."
+        },
+        {
+          "info": {
+            "name": "Get edge node",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an edge node record."
+        },
+        {
+          "info": {
+            "name": "Update edge node",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Update an edge node record. The usual pattern to update an edge node record is to retrieve the record and update with the modified values in a new body to update the edge node record."
+        },
+        {
+          "info": {
+            "name": "Delete edge node",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/devices/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Delete an edge node record."
+        },
+        {
+          "info": {
+            "name": "Activate edge node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/activate",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Activate an edge node. If already in active state no action is taken."
+        },
+        {
+          "info": {
+            "name": "update EVE image on edge node",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/apply",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Update EVE image on edge node, if edge node is already running the latest EVE image no action is taken."
+        },
+        {
+          "info": {
+            "name": "Get edge node PCR attestation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/attestation",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Get the PCR attestation of an edge node record if present."
+        },
+        {
+          "info": {
+            "name": "Retry baseos upgrade on the edge node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/baseos/upgrade/retry",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Retry baseos upgrade on the edge node."
+        },
+        {
+          "info": {
+            "name": "Deactivate edge node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/deactivate",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Deactivate an edge node. If already in inactive state no action is taken."
+        },
+        {
+          "info": {
+            "name": "Stop debug mode on the edge node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/debug/disable",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Stop debug mode on the edge node."
+        },
+        {
+          "info": {
+            "name": "Start debug mode on the edge node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/debug/enable",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Start debug mode on the edge node."
+        },
+        {
+          "info": {
+            "name": "Get edgeview client script of the edge node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/edgeview/clientscript",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Get edgeview client script of the edge node after edgeview is started."
+        },
+        {
+          "info": {
+            "name": "Stop edgeview on the edge node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/edgeview/disable",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Stop edgeview on the edge node."
+        },
+        {
+          "info": {
+            "name": "Start edgeview on the edge node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/edgeview/enable",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Start edgeview on the edge node."
+        },
+        {
+          "info": {
+            "name": "Offoard the edge-ndoe",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/offboard",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "The API is used for offbaording the device from the enterprise"
+        },
+        {
+          "info": {
+            "name": "Get edge node onboarding certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/onboarding",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Get the onboarding certificate of an edge node record if present, only valid for edge nodes that have not been onboarded."
+        },
+        {
+          "info": {
+            "name": "Shutdown applications on edge node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/preparepoweroff",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Shutdown application instance on edge node in preparation for power off and equipment movement."
+        },
+        {
+          "info": {
+            "name": "update EVE image on edge node",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/publish",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Update EVE image on edge node, if edge node is already running the latest EVE image no action is taken."
+        },
+        {
+          "info": {
+            "name": "Reboot edge node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/reboot",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Reboot an edge node remotely. This operation triggers reboot event. Please check bla-bla for device reboot status."
+        },
+        {
+          "info": {
+            "name": "Get edge node single-use EVE image details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/suimage",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get details of a single use EVE image for an edge node."
+        },
+        {
+          "info": {
+            "name": "Create edge node single-use EVE image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/devices/id/:id/suimage",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "unique id for a device"
+              }
+            ]
+          },
+          "docs": "Create a single use EVE image for an edge node."
+        },
+        {
+          "info": {
+            "name": "Get edge node single-use EVE image download link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/suimage/link",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get download link of a single use EVE image for an edge node."
+        },
+        {
+          "info": {
+            "name": "update EVE image on edge node",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/unpublish",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Update EVE image on edge node, if edge node is already running the latest EVE image no action is taken."
+        },
+        {
+          "info": {
+            "name": "Query device interface tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/interfaces/tags",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Device Interface tags LIST API is to fetch the interfaces tags attached to a device."
+        },
+        {
+          "info": {
+            "name": "Get edge node by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "user defined device name for a device"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an edge node record."
+        },
+        {
+          "info": {
+            "name": "Get edge node by serial number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/serial/:serialno",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "serialno",
+                "value": "",
+                "type": "path",
+                "description": "unique identity number of the device"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an edge node record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

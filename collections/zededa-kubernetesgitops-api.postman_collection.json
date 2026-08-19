@@ -1,0 +1,2649 @@
+{
+  "item": [
+    {
+      "id": "c220a026-93b9-4754-a6dd-fdc06334b298",
+      "name": "KubernetesGitOps",
+      "description": {
+        "content": "APIs for managing GitOps configurations and continuous deployment from Git repositories to Kubernetes clusters",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a10c0dca-726c-4e9b-b7f8-f4da9408b63b",
+          "name": "List all GitRepo configurations",
+          "request": {
+            "name": "List all GitRepo configurations",
+            "description": {
+              "content": "Retrieve a list of all GitRepo configurations with their status and summary information. Includes statistics about sync status and resource counts.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/gitrepos\n```\n\n**Example Response:**\n```json\n{\n  \"totalCount\": 2,\n  \"stateSummary\": {\n    \"description\": \"GitRepo Status Summary\",\n    \"total\": 2,\n    \"values\": {\n      \"Active\": 1,\n      \"Pending\": 1\n    }\n  },\n  \"gitrepos\": [\n    {\n      \"id\": \"gitrepo-abc123\",\n      \"name\": \"app-manifests\",\n      \"title\": \"Application Manifests Repository\",\n      \"description\": \"Git repository containing production application manifests\",\n      \"workspace\": \"default\",\n      \"status\": {\n        \"display\": {\n          \"ready_bundle_deployments\": \"3/3\",\n          \"state\": \"Active\"\n        }\n      },\n      \"created_at\": \"2024-01-15T10:30:00Z\",\n      \"updated_at\": \"2024-01-15T11:00:00Z\"\n    },\n    {\n      \"id\": \"gitrepo-def456\",\n      \"name\": \"helm-charts\",\n      \"title\": \"Helm Charts Repository\",\n      \"description\": \"Repository containing Helm chart definitions\",\n      \"workspace\": \"default\",\n      \"status\": {\n        \"display\": {\n          \"ready_bundle_deployments\": \"0/2\",\n          \"state\": \"Pending\"\n        }\n      },\n      \"created_at\": \"2024-01-14T15:20:00Z\",\n      \"updated_at\": \"2024-01-14T15:25:00Z\"\n    }\n  ]\n}\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cluster",
+                "instances",
+                "kubernetes",
+                "gitrepos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1412a54c-c08e-443a-82b9-24fcf01bbd8c",
+              "name": "Successfully retrieved GitRepo configuration list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 9951,\n  \"stateSummary\": {\n    \"description\": \"string\",\n    \"total\": 2352,\n    \"values\": {\n      \"key_0\": 6553,\n      \"key_1\": 1325\n    }\n  },\n  \"gitrepos\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"workspace\": \"string\",\n      \"data\": {\n        \"projectId\": \"string\",\n        \"repoDetails\": {\n          \"url\": \"string\",\n          \"branch\": \"string\",\n          \"commit\": \"string\",\n          \"pathList\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"target\": {\n          \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n          \"value\": \"string\"\n        },\n        \"auth\": {\n          \"encodedCertificates\": \"string\",\n          \"insecureSkipTlsVerify\": false,\n          \"git\": {\n            \"secret\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"helm\": {\n            \"secret\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"helmRepoUrlRegex\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"status\": {\n        \"display\": {\n          \"readyBundleDeployments\": \"string\",\n          \"state\": \"string\"\n        },\n        \"conditions\": [\n          {\n            \"type\": \"string\",\n            \"status\": \"string\",\n            \"error\": true,\n            \"transitioning\": true,\n            \"message\": \"string\",\n            \"lastUpdateTime\": \"string\"\n          },\n          {\n            \"type\": \"string\",\n            \"status\": \"string\",\n            \"error\": true,\n            \"transitioning\": false,\n            \"message\": \"string\",\n            \"lastUpdateTime\": \"string\"\n          }\n        ],\n        \"resourceCounts\": {\n          \"desiredReady\": 5044,\n          \"missing\": 7221,\n          \"modified\": 4205,\n          \"notReady\": 6591,\n          \"orphaned\": 7158,\n          \"ready\": 6612,\n          \"unknown\": 7993,\n          \"waitApplied\": 3792\n        },\n        \"resourceStatusMap\": [\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"namespace\": \"string\",\n            \"state\": \"string\"\n          },\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"namespace\": \"string\",\n            \"state\": \"string\"\n          }\n        ],\n        \"state\": {\n          \"error\": false,\n          \"message\": \"string\",\n          \"name\": \"string\",\n          \"transitioning\": true\n        },\n        \"summary\": {}\n      },\n      \"events\": [\n        {\n          \"reason\": \"string\",\n          \"type\": \"string\",\n          \"message\": \"string\",\n          \"lastUpdateTime\": \"1990-05-11T02:58:31.880Z\"\n        },\n        {\n          \"reason\": \"string\",\n          \"type\": \"string\",\n          \"message\": \"string\",\n          \"lastUpdateTime\": \"1960-05-19T15:49:07.768Z\"\n        }\n      ],\n      \"createdAt\": \"2012-07-05T05:47:09.452Z\",\n      \"updatedAt\": \"1948-07-04T22:28:54.501Z\",\n      \"createdBy\": \"string\",\n      \"updatedBy\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"workspace\": \"string\",\n      \"data\": {\n        \"projectId\": \"string\",\n        \"repoDetails\": {\n          \"url\": \"string\",\n          \"branch\": \"string\",\n          \"commit\": \"string\",\n          \"pathList\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"target\": {\n          \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n          \"value\": \"string\"\n        },\n        \"auth\": {\n          \"encodedCertificates\": \"string\",\n          \"insecureSkipTlsVerify\": false,\n          \"git\": {\n            \"secret\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"helm\": {\n            \"secret\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"helmRepoUrlRegex\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"status\": {\n        \"display\": {\n          \"readyBundleDeployments\": \"string\",\n          \"state\": \"string\"\n        },\n        \"conditions\": [\n          {\n            \"type\": \"string\",\n            \"status\": \"string\",\n            \"error\": false,\n            \"transitioning\": false,\n            \"message\": \"string\",\n            \"lastUpdateTime\": \"string\"\n          },\n          {\n            \"type\": \"string\",\n            \"status\": \"string\",\n            \"error\": true,\n            \"transitioning\": true,\n            \"message\": \"string\",\n            \"lastUpdateTime\": \"string\"\n          }\n        ],\n        \"resourceCounts\": {\n          \"desiredReady\": 9019,\n          \"missing\": 7245,\n          \"modified\": 411,\n          \"notReady\": 467,\n          \"orphaned\": 2022,\n          \"ready\": 2958,\n          \"unknown\": 4661,\n          \"waitApplied\": 8276\n        },\n        \"resourceStatusMap\": [\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"namespace\": \"string\",\n            \"state\": \"string\"\n          },\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"namespace\": \"string\",\n            \"state\": \"string\"\n          }\n        ],\n        \"state\": {\n          \"error\": false,\n          \"message\": \"string\",\n          \"name\": \"string\",\n          \"transitioning\": true\n        },\n        \"summary\": {}\n      },\n      \"events\": [\n        {\n          \"reason\": \"string\",\n          \"type\": \"string\",\n          \"message\": \"string\",\n          \"lastUpdateTime\": \"2010-07-26T03:42:05.244Z\"\n        },\n        {\n          \"reason\": \"string\",\n          \"type\": \"string\",\n          \"message\": \"string\",\n          \"lastUpdateTime\": \"1956-04-06T13:09:22.587Z\"\n        }\n      ],\n      \"createdAt\": \"1950-06-01T20:57:14.727Z\",\n      \"updatedAt\": \"1991-11-22T11:52:00.028Z\",\n      \"createdBy\": \"string\",\n      \"updatedBy\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bb5a427-876a-4df7-b5ef-dd9e37598469",
+              "name": "Bad Request. The API gateway did not process the request because of invalid value of filter parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 4918,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa2ad7ff-aedd-4b19-b992-2682e28f1a40",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5dee01d-ab64-4329-9563-b64d4cd07996",
+              "name": "Forbidden. User does not have permission to list GitRepo configurations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b312e7c3-5684-4c7c-860e-0eb1ad84f577",
+              "name": "Internal Server Error. Failed to retrieve GitRepo list due to server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1612b59-48c1-4990-a701-71b07d5c4454",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4136,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47c6a646-af88-4be2-bfa9-903a3c4a3641",
+          "name": "Create a new GitRepo configuration",
+          "request": {
+            "name": "Create a new GitRepo configuration",
+            "description": {
+              "content": "Create a new GitRepo configuration to enable continuous deployment from a Git repository. This allows automatic synchronization of Kubernetes manifests or Helm charts from a Git repository to target clusters.\n\n**Example Request:**\n```json\n{\n  \"metadata\": {\n    \"name\": \"app-manifests\",\n    \"title\": \"Application Manifests Repository\",\n    \"description\": \"Git repository containing production application manifests\"\n  },\n  \"data\": {\n    \"project_id\": \"proj-12345\",\n    \"repo_details\": {\n      \"url\": \"https://github.com/myorg/k8s-manifests.git\",\n      \"branch\": \"main\",\n      \"path_list\": [\"applications/\", \"ingress/\"]\n    },\n    \"auth\": {\n      \"git\": {\n        \"secret\": {\n          \"type\": \"SECRET_TYPE_OPAQUE\",\n          \"name\": \"git-credentials\"\n        }\n      }\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_CLUSTER\",\n      \"value\": \"cluster-abc123\"\n    }\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"gitrepo-abc123\",\n  \"objectName\": \"app-manifests\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 201,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cluster",
+                "instances",
+                "kubernetes",
+                "gitrepos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e99e625b-181f-4fc4-b312-d5960219bae0",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "631e549e-cd47-41a9-bd54-7d4c7a989a0e",
+              "name": "Successfully created GitRepo configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad649709-335e-4a7c-b0e0-0f176e21dcda",
+              "name": "Bad Request. Invalid GitRepo configuration or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13e4d197-a2dd-44a3-b085-9754ce74e5ef",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bab8fed-e4a7-42c8-a9f5-8c924952613c",
+              "name": "Forbidden. User does not have permission to create GitRepo configurations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f97280f-11d0-46a2-8bd3-d1647c3bef0c",
+              "name": "Conflict. GitRepo configuration with the same name already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0bda202-1476-4423-922b-7c53ae1c85a3",
+              "name": "Internal Server Error. Failed to create GitRepo configuration due to server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec917e78-ffc0-4705-8629-0541142a793c",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 678,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebf9c1c8-712e-43c1-837f-597e3e7907d4",
+          "name": "Get GitRepo configuration by ID",
+          "request": {
+            "name": "Get GitRepo configuration by ID",
+            "description": {
+              "content": "Retrieve detailed information about a specific GitRepo configuration including its current status, sync information, and metadata.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/gitrepos/id/gitrepo-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"gitrepo-abc123\",\n  \"name\": \"app-manifests\",\n  \"title\": \"Application Manifests Repository\",\n  \"description\": \"Git repository containing production application manifests\",\n  \"workspace\": \"default\",\n  \"data\": {\n    \"project_id\": \"proj-12345\",\n    \"repo_details\": {\n      \"url\": \"https://github.com/myorg/k8s-manifests.git\",\n      \"branch\": \"main\",\n      \"commit\": \"a1b2c3d4e5f6\",\n      \"path_list\": [\"applications/\", \"ingress/\"]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_CLUSTER\",\n      \"value\": \"cluster-abc123\"\n    }\n  },\n  \"status\": {\n    \"display\": {\n      \"ready_bundle_deployments\": \"3/3\",\n      \"state\": \"Active\"\n    },\n    \"conditions\": [\n      {\n        \"type\": \"Ready\",\n        \"status\": \"True\",\n        \"message\": \"GitRepo is ready and syncing\"\n      }\n    ],\n    \"resource_counts\": {\n      \"ready\": 3,\n      \"desired_ready\": 3\n    }\n  },\n  \"created_at\": \"2024-01-15T10:30:00Z\",\n  \"updated_at\": \"2024-01-15T11:00:00Z\",\n  \"created_by\": \"user@example.com\",\n  \"updated_by\": \"user@example.com\"\n}\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cluster",
+                "instances",
+                "kubernetes",
+                "gitrepos",
+                "id",
+                ":gitrepoId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "gitrepoId",
+                  "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c65472b4-fdb3-4443-ad3b-021a7f640cfa",
+              "name": "Successfully retrieved GitRepo configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"workspace\": \"string\",\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  },\n  \"status\": {\n    \"display\": {\n      \"readyBundleDeployments\": \"string\",\n      \"state\": \"string\"\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"string\",\n        \"error\": true,\n        \"transitioning\": false,\n        \"message\": \"string\",\n        \"lastUpdateTime\": \"string\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"string\",\n        \"error\": true,\n        \"transitioning\": true,\n        \"message\": \"string\",\n        \"lastUpdateTime\": \"string\"\n      }\n    ],\n    \"resourceCounts\": {\n      \"desiredReady\": 3303,\n      \"missing\": 4562,\n      \"modified\": 3738,\n      \"notReady\": 3705,\n      \"orphaned\": 6612,\n      \"ready\": 1123,\n      \"unknown\": 2490,\n      \"waitApplied\": 8323\n    },\n    \"resourceStatusMap\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"state\": \"string\"\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"state\": \"string\"\n      }\n    ],\n    \"state\": {\n      \"error\": true,\n      \"message\": \"string\",\n      \"name\": \"string\",\n      \"transitioning\": true\n    },\n    \"summary\": {}\n  },\n  \"events\": [\n    {\n      \"reason\": \"string\",\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"lastUpdateTime\": \"2024-05-23T15:20:36.497Z\"\n    },\n    {\n      \"reason\": \"string\",\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"lastUpdateTime\": \"1962-09-19T01:21:12.574Z\"\n    }\n  ],\n  \"createdAt\": \"1973-01-12T04:21:12.364Z\",\n  \"updatedAt\": \"2012-04-21T09:24:46.871Z\",\n  \"createdBy\": \"string\",\n  \"updatedBy\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12f8a1db-9997-4d10-87d1-035d6fdccab0",
+              "name": "Bad Request. Invalid GitRepo ID format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ef71202-dd3e-493a-a685-cbb5d8947cd7",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad3a6470-2aa1-4f59-b29d-3ba7f783bdf8",
+              "name": "Forbidden. User does not have permission to view this GitRepo configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fcccc6b-4ab3-4af6-8c57-64b596278c76",
+              "name": "Not Found. GitRepo configuration with the specified ID does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa04d77e-4f33-4755-ab8f-8714e607eaf6",
+              "name": "Internal Server Error. Failed to retrieve GitRepo configuration due to server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97aaaa2e-d0ff-43d6-93bd-cc5147fc72a9",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 678,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e3d30b3-7993-464a-a66b-475b2729157d",
+          "name": "Delete GitRepo configuration",
+          "request": {
+            "name": "Delete GitRepo configuration",
+            "description": {
+              "content": "Delete a GitRepo configuration. This will stop the synchronization from the Git repository and remove all associated resources from the target clusters. This action is irreversible.\n\n**Example Request:**\n```\nDELETE /v1/cluster/instances/kubernetes/gitrepos/id/gitrepo-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"gitrepo-abc123\",\n  \"objectName\": \"app-manifests\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```\n\n**Warning:** This operation will remove the GitRepo configuration and stop synchronization. All resources deployed through this GitRepo will be removed from target clusters.\n\n**Note:** The gitrepo_id parameter is **required** and must be a valid GitRepo identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cluster",
+                "instances",
+                "kubernetes",
+                "gitrepos",
+                "id",
+                ":gitrepoId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "gitrepoId",
+                  "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "317a3d99-c514-4cd1-adf8-ec816ac1426a",
+              "name": "Successfully deleted GitRepo configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b30d3e4-1e28-488d-90f4-4cbdee44d41c",
+              "name": "Bad Request. Invalid GitRepo ID format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "409d3701-1a20-447f-8887-24aaadf332eb",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c59d97d-d6f2-45c5-989a-64442ac8f997",
+              "name": "Forbidden. User does not have permission to delete this GitRepo configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58cec4ac-de21-4ecf-88a6-2da5bbf1d8ac",
+              "name": "Not Found. GitRepo configuration with the specified ID does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02f532f7-46a9-4dac-b3bb-5e99e4919350",
+              "name": "Conflict. Cannot delete GitRepo configuration because it is currently in use or in a transitioning state.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddf86cac-f2ab-4ff5-a2db-51a89ec6c51a",
+              "name": "Internal Server Error. Failed to delete GitRepo configuration due to server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56bf3fec-c05a-4000-b967-6432905d1d2f",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 678,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "343d877a-36ac-4507-bc21-81ac94a2efc6",
+          "name": "Update GitRepo configuration",
+          "request": {
+            "name": "Update GitRepo configuration",
+            "description": {
+              "content": "Update an existing GitRepo configuration. This allows modification of repository details, authentication settings, and target configuration. The GitRepo name cannot be changed after creation.\n\n**Example Request:**\n```json\n{\n  \"gitrepo_id\": \"gitrepo-abc123\",\n  \"metadata\": {\n    \"name\": \"app-manifests\",\n    \"title\": \"Updated Application Manifests Repository\",\n    \"description\": \"Updated Git repository containing production application manifests\"\n  },\n  \"data\": {\n    \"project_id\": \"proj-12345\",\n    \"repo_details\": {\n      \"url\": \"https://github.com/myorg/k8s-manifests.git\",\n      \"branch\": \"production\",\n      \"path_list\": [\"applications/\", \"ingress/\", \"monitoring/\"]\n    },\n    \"auth\": {\n      \"git\": {\n        \"secret\": {\n          \"type\": \"SECRET_TYPE_OPAQUE\",\n          \"name\": \"updated-git-credentials\"\n        }\n      }\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_CLUSTER_GROUP\",\n      \"value\": \"production-clusters\"\n    }\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"gitrepo-abc123\",\n  \"objectName\": \"app-manifests\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"user\": \"\",\n  \"httpStatusCode\": 200,\n  \"httpStatusMsg\": \"\",\n  \"jobId\": \"\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgSucess\",\n      \"location\": \"\",\n      \"details\": \"\"\n    }\n  ]\n}\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cluster",
+                "instances",
+                "kubernetes",
+                "gitrepos",
+                "id",
+                ":gitrepoId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "gitrepoId",
+                  "description": "(Required) Unique identifier of the GitRepo to update (required). Example: 'gitrepo-abc123'"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent specified id to track a request",
+                "key": "X-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  },\n  \"gitrepo_id\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "74e5d2c8-7710-4398-b002-26e53f2bbac8",
+              "name": "Successfully updated GitRepo configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo to update (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  },\n  \"gitrepo_id\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7566a1e-e901-4f8c-b32e-830fe68be2ec",
+              "name": "Bad Request. Invalid GitRepo configuration or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo to update (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  },\n  \"gitrepo_id\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "907357e0-278f-4fd6-a8c8-1ccc09223d02",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo to update (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  },\n  \"gitrepo_id\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95653be3-6110-4851-b406-3fe31b35929d",
+              "name": "Forbidden. User does not have permission to update this GitRepo configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo to update (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  },\n  \"gitrepo_id\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d2a5cdc-fd41-437e-88ff-a54d3d9c567f",
+              "name": "Not Found. GitRepo configuration with the specified ID does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo to update (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  },\n  \"gitrepo_id\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c301b6f5-72b1-44aa-b7b3-3b5210dde968",
+              "name": "Conflict. Cannot update GitRepo configuration due to conflicting state.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo to update (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  },\n  \"gitrepo_id\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2817df2b-8bf3-49cb-85e2-9d13328afb93",
+              "name": "Internal Server Error. Failed to update GitRepo configuration due to server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo to update (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  },\n  \"gitrepo_id\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"string\",\n  \"objectId\": \"string\",\n  \"objectName\": \"string\",\n  \"objectRevision\": \"string\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"operationTime\": \"string\",\n  \"startTime\": \"string\",\n  \"endTime\": \"string\",\n  \"user\": \"string\",\n  \"httpStatusCode\": 9578,\n  \"httpStatusMsg\": \"string\",\n  \"jobId\": \"string\",\n  \"error\": [\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"ec\": \"zMsgErrorNone\",\n      \"location\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d01f10f1-52ea-4faf-b2a4-064981a8f432",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cluster",
+                    "instances",
+                    "kubernetes",
+                    "gitrepos",
+                    "id",
+                    ":gitrepoId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gitrepoId",
+                      "description": "(Required) Unique identifier of the GitRepo to update (required). Example: 'gitrepo-abc123'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "User-Agent specified id to track a request",
+                    "key": "X-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"projectId\": \"<string>\",\n    \"repoDetails\": {\n      \"url\": \"<string>\",\n      \"branch\": \"<string>\",\n      \"commit\": \"<string>\",\n      \"pathList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"target\": {\n      \"type\": \"GIT_REPO_TARGET_TYPE_UNKNOWN\",\n      \"value\": \"<string>\"\n    },\n    \"auth\": {\n      \"encodedCertificates\": \"<string>\",\n      \"insecureSkipTlsVerify\": \"<boolean>\",\n      \"git\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        }\n      },\n      \"helm\": {\n        \"secret\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"<string>\"\n        },\n        \"helmRepoUrlRegex\": \"<string>\"\n      }\n    }\n  },\n  \"gitrepo_id\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 678,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"typeUrl\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "950003f6-d952-4b60-8e94-d42dd27791ea",
+    "name": "ZEDEDA App Profiles Service AppProfileService KubernetesGitOps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ZEDEDA App Profiles Service is part of ZEDEDA Edge Orchestration Platform. This service enables customers to define their app profiles on ZEDEDA platform and to manage them remotely.\n\nContact Support:\n Name: ZEDEDA API Support\n Email: support@zededa.com",
+      "type": "text/plain"
+    }
+  }
+}

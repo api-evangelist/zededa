@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService HelmChartManagement API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HelmChartManagement",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Helm Charts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/helm/charts",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all available Helm charts in the project repository with their versions and metadata.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/helm/charts\n```\n\n**Example Response:**\n```json\n{\n  \"api_version\": \"v2\",\n  \"generated\": \"2024-01-15T12:00:00Z\",\n  \"repo_identifier\": \"project-charts\",\n  \"repo_name\": \"Project Repository\",\n  \"entries\": {\n    \"nginx\": [\n      {\n        \"name\": \"nginx\",\n        \"version\": \"15.4.0\",\n        \"app_version\": \"1.25.3\",\n        \"description"
+        },
+        {
+          "info": {
+            "name": "Create Helm Chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/helm/charts",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Upload and create a new Helm chart package in the project repository. The chart package should be provided as a .tgz file using multipart/form-data with the field name 'chart'.\n\n**Example Request using curl:**\n```bash\ncurl -X POST \\\n  -H \"X-API-KEY: your-api-key\" \\\n  -F \"chart=@nginx-chart-1.0.0.tgz\" \\\n  https://api.zededa.com/api/v1/cluster/instances/kubernetes/helm/charts\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIE"
+        },
+        {
+          "info": {
+            "name": "Delete Helm Chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/helm/charts/name/:chartName",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chartName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Helm chart (required). Example: 'nginx'"
+              }
+            ]
+          },
+          "docs": "Delete a Helm chart from the project repository. This action is irreversible and will remove all versions of the specified chart.\n\n**Example Request:**\n```\nDELETE /v1/cluster/instances/kubernetes/helm/charts/name/nginx\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"4495fb8b-187e-4fc1-8c28-6a8ac6629833\",\n  \"objectName\": \"nginx\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UN"
+        },
+        {
+          "info": {
+            "name": "Get Helm Chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/helm/charts/name/:chartName/version/:chartVersion",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chartName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Helm chart (required). Example: 'nginx'"
+              },
+              {
+                "name": "chartVersion",
+                "value": "",
+                "type": "path",
+                "description": "Version of the Helm chart (required). Example: '15.4.0'"
+              },
+              {
+                "name": "repoIdentifier",
+                "value": "",
+                "type": "query",
+                "description": "Identifier for the Helm chart repository (optional). Example: 'bitnami'. Defaults to local repository if not specified"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific Helm chart including its metadata, default values, and configuration options.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/helm/charts/name/nginx/version/15.4.0?repo_identifier=bitnami\n```\n\n**Example Response:**\n```json\n{\n  \"readme\": \"# NGINX Chart\\n\\nThis chart deploys NGINX on Kubernetes...\",\n  \"app_readme\": \"# NGINX Application\\n\\nNGINX is a web server...\",\n  \"questions\": {\n    \"replicaCount\": {\n      \"type\": \"integer\",\n      \"l"
+        },
+        {
+          "info": {
+            "name": "Update Helm Chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/helm/charts/name/:chartName/version/:chartVersion",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chartName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Helm chart (required). Example: 'nginx'"
+              },
+              {
+                "name": "chartVersion",
+                "value": "",
+                "type": "path",
+                "description": "Version of the Helm chart (required). Example: '1.0.0'"
+              }
+            ]
+          },
+          "docs": "Update an existing Helm chart with a new chart package. The chart name and version must match the existing chart being updated. The chart package should be provided as a .tgz file using multipart/form-data with the field name 'chart'.\n\n**Example Request using curl:**\n```bash\ncurl -X PUT \\\n  -H \"X-API-KEY: your-api-key\" \\\n  -F \"chart=@nginx-chart-1.0.1.tgz\" \\\n  https://api.zededa.com/api/v1/cluster/instances/kubernetes/helm/charts/name/nginx/version/1.0.0\n```\n\n**Example Response:**\n```json\n{\n  \"o"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

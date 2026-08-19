@@ -1,0 +1,355 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService EdgeNodeClusterConfiguration API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EdgeNodeClusterConfiguration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query Edge-Node Clusters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filter.projectName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the project, unique across the enterprise. Once project is created, name can’t be changed"
+              },
+              {
+                "name": "filter.projectNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "cluster project name pattern"
+              },
+              {
+                "name": "filter.namePattern",
+                "value": "",
+                "type": "query",
+                "description": "cluster name pattern"
+              },
+              {
+                "name": "filter.includeZks",
+                "value": "",
+                "type": "query",
+                "description": "include zks clusters"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query the Edge-Node Cluster records."
+        },
+        {
+          "info": {
+            "name": "Create Edge-Node Cluster.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/cluster",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an Edge-Node Cluster record."
+        },
+        {
+          "info": {
+            "name": "Get Edge-Node Cluster Available Projects.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/available/projects",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filter.projectName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the project, unique across the enterprise. Once project is created, name can’t be changed"
+              },
+              {
+                "name": "filter.projectNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "cluster project name pattern"
+              },
+              {
+                "name": "filter.namePattern",
+                "value": "",
+                "type": "query",
+                "description": "cluster name pattern"
+              },
+              {
+                "name": "filter.includeZks",
+                "value": "",
+                "type": "query",
+                "description": "include zks clusters"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get the list of available projects for a Edge-Node Cluster record."
+        },
+        {
+          "info": {
+            "name": "Get Edge-Node Cluster.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the cluster"
+              }
+            ]
+          },
+          "docs": "Get the configuration of a Edge-Node Cluster record."
+        },
+        {
+          "info": {
+            "name": "Update Edge-Node Cluster.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/cluster/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the cluster"
+              }
+            ]
+          },
+          "docs": "Update an Edge-Node Cluster record. The usual pattern to update an Edge-Node Cluster record is to retrieve the record and update with the modified values in a new body."
+        },
+        {
+          "info": {
+            "name": "Delete Edge-Node Cluster.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/cluster/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the cluster"
+              }
+            ]
+          },
+          "docs": "Delete an Edge-Node Cluster record."
+        },
+        {
+          "info": {
+            "name": "Get Edge-Node Cluster Interface Ports.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/id/:id/ports",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the cluster"
+              }
+            ]
+          },
+          "docs": "Get the list of interface ports for a Edge-Node Cluster record."
+        },
+        {
+          "info": {
+            "name": "Upgrade Edge-Node Cluster.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/cluster/id/:id/upgrade",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upgrade an Edge-Node Cluster with a new version of the eve-os."
+        },
+        {
+          "info": {
+            "name": "Get Edge-Node Cluster.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the cluster, unique across the enterprise. Once cluster is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "Get the configuration of a Edge-Node Cluster record."
+        },
+        {
+          "info": {
+            "name": "Get Edge-Node Cluster.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/node/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the cluster"
+              }
+            ]
+          },
+          "docs": "Get the configuration of a Edge-Node Cluster record by node id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

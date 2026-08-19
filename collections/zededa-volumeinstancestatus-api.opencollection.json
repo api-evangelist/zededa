@@ -1,0 +1,432 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService VolumeInstanceStatus API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VolumeInstanceStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get edge volume instance status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/volumes/instances/id/:id/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the status of an edge volume instance record."
+        },
+        {
+          "info": {
+            "name": "Get edge volume instance events by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/volumes/instances/id/:objid/events",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objid",
+                "value": "",
+                "type": "path",
+                "description": "Object id"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time in timestamp"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "severity"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "resource"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get configuration and status events of an edge volume by id."
+        },
+        {
+          "info": {
+            "name": "Get edge volume instance status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/volumes/instances/name/:name/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the status of an edge volume instance record."
+        },
+        {
+          "info": {
+            "name": "Get edge volume instance events by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/volumes/instances/name/:objname/events",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objname",
+                "value": "",
+                "type": "path",
+                "description": "Object name"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time in timestamp"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "severity"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "resource"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get configuration and status events of an edge volume by name."
+        },
+        {
+          "info": {
+            "name": "Query status of edge volume instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/volumes/instances/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "imageName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appInstName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceNamePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query the status of edge volume instance records."
+        },
+        {
+          "info": {
+            "name": "Query status and config of edge volume instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/volumes/instances/status-config",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "imageName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appInstName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceNamePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query the status and config of edge volume instance records."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

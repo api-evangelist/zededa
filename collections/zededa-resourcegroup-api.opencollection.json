@@ -1,0 +1,698 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService ResourceGroup API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ResourceGroup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query resource groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "Resource group name pattern to be matched."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Resource group type to ne matched.\n\n - TAG_TYPE_UNSPECIFIED: Unspecified\n - TAG_TYPE_GENERIC: Generic resource group\n - TAG_TYPE_PROJECT: Project resource group\n - TAG_TYPE_AZURE: Project resource group\n - TAG_TYPE_DEPLOYMENT: Project with deployment"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select: id, name, title, description, revision, type, attr, appPolicy, cloudPolicy, modulePolicy, numdevices, attestationPolicy, networkPolicy, edgeviewPolicy"
+              }
+            ]
+          },
+          "docs": "Query the resource group records."
+        },
+        {
+          "info": {
+            "name": "Create resource group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/projects",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a resource group record."
+        },
+        {
+          "info": {
+            "name": "Get resource group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the resource group"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a resource group record."
+        },
+        {
+          "info": {
+            "name": "Update resource group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/projects/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update a resource group record. The usual pattern to update a resource group record is to retrieve the record and update with the modified values in a new body to update the resource group record."
+        },
+        {
+          "info": {
+            "name": "Delete resource group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/projects/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the resource group"
+              }
+            ]
+          },
+          "docs": "Delete a resource group record."
+        },
+        {
+          "info": {
+            "name": "Get resource group events by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/id/:objid/events",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objid",
+                "value": "",
+                "type": "path",
+                "description": "Object id"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time in timestamp"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "severity"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "resource"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get configuration and status events of a resource group by id."
+        },
+        {
+          "info": {
+            "name": "Get resource group resource usage timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/id/:objid/timeSeries/:mType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the resource usage timeline of a resource group as reported by the edge nodes in the resource group"
+        },
+        {
+          "info": {
+            "name": "Get resource group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the resource group, unique across the enterprise. Once resource group is created, name can’t be changed."
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a resource group record."
+        },
+        {
+          "info": {
+            "name": "Get resource group events by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/name/:objname/events",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objname",
+                "value": "",
+                "type": "path",
+                "description": "Object name"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time in timestamp"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "severity"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "resource"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get configuration and status events of a resource group by name."
+        },
+        {
+          "info": {
+            "name": "Get resource group resource usage timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/name/:objname/timeSeries/:mType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objname",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the resource usage timeline of a resource group as reported by the edge nodes in the resource group"
+        },
+        {
+          "info": {
+            "name": "Query resource group tag key-values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/projects/tags",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filter.objId",
+                "value": "",
+                "type": "query",
+                "description": "Object Id which tags are associated."
+              },
+              {
+                "name": "filter.objName",
+                "value": "",
+                "type": "query",
+                "description": "Object name which tags are associated."
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query resource group tag key-values"
+        },
+        {
+          "info": {
+            "name": "Create resource group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/projects",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "v2 API to create a resource group record."
+        },
+        {
+          "info": {
+            "name": "Get deployment list in a project by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/projects/id/:projectId/deployments",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "v2 API to get deployment list by project ID"
+        },
+        {
+          "info": {
+            "name": "Create deployment for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/projects/id/:projectId/deployments",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "project id"
+              }
+            ]
+          },
+          "docs": "v2 API to create a deployment for an existing project"
+        },
+        {
+          "info": {
+            "name": "Delete all deployments in a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2/projects/id/:projectId/deployments",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "v2 API to delete all deployments in a project by project ID."
+        },
+        {
+          "info": {
+            "name": "Get specific deployment status in a project by project ID and deployment ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/projects/id/:projectId/deployments/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "v2 API to get project status by project ID"
+        },
+        {
+          "info": {
+            "name": "Update deployment in a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/projects/id/:projectId/deployments/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "project id"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for an deployment"
+              }
+            ]
+          },
+          "docs": "v2 API to update deployment in a project. The usual pattern to update deployment is to retrieve the record and update with the modified values in a new body to update the deployment record."
+        },
+        {
+          "info": {
+            "name": "Delete deployment in a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2/projects/id/:projectId/deployments/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "v2 API to delete a specific deployment in a project by project ID and deployment ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

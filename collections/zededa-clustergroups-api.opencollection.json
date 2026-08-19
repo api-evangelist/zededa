@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService ClusterGroups API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ClusterGroups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/zks/cluster/groups",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a new cluster group with specified configuration and manifest.\n\n**Example Request:**\n```json\n{\n  \"projectId\": \"project-123\",\n  \"name\": \"production-cluster-group\",\n  \"title\": \"Production Cluster Group\",\n  \"description\": \"Cluster group for production environments\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"region\": \"us-west\",\n    \"team\": \"platform\"\n  },\n  \"manifest\": {\n    \"yamlContent\": \"apiVersion: v1\\nkind: Namespace\\nmetadata:\\n  name: production-ns\"\n  }\n}\n```\n\n**Example Respons"
+        },
+        {
+          "info": {
+            "name": "Delete cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/zks/cluster/groups/id/:clusterGroupId",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "clusterGroupId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the cluster group. This field is required and must be a valid cluster group ID."
+              }
+            ]
+          },
+          "docs": "Delete a cluster group and all its associated resources. This operation is irreversible and will remove the cluster group configuration.\n\n**Example Request:**\n```\nDELETE /v1/zks/cluster/groups/id/cluster-group-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"cluster-group-abc123\",\n  \"objectName\": \"production-cluster-group\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_U"
+        },
+        {
+          "info": {
+            "name": "Update cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/zks/cluster/groups/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the cluster group"
+              }
+            ]
+          },
+          "docs": "Update an existing cluster group configuration including name, title, description, tags, and manifest.\n\n**Example Request:**\n```json\n{\n  \"id\": \"cluster-group-abc123\",\n  \"projectId\": \"project-123\",\n  \"name\": \"production-cluster-group\",\n  \"title\": \"Updated Production Cluster Group\",\n  \"description\": \"Updated cluster group for production environments\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"region\": \"us-west\",\n    \"version\": \"v2\"\n  },\n  \"manifest\": {\n    \"yamlContent\": \"apiVersion: v1\\nk"
+        },
+        {
+          "info": {
+            "name": "Get cluster group manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/zks/cluster/groups/manifest",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Generate and retrieve a cluster group manifest based on specified criteria.\n\n**Query Parameters:**\n- `name`: Name of the cluster group\n- `projectName`: Name of the project\n- `tags`: Tags filter (JSON object)\n\n**Example Request:**\n```\nGET /v1/zks/cluster/groups/manifest?name=production-cluster-group&projectName=production-project\nGET /v1/zks/cluster/groups/manifest?tags={\"environment\":\"production\"}\n```\n\n**Example Response:**\n```json\n{\n  \"manifest\": {\n    \"yamlContent\": \"apiVersion: v1\\nkind: Name"
+        },
+        {
+          "info": {
+            "name": "Get cluster groups status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/zks/cluster/groups/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve detailed status information for all cluster groups including readiness, resources, and cluster details.\n\n**Query Parameters:**\n- `id`: Filter by cluster group ID\n- `name`: Filter by cluster group name\n- `namePattern`: Filter by cluster group name pattern\n- `projectName`: Filter by project name\n- `projectNamePattern`: Filter by project name pattern\n\n**Example Request:**\n```\nGET /v1/zks/cluster/groups/status\nGET /v1/zks/cluster/groups/status?name=production-cluster-group\nGET /v1/zks/clust"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

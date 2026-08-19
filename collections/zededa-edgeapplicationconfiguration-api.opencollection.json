@@ -1,0 +1,530 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService EdgeApplicationConfiguration API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EdgeApplicationConfiguration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query edge application bundles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/beta/apps",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "query param : \"name-pattern\" . Search * namePattern * in name field to filter records"
+              },
+              {
+                "name": "originType",
+                "value": "",
+                "type": "query",
+                "description": "origin of bundle"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "category type of the bundle"
+              },
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "appType",
+                "value": "",
+                "type": "query",
+                "description": "app type, eg: vm, container, module"
+              },
+              {
+                "name": "deploymentType",
+                "value": "",
+                "type": "query",
+                "description": "type of deployment for the app, eg: azure, k3s, standalone"
+              },
+              {
+                "name": "appCategory",
+                "value": "",
+                "type": "query",
+                "description": "category types of the bundle\n\n - APP_CATEGORY_UNSPECIFIED: Invalid Edge Application Category\n - APP_CATEGORY_OPERATING_SYSTEM: Edge operating systems\n - APP_CATEGORY_INDUSTRIAL: Connectity solution for industrial protocols\n - APP_CATEGORY_EDGE_APPLICATION: Edge application framework featuring composite functions for data ingestion, buffering, analytics and export\n - APP_CATEGORY_NETWORKING: Edge networking services (e.g. SD-WAN, NFV)\n - APP_CATEGORY_SECURITY: Edge security services (e.g. protocol inspection, firewall)\n - APP_CATEGORY_DATA_ANALYTICS: Edge analytics (e.g. AI/ML) and data management (e.g. database, connectors) services\n - APP_CATEGORY_CLOUD_APPLICATION: Edge application runtimes, cloud connectivity and general application enablement\n - APP_CATEGORY_DEVOPS: Tools for Edge Application CI/CD and performance optimization\n - APP_CATEGORY_OTHERS: Miscellaneous functionality"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "titlePattern",
+                "value": "",
+                "type": "query",
+                "description": "query param : \"title-pattern\" . Search * titlePattern * in name field to filter records"
+              }
+            ]
+          },
+          "docs": "Query the edge application bundle records."
+        },
+        {
+          "info": {
+            "name": "Query edge application bundles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "query param : \"name-pattern\" . Search * namePattern * in name field to filter records"
+              },
+              {
+                "name": "originType",
+                "value": "",
+                "type": "query",
+                "description": "origin of bundle"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "category type of the bundle"
+              },
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "appType",
+                "value": "",
+                "type": "query",
+                "description": "app type, eg: vm, container, module"
+              },
+              {
+                "name": "deploymentType",
+                "value": "",
+                "type": "query",
+                "description": "type of deployment for the app, eg: azure, k3s, standalone"
+              },
+              {
+                "name": "appCategory",
+                "value": "",
+                "type": "query",
+                "description": "category types of the bundle\n\n - APP_CATEGORY_UNSPECIFIED: Invalid Edge Application Category\n - APP_CATEGORY_OPERATING_SYSTEM: Edge operating systems\n - APP_CATEGORY_INDUSTRIAL: Connectity solution for industrial protocols\n - APP_CATEGORY_EDGE_APPLICATION: Edge application framework featuring composite functions for data ingestion, buffering, analytics and export\n - APP_CATEGORY_NETWORKING: Edge networking services (e.g. SD-WAN, NFV)\n - APP_CATEGORY_SECURITY: Edge security services (e.g. protocol inspection, firewall)\n - APP_CATEGORY_DATA_ANALYTICS: Edge analytics (e.g. AI/ML) and data management (e.g. database, connectors) services\n - APP_CATEGORY_CLOUD_APPLICATION: Edge application runtimes, cloud connectivity and general application enablement\n - APP_CATEGORY_DEVOPS: Tools for Edge Application CI/CD and performance optimization\n - APP_CATEGORY_OTHERS: Miscellaneous functionality"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "titlePattern",
+                "value": "",
+                "type": "query",
+                "description": "query param : \"title-pattern\" . Search * titlePattern * in name field to filter records"
+              }
+            ]
+          },
+          "docs": "Query the edge application bundle records."
+        },
+        {
+          "info": {
+            "name": "Create edge application bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/apps",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create an edge application bundle record."
+        },
+        {
+          "info": {
+            "name": "Query global edge application bundles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/global",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "query param : \"name-pattern\" . Search * namePattern * in name field to filter records"
+              },
+              {
+                "name": "originType",
+                "value": "",
+                "type": "query",
+                "description": "origin of bundle"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "category type of the bundle"
+              },
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "appType",
+                "value": "",
+                "type": "query",
+                "description": "app type, eg: vm, container, module"
+              },
+              {
+                "name": "deploymentType",
+                "value": "",
+                "type": "query",
+                "description": "type of deployment for the app, eg: azure, k3s, standalone"
+              },
+              {
+                "name": "appCategory",
+                "value": "",
+                "type": "query",
+                "description": "category types of the bundle\n\n - APP_CATEGORY_UNSPECIFIED: Invalid Edge Application Category\n - APP_CATEGORY_OPERATING_SYSTEM: Edge operating systems\n - APP_CATEGORY_INDUSTRIAL: Connectity solution for industrial protocols\n - APP_CATEGORY_EDGE_APPLICATION: Edge application framework featuring composite functions for data ingestion, buffering, analytics and export\n - APP_CATEGORY_NETWORKING: Edge networking services (e.g. SD-WAN, NFV)\n - APP_CATEGORY_SECURITY: Edge security services (e.g. protocol inspection, firewall)\n - APP_CATEGORY_DATA_ANALYTICS: Edge analytics (e.g. AI/ML) and data management (e.g. database, connectors) services\n - APP_CATEGORY_CLOUD_APPLICATION: Edge application runtimes, cloud connectivity and general application enablement\n - APP_CATEGORY_DEVOPS: Tools for Edge Application CI/CD and performance optimization\n - APP_CATEGORY_OTHERS: Miscellaneous functionality"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "titlePattern",
+                "value": "",
+                "type": "query",
+                "description": "query param : \"title-pattern\" . Search * titlePattern * in name field to filter records"
+              }
+            ]
+          },
+          "docs": "Query the edge application bundle records present in the parent enetrprise"
+        },
+        {
+          "info": {
+            "name": "Get global edge application bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/global/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the edge application"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a global edge application bundle record."
+        },
+        {
+          "info": {
+            "name": "Get global edge application bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/global/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the edge application, unique across the enterprise. Once object is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a global edge application bundle record."
+        },
+        {
+          "info": {
+            "name": "Get edge application bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the edge application"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an edge application bundle record."
+        },
+        {
+          "info": {
+            "name": "Update edge application bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update an edge application bundle record. The usual pattern to update an edge application bundle record is to retrieve the record and update with the modified values in a new body to update the edge application bundle record."
+        },
+        {
+          "info": {
+            "name": "Delete edge application bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/apps/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the edge application"
+              }
+            ]
+          },
+          "docs": "Delete an edge application bundle record."
+        },
+        {
+          "info": {
+            "name": "Query the project access list of an edge application bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/id/:id/projects",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app bundle"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query the project access list of an edge application bundle"
+        },
+        {
+          "info": {
+            "name": "Get edge application bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the edge application, unique across the enterprise. Once object is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an edge application bundle record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

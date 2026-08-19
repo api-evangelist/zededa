@@ -1,0 +1,513 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService ImageConfiguration API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ImageConfiguration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query edge application images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/images",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "imageType",
+                "value": "",
+                "type": "query",
+                "description": "Image type to ne matched.\n\n - IMAGE_TYPE_EVE: Base OS images for edge gateway\n - IMAGE_TYPE_APPLICATION: Edge application images\n - IMAGE_TYPE_EVEPRIVATE: Private Base OS images for edge gateway\n - IMAGE_TYPE_ARTIFACT: Image type to be used for configuration/patch service\n - IMAGE_TYPE_DOCKER_COMPOSE_TAR: Image type to be used for multi-file docker-compose projects\n - IMAGE_TYPE_DOCKER_RUNTIME: Image type to be used for Docker Compose runtime bundles\n - IMAGE_TYPE_ZKS_RUNTIME: Image type to be used for ZKS runtime bundles"
+              },
+              {
+                "name": "imageStatus",
+                "value": "",
+                "type": "query",
+                "description": "Image status to be matched.\n\n - IMAGE_STATUS_CREATED: Image metadata is created\n - IMAGE_STATUS_UPLOADING: Image binary is being uploaded to Datstore\n - IMAGE_STATUS_READY: Image is ready for download\n - IMAGE_STATUS_INUSE: Image is being used by edge applications\n - IMAGE_STATUS_FAILED: Image binary upload has failed\n - IMAGE_STATUS_UPLINKING: Image metadata is being uplinked with Datstore binary"
+              },
+              {
+                "name": "datastoreId",
+                "value": "",
+                "type": "query",
+                "description": "Datastore id to be matched."
+              },
+              {
+                "name": "imageArch",
+                "value": "",
+                "type": "query",
+                "description": "Image architecture to be matched."
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "Image name pattern to be matched."
+              },
+              {
+                "name": "originType",
+                "value": "",
+                "type": "query",
+                "description": "origin of image"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query the edge application image records."
+        },
+        {
+          "info": {
+            "name": "Create edge application image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/apps/images",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create an edge application image record."
+        },
+        {
+          "info": {
+            "name": "Query latest version of EVE image for each hardware architecture",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/images/baseos/latest",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "Image Architecture pattern to be matched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "fields list for variable response"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query the latest version of EVE image for each hardware architecture."
+        },
+        {
+          "info": {
+            "name": "Mark Eve image as latest",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/images/baseos/latest",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Mark Eve image as latest for a given hardware architecture."
+        },
+        {
+          "info": {
+            "name": "Delete edge application image",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/apps/images/baseos/latest",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "System defined universally unique Id of the image"
+              }
+            ]
+          },
+          "docs": "Delete an edge application image record."
+        },
+        {
+          "info": {
+            "name": "Get latest version of EVE image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/images/baseos/latest/hwclass/:imageArch",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "imageArch",
+                "value": "",
+                "type": "path",
+                "description": "Image architecture to be matched : 'AMD64' or 'ARM64'."
+              }
+            ]
+          },
+          "docs": "Query the latest version of EVE image for given hardware architecture."
+        },
+        {
+          "info": {
+            "name": "Mark Eve image as latest",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/images/baseos/latest/hwclass/:imageArch",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "imageArch",
+                "value": "",
+                "type": "path",
+                "description": "Image Architecture."
+              }
+            ]
+          },
+          "docs": "Mark Eve image as latest for a given hardware architecture."
+        },
+        {
+          "info": {
+            "name": "Get edge application image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/images/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the image"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an edge application image record."
+        },
+        {
+          "info": {
+            "name": "Update edge application image",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/images/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the image."
+              }
+            ]
+          },
+          "docs": "Update an edge application image. The usual pattern to update an edge application image record is to retrieve the record and update with the modified values in a new body to update the edge application image record."
+        },
+        {
+          "info": {
+            "name": "Delete edge application image",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/apps/images/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the image"
+              }
+            ]
+          },
+          "docs": "Delete an edge application image record."
+        },
+        {
+          "info": {
+            "name": "Uplinks edge application image",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/images/id/:id/uplink",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the image."
+              }
+            ]
+          },
+          "docs": "Uplinks the edge application image record to an existing binry file in the datastore."
+        },
+        {
+          "info": {
+            "name": "Get edge application image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/images/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the image, unique across the enterprise. Once image is created, name can’t be changed."
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an edge application image record."
+        },
+        {
+          "info": {
+            "name": "Uploads edge application image binary file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/images/name/:name/upload/chunked",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              },
+              {
+                "name": "Content-Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the image, unique across the enterprise. Once image is created, name can’t be changed."
+              }
+            ]
+          },
+          "docs": "Uploads the edge application image binary file in the datastore. This method uses multiple HTTP requests to upload image binary file in smaller chunks. Recommended for larger file size."
+        },
+        {
+          "info": {
+            "name": "Uploads edge application image binary file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/images/name/:name/upload/file",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the image, unique across the enterprise. Once image is created, name can’t be changed."
+              }
+            ]
+          },
+          "docs": "Uploads the edge application image binary file in the datastore. This method uses single HTTP request to upload the entire image binary file. Recommended for smaller file size."
+        },
+        {
+          "info": {
+            "name": "Query common project access list among a list of images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/images/projects",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "List of images IDs"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query common project access list among a list of images"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

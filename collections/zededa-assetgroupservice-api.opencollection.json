@@ -1,0 +1,202 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService AssetGroupService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AssetGroupService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query asset groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/assetgroups",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "project name pattern"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "asset group name pattern"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              }
+            ]
+          },
+          "docs": "Query the asset group records."
+        },
+        {
+          "info": {
+            "name": "Create asset group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/assetgroups",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a asset group record. An assetGroup is a subset of entities in a project identified by assetIds"
+        },
+        {
+          "info": {
+            "name": "Get asset group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/assetgroups/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "unique Id of the asset group"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a asset group record."
+        },
+        {
+          "info": {
+            "name": "Update asset group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/assetgroups/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "unique Id of the asset group."
+              }
+            ]
+          },
+          "docs": "Update a asset group record. The usual pattern to update a asset group record is to retrieve the record and update with the modified values in a new body to update the asset group record. If the asset group has a profile deployment associated with it, the newly added assets will automatically be applied with the corresponding app profile. Similarly if the assets are removed from this asset group, corresponding policies will be removed from these assets."
+        },
+        {
+          "info": {
+            "name": "Delete asset group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/assetgroups/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "unique Id of the asset group"
+              }
+            ]
+          },
+          "docs": "Delete a asset group record."
+        },
+        {
+          "info": {
+            "name": "Get asset group by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/assetgroups/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the asset group, unique across the enterprise. Once object is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a asset group record by name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

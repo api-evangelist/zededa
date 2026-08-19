@@ -1,0 +1,2226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService EdgeApplicationInstanceStatus API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EdgeApplicationInstanceStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query Application instance snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:appInstanceId/snapshot/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "appInstanceId",
+                "value": "",
+                "type": "path",
+                "description": "Application Instance UUID"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name. Unique across the application instance"
+              }
+            ]
+          },
+          "docs": "Returns the snapshot with the specified name and application instance"
+        },
+        {
+          "info": {
+            "name": "Delete Application instance snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:appInstanceId/snapshot/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "appInstanceId",
+                "value": "",
+                "type": "path",
+                "description": "Application Instance UUID"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name. Unique across the application instance"
+              }
+            ]
+          },
+          "docs": "Deletes application instance snapshot with the specified name"
+        },
+        {
+          "info": {
+            "name": "Get edge application instance network traffic flow log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/flowlog/classification",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "levels",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query",
+                "description": "deprecated field"
+              },
+              {
+                "name": "metric",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "aclid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "proto",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "remoteip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "remoteport",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fqdn",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the network traffic flow log of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance top talkers of the network traffic flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/flowlog/toptalkers",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "metricType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Cursor.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "Cursor.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "Cursor.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "Cursor.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "Cursor.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get the top talkers of the network traffic flows of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/logs",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time for querying the  app instance logs"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "entime for querying the app instacne logs"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "interval at which logs needs to fetched"
+              },
+              {
+                "name": "Cursor.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "Cursor.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "Cursor.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "Cursor.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "Cursor.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get the log of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get patch envelope opaque status as base64 encoded string",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/opaque-status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Get the base64 encoded opaque status of patch envelope attached to edge application instance as reported by the app instance."
+        },
+        {
+          "info": {
+            "name": "Query Application instance snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/snapshots",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Returns the list of all snapshots for the specified application instance"
+        },
+        {
+          "info": {
+            "name": "Get edge application instance status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Get the status of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance events by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:objid/events",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objid",
+                "value": "",
+                "type": "path",
+                "description": "Object id"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time in timestamp"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "severity"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "resource"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get configuration and status events of an edge application instance by id."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance resource usage timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:objid/timeSeries/:mType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the resource usage timeline of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance network traffic flow log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/name/:name/flowlog/classification",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "levels",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query",
+                "description": "deprecated field"
+              },
+              {
+                "name": "metric",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "aclid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "proto",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "remoteip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "remoteport",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fqdn",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the network traffic flow log of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance top talkers of the network traffic flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/name/:name/flowlog/toptalkers",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "metricType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Cursor.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "Cursor.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "Cursor.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "Cursor.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "Cursor.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get the top talkers of the network traffic flows of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get patch envelope opaque status as base64 encoded string",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/name/:name/opaque-status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "Get the base64 encoded opaque status of patch envelope attached to edge application instance as reported by the app instance."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/name/:name/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "Get the status of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance events by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/name/:objname/events",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objname",
+                "value": "",
+                "type": "path",
+                "description": "Object name"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time in timestamp"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "severity"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "resource"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get configuration and status events of an edge application instance by name."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance resource usage timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/name/:objname/timeSeries/:mType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objname",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the resource usage timeline of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Query Application instance snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/snapshot/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Returns the snapshot with the specified UUID"
+        },
+        {
+          "info": {
+            "name": "Query Application instance snapshot state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/snapshot/id/:id/state",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Returns the snapshot state with the specified UUID"
+        },
+        {
+          "info": {
+            "name": "Query status of edge application instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "app instance summary flag"
+              },
+              {
+                "name": "appName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the app bundle, unique across the enterprise. Once app bundle is created, name can’t be changed"
+              },
+              {
+                "name": "runState",
+                "value": "",
+                "type": "query",
+                "description": "aperation status"
+              },
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the device, unique across the enterprise. Once device is created, name can’t be changed"
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the project, unique across the enterprise. Once project is created, name can’t be changed"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "name pattern"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type of app"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "json stringified key value pairs"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "project name pattern"
+              },
+              {
+                "name": "deviceNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "device name pattern"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select: id, name, deviceId, appId, tags, adminState, clusterID, runState, Memory, Storage, swState, Cpu, projectId, title, appType, deploymentType, memorySummary"
+              },
+              {
+                "name": "patchEnvelopeNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "patch envelope name pattern"
+              },
+              {
+                "name": "patchEnvelopeReference",
+                "value": "",
+                "type": "query",
+                "description": "app instance patch envelope reference check"
+              }
+            ]
+          },
+          "docs": "Query the status of edge application instances as reported by the edge nodes where the edge application instances have been deployed."
+        },
+        {
+          "info": {
+            "name": "Query status and config of edge application instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/status-config",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "app instance summary flag"
+              },
+              {
+                "name": "appName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the app bundle, unique across the enterprise. Once app bundle is created, name can’t be changed"
+              },
+              {
+                "name": "runState",
+                "value": "",
+                "type": "query",
+                "description": "aperation status"
+              },
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the device, unique across the enterprise. Once device is created, name can’t be changed"
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the project, unique across the enterprise. Once project is created, name can’t be changed"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "name pattern"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type of app"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "json stringified key value pairs"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "project name pattern"
+              },
+              {
+                "name": "deviceNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "device name pattern"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select: id, name, deviceId, appId, tags, adminState, clusterID, runState, Memory, Storage, swState, Cpu, projectId, title, appType, deploymentType, memorySummary"
+              },
+              {
+                "name": "patchEnvelopeNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "patch envelope name pattern"
+              },
+              {
+                "name": "patchEnvelopeReference",
+                "value": "",
+                "type": "query",
+                "description": "app instance patch envelope reference check"
+              }
+            ]
+          },
+          "docs": "Edge application instances status config API is a composite API for application instance config and application instance status"
+        },
+        {
+          "info": {
+            "name": "Query Application instance tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/tags",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Application Instance tags LIST API is to fetch the interfaces tags attached to app instances."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance network traffic flow log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id/flowlog/classification",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "levels",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query",
+                "description": "deprecated field"
+              },
+              {
+                "name": "metric",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "aclid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "proto",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "remoteip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "remoteport",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fqdn",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "v2 API to get the network traffic flow log of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance top talkers of the network traffic flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id/flowlog/toptalkers",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "metricType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Cursor.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "Cursor.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "Cursor.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "Cursor.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "Cursor.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "v2 API to get the top talkers of the network traffic flows of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id/logs",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time for querying the  app instance logs"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "entime for querying the app instacne logs"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "interval at which logs needs to fetched"
+              },
+              {
+                "name": "Cursor.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "Cursor.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "Cursor.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "Cursor.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "Cursor.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "v2 API to get the log of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get patch envelope opaque status as base64 encoded string",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id/opaque-status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Get the base64 encoded opaque status of patch envelope attached to edge application instance as reported by the app instance."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "v2 API to get the status of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance events by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:objid/events",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objid",
+                "value": "",
+                "type": "path",
+                "description": "Object id"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time in timestamp"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "severity"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "resource"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "v2 API to get configuration and status events of an edge application instance by id."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance resource usage timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:objid/timeSeries/:mType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "v2 API to get the resource usage timeline of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance network traffic flow log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/name/:name/flowlog/classification",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "levels",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query",
+                "description": "deprecated field"
+              },
+              {
+                "name": "metric",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "aclid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "proto",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "remoteip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "remoteport",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fqdn",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "v2 API to get the network traffic flow log of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance top talkers of the network traffic flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/name/:name/flowlog/toptalkers",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "metricType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Cursor.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "Cursor.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "Cursor.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "Cursor.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "Cursor.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "v2 API to get the top talkers of the network traffic flows of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get patch envelope opaque status as base64 encoded string",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/name/:name/opaque-status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "Get the base64 encoded opaque status of patch envelope attached to edge application instance as reported by the app instance."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/name/:name/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "v2 API to get the status of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance events by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/name/:objname/events",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objname",
+                "value": "",
+                "type": "path",
+                "description": "Object name"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time in timestamp"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "severity"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "resource"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "v2 API to get configuration and status events of an edge application instance by name."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance resource usage timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/name/:objname/timeSeries/:mType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objname",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "v2 API to get the resource usage timeline of an edge application instance as reported by the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Query status of edge application instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "app instance summary flag"
+              },
+              {
+                "name": "appName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the app bundle, unique across the enterprise. Once app bundle is created, name can’t be changed"
+              },
+              {
+                "name": "runState",
+                "value": "",
+                "type": "query",
+                "description": "aperation status"
+              },
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the device, unique across the enterprise. Once device is created, name can’t be changed"
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the project, unique across the enterprise. Once project is created, name can’t be changed"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "name pattern"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type of app"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "json stringified key value pairs"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "project name pattern"
+              },
+              {
+                "name": "deviceNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "device name pattern"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select: id, name, deviceId, appId, tags, adminState, clusterID, runState, Memory, Storage, swState, Cpu, projectId, title, appType, deploymentType, memorySummary"
+              },
+              {
+                "name": "patchEnvelopeNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "patch envelope name pattern"
+              },
+              {
+                "name": "patchEnvelopeReference",
+                "value": "",
+                "type": "query",
+                "description": "app instance patch envelope reference check"
+              }
+            ]
+          },
+          "docs": "v2 API to query the status of edge application instances as reported by the edge nodes where the edge application instances have been deployed."
+        },
+        {
+          "info": {
+            "name": "Query status and config of edge application instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/status-config",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "app instance summary flag"
+              },
+              {
+                "name": "appName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the app bundle, unique across the enterprise. Once app bundle is created, name can’t be changed"
+              },
+              {
+                "name": "runState",
+                "value": "",
+                "type": "query",
+                "description": "aperation status"
+              },
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the device, unique across the enterprise. Once device is created, name can’t be changed"
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the project, unique across the enterprise. Once project is created, name can’t be changed"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "name pattern"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type of app"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "json stringified key value pairs"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "project name pattern"
+              },
+              {
+                "name": "deviceNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "device name pattern"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select: id, name, deviceId, appId, tags, adminState, clusterID, runState, Memory, Storage, swState, Cpu, projectId, title, appType, deploymentType, memorySummary"
+              },
+              {
+                "name": "patchEnvelopeNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "patch envelope name pattern"
+              },
+              {
+                "name": "patchEnvelopeReference",
+                "value": "",
+                "type": "query",
+                "description": "app instance patch envelope reference check"
+              }
+            ]
+          },
+          "docs": "Edge application instances status config v2 API is a composite API for application instance config and application instance status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

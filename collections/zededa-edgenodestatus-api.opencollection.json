@@ -1,0 +1,569 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService EdgeNodeStatus API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EdgeNodeStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get edge node status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the status of an edge node as reported by the edge node itself"
+        },
+        {
+          "info": {
+            "name": "Get edge node edgeview status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/status/edgeview",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the edgeview status of an edge node as reported by the edge node itself"
+        },
+        {
+          "info": {
+            "name": "Get edge node info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/status/info",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the info of an edge node as reported by the edge node itself"
+        },
+        {
+          "info": {
+            "name": "Get edge node raw status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/status/metrics/raw",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the raw status of an edge node as reported by the edge node itself"
+        },
+        {
+          "info": {
+            "name": "Get edge node events by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:objid/events",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objid",
+                "value": "",
+                "type": "path",
+                "description": "Object id"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time in timestamp"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "severity"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "resource"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get configuration and status events of an edge node by id."
+        },
+        {
+          "info": {
+            "name": "Get edge node resource usage timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:objid/timeSeries/:mType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the resource usage timeline of an edge node"
+        },
+        {
+          "info": {
+            "name": "Get edge node status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/name/:name/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the status of an edge node as reported by the edge node itself"
+        },
+        {
+          "info": {
+            "name": "Get edge node edgeview status by edge node name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/name/:name/status/edgeview",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the edgeview status of an edge node as reported by the edge node itself"
+        },
+        {
+          "info": {
+            "name": "Get edge node info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/name/:name/status/info",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the info of an edge node as reported by the edge node itself"
+        },
+        {
+          "info": {
+            "name": "Get edge node raw status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/name/:name/status/metrics/raw",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the raw status of an edge node as reported by the edge node itself"
+        },
+        {
+          "info": {
+            "name": "Get edge node events by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/name/:objname/events",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objname",
+                "value": "",
+                "type": "path",
+                "description": "Object name"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "start time in timestamp"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "severity"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "resource"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Get configuration and status events of an edge node by id."
+        },
+        {
+          "info": {
+            "name": "Get edge node resource usage timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/name/:objname/timeSeries/:mType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objname",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the resource usage timeline of an edge node"
+        },
+        {
+          "info": {
+            "name": "Query status of edge nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "load",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select for composite api: id, name, title, serialNo, projectId, projectName, isEveLatest, appInstCount, runState, adminState."
+              },
+              {
+                "name": "adminState",
+                "value": "",
+                "type": "query",
+                "description": " - CREATED: Entity Created in the controller\n - DELETED: Entity Deleted in the controller\n - ACTIVE: Entity Activated in the controller\n - INACTIVE: Entity Deactivated in the controller\n - REGISTERED: Specific to Edge-node - Edge-node Registered with the controller\n - ARCHIVED: Entity Archived in the controller"
+              },
+              {
+                "name": "eveLtsSupportType",
+                "value": "",
+                "type": "query",
+                "description": "filter devices by eve version support type i.e LTS OR NON_LTS"
+              },
+              {
+                "name": "includeInterfaces",
+                "value": "",
+                "type": "query",
+                "description": "flag to indicate whether to include network interface details in the response"
+              }
+            ]
+          },
+          "docs": "Query the status of edge nodes as reported by the edge nodes themselves"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

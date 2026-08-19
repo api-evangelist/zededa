@@ -1,0 +1,803 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService EdgeApplicationInstanceConfiguration API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EdgeApplicationInstanceConfiguration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query edge application instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the project, unique across the enterprise. Once project is created, name can’t be changed"
+              },
+              {
+                "name": "bundle",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed"
+              },
+              {
+                "name": "device",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the device, unique across the enterprise. Once device is created, name can’t be changed"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "name pattern"
+              },
+              {
+                "name": "appType",
+                "value": "",
+                "type": "query",
+                "description": "type of bundle"
+              },
+              {
+                "name": "deploymentType",
+                "value": "",
+                "type": "query",
+                "description": "type of deployment for the app, eg: azure, k3s, standalone"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "project name pattern"
+              },
+              {
+                "name": "deviceNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "device name pattern"
+              },
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "summary flag"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select: id, name, title, description, projectId, tags, clusterID, appId, deviceId, manifestInfo, appType, appPolicyId, userDefinedVersion, remoteConsole"
+              }
+            ]
+          },
+          "docs": "Query the edge application instance records."
+        },
+        {
+          "info": {
+            "name": "Create edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/apps/instances",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create an edge application instance record."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an edge application instance record."
+        },
+        {
+          "info": {
+            "name": "Update edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update an edge application instance. The usual pattern to update an edge application bundle record is to retrieve the record and update with the modified values in a new body to update the edge application bundle record."
+        },
+        {
+          "info": {
+            "name": "Delete edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Delete an edge application instance record."
+        },
+        {
+          "info": {
+            "name": "Activate edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/activate",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Activate an edge application instance. If already in active state no action is taken."
+        },
+        {
+          "info": {
+            "name": "Connect to edge application instance console",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/console/remote",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Remotely connect to console of an edge application instance running on the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Deactivate edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/deactivate",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Deactivate an edge application instance. If already in inactive state no action is taken."
+        },
+        {
+          "info": {
+            "name": "Refresh edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/refresh",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Refresh an edge application instance. Update edge application instance to the latest version of the edge application. This operation will result in a restart of the edge application instance."
+        },
+        {
+          "info": {
+            "name": "Refresh and purge edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/refresh/purge",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Refresh and purge an edge application instance, update edge application instance to the latest version of the edge application. This operation will result in loss of data and a restart of the edge application instance. "
+        },
+        {
+          "info": {
+            "name": "Restart edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/apps/instances/id/:id/restart",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "Restart an edge application instance, initiate a restart of the edge application instance."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/apps/instances/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an edge application instance record."
+        },
+        {
+          "info": {
+            "name": "Patch envelope reference update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/apps/instances/patch-reference-update",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Attach/detach a patch envelope to app instance. For detaching, pass patch envelope id as empty string"
+        },
+        {
+          "info": {
+            "name": "Query edge application instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the project, unique across the enterprise. Once project is created, name can’t be changed"
+              },
+              {
+                "name": "bundle",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed"
+              },
+              {
+                "name": "device",
+                "value": "",
+                "type": "query",
+                "description": "User defined name of the device, unique across the enterprise. Once device is created, name can’t be changed"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "name pattern"
+              },
+              {
+                "name": "appType",
+                "value": "",
+                "type": "query",
+                "description": "type of bundle"
+              },
+              {
+                "name": "deploymentType",
+                "value": "",
+                "type": "query",
+                "description": "type of deployment for the app, eg: azure, k3s, standalone"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "project name pattern"
+              },
+              {
+                "name": "deviceNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "device name pattern"
+              },
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "summary flag"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select: id, name, title, description, projectId, tags, clusterID, appId, deviceId, manifestInfo, appType, appPolicyId, userDefinedVersion, remoteConsole"
+              }
+            ]
+          },
+          "docs": "v2 API to query the edge application instance records."
+        },
+        {
+          "info": {
+            "name": "Create edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/apps/instances",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "v2 API to create an edge application instance record."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "v2 API to get the configuration (without security details) of an edge application instance record."
+        },
+        {
+          "info": {
+            "name": "Update edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "v2 API to update an edge application instance. The usual pattern to update an edge application bundle record is to retrieve the record and update with the modified values in a new body to update the edge application bundle record."
+        },
+        {
+          "info": {
+            "name": "Delete edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "v2 API to delete an edge application instance record."
+        },
+        {
+          "info": {
+            "name": "Activate edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id/activate",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "v2 API to activate an edge application instance. If already in active state no action is taken."
+        },
+        {
+          "info": {
+            "name": "Connect to edge application instance console",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id/console/remote",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "v2 API to remotely connect to console of an edge application instance running on the edge node where the edge application instance has been deployed."
+        },
+        {
+          "info": {
+            "name": "Deactivate edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id/deactivate",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "v2 API to deactivate an edge application instance. If already in inactive state no action is taken."
+        },
+        {
+          "info": {
+            "name": "Refresh edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id/refresh",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "v2 API to refresh an edge application instance. Update edge application instance to the latest version of the edge application. This operation will result in a restart of the edge application instance."
+        },
+        {
+          "info": {
+            "name": "Refresh and purge edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id/refresh/purge",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "v2 API to refresh and purge an edge application instance, update edge application instance to the latest version of the edge application. This operation will result in loss of data and a restart of the edge application instance."
+        },
+        {
+          "info": {
+            "name": "Restart edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/apps/instances/id/:id/restart",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the app instance"
+              }
+            ]
+          },
+          "docs": "v2 API to restart an edge application instance, initiate a restart of the edge application instance."
+        },
+        {
+          "info": {
+            "name": "Get edge application instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/apps/instances/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "v2 API to get the configuration (without security details) of an edge application instance record."
+        },
+        {
+          "info": {
+            "name": "Patch envelope reference update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/apps/instances/patch-reference-update",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Attach/detach a patch envelope to app instance. For detaching, pass patch envelope id as empty string"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

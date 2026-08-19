@@ -1,0 +1,223 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService CloudDiagnostics API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CloudDiagnostics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Cloud services health report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cloud/healthreport",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get Cloud services health report."
+        },
+        {
+          "info": {
+            "name": "Check Cloud reachability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cloud/ping",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pingId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Check Cloud reachability by sending a ping message to API gateway. API gateway will echo back either \"pong\" or the id specified."
+        },
+        {
+          "info": {
+            "name": "Check Cloud reachability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cloud/ping/id/:pingId",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pingId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Check Cloud reachability by sending a ping message to API gateway. API gateway will echo back either \"pong\" or the id specified."
+        },
+        {
+          "info": {
+            "name": "Query Cloud policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cloud/policies",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "all",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query policy records of latest version of Cloud policies."
+        },
+        {
+          "info": {
+            "name": "Create Cloud policy document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/cloud/policies",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create policy document"
+        },
+        {
+          "info": {
+            "name": "Get Cloud policy document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cloud/policies/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get policy document for specific version of Cloud policy."
+        },
+        {
+          "info": {
+            "name": "Delete Cloud policy specific version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/cloud/policies/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete policy record for specific version of Cloud policy."
+        },
+        {
+          "info": {
+            "name": "Update Cloud policy specific version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/cloud/policies/latest",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update Cloud policy specific version"
+        },
+        {
+          "info": {
+            "name": "Get Cloud controller software version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cloud/version",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get Cloud controller software version."
+        },
+        {
+          "info": {
+            "name": "Check Cloud services health",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/hello",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Check Cloud services health by sending a hello name to microservice behind API Gateway. Microservice will echo back the name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

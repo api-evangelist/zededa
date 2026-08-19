@@ -1,0 +1,387 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService ZKSClusterInstances API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ZKSClusterInstances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all ZKS instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/zks/instances",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all ZKS instances with their basic information and metadata.\n\n**Query Parameters:**\n- Pagination parameters supported via cursor\n\n**Example Request:**\n```\nGET /v1/zks/instances\n```\n\n**Example Response:**\n```json\n{\n  \"list\": [\n    {\n      \"id\": \"zks-instance-abc123\",\n      \"projectId\": \"project-123\",\n      \"name\": \"production-cluster\",\n      \"title\": \"Production Kubernetes Cluster\",\n      \"description\": \"Main production cluster for edge applications\",\n      \"tags\": {\n        \"e"
+        },
+        {
+          "info": {
+            "name": "Create a new ZKS instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/zks/instances",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a new ZKS (ZEDEDA Kubernetes Service) cluster instance with specified nodes and configuration.\n\n**Example Request:**\n```json\n{\n  \"projectId\": \"project-123\",\n  \"name\": \"production-cluster\",\n  \"title\": \"Production Kubernetes Cluster\",\n  \"description\": \"Main production cluster for edge applications\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"region\": \"us-west\",\n    \"purpose\": \"edge-computing\"\n  },\n  \"nodes\": [\n    {\n      \"id\": \"node-001\",\n      \"clusterInterface\": \"eth0\"\n    },\n    "
+        },
+        {
+          "info": {
+            "name": "Bulk update ZKS instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/zks/instances",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update multiple ZKS instances at once with new tags or other common properties. This operation is useful for applying changes to multiple clusters simultaneously.\n\n**Example Request:**\n```json\n{\n  \"ids\": [\n    \"zks-instance-abc123\",\n    \"zks-instance-def456\",\n    \"zks-instance-ghi789\"\n  ],\n  \"data\": {\n    \"tags\": {\n      \"environment\": \"production\",\n      \"version\": \"v2\",\n      \"managed-by\": \"platform-team\"\n    }\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED"
+        },
+        {
+          "info": {
+            "name": "Update ZKS instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/zks/instances/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the zks instance"
+              }
+            ]
+          },
+          "docs": "Update an existing ZKS instance configuration including name, title, description, and tags.\n\n**Example Request:**\n```json\n{\n  \"id\": \"zks-instance-abc123\",\n  \"projectId\": \"project-123\",\n  \"name\": \"production-cluster\",\n  \"title\": \"Updated Production Kubernetes Cluster\",\n  \"description\": \"Updated main production cluster for edge applications\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"region\": \"us-west\",\n    \"version\": \"v2\"\n  },\n  \"nodes\": [\n    {\n      \"id\": \"node-001\",\n      \"clusterInter"
+        },
+        {
+          "info": {
+            "name": "Get ZKS instance by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/zks/instances/id/:zksId",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zksId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the ZKS instance. This field is required and must be a valid ZKS instance ID."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific ZKS instance including its configuration, nodes, and metadata.\n\n**Example Request:**\n```\nGET /v1/zks/instances/id/zks-instance-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"zks-instance-abc123\",\n  \"projectId\": \"project-123\",\n  \"name\": \"production-cluster\",\n  \"title\": \"Production Kubernetes Cluster\",\n  \"description\": \"Main production cluster for edge applications\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"region\": \"us-west\",\n    \"purp"
+        },
+        {
+          "info": {
+            "name": "Delete ZKS instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/zks/instances/id/:zksId",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zksId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the ZKS instance. This field is required and must be a valid ZKS instance ID."
+              }
+            ]
+          },
+          "docs": "Delete a ZKS instance and all its associated resources. This operation is irreversible and will terminate all running workloads.\n\n**Example Request:**\n```\nDELETE /v1/zks/instances/id/zks-instance-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"zks-instance-abc123\",\n  \"objectName\": \"production-cluster\",\n  \"objectRevision\": \"\",\n  \"objectType\": \"OBJECT_TYPE_UNSPECIFIED\",\n  \"opera"
+        },
+        {
+          "info": {
+            "name": "Get ZKS instance metrics by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/zks/instances/id/:zksId/metrics",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zksId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the ZKS instance. This field is required and must be a valid ZKS instance ID."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed metrics for a specific ZKS instance including resource utilization and capacity information.\n\n**Example Request:**\n```\nGET /v1/zks/instances/id/zks-instance-abc123/metrics\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"zks-instance-abc123\",\n  \"name\": \"production-cluster\",\n  \"provider\": \"k3s\",\n  \"kubeVersion\": \"v1.28.2+k3s1\",\n  \"architecture\": \"amd64\",\n  \"created\": \"2024-01-15T10:00:00Z\",\n  \"totalResources\": 100,\n  \"nOfNodes\": 3,\n  \"deployments\": 15,\n  \"capacity\": {\n    \"pods\": {"
+        },
+        {
+          "info": {
+            "name": "Update ZKS instance nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/zks/instances/id/:zksId/nodes",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zksId",
+                "value": "",
+                "type": "path",
+                "description": "ZKS instance ID for the node update operation"
+              }
+            ]
+          },
+          "docs": "Add or remove nodes from a ZKS instance. This operation allows scaling the cluster up or down by managing individual nodes.\n\n**Example Request (Add Nodes):**\n```json\n{\n  \"action\": \"NODE_ACTION_ADD_NODES\",\n  \"nodes\": [\n    {\n      \"id\": \"node-003\",\n      \"clusterInterface\": \"eth0\"\n    },\n    {\n      \"id\": \"node-004\",\n      \"clusterInterface\": \"eth0\"\n    }\n  ]\n}\n```\n\n**Example Request (Remove Nodes):**\n```json\n{\n  \"action\": \"NODE_ACTION_REMOVE_NODES\",\n  \"nodes\": [\n    {\n      \"id\": \"node-002\",\n   "
+        },
+        {
+          "info": {
+            "name": "Get registration commands by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/zks/instances/id/:zksId/registration-commands",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zksId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the ZKS instance. This field is required and must be a valid ZKS instance ID."
+              }
+            ]
+          },
+          "docs": "Retrieve registration commands for adding nodes to a ZKS instance. These commands can be executed on edge devices to join them to the cluster.\n\n**Example Request:**\n```\nGET /v1/zks/instances/id/zks-instance-abc123/registration-commands\n```\n\n**Example Response:**\n```json\n{\n  \"created\": \"2024-01-15T10:30:00Z\",\n  \"manifestUrl\": \"https://api.zededa.com/manifests/zks-instance-abc123\",\n  \"commands\": {\n    \"command\": \"curl -sfL https://get.k3s.io | K3S_URL=https://cluster.example.com:6443 K3S_TOKEN=K12"
+        },
+        {
+          "info": {
+            "name": "Upgrade ZKS instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/zks/instances/id/:zksId/upgrade",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zksId",
+                "value": "",
+                "type": "path",
+                "description": "ZKS instance ID for the upgrade operation"
+              }
+            ]
+          },
+          "docs": "Upgrade a ZKS instance to a new base OS image or Kubernetes version. This operation will update the underlying infrastructure.\n\n**Example Request:**\n```json\n{\n  \"baseOSImage\": {\n    \"name\": \"ubuntu-22.04-lts\",\n    \"version\": \"22.04.3\",\n    \"digest\": \"sha256:abcd1234...\"\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"zks-instance-abc123\",\n  \"objectName\": \"production-cluster\",\n "
+        },
+        {
+          "info": {
+            "name": "Import an existing ZKS instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/zks/instances/import",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Import an existing Kubernetes cluster as a ZKS instance into the ZEDEDA platform. This allows managing externally created clusters through ZEDEDA.\n\n**Example Request:**\n```json\n{\n  \"projectId\": \"project-123\",\n  \"name\": \"imported-cluster\",\n  \"title\": \"Imported Production Cluster\",\n  \"description\": \"Externally created cluster imported into ZEDEDA\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"source\": \"external\"\n  },\n  \"nodes\": [\n    {\n      \"id\": \"node-001\",\n      \"clusterInterface\": \"eth0\"\n"
+        },
+        {
+          "info": {
+            "name": "Bulk upgrade K3s version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/zks/instances/k3s-upgrade",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Upgrade K3s version for multiple ZKS instances simultaneously. This operation initiates a rolling upgrade across the specified clusters.\n\n**Example Request:**\n```json\n{\n  \"ids\": [\n    \"zks-instance-abc123\",\n    \"zks-instance-def456\"\n  ],\n  \"data\": {\n    \"version\": \"v1.28.5+k3s1\"\n  }\n}\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"\",\n  \"objectName\": \"\",\n  \"objectRevision\": \"\",\n  \"ob"
+        },
+        {
+          "info": {
+            "name": "Get available K3s versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/zks/instances/k3s-versions",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a list of available K3s versions that can be used for cluster creation or upgrades.\n\n**Example Request:**\n```\nGET /v1/zks/instances/k3s-versions\n```\n\n**Example Response:**\n```json\n{\n  \"list\": [\n    {\n      \"id\": \"v1.28.5+k3s1\",\n      \"version\": \"v1.28.5+k3s1\",\n      \"type\": \"release\"\n    },\n    {\n      \"id\": \"v1.28.4+k3s2\",\n      \"version\": \"v1.28.4+k3s2\",\n      \"type\": \"release\"\n    },\n    {\n      \"id\": \"v1.27.9+k3s1\",\n      \"version\": \"v1.27.9+k3s1\",\n      \"type\": \"release\"\n    },\n   "
+        },
+        {
+          "info": {
+            "name": "Get ZKS instance by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/zks/instances/name/:zksName",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zksName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the ZKS instance. This field is required and must be a valid ZKS instance name."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific ZKS instance by its name.\n\n**Example Request:**\n```\nGET /v1/zks/instances/name/production-cluster\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"zks-instance-abc123\",\n  \"projectId\": \"project-123\",\n  \"name\": \"production-cluster\",\n  \"title\": \"Production Kubernetes Cluster\",\n  \"description\": \"Main production cluster for edge applications\",\n  \"tags\": {\n    \"environment\": \"production\",\n    \"region\": \"us-west\"\n  },\n  \"nodes\": [\n    {\n      \"id\": \"node-001\""
+        },
+        {
+          "info": {
+            "name": "Get ZKS instance metrics by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/zks/instances/name/:zksName/metrics",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zksName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the ZKS instance. This field is required and must be a valid ZKS instance name."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed metrics for a specific ZKS instance by its name including resource utilization and capacity information.\n\n**Example Request:**\n```\nGET /v1/zks/instances/name/production-cluster/metrics\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"zks-instance-abc123\",\n  \"name\": \"production-cluster\",\n  \"provider\": \"k3s\",\n  \"kubeVersion\": \"v1.28.2+k3s1\",\n  \"architecture\": \"amd64\",\n  \"created\": \"2024-01-15T10:00:00Z\",\n  \"totalResources\": 100,\n  \"nOfNodes\": 3,\n  \"deployments\": 15,\n  \"capacity\": {\n"
+        },
+        {
+          "info": {
+            "name": "Get registration commands by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/zks/instances/name/:zksName/registration-commands",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zksName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the ZKS instance. This field is required and must be a valid ZKS instance name."
+              }
+            ]
+          },
+          "docs": "Retrieve registration commands for adding nodes to a ZKS instance by its name. These commands can be executed on edge devices to join them to the cluster.\n\n**Example Request:**\n```\nGET /v1/zks/instances/name/production-cluster/registration-commands\n```\n\n**Example Response:**\n```json\n{\n  \"created\": \"2024-01-15T10:30:00Z\",\n  \"manifestUrl\": \"https://api.zededa.com/manifests/production-cluster\",\n  \"commands\": {\n    \"command\": \"curl -sfL https://get.k3s.io | K3S_URL=https://cluster.example.com:6443 K"
+        },
+        {
+          "info": {
+            "name": "Get ZKS instances status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/zks/instances/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve detailed status information for all ZKS instances including runtime metrics, capacity information, and node health.\n\n**Query Parameters:**\n- `zksid` (optional): Filter by ZKS instance ID\n- `zksname` (optional): Filter by ZKS instance name\n- `zksnamePattern` (optional): Filter by ZKS instance name pattern\n- `projectName` (optional): Filter by project name\n- `projectNamePattern` (optional): Filter by project name pattern\n- `tags` (optional): Filter by tags (JSON object)\n\n**Example Request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

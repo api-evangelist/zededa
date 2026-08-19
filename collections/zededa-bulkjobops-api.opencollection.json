@@ -1,0 +1,421 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService BulkJobOps API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BulkJobOps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query asynchronous job requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/jobs",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary count is required."
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "jobStatus",
+                "value": "",
+                "type": "query",
+                "description": "status of the job."
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query",
+                "description": "project name."
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "name pattern of the job."
+              }
+            ]
+          },
+          "docs": "Query the asynchronous job request records."
+        },
+        {
+          "info": {
+            "name": "Create asynchronous job request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/jobs",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create an asynchronous job request record."
+        },
+        {
+          "info": {
+            "name": "Update job request to import edge application bundles",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/jobs/apps/bundles/import",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update job request to import edge application bundle(s) from global App Store matching selection criteria."
+        },
+        {
+          "info": {
+            "name": "Update job request to create edge application instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/jobs/apps/instances/create",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update job request to create edge application instance(s) on edge node(s) matching selection criteria."
+        },
+        {
+          "info": {
+            "name": "Update job request to refresh edge application instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/jobs/apps/instances/refresh",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update job request to refresh edge application instances matching selection criteria. Update edge application instance(s) to the latest version of the edge application. This operation will result in a restart of the edge application instance(s)."
+        },
+        {
+          "info": {
+            "name": "Update job request to refresh and purge edge application instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/jobs/apps/instances/refresh/purge",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update job request to refresh and purge edge application instances matching selection criteria. Update edge application instance(s) to the latest version of the edge application. This operation will result in loss of data and a restart of the edge application instance(s). "
+        },
+        {
+          "info": {
+            "name": "Update job request to update EVE image on edge nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/jobs/devices/baseos/upgrade",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update job request to update EVE image on edge nodes. If edge node is already running the latest EVE image no action is taken."
+        },
+        {
+          "info": {
+            "name": "Update job request to retry update EVE image on edge nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/jobs/devices/baseos/upgrade/retry",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update job request to retry update EVE image on edge nodes. If edge node is already running the latest EVE image no action is taken."
+        },
+        {
+          "info": {
+            "name": "Update job request to update Deployment tag on edge nodes in bulk.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/jobs/devices/deployment/tags",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update job request to update Deployment tag on edge nodes in bulk."
+        },
+        {
+          "info": {
+            "name": "Update job request to update EVE image project and target on edge nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/jobs/devices/project/target",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update job request to update EVE image project and target on edge nodes. If edge node is already running the latest EVE image no action is taken."
+        },
+        {
+          "info": {
+            "name": "Update job request to update EVE image tag on edge nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/jobs/devices/tags",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update job request to update EVE image tag on edge nodes. If edge node is already running the latest EVE image no action is taken."
+        },
+        {
+          "info": {
+            "name": "Get asynchronous job request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/jobs/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the job request"
+              }
+            ]
+          },
+          "docs": "Get the configuration and status of an asynchronous job request record."
+        },
+        {
+          "info": {
+            "name": "Update asynchronous job request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/jobs/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the job request"
+              }
+            ]
+          },
+          "docs": "Update an asynchronous job request record. The usual pattern to update an asynchronous job request record is to retrieve the record and update with the modified values in a new body to update the asynchronous job request record."
+        },
+        {
+          "info": {
+            "name": "Get asynchronous job request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/jobs/id/:id/objectType/:objectType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the job request"
+              },
+              {
+                "name": "objectType",
+                "value": "",
+                "type": "path",
+                "description": "object type for which job has been created"
+              }
+            ]
+          },
+          "docs": "Get the configuration and status of an asynchronous job request record."
+        },
+        {
+          "info": {
+            "name": "Delete asynchronous job request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/jobs/id/:id/objectType/:objectType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the job request"
+              },
+              {
+                "name": "objectType",
+                "value": "",
+                "type": "path",
+                "description": "object type for which job has been created"
+              }
+            ]
+          },
+          "docs": "Delete an asynchronous job request record."
+        },
+        {
+          "info": {
+            "name": "Update job request to import hardware models",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/jobs/models/import",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update job request to import hardware model(s) from global Model Store matching selection criteria."
+        },
+        {
+          "info": {
+            "name": "Get asynchronous job request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/jobs/name/:name/objectType/:objectType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the job request, unique across the enterprise. Once object is created, name can’t be changed"
+              },
+              {
+                "name": "objectType",
+                "value": "",
+                "type": "path",
+                "description": "object type for which job has been created"
+              }
+            ]
+          },
+          "docs": "Get the configuration and status of an asynchronous job request record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

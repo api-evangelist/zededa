@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService ArtifactManager API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ArtifactManager",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query artifact files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/artifacts",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query the artifact file records."
+        },
+        {
+          "info": {
+            "name": "Create artifact file in the file storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/artifacts",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create the artifact file in the file storage in AWS S3 or Azure BlobStorage"
+        },
+        {
+          "info": {
+            "name": "Download artifact file chunk by chunk",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/artifacts/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for an artifact"
+              }
+            ]
+          },
+          "docs": "Downloads the artifact file in a stream from the file storage"
+        },
+        {
+          "info": {
+            "name": "Delete artifact file form the datastore",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/artifacts/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for an artifact"
+              }
+            ]
+          },
+          "docs": "Drops the artifact file from the file storage in AWS S3 or Azure BlobStorage"
+        },
+        {
+          "info": {
+            "name": "Uploads the given chunk into the specified multiplePart file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/artifacts/id/:id/upload/chunked",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              },
+              {
+                "name": "Content-Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Uploads the given chunk into the specified file"
+        },
+        {
+          "info": {
+            "name": "Generates the signedUrl for accessing the resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/artifacts/id/:id/url",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for an artifact"
+              }
+            ]
+          },
+          "docs": "Generate the URL which can be used to access the resource from datastore like s3, Azure etc for specified amount of time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

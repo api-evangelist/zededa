@@ -1,0 +1,1165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService HardwareModel API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HardwareModel",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query hardware brands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/brands",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "Brand name pattern to be matched."
+              },
+              {
+                "name": "originType",
+                "value": "",
+                "type": "query",
+                "description": "origin of object\n\n - ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query the hardware brand records."
+        },
+        {
+          "info": {
+            "name": "Create hardware brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/brands",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a hardware brand record."
+        },
+        {
+          "info": {
+            "name": "Query global hardware brands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/brands/global",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "Brand name pattern to be matched."
+              },
+              {
+                "name": "originType",
+                "value": "",
+                "type": "query",
+                "description": "origin of object\n\n - ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query the global hardware brand records."
+        },
+        {
+          "info": {
+            "name": "Get global hardware brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/brands/global/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the model."
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query",
+                "description": "deprecated field: EnterpriseId"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a global hardware brand record."
+        },
+        {
+          "info": {
+            "name": "Get global hardware brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/brands/global/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "user defined sys brand name"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query",
+                "description": "deprecated field: EnterpriseId"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a global hardware brand record."
+        },
+        {
+          "info": {
+            "name": "Get hardware brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/brands/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the model."
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query",
+                "description": "deprecated field: EnterpriseId"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a hardware brand record."
+        },
+        {
+          "info": {
+            "name": "Update hardware brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/brands/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the brand."
+              }
+            ]
+          },
+          "docs": "Update a hardware brand. The usual pattern to update a hardware brand record is to retrieve the record and update with the modified values in a new body to update the hardware brand record."
+        },
+        {
+          "info": {
+            "name": "Delete hardware brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/brands/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the model."
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query",
+                "description": "deprecated field: EnterpriseId"
+              }
+            ]
+          },
+          "docs": "Delete a hardware brand record."
+        },
+        {
+          "info": {
+            "name": "Get hardware brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/brands/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "user defined sys brand name"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query",
+                "description": "deprecated field: EnterpriseId"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a hardware brand record."
+        },
+        {
+          "info": {
+            "name": "Query device status and config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/status-config",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "load",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select for composite api: id, name, title, serialNo, projectId, projectName, isEveLatest, appInstCount, runState, adminState."
+              },
+              {
+                "name": "adminState",
+                "value": "",
+                "type": "query",
+                "description": " - CREATED: Entity Created in the controller\n - DELETED: Entity Deleted in the controller\n - ACTIVE: Entity Activated in the controller\n - INACTIVE: Entity Deactivated in the controller\n - REGISTERED: Specific to Edge-node - Edge-node Registered with the controller\n - ARCHIVED: Entity Archived in the controller"
+              },
+              {
+                "name": "eveLtsSupportType",
+                "value": "",
+                "type": "query",
+                "description": "filter devices by eve version support type i.e LTS OR NON_LTS"
+              },
+              {
+                "name": "includeInterfaces",
+                "value": "",
+                "type": "query",
+                "description": "flag to indicate whether to include network interface details in the response"
+              }
+            ]
+          },
+          "docs": "Device status config API is a composite API for device config and device status"
+        },
+        {
+          "info": {
+            "name": "Query device status location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/status/locations",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "load",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectNamePattern",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select for composite api: id, name, title, serialNo, projectId, projectName, isEveLatest, appInstCount, runState, adminState."
+              },
+              {
+                "name": "adminState",
+                "value": "",
+                "type": "query",
+                "description": " - CREATED: Entity Created in the controller\n - DELETED: Entity Deleted in the controller\n - ACTIVE: Entity Activated in the controller\n - INACTIVE: Entity Deactivated in the controller\n - REGISTERED: Specific to Edge-node - Edge-node Registered with the controller\n - ARCHIVED: Entity Archived in the controller"
+              },
+              {
+                "name": "eveLtsSupportType",
+                "value": "",
+                "type": "query",
+                "description": "filter devices by eve version support type i.e LTS OR NON_LTS"
+              },
+              {
+                "name": "includeInterfaces",
+                "value": "",
+                "type": "query",
+                "description": "flag to indicate whether to include network interface details in the response"
+              }
+            ]
+          },
+          "docs": "Query device status locations"
+        },
+        {
+          "info": {
+            "name": "Query device object tag key-values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/tags",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query device object tag key-values"
+        },
+        {
+          "info": {
+            "name": "Update pcr template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/pcrtemplate/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the PCR template. If not set in POST / PUT API calls, this will be treated as a new entry and a unique System Generated ID assigned."
+              }
+            ]
+          },
+          "docs": "Update a pcr template record. The usual pattern to update a pcr template record is to retrieve the record and update with the modified values in a new body to update the pcr template record."
+        },
+        {
+          "info": {
+            "name": "Query pcr template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/pcrtemplates/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the pcr template"
+              },
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "query",
+                "description": "Device model identifier"
+              }
+            ]
+          },
+          "docs": "Query pcr template by id. "
+        },
+        {
+          "info": {
+            "name": "Delete pcr template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/pcrtemplates/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the pcr template"
+              },
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "query",
+                "description": "Device model identifier"
+              }
+            ]
+          },
+          "docs": "Delete an pcr template record."
+        },
+        {
+          "info": {
+            "name": "Query hardware models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/sysmodels",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "Model name pattern to be matched."
+              },
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "query",
+                "description": "System defined universally unique Id of the brand."
+              },
+              {
+                "name": "originType",
+                "value": "",
+                "type": "query",
+                "description": "origin of object\n\n - ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+              },
+              {
+                "name": "includeGlobal",
+                "value": "",
+                "type": "query",
+                "description": "Include global models that are not imported."
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query the hardware model records."
+        },
+        {
+          "info": {
+            "name": "Create hardware model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/sysmodels",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a hardware model record."
+        },
+        {
+          "info": {
+            "name": "Query global hardware models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/sysmodels/global",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "Model name pattern to be matched."
+              },
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "query",
+                "description": "System defined universally unique Id of the brand."
+              },
+              {
+                "name": "originType",
+                "value": "",
+                "type": "query",
+                "description": "origin of object\n\n - ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+              },
+              {
+                "name": "includeGlobal",
+                "value": "",
+                "type": "query",
+                "description": "Include global models that are not imported."
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "Query the global hardware model records."
+        },
+        {
+          "info": {
+            "name": "Get global hardware model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/sysmodels/global/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the  model"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a global hardware model record."
+        },
+        {
+          "info": {
+            "name": "Get global hardware model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/sysmodels/global/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the model, unique across the enterprise. Once model is created, name can’t be changed."
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a global hardware model record."
+        },
+        {
+          "info": {
+            "name": "Get hardware model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/sysmodels/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the  model"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a hardware model record."
+        },
+        {
+          "info": {
+            "name": "Update hardware model",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/sysmodels/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the model."
+              }
+            ]
+          },
+          "docs": "Update a hardware model. The usual pattern to update a hardware model record is to retrieve the record and update with the modified values in a new body to update the hardware model record."
+        },
+        {
+          "info": {
+            "name": "Delete hardware model",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/sysmodels/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the  model"
+              }
+            ]
+          },
+          "docs": "Delete a hardware model record."
+        },
+        {
+          "info": {
+            "name": "Import hardware model to local enterprise if it is not already imported and return imported model information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/sysmodels/id/:id/import",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the  model"
+              }
+            ]
+          },
+          "docs": "Import hardware model to local enterprise if it is not already imported and return model information."
+        },
+        {
+          "info": {
+            "name": "Query pcr templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/sysmodels/id/:id/pcrtemplates",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the model."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "PCR template name."
+              },
+              {
+                "name": "eveImageVersion",
+                "value": "",
+                "type": "query",
+                "description": "PCR template eve version."
+              },
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "PCR template name pattern to be matched."
+              },
+              {
+                "name": "eveImageVersionPattern",
+                "value": "",
+                "type": "query",
+                "description": "PCR template eve image version pattern to be matched"
+              }
+            ]
+          },
+          "docs": "Query pcr template records. "
+        },
+        {
+          "info": {
+            "name": "Create pcr templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/sysmodels/id/:id/pcrtemplates",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a list of pcr templates."
+        },
+        {
+          "info": {
+            "name": "Query pcr template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/sysmodels/id/:modelId/pcrtemplates/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "Device model identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the pcr template, unique across a model "
+              }
+            ]
+          },
+          "docs": "Query pcr template by name. "
+        },
+        {
+          "info": {
+            "name": "Get hardware model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/sysmodels/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the model, unique across the enterprise. Once model is created, name can’t be changed."
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of a hardware model record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

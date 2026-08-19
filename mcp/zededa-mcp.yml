@@ -272,3 +272,9 @@ tools:
 - name: IdentityAccessManagement_DeleteDocPolicy
   description: Deletes document policy by id
   source_operation: openapi/zededa-user_service-openapi.json#IdentityAccessManagement_DeleteDocPolicy
+deployment:
+  mode: none
+  verified: derived
+  tools: 87
+  checked: '2026-08-12'
+  source: catalog MCP census

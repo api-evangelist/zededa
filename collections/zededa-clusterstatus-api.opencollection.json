@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService ClusterStatus API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ClusterStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Edge-Node Cluster raw status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/id/:id/raw/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the cluster"
+              }
+            ]
+          },
+          "docs": "Get the raw (unprocessed) status of an Edge-Node Cluster as reported by the cluster reporter."
+        },
+        {
+          "info": {
+            "name": "Get Edge-Node Cluster status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/id/:id/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the cluster"
+              }
+            ]
+          },
+          "docs": "Get the status of an Edge-Node Cluster as reported by the cluster reporter."
+        },
+        {
+          "info": {
+            "name": "Get Edge-Node Cluster upgrade status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/id/:id/upgrade/status",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the cluster"
+              }
+            ]
+          },
+          "docs": "Get the eve-os upgrade status of an Edge-Node Cluster as reported by the cluster reporter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

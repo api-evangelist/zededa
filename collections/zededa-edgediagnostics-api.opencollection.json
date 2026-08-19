@@ -1,0 +1,415 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService EdgeDiagnostics API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EdgeDiagnostics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current Device twin configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/config",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Get currentnext Device twin configuration for the edge node. Edge node has read this configuration when it queried Cloud controller last time."
+        },
+        {
+          "info": {
+            "name": "Re-generate device configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/devices/id/:id/config",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Re-generate the device configuration. Edge node will get this configuration when it queries Cloud controller next time."
+        },
+        {
+          "info": {
+            "name": "Get bootstrap Device twin configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/config/bootstrap",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Get bootstrap Device twin configuration for the edge node. Doesn't change the existing edge node configuration."
+        },
+        {
+          "info": {
+            "name": "Get next Device twin configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/config/next",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Get next Device twin configuration for the edge node. Edge node will get this configuration when it queries Cloud controller next time."
+        },
+        {
+          "info": {
+            "name": "Get offline Device twin configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/id/:id/config/offline",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "system generated unique id for a device"
+              }
+            ]
+          },
+          "docs": "Get offline Device twin configuration for the edge node. Edge node will get this configuration when it queries Cloud controller next time."
+        },
+        {
+          "info": {
+            "name": "Get current Device twin configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/name/:name/config",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "user defined device name for a device"
+              }
+            ]
+          },
+          "docs": "Get currentnext Device twin configuration for the edge node. Edge node has read this configuration when it queried Cloud controller last time."
+        },
+        {
+          "info": {
+            "name": "Get bootstrap Device twin configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/name/:name/config/bootstrap",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "user defined device name for a device"
+              }
+            ]
+          },
+          "docs": "Get bootstrap Device twin configuration for the edge node. Doesn't change the existing edge node configuration."
+        },
+        {
+          "info": {
+            "name": "Get next Device twin configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/name/:name/config/next",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "user defined device name for a device"
+              }
+            ]
+          },
+          "docs": "Get next Device twin configuration for the edge node. Edge node will get this configuration when it queries Cloud controller next time."
+        },
+        {
+          "info": {
+            "name": "Get offline Device twin configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/devices/name/:name/config/offline",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "user defined device name for a device"
+              }
+            ]
+          },
+          "docs": "Get offline Device twin configuration for the edge node. Edge node will get this configuration when it queries Cloud controller next time."
+        },
+        {
+          "info": {
+            "name": "Get events timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/events",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objname",
+                "value": "",
+                "type": "query",
+                "description": "Object name"
+              },
+              {
+                "name": "objid",
+                "value": "",
+                "type": "query",
+                "description": "Object id"
+              },
+              {
+                "name": "objtype",
+                "value": "",
+                "type": "query",
+                "description": "Object type"
+              }
+            ]
+          },
+          "docs": "Get aggregated events timeline"
+        },
+        {
+          "info": {
+            "name": "Get resource usage timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/events/timeSeries/:mType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "objtype",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "objname",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "objid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the aggregated resource usage timeline as reported by the edge nodes and edge application instances."
+        },
+        {
+          "info": {
+            "name": "Get top users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/events/topUsers",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get top users."
+        },
+        {
+          "info": {
+            "name": "Get resource usage timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/timeSeries/:mType",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "objtype",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "objname",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enterpriseId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "objid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the aggregated resource usage timeline as reported by the edge nodes and edge application instances."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

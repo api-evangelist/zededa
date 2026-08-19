@@ -1,0 +1,330 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AppProfileService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query app profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/appprofiles",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "summary flag"
+              },
+              {
+                "name": "filter.namePattern",
+                "value": "",
+                "type": "query",
+                "description": "app profile name pattern"
+              },
+              {
+                "name": "filter.id",
+                "value": "",
+                "type": "query",
+                "description": "app profile id"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to select: id, name, title, description"
+              }
+            ]
+          },
+          "docs": "Query the app profile records."
+        },
+        {
+          "info": {
+            "name": "Create app profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/appprofiles",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create an app profile record."
+        },
+        {
+          "info": {
+            "name": "Get app profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/appprofiles/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique Id of the App profile"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an app profile record."
+        },
+        {
+          "info": {
+            "name": "Update app profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/appprofiles/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "unique id for an App profile"
+              }
+            ]
+          },
+          "docs": "Update an app profile record. The usual pattern to update an app profile record is to retrieve the record and update with the modified values in a new body to update the app profile record. Updating the app profile automatically creates a new version of the original app profile."
+        },
+        {
+          "info": {
+            "name": "Delete app profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/appprofiles/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique Id of the App profile"
+              }
+            ]
+          },
+          "docs": "Delete an app profile record."
+        },
+        {
+          "info": {
+            "name": "Query app profile versions by app profile id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/appprofiles/id/:id/version",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "unique id for an App profile"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "user defined name for the App profile"
+              }
+            ]
+          },
+          "docs": "Query the app profile version records using app profile id"
+        },
+        {
+          "info": {
+            "name": "Get app profile by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/appprofiles/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the app profile, unique across the enterprise. Once app profile is created, name can’t be changed"
+              }
+            ]
+          },
+          "docs": "Get the configuration (without security details) of an app profile record by name."
+        },
+        {
+          "info": {
+            "name": "Query app profile versions by app profile name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/appprofiles/name/:name/version",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "user defined name for the App profile"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "unique id for an App profile"
+              }
+            ]
+          },
+          "docs": "Query the app profile version records using app profile name"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

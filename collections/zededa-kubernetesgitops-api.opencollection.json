@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService KubernetesGitOps API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KubernetesGitOps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all GitRepo configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/gitrepos",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all GitRepo configurations with their status and summary information. Includes statistics about sync status and resource counts.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/gitrepos\n```\n\n**Example Response:**\n```json\n{\n  \"totalCount\": 2,\n  \"stateSummary\": {\n    \"description\": \"GitRepo Status Summary\",\n    \"total\": 2,\n    \"values\": {\n      \"Active\": 1,\n      \"Pending\": 1\n    }\n  },\n  \"gitrepos\": [\n    {\n      \"id\": \"gitrepo-abc123\",\n      \"name\": \"app-manifes"
+        },
+        {
+          "info": {
+            "name": "Create a new GitRepo configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/gitrepos",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a new GitRepo configuration to enable continuous deployment from a Git repository. This allows automatic synchronization of Kubernetes manifests or Helm charts from a Git repository to target clusters.\n\n**Example Request:**\n```json\n{\n  \"metadata\": {\n    \"name\": \"app-manifests\",\n    \"title\": \"Application Manifests Repository\",\n    \"description\": \"Git repository containing production application manifests\"\n  },\n  \"data\": {\n    \"project_id\": \"proj-12345\",\n    \"repo_details\": {\n      \"url\": \""
+        },
+        {
+          "info": {
+            "name": "Get GitRepo configuration by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/gitrepos/id/:gitrepoId",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "gitrepoId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific GitRepo configuration including its current status, sync information, and metadata.\n\n**Example Request:**\n```\nGET /v1/cluster/instances/kubernetes/gitrepos/id/gitrepo-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"id\": \"gitrepo-abc123\",\n  \"name\": \"app-manifests\",\n  \"title\": \"Application Manifests Repository\",\n  \"description\": \"Git repository containing production application manifests\",\n  \"workspace\": \"default\",\n  \"data\": {\n    \"project_id\": \"proj-1"
+        },
+        {
+          "info": {
+            "name": "Update GitRepo configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/gitrepos/id/:gitrepoId",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "gitrepoId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the GitRepo to update (required). Example: 'gitrepo-abc123'"
+              }
+            ]
+          },
+          "docs": "Update an existing GitRepo configuration. This allows modification of repository details, authentication settings, and target configuration. The GitRepo name cannot be changed after creation.\n\n**Example Request:**\n```json\n{\n  \"gitrepo_id\": \"gitrepo-abc123\",\n  \"metadata\": {\n    \"name\": \"app-manifests\",\n    \"title\": \"Updated Application Manifests Repository\",\n    \"description\": \"Updated Git repository containing production application manifests\"\n  },\n  \"data\": {\n    \"project_id\": \"proj-12345\",\n   "
+        },
+        {
+          "info": {
+            "name": "Delete GitRepo configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/cluster/instances/kubernetes/gitrepos/id/:gitrepoId",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "gitrepoId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the GitRepo (required). Example: 'gitrepo-abc123'"
+              }
+            ]
+          },
+          "docs": "Delete a GitRepo configuration. This will stop the synchronization from the Git repository and remove all associated resources from the target clusters. This action is irreversible.\n\n**Example Request:**\n```\nDELETE /v1/cluster/instances/kubernetes/gitrepos/id/gitrepo-abc123\n```\n\n**Example Response:**\n```json\n{\n  \"operationType\": \"OPS_TYPE_UNSPECIFIED\",\n  \"operationStatus\": \"OPS_STATUS_UNSPECIFIED\",\n  \"objectKind\": \"\",\n  \"objectId\": \"gitrepo-abc123\",\n  \"objectName\": \"app-manifests\",\n  \"objectRevi"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

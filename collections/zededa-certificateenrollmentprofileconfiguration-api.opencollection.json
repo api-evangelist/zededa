@@ -1,0 +1,214 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZEDEDA App Profiles Service AppProfileService CertificateEnrollmentProfileConfiguration API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CertificateEnrollmentProfileConfiguration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List certificate enrollment profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/ceps",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "namePattern",
+                "value": "",
+                "type": "query",
+                "description": "query param : \"name-pattern\" . Search * namePattern * in name field to filter records"
+              },
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "Only summary of the records required"
+              },
+              {
+                "name": "showProjectsList",
+                "value": "",
+                "type": "query",
+                "description": "If true, include the list of projects referencing each CEP profile"
+              },
+              {
+                "name": "next.pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page Token"
+              },
+              {
+                "name": "next.orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OrderBy helps in sorting the list response"
+              },
+              {
+                "name": "next.pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "next.pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Defines the page size"
+              },
+              {
+                "name": "next.totalPages",
+                "value": "",
+                "type": "query",
+                "description": "Total number of pages to be fetched."
+              }
+            ]
+          },
+          "docs": "List all certificate enrollment profiles with optional filtering and pagination."
+        },
+        {
+          "info": {
+            "name": "Create a certificate enrollment profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/ceps",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a certificate enrollment profile (CEP) for SCEP-based certificate provisioning on edge devices."
+        },
+        {
+          "info": {
+            "name": "Get certificate enrollment profile by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/ceps/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the CEP profile"
+              },
+              {
+                "name": "showProjectsList",
+                "value": "",
+                "type": "query",
+                "description": "If true, include the list of projects referencing this CEP profile"
+              }
+            ]
+          },
+          "docs": "Get the configuration of a certificate enrollment profile by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a certificate enrollment profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/ceps/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System-generated unique identifier (UUID)"
+              }
+            ]
+          },
+          "docs": "Update a certificate enrollment profile. Fields id, name, enterprise_id, and status are immutable and cannot be changed."
+        },
+        {
+          "info": {
+            "name": "Delete a certificate enrollment profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/ceps/id/:id",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "System defined universally unique Id of the CEP profile"
+              },
+              {
+                "name": "showProjectsList",
+                "value": "",
+                "type": "query",
+                "description": "If true, include the list of projects referencing this CEP profile"
+              }
+            ]
+          },
+          "docs": "Delete a certificate enrollment profile by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Get certificate enrollment profile by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/ceps/name/:name",
+            "headers": [
+              {
+                "name": "X-Request-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "User defined name of the CEP profile"
+              }
+            ]
+          },
+          "docs": "Get the configuration of a certificate enrollment profile by its unique name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
