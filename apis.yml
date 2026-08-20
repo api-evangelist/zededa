@@ -285,6 +285,8 @@ apis:
   humanURL: https://zedcontrol.zededa.net/api/v1/docs/
   baseURL: https://zedcontrol.zededa.net/api
   tags:
+  - Identity Access Management
+  tags_raw:
   - IdentityAccessManagement
   properties:
   - type: OpenAPI
