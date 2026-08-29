@@ -15,6 +15,18 @@ x-backed-by:
 - lux-capital
 x-tier: stub
 x-tier-reason: portfolio-lead
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -421,6 +433,9 @@ apis:
   - type: OpenAPI
     url: openapi/zededa-zksclusterinstances-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/zededa-capability-edges.yml
+  name: Zededa Business Capability Map
 - type: APIReference
   url: https://zedcontrol.zededa.net/api/v1/docs/
 - type: Documentation
