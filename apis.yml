@@ -120,17 +120,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/zededa-clouddiagnostics-api-openapi.yml
-- aid: zededa:zededa-clustergroups-api
-  name: Zededa ClusterGroups API
-  description: >-
-    APIs for managing cluster groups including creation, deletion, status monitoring, and manifest generation
-  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
-  baseURL: https://zedcontrol.zededa.net/api
-  tags:
-  - ClusterGroups
-  properties:
-  - type: OpenAPI
-    url: openapi/zededa-clustergroups-api-openapi.yml
 - aid: zededa:zededa-clusterstatus-api
   name: Zededa ClusterStatus API
   description: The ClusterStatus API from Zededa — 3 operation(s) for clusterstatus.
@@ -433,6 +422,17 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/zededa-zksclusterinstances-api-openapi.yml
+- aid: zededa:zededa-cluster-groups-api
+  name: Zededa cluster groups API
+  description: >-
+    APIs for managing cluster groups including creation, deletion, status monitoring, and manifest generation
+  humanURL: https://zedcontrol.zededa.net/api/v1/docs/
+  baseURL: https://zedcontrol.zededa.net/api
+  tags:
+  - cluster groups
+  properties:
+  - type: OpenAPI
+    url: openapi/zededa-cluster-groups-api-openapi.yml
 common:
 - type: CapabilityMap
   url: capabilities/zededa-capability-edges.yml
