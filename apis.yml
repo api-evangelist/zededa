@@ -429,6 +429,8 @@ apis:
   humanURL: https://zedcontrol.zededa.net/api/v1/docs/
   baseURL: https://zedcontrol.zededa.net/api
   tags:
+  - ClusterGroups
+  tags_raw:
   - cluster groups
   properties:
   - type: OpenAPI
