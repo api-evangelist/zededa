@@ -44,7 +44,8 @@ edges:
   reason: Lifecycle management of storage volume instances on edge nodes is plainly compute/storage infrastructure
     management, not a business capability.
 - tag: ClusterGroups
-  spec_file: zededa-clustergroups-api-openapi.yml
+  spec_file: zededa-cluster-groups-api-openapi.yml
+  reanchored_from: zededa-clustergroups-api-openapi.yml
   capability_id: BC-600.50
   capability_id_l1: BC-600
   capability_name: IT Infrastructure Management
