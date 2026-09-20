@@ -1,0 +1,195 @@
+slug: zededa
+provider: Zededa
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 18
+edges:
+- tag: IdentityAccessManagement
+  spec_file: zededa-identityaccessmanagement-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.9
+  evidence: '"IdentityAccessManagement_CreateAuthProfile  Create AAA profile", "IdentityAccessManagement_CreateCredential  Create
+    IAM credential", schemas AuthorizationProfile, SessionDetails, TOTPSettings'
+  reason: Explicit AAA profiles, credentials, sessions, MFA settings and access policies — Identity &
+    Access Management.
+- tag: ZKSClusterInstances
+  spec_file: zededa-zksclusterinstances-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /v1/zks/instances ZKSClusterInstances_CreateZKSInstance 'Create a new ZKS instance';
+    PUT /v1/zks/instances/k3s-upgrade 'Bulk upgrade K3s version'
+  reason: Provisioning, node management and K3s version upgrades of managed Kubernetes clusters is unambiguously
+    cloud/compute infrastructure management.
+- tag: VolumeInstanceConfiguration
+  spec_file: zededa-volumeinstanceconfiguration-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /v1/volumes/instances VolumeInstanceConfiguration_CreateVolumeInstance 'Create edge volume
+    instance'; schemas 'VolInstConfig', 'VolumeInstanceAccessMode'
+  reason: Lifecycle management of storage volume instances on edge nodes is plainly compute/storage infrastructure
+    management, not a business capability.
+- tag: ClusterGroups
+  spec_file: zededa-clustergroups-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /v1/zks/cluster/groups 'Create a new cluster group'; schemas ClusterGroupResources, ClusterReadiness
+  reason: Lifecycle management of managed Kubernetes cluster groups is compute infrastructure provisioning
+    — IT Infrastructure Management.
+- tag: EdgeNetworkConfiguration
+  spec_file: zededa-edgenetworkconfiguration-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /v1/networks 'Create edge network'; schemas NetworkDHCPType, NetCellularAccessPoint,
+    NetProxyServer
+  reason: Configuration of edge network definitions (DHCP, proxies, wireless/cellular access) is network
+    infrastructure management.
+- tag: EdgeNetworkInstanceConfiguration
+  spec_file: zededa-edgenetworkinstanceconfiguration-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /v1/netinsts 'Create edge network instance'; schemas NetInstConfig, StaticIPRoute
+  reason: CRUD over deployed virtual network instances with static routes and probes — network infrastructure
+    provisioning and configuration.
+- tag: EdgeNodeClusterConfiguration
+  spec_file: zededa-edgenodeclusterconfiguration-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /v1/cluster 'Create Edge-Node Cluster.'; 'Upgrade Edge-Node Cluster.'; schemas EdgeNodeClusterNode,
+    BaseOSImage
+  reason: Creation, update and upgrade of edge node clusters and their interface ports is compute/cluster
+    infrastructure management.
+- tag: EdgeNodeConfiguration
+  spec_file: zededa-edgenodeconfiguration-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: '"EdgeNodeConfiguration_CreateEdgeNode  Create edge node", "EdgeNodeConfiguration_UpdateEdgeNodeBaseOS  update
+    EVE image on edge node", "Activate edge node"'
+  reason: Operations create, update, activate/deactivate and upgrade the base OS of distributed edge compute
+    nodes — lifecycle management of compute infrastructure, i.e. IT Infrastructure Management rather than
+    any industry-specific capability.
+- tag: CloudDiagnostics
+  spec_file: zededa-clouddiagnostics-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.72
+  evidence: GET /v1/cloud/healthreport — 'Get Cloud services health report'; 'Check Cloud reachability';
+    'Get Cloud controller software version'
+  reason: Health checks, reachability pings and controller version/policy documents for the control plane
+    — day-to-day IT operations monitoring of the orchestration service, not a business capability of any
+    industry.
+- tag: DatastoreConfiguration
+  spec_file: zededa-datastoreconfiguration-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.72
+  evidence: POST /v1/datastores 'Create Datastore'; schemas DatastoreType, DatastoreInfoSecrets
+  reason: CRUD over datastore (image/artifact storage) definitions used by the edge platform — storage
+    infrastructure configuration, an IT infrastructure capability.
+- tag: EdgeApplicationConfiguration
+  spec_file: zededa-edgeapplicationconfiguration-api-openapi.yml
+  capability_id: BC-600.60
+  capability_id_l1: BC-600
+  capability_name: IT Application Management
+  confidence: 0.72
+  evidence: POST /v1/apps 'Create edge application bundle'; schemas Apps, AppType, ContainerDetail, ImageDatastore
+  reason: Definition and lifecycle of deployable edge application bundles (container/VM images) — application
+    lifecycle management within IT, not a product-engineering or industry capability.
+- tag: EdgeApplicationInstanceConfiguration
+  spec_file: zededa-edgeapplicationinstanceconfiguration-api-openapi.yml
+  capability_id: BC-600.60
+  capability_id_l1: BC-600
+  capability_name: IT Application Management
+  confidence: 0.72
+  evidence: '''Create edge application instance''; ''Activate edge application instance''; ''Restart edge
+    application instance'''
+  reason: Deploying, activating and restarting application instances on edge nodes is operational application
+    lifecycle management for the IT estate.
+- tag: EdgeApplicationInstanceStatus
+  spec_file: zededa-edgeapplicationinstancestatus-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.72
+  evidence: '''Get edge application instance log''; ''Get edge application instance resource usage timeline'';
+    ''Get edge application instance events by id'''
+  reason: Logs, metrics timelines, traffic flow logs and events for running instances — infrastructure/application
+    monitoring under IT Operations Management; not the vendor's own SaaS observability.
+- tag: EdgeNodeStatus
+  spec_file: zededa-edgenodestatus-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.72
+  evidence: '"Get edge node status", "Get edge node events by id", "Get edge node resource usage timeline"
+    with schemas CpuSummary, MemorySummary'
+  reason: Read-only status, events, raw metrics and resource-usage timelines for edge devices — operational
+    monitoring of running infrastructure (IT Operations Management). Not the vendor's own SaaS observability
+    practice, so BC-4220 is a poorer fit.
+- tag: KubernetesSecrets
+  spec_file: zededa-kubernetessecrets-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.72
+  evidence: '"KubernetesSecrets_CreateSecret  Create a new Kubernetes secret", schemas SecretCreateRequest,
+    SSHCredentials, SecretData'
+  reason: Creation and listing of Kubernetes secrets consumed by deployed workloads — runtime configuration
+    and secrets management.
+- tag: CertificateEnrollmentProfileConfiguration
+  spec_file: zededa-certificateenrollmentprofileconfiguration-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: POST /v1/ceps — 'Create a certificate enrollment profile'; schemas 'CEPCommonSCEPProfileSecrets',
+    'CEPCommonCSRProfile', 'CEPCommonHashAlgorithm'
+  reason: Manages SCEP/CSR certificate enrollment profiles with key types and hash algorithms — PKI credential
+    issuance configuration, a cybersecurity capability. Split between Identity & Access Management and
+    Security Architecture, so L2 left unset.
+- tag: ClusterStatus
+  spec_file: zededa-clusterstatus-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.7
+  evidence: '''Get Edge-Node Cluster status.''; ''Get Edge-Node Cluster upgrade status.''; schemas infoKubePodStatus,
+    infoZInfoKubeCluster'
+  reason: Read-only status and upgrade-progress reporting on edge Kubernetes clusters — operational monitoring
+    of IT infrastructure.
+- tag: EdgeDiagnostics
+  spec_file: zededa-edgediagnostics-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.7
+  evidence: '''Get current Device twin configuration''; ''Get events timeline''; ''Get resource usage
+    timeline'''
+  reason: Device configuration inspection plus event and resource-metric timelines for edge nodes — diagnostic
+    IT operations monitoring.
