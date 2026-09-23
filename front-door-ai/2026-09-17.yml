@@ -1,0 +1,31 @@
+# Front Door AI Index — zededa — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: zededa
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: zededa.com
+  final_host: zededa.com
+  ownership: own
+  owner: zededa
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 43
+  host_score: 43
+  density: 24.47
+  words: 1757
+  tiers:
+    agentic: 13
+    core: 30
+    model: 0
+  ambiguous: 55
+  top_terms:
+    AI: 30
+    intelligence: 30
+    agent: 22
+    inference: 7
+    autonomous agent: 4
+    predictive: 3
+    AI agent: 2

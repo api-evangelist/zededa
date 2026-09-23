@@ -1,0 +1,1250 @@
+openapi: 3.2.0
+info:
+  title: ZEDEDA Kubernetes Service Cluster Groups API
+  description: The ZEDEDA Kubernetes Service provides APIs for managing Kubernetes deployments and Helm charts in edge clusters.
+  termsOfService: https://www.zededa.com/terms
+  version: '1.0'
+  contact:
+    name: ZEDEDA API Support
+    url: https://www.zededa.com/support
+    email: support@zededa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: /api
+security:
+- ApiKeyAuth: []
+tags:
+- name: cluster groups
+  description: APIs for managing cluster groups including creation, deletion, status monitoring, and manifest generation
+paths:
+  /v1/zks/cluster/groups:
+    post:
+      summary: Create a new cluster group
+      description: 'Create a new cluster group with specified configuration and manifest.
+
+
+        **Example Request:**
+
+        ```json
+
+        {
+
+        "projectId": "project-123",
+
+        "name": "production-cluster-group",
+
+        "title": "Production Cluster Group",
+
+        "description": "Cluster group for production environments",
+
+        "tags": {
+
+        "environment": "production",
+
+        "region": "us-west",
+
+        "team": "platform"
+
+        },
+
+        "manifest": {
+
+        "yamlContent": "apiVersion: v1\nkind: Namespace\nmetadata:\n name: production-ns"
+
+        }
+
+        }
+
+        ```
+
+
+        **Example Response:**
+
+        ```json
+
+        {
+
+        "operationType": "OPS_TYPE_UNSPECIFIED",
+
+        "operationStatus": "OPS_STATUS_UNSPECIFIED",
+
+        "objectKind": "",
+
+        "objectId": "cluster-group-abc123",
+
+        "objectName": "production-cluster-group",
+
+        "objectRevision": "",
+
+        "objectType": "OBJECT_TYPE_UNSPECIFIED",
+
+        "operationTime": "",
+
+        "startTime": "",
+
+        "endTime": "",
+
+        "user": "",
+
+        "httpStatusCode": 201,
+
+        "httpStatusMsg": "",
+
+        "jobId": "",
+
+        "error": [
+
+        {
+
+        "ec": "zMsgSucess",
+
+        "location": "",
+
+        "details": ""
+
+        }
+
+        ]
+
+        }
+
+        ```'
+      operationId: ClusterGroups_CreateClusterGroup
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '201':
+          description: Successfully created cluster group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid cluster group configuration or missing required fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to create cluster groups.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '409':
+          description: Conflict. Cluster group with the same name already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to create cluster group due to server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        schema:
+          type: string
+      tags:
+      - cluster groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterGroup'
+        required: true
+  /v1/zks/cluster/groups/id/{clusterGroupId}:
+    delete:
+      summary: Delete cluster group
+      description: 'Delete a cluster group and all its associated resources. This operation is irreversible and will remove the cluster group configuration.
+
+
+        **Example Request:**
+
+        ```
+
+        DELETE /v1/zks/cluster/groups/id/cluster-group-abc123
+
+        ```
+
+
+        **Example Response:**
+
+        ```json
+
+        {
+
+        "operationType": "OPS_TYPE_UNSPECIFIED",
+
+        "operationStatus": "OPS_STATUS_UNSPECIFIED",
+
+        "objectKind": "",
+
+        "objectId": "cluster-group-abc123",
+
+        "objectName": "production-cluster-group",
+
+        "objectRevision": "",
+
+        "objectType": "OBJECT_TYPE_UNSPECIFIED",
+
+        "operationTime": "",
+
+        "startTime": "",
+
+        "endTime": "",
+
+        "user": "",
+
+        "httpStatusCode": 200,
+
+        "httpStatusMsg": "",
+
+        "jobId": "",
+
+        "error": [
+
+        {
+
+        "ec": "zMsgSucess",
+
+        "location": "",
+
+        "details": ""
+
+        }
+
+        ]
+
+        }
+
+        ```
+
+
+        **Warning:** This operation will permanently delete the cluster group and all its configurations. Ensure all important data is backed up before deletion.'
+      operationId: ClusterGroups_DeleteClusterGroup
+      responses:
+        '200':
+          description: Successfully deleted cluster group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid cluster group ID format.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to delete this cluster group.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '404':
+          description: Not Found. Cluster group with the specified ID does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '409':
+          description: Conflict. Cannot delete cluster group due to active dependencies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to delete cluster group due to server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+      - name: clusterGroupId
+        description: Unique identifier of the cluster group. This field is required and must be a valid cluster group ID.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        schema:
+          type: string
+      tags:
+      - cluster groups
+  /v1/zks/cluster/groups/id/{id}:
+    put:
+      summary: Update cluster group
+      description: 'Update an existing cluster group configuration including name, title, description, tags, and manifest.
+
+
+        **Example Request:**
+
+        ```json
+
+        {
+
+        "id": "cluster-group-abc123",
+
+        "projectId": "project-123",
+
+        "name": "production-cluster-group",
+
+        "title": "Updated Production Cluster Group",
+
+        "description": "Updated cluster group for production environments",
+
+        "tags": {
+
+        "environment": "production",
+
+        "region": "us-west",
+
+        "version": "v2"
+
+        },
+
+        "manifest": {
+
+        "yamlContent": "apiVersion: v1\nkind: Namespace\nmetadata:\n name: production-ns\n labels:\n version: v2"
+
+        }
+
+        }
+
+        ```
+
+
+        **Example Response:**
+
+        ```json
+
+        {
+
+        "operationType": "OPS_TYPE_UNSPECIFIED",
+
+        "operationStatus": "OPS_STATUS_UNSPECIFIED",
+
+        "objectKind": "",
+
+        "objectId": "cluster-group-abc123",
+
+        "objectName": "production-cluster-group",
+
+        "objectRevision": "",
+
+        "objectType": "OBJECT_TYPE_UNSPECIFIED",
+
+        "operationTime": "",
+
+        "startTime": "",
+
+        "endTime": "",
+
+        "user": "",
+
+        "httpStatusCode": 200,
+
+        "httpStatusMsg": "",
+
+        "jobId": "",
+
+        "error": [
+
+        {
+
+        "ec": "zMsgSucess",
+
+        "location": "",
+
+        "details": ""
+
+        }
+
+        ]
+
+        }
+
+        ```'
+      operationId: ClusterGroups_UpdateClusterGroup
+      responses:
+        '200':
+          description: Successfully updated cluster group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '400':
+          description: Bad Request. Invalid cluster group configuration or missing required fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to update this cluster group.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '404':
+          description: Not Found. Cluster group with the specified ID does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '409':
+          description: Conflict. Update conflicts with current cluster group state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to update cluster group due to server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+      - name: id
+        description: System defined universally unique Id of the cluster group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        schema:
+          type: string
+      tags:
+      - cluster groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  description: Foreign key to the project
+                  pattern: '[0-9A-Za-z-]+'
+                name:
+                  type: string
+                  description: User defined name of the cluster group, unique across the enterprise. Once cluster group is created, name can’t be changed
+                title:
+                  type: string
+                  description: User defined title of the cluster group. Title can be changed at any time
+                description:
+                  type: string
+                  description: Detailed description of the cluster group
+                tags:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+                  maxLength: 32
+                  pattern: ^[^<%&?/\>]+$
+                manifest:
+                  type: object
+                  $ref: '#/components/schemas/ClusterGroupManifest'
+                  description: The cluster group manifest
+              description: Cluster Group details
+              title: Cluster Group details
+              required:
+              - projectId
+              - name
+        required: true
+  /v1/zks/cluster/groups/manifest:
+    get:
+      summary: Get cluster group manifest
+      description: 'Generate and retrieve a cluster group manifest based on specified criteria.
+
+
+        **Query Parameters:**
+
+        - `name`: Name of the cluster group
+
+        - `projectName`: Name of the project
+
+        - `tags`: Tags filter (JSON object)
+
+
+        **Example Request:**
+
+        ```
+
+        GET /v1/zks/cluster/groups/manifest?name=production-cluster-group&projectName=production-project
+
+        GET /v1/zks/cluster/groups/manifest?tags={"environment":"production"}
+
+        ```
+
+
+        **Example Response:**
+
+        ```json
+
+        {
+
+        "manifest": {
+
+        "yamlContent": "apiVersion: v1\nkind: Namespace\nmetadata:\n name: production-ns\n labels:\n environment: production\n---\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n name: app-deployment\n namespace: production-ns\nspec:\n replicas: 3\n selector:\n matchLabels:\n app: production-app\n template:\n metadata:\n labels:\n app: production-app\n spec:\n containers:\n - name: app\n image: nginx:latest\n ports:\n - containerPort: 80"
+
+        }
+
+        }
+
+        ```'
+      operationId: ClusterGroups_GetClusterGroupManifest
+      responses:
+        '200':
+          description: Successfully generated cluster group manifest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterGroupManifestOutput'
+        '400':
+          description: Bad Request. Invalid query parameters or manifest generation criteria.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to access cluster group manifests.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '404':
+          description: Not Found. No cluster group found matching the specified criteria.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to generate manifest due to server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      tags:
+      - cluster groups
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        schema:
+          type: string
+  /v1/zks/cluster/groups/status:
+    get:
+      summary: Get cluster groups status
+      description: 'Retrieve detailed status information for all cluster groups including readiness, resources, and cluster details.
+
+
+        **Query Parameters:**
+
+        - `id`: Filter by cluster group ID
+
+        - `name`: Filter by cluster group name
+
+        - `namePattern`: Filter by cluster group name pattern
+
+        - `projectName`: Filter by project name
+
+        - `projectNamePattern`: Filter by project name pattern
+
+
+        **Example Request:**
+
+        ```
+
+        GET /v1/zks/cluster/groups/status
+
+        GET /v1/zks/cluster/groups/status?name=production-cluster-group
+
+        GET /v1/zks/cluster/groups/status?projectName=production-project
+
+        ```
+
+
+        **Example Response:**
+
+        ```json
+
+        {
+
+        "list": [
+
+        {
+
+        "id": "cluster-group-abc123",
+
+        "projectId": "project-123",
+
+        "projectName": "Production Project",
+
+        "name": "production-cluster-group",
+
+        "title": "Production Cluster Group",
+
+        "description": "Cluster group for production environments",
+
+        "tags": {
+
+        "environment": "production",
+
+        "region": "us-west"
+
+        },
+
+        "state": "DEPLOYED",
+
+        "clusterReadiness": {
+
+        "total": 5,
+
+        "ready": 4
+
+        },
+
+        "resources": {
+
+        "amount": 25,
+
+        "summary": {
+
+        "missing": 0,
+
+        "modified": 1,
+
+        "notReady": 1,
+
+        "orphaned": 0,
+
+        "ready": 23,
+
+        "unknown": 0,
+
+        "waitApplied": 0
+
+        }
+
+        },
+
+        "clusters": [
+
+        {
+
+        "name": "cluster-001",
+
+        "state": "DEPLOYED",
+
+        "bundleReady": "True",
+
+        "reposReady": "True",
+
+        "resources": 5,
+
+        "lastSeen": "2024-01-15T12:00:00Z",
+
+        "age": "2024-01-10T10:00:00Z"
+
+        }
+
+        ],
+
+        "namespace": "production-ns",
+
+        "age": "2024-01-10T10:00:00Z"
+
+        }
+
+        ]
+
+        }
+
+        ```'
+      operationId: ClusterGroups_GetClusterGroupsStatus
+      responses:
+        '200':
+          description: Successfully retrieved cluster groups status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterGroupStatusListResp'
+        '400':
+          description: Bad Request. Invalid query parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '403':
+          description: Forbidden. User does not have permission to view cluster groups status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        '500':
+          description: Internal Server Error. Failed to retrieve status due to server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZsrvResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      tags:
+      - cluster groups
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        description: User-Agent specified id to track a request
+        schema:
+          type: string
+components:
+  schemas:
+    ZsrvResponse:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
+          type: string
+          title: zedcloud object kind on which the operation was performed
+        objectId:
+          type: string
+          title: Unique value identifies the object that was operated on
+        objectName:
+          type: string
+          title: name of the object
+        objectRevision:
+          type: string
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    ClusterGroupStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the cluster group
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        projectId:
+          type: string
+          description: Foreign key to the project
+          pattern: '[0-9A-Za-z-]+'
+        projectName:
+          type: string
+          description: Name of the project to which this cluster group belongs
+        name:
+          type: string
+          description: User defined name of the cluster group, unique across the enterprise. Once cluster group is created, name can’t be changed
+        title:
+          type: string
+          description: User defined title of the cluster group. Title can be changed at any time
+        description:
+          type: string
+          description: Detailed description of the cluster group
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        state:
+          $ref: '#/components/schemas/RunState'
+          description: Run state of the cluster group
+        clusterReadiness:
+          $ref: '#/components/schemas/ClusterReadiness'
+          description: Readiness of the clusters in the cluster group
+        resources:
+          $ref: '#/components/schemas/ClusterGroupResources'
+          description: Resources in the cluster group
+        clusters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClusterGroupCluster'
+          description: List of clusters in the cluster group
+        namespace:
+          type: string
+          description: Namespace of the cluster group
+        age:
+          type: string
+          format: date-time
+          description: Age of the cluster group
+        clusterTags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Cluster tags are name/value pairs that enable you to categorize clusters
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    ClusterReadiness:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+          description: Total number of clusters in the cluster group
+        ready:
+          type: integer
+          format: int64
+          description: Number of clusters in the cluster group that are ready
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
+    ClusterGroupResources:
+      type: object
+      properties:
+        amount:
+          type: integer
+          format: int64
+          description: Total resources of clusters in the cluster group
+        summary:
+          $ref: '#/components/schemas/ClusterGroupResourceSummary'
+          description: Summary of the resources in the cluster group
+    ClusterGroupCluster:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the cluster in the cluster group
+        state:
+          type: string
+          $ref: '#/components/schemas/RunState'
+          description: State of the cluster in the cluster group
+        bundleReady:
+          type: string
+          description: Bundle readiness of the cluster in the cluster group
+        reposReady:
+          type: string
+          description: Repository readiness of the cluster in the cluster group
+        resources:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster in the cluster group
+        lastSeen:
+          type: string
+          format: date-time
+          description: Last seen timestamp of the cluster in the cluster group
+        age:
+          type: string
+          format: date-time
+          description: Age of the cluster in the cluster group
+    ClusterGroupManifest:
+      type: object
+      properties:
+        yamlContent:
+          type: string
+          description: The content of an yaml manifest
+      description: Cluster Group Manifest details
+      title: Cluster Group Manifest details
+      required:
+      - yamlContent
+    ClusterGroup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the cluster group
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        projectId:
+          type: string
+          description: Foreign key to the project
+          pattern: '[0-9A-Za-z-]+'
+        name:
+          type: string
+          description: User defined name of the cluster group, unique across the enterprise. Once cluster group is created, name can’t be changed
+        title:
+          type: string
+          description: User defined title of the cluster group. Title can be changed at any time
+        description:
+          type: string
+          description: Detailed description of the cluster group
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        manifest:
+          type: object
+          $ref: '#/components/schemas/ClusterGroupManifest'
+          description: The cluster group manifest
+      description: Cluster Group details
+      title: Cluster Group details
+      required:
+      - projectId
+      - name
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    ClusterGroupStatusListResp:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClusterGroupStatus'
+          description: Detailed statuses of the cluster groups
+        result:
+          $ref: '#/components/schemas/ZsrvResponse'
+          description: Response result
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of cluster groups satisfying the filter criteria
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Cursor for pagination
+    RunState:
+      type: string
+      enum:
+      - RUN_STATE_UNSPECIFIED
+      - RUN_STATE_ONLINE
+      - RUN_STATE_HALTED
+      - RUN_STATE_INIT
+      - RUN_STATE_REBOOTING
+      - RUN_STATE_OFFLINE
+      - RUN_STATE_UNKNOWN
+      - RUN_STATE_UNPROVISIONED
+      - RUN_STATE_PROVISIONED
+      - RUN_STATE_SUSPECT
+      - RUN_STATE_DOWNLOADING
+      - RUN_STATE_RESTARTING
+      - RUN_STATE_PURGING
+      - RUN_STATE_HALTING
+      - RUN_STATE_ERROR
+      - RUN_STATE_VERIFYING
+      - RUN_STATE_LOADING
+      - RUN_STATE_CREATING_VOLUME
+      - RUN_STATE_BOOTING
+      - RUN_STATE_MAINTENANCE_MODE
+      - RUN_STATE_START_DELAYED
+      - RUN_STATE_BASEOS_UPDATING
+      - RUN_STATE_PREPARING_POWEROFF
+      - RUN_STATE_POWERING_OFF
+      - RUN_STATE_PREPARED_POWEROFF
+      default: RUN_STATE_UNSPECIFIED
+      description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
+      title: RunState - On update, please update RunState_HttpRequest as well
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    ClusterGroupResourceSummary:
+      type: object
+      properties:
+        missing:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are missing
+        modified:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are modified
+        notReady:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are not ready
+        orphaned:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are orphaned
+        ready:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are ready
+        unknown:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are in unknown state
+        waitApplied:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are waiting for applied state
+    ClusterGroupManifestOutput:
+      type: object
+      properties:
+        manifest:
+          $ref: '#/components/schemas/ClusterGroupManifestJaml'
+          description: The cluster group manifest in jaml format
+    ClusterGroupManifestJaml:
+      type: object
+      properties:
+        yamlContent:
+          type: string
+          description: The content of an jaml manifest
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-KEY
+      in: header
+externalDocs:
+  description: ZEDEDA Kubernetes Management Documentation
+  url: https://help.zededa.com/hc/en-us/categories/39343791302299-Edge-Kubernetes
