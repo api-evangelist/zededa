@@ -1007,6 +1007,297 @@ paths:
       - PrivateHelmRepositories
 components:
   schemas:
+    PrivateRepoAuthInfo:
+      type: object
+      properties:
+        secret:
+          $ref: '#/components/schemas/PrivateRepoSecretInfo'
+          description: Enhanced secret information for authentication
+      description: Enhanced authentication information including secret details for private repository access
+      title: Private Repository authentication information
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    PrivateRepoAuthConfig:
+      type: object
+      properties:
+        secret:
+          $ref: '#/components/schemas/PrivateRepoSecretConfig'
+          description: Secret configuration for authentication
+      description: Authentication configuration for private repository access
+      title: Private Repository authentication configuration
+    PrivateRepoGetByIdResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the private repository
+        metadata:
+          $ref: '#/components/schemas/PrivateRepoMetadata'
+          description: Metadata information for the private repository
+        spec:
+          $ref: '#/components/schemas/PrivateRepoSpecInfo'
+          description: Enhanced specification of the private repository
+        status:
+          $ref: '#/components/schemas/PrivateRepoStatus'
+          description: Current operational status of the private repository
+        repoIdentifier:
+          type: string
+          description: Unique identifier for the private repository
+      description: Detailed response message for private repository get by ID operation including metadata, specification, and status
+      title: Private Repository detailed response
+    PrivateRepoListResponse:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrivateRepoGetByIdResponse'
+          description: List of private repositories
+        total:
+          type: integer
+          format: int32
+          description: Total number of private repositories
+      description: Response message for listing private repositories
+      title: Private Repository list response
+    PrivateRepoStatus:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Indicates if the repository is in an error state
+        message:
+          type: string
+          description: Status message providing additional details about the repository state
+        name:
+          type: string
+          description: Name of the repository in its current state
+        transitioning:
+          type: boolean
+          description: Indicates if the repository is currently undergoing state transition
+      description: Current operational status of a private repository
+      title: Private Repository status
+    PrivateRepoSpecInfo:
+      type: object
+      properties:
+        repoDetails:
+          $ref: '#/components/schemas/PrivateRepoRepositoryDetails'
+          description: Repository details and configuration
+        auth:
+          $ref: '#/components/schemas/PrivateRepoAuthInfo'
+          description: Enhanced authentication configuration
+      description: Enhanced specification information for a private repository configuration
+      title: Private Repository specification information
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    PrivateRepoRepositoryDetails:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/PrivateRepoType'
+          description: Type of the private repository (PRIVATE_REPO_TYPE_HELM_INDEX, PRIVATE_REPO_TYPE_GIT, PRIVATE_REPO_TYPE_UNSPECIFIED). This is a required parameter
+        url:
+          type: string
+          description: Private repository URL (required)
+        branch:
+          type: string
+          description: Git branch to track
+      description: Repository configuration details for private repository
+      title: Private Repository details
+      required:
+      - type
+      - url
+    PrivateRepoMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the private repository configuration (required)
+        title:
+          type: string
+          description: Display title of the private repository configuration
+        description:
+          type: string
+          description: Description of the private repository configuration
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags associated with the private repository
+      description: Metadata information for a private repository configuration
+      title: Private Repository metadata
+      required:
+      - name
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    PrivateRepoSecretInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the secret
+        type:
+          $ref: '#/components/schemas/SecretType'
+          description: Type of secret for authentication
+        name:
+          type: string
+          description: Name of the secret resource
+        data:
+          $ref: '#/components/schemas/SecretData'
+          description: Secret credentials data
+      description: Enhanced secret information including credentials data for private repository authentication
+      title: Private Repository secret information
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    PrivateRepoSecretConfig:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SecretType'
+          description: Type of the secret (SECRET_TYPE_SSH, SECRET_TYPE_BASIC_AUTH, SECRET_TYPE_UNSPECIFIED, SECRET_TYPE_NONE). This field is required and must be a valid Kubernetes secret type.
+        name:
+          type: string
+          description: Name of the secret resource
+      description: Secret configuration for private repository authentication
+      title: Private Repository secret configuration
+    PrivateRepoCreateRequest:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/PrivateRepoMetadata'
+          description: Metadata for the private repository (required)
+        spec:
+          $ref: '#/components/schemas/PrivateRepoSpec'
+          description: Specification for the private repository (required)
+      description: Request message for creating a new private repository configuration
+      title: Private Repository create request
+      required:
+      - metadata
+      - spec
+    HelmChartListResponse:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the chart index
+        generated:
+          type: string
+          description: Timestamp when the chart index was generated
+        repoIdentifier:
+          type: string
+          description: Identifier for the Helm chart repository
+        repoName:
+          type: string
+          description: Name of the Helm chart repository
+      description: Response containing a list of Helm charts with their metadata and versions
+      title: Helm chart list response
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
     ZsrvResponse:
       type: object
       properties:
@@ -1060,328 +1351,6 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    PrivateRepoAuthConfig:
-      type: object
-      properties:
-        secret:
-          $ref: '#/components/schemas/PrivateRepoSecretConfig'
-          description: Secret configuration for authentication
-      description: Authentication configuration for private repository access
-      title: Private Repository authentication configuration
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    PrivateRepoSecretInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the secret
-        type:
-          $ref: '#/components/schemas/SecretType'
-          description: Type of secret for authentication
-        name:
-          type: string
-          description: Name of the secret resource
-        data:
-          $ref: '#/components/schemas/SecretData'
-          description: Secret credentials data
-      description: Enhanced secret information including credentials data for private repository authentication
-      title: Private Repository secret information
-    PrivateRepoSpec:
-      type: object
-      properties:
-        repoDetails:
-          $ref: '#/components/schemas/PrivateRepoRepositoryDetails'
-          description: Repository details and configuration (required)
-        auth:
-          $ref: '#/components/schemas/PrivateRepoAuthConfig'
-          description: Authentication configuration
-      description: Complete specification for a private repository configuration
-      title: Private Repository specification
-      required:
-      - repoDetails
-    PrivateRepoMetadata:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the private repository configuration (required)
-        title:
-          type: string
-          description: Display title of the private repository configuration
-        description:
-          type: string
-          description: Description of the private repository configuration
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags associated with the private repository
-      description: Metadata information for a private repository configuration
-      title: Private Repository metadata
-      required:
-      - name
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    PrivateRepoGetByIdResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the private repository
-        metadata:
-          $ref: '#/components/schemas/PrivateRepoMetadata'
-          description: Metadata information for the private repository
-        spec:
-          $ref: '#/components/schemas/PrivateRepoSpecInfo'
-          description: Enhanced specification of the private repository
-        status:
-          $ref: '#/components/schemas/PrivateRepoStatus'
-          description: Current operational status of the private repository
-        repoIdentifier:
-          type: string
-          description: Unique identifier for the private repository
-      description: Detailed response message for private repository get by ID operation including metadata, specification, and status
-      title: Private Repository detailed response
-    HelmChartListResponse:
-      type: object
-      properties:
-        apiVersion:
-          type: string
-          description: API version of the chart index
-        generated:
-          type: string
-          description: Timestamp when the chart index was generated
-        repoIdentifier:
-          type: string
-          description: Identifier for the Helm chart repository
-        repoName:
-          type: string
-          description: Name of the Helm chart repository
-      description: Response containing a list of Helm charts with their metadata and versions
-      title: Helm chart list response
-    PrivateRepoAuthInfo:
-      type: object
-      properties:
-        secret:
-          $ref: '#/components/schemas/PrivateRepoSecretInfo'
-          description: Enhanced secret information for authentication
-      description: Enhanced authentication information including secret details for private repository access
-      title: Private Repository authentication information
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    PrivateRepoCreateRequest:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/PrivateRepoMetadata'
-          description: Metadata for the private repository (required)
-        spec:
-          $ref: '#/components/schemas/PrivateRepoSpec'
-          description: Specification for the private repository (required)
-      description: Request message for creating a new private repository configuration
-      title: Private Repository create request
-      required:
-      - metadata
-      - spec
-    PrivateRepoType:
-      type: string
-      enum:
-      - PRIVATE_REPO_TYPE_UNSPECIFIED
-      - PRIVATE_REPO_TYPE_GIT
-      - PRIVATE_REPO_TYPE_HELM_INDEX
-      default: PRIVATE_REPO_TYPE_UNSPECIFIED
-      title: Private Repository Type
-    PrivateRepoRepositoryDetails:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/PrivateRepoType'
-          description: Type of the private repository (PRIVATE_REPO_TYPE_HELM_INDEX, PRIVATE_REPO_TYPE_GIT, PRIVATE_REPO_TYPE_UNSPECIFIED). This is a required parameter
-        url:
-          type: string
-          description: Private repository URL (required)
-        branch:
-          type: string
-          description: Git branch to track
-      description: Repository configuration details for private repository
-      title: Private Repository details
-      required:
-      - type
-      - url
-    PrivateRepoListResponse:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/PrivateRepoGetByIdResponse'
-          description: List of private repositories
-        total:
-          type: integer
-          format: int32
-          description: Total number of private repositories
-      description: Response message for listing private repositories
-      title: Private Repository list response
-    PrivateRepoStatus:
-      type: object
-      properties:
-        error:
-          type: boolean
-          description: Indicates if the repository is in an error state
-        message:
-          type: string
-          description: Status message providing additional details about the repository state
-        name:
-          type: string
-          description: Name of the repository in its current state
-        transitioning:
-          type: boolean
-          description: Indicates if the repository is currently undergoing state transition
-      description: Current operational status of a private repository
-      title: Private Repository status
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
-    SecretType:
-      type: string
-      enum:
-      - SECRET_TYPE_UNSPECIFIED
-      - SECRET_TYPE_SSH
-      - SECRET_TYPE_BASIC_AUTH
-      - SECRET_TYPE_NONE
-      default: SECRET_TYPE_UNSPECIFIED
-      title: Kubernetes Secret Types
-    PrivateRepoSecretConfig:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/SecretType'
-          description: Type of the secret (SECRET_TYPE_SSH, SECRET_TYPE_BASIC_AUTH, SECRET_TYPE_UNSPECIFIED, SECRET_TYPE_NONE). This field is required and must be a valid Kubernetes secret type.
-        name:
-          type: string
-          description: Name of the secret resource
-      description: Secret configuration for private repository authentication
-      title: Private Repository secret configuration
     SecretData:
       type: object
       properties:
@@ -1399,17 +1368,6 @@ components:
           description: Base64 encoded SSH private key for SSH authentication, Required if Secret type is SECRET_TYPE_SSH
       description: Raw data for Kubernetes secrets including encoded credentials and SSH keys
       title: Kubernetes secret data
-    PrivateRepoSpecInfo:
-      type: object
-      properties:
-        repoDetails:
-          $ref: '#/components/schemas/PrivateRepoRepositoryDetails'
-          description: Repository details and configuration
-        auth:
-          $ref: '#/components/schemas/PrivateRepoAuthInfo'
-          description: Enhanced authentication configuration
-      description: Enhanced specification information for a private repository configuration
-      title: Private Repository specification information
     ZcOpsStatus:
       type: string
       enum:
@@ -1420,6 +1378,48 @@ components:
       default: OPS_STATUS_UNSPECIFIED
       description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
       title: ZedCloud internal operation status
+    PrivateRepoSpec:
+      type: object
+      properties:
+        repoDetails:
+          $ref: '#/components/schemas/PrivateRepoRepositoryDetails'
+          description: Repository details and configuration (required)
+        auth:
+          $ref: '#/components/schemas/PrivateRepoAuthConfig'
+          description: Authentication configuration
+      description: Complete specification for a private repository configuration
+      title: Private Repository specification
+      required:
+      - repoDetails
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    SecretType:
+      type: string
+      enum:
+      - SECRET_TYPE_UNSPECIFIED
+      - SECRET_TYPE_SSH
+      - SECRET_TYPE_BASIC_AUTH
+      - SECRET_TYPE_NONE
+      default: SECRET_TYPE_UNSPECIFIED
+      title: Kubernetes Secret Types
+    PrivateRepoType:
+      type: string
+      enum:
+      - PRIVATE_REPO_TYPE_UNSPECIFIED
+      - PRIVATE_REPO_TYPE_GIT
+      - PRIVATE_REPO_TYPE_HELM_INDEX
+      default: PRIVATE_REPO_TYPE_UNSPECIFIED
+      title: Private Repository Type
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -507,67 +507,50 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
 components:
   schemas:
-    ZsrvResponse:
+    ObjectRevision:
       type: object
       properties:
-        operationType:
-          $ref: '#/components/schemas/ZcOpsType'
-          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
-        operationStatus:
-          $ref: '#/components/schemas/ZcOpsStatus'
-          title: if this is log running job
-        objectKind:
+        prev:
           type: string
-          title: zedcloud object kind on which the operation was performed
-        objectId:
+          description: Previous
+        curr:
           type: string
-          title: Unique value identifies the object that was operated on
-        objectName:
+          description: Current Database version of the record
+        createdAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was created.
+        createdBy:
           type: string
-          title: name of the object
-        objectRevision:
+          description: 'User data: Created By'
+        updatedAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was last updated.
+        updatedBy:
           type: string
-          title: 'object revision post the operation, note Read operation
-
-            doesn''t change the revision'
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-        operationTime:
+          description: 'User data: Updated By'
+      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+      title: ObjectRevision is used to store the user information.
+      required:
+      - curr
+      - createdAt
+      - createdBy
+      - updatedAt
+      - updatedBy
+    VolInstShortConfig:
+      type: object
+      properties:
+        id:
           type: string
-          title: time of operation
-        startTime:
+        name:
           type: string
-          title: total time taken by operations
-        endTime:
+        type:
+          $ref: '#/components/schemas/VolumeInstanceType'
+        deviceId:
           type: string
-        user:
+        projectId:
           type: string
-          title: the operation is performed on behalf of this user
-        httpStatusCode:
-          type: integer
-          format: int32
-          title: http response
-        httpStatusMsg:
-          type: string
-          title: summary of the error in text format
-        jobId:
-          type: string
-          title: for tracking asynchronous tasks
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZsrvError'
-          title: 'one or more errors will be set if the operation failed
-
-            i.e. httpStatusCode != 2xx'
-    VolumeInstanceAccessMode:
-      type: string
-      enum:
-      - VOLUME_INSTANCE_ACCESS_MODE_INVALID
-      - VOLUME_INSTANCE_ACCESS_MODE_READWRITE
-      - VOLUME_INSTANCE_ACCESS_MODE_READONLY
-      - VOLUME_INSTANCE_ACCESS_MODE_MULTIREAD_SINGLEWRITE
-      default: VOLUME_INSTANCE_ACCESS_MODE_INVALID
     ZsrvErrorCode:
       type: string
       enum:
@@ -606,107 +589,6 @@ components:
       default: zMsgErrorNone
       description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
       title: ZedCould internal error code
-    Summary:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    VolumeInstanceType:
-      type: string
-      enum:
-      - VOLUME_INSTANCE_TYPE_UNSPECIFIED
-      - VOLUME_INSTANCE_TYPE_EMPTYDIR
-      - VOLUME_INSTANCE_TYPE_BLOCKSTORAGE
-      - VOLUME_INSTANCE_TYPE_HOSTFS
-      - VOLUME_INSTANCE_TYPE_TMPFS
-      - VOLUME_INSTANCE_TYPE_SECRET
-      - VOLUME_INSTANCE_TYPE_NFS
-      - VOLUME_INSTANCE_TYPE_AWS_BLOCK_STORAGE
-      - VOLUME_INSTANCE_TYPE_CONTENT_TREE
-      default: VOLUME_INSTANCE_TYPE_UNSPECIFIED
-      title: VolumeInstanceType - On update, please update VolumeInstanceType_HttpRequest as well
-    VolInstShortConfig:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/VolumeInstanceType'
-        deviceId:
-          type: string
-        projectId:
-          type: string
     Cursor:
       type: object
       properties:
@@ -732,27 +614,25 @@ components:
           description: Total number of pages to be fetched.
       description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
       title: Cursor is used as filter in list operation.
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    ZedCloudOpsCmd:
-      type: object
-      properties:
-        counter:
-          type: number
-          format: int64
-          description: counter
-        opsTime:
-          type: object
-          format: date-time
-          description: 'Timestamp: Operational time'
-      description: Zed cloud Operation command
-      title: Zed cloud Operation command
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    VolumeInstanceAccessMode:
+      type: string
+      enum:
+      - VOLUME_INSTANCE_ACCESS_MODE_INVALID
+      - VOLUME_INSTANCE_ACCESS_MODE_READWRITE
+      - VOLUME_INSTANCE_ACCESS_MODE_READONLY
+      - VOLUME_INSTANCE_ACCESS_MODE_MULTIREAD_SINGLEWRITE
+      default: VOLUME_INSTANCE_ACCESS_MODE_INVALID
     VolInstList:
       type: object
       properties:
@@ -768,6 +648,14 @@ components:
           $ref: '#/components/schemas/Summary'
         next:
           $ref: '#/components/schemas/Cursor'
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
     VolInstConfigUpdate_HttpRequest:
       type: object
       properties:
@@ -851,18 +739,65 @@ components:
           $ref: '#/components/schemas/VolInstEdgeNodeCluster'
           description: edge node cluster associated with the volume instance
       title: VolInstConfigUpdate_HttpRequest - Only for swagger documentation
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    VolumeInstanceType:
+      type: string
+      enum:
+      - VOLUME_INSTANCE_TYPE_UNSPECIFIED
+      - VOLUME_INSTANCE_TYPE_EMPTYDIR
+      - VOLUME_INSTANCE_TYPE_BLOCKSTORAGE
+      - VOLUME_INSTANCE_TYPE_HOSTFS
+      - VOLUME_INSTANCE_TYPE_TMPFS
+      - VOLUME_INSTANCE_TYPE_SECRET
+      - VOLUME_INSTANCE_TYPE_NFS
+      - VOLUME_INSTANCE_TYPE_AWS_BLOCK_STORAGE
+      - VOLUME_INSTANCE_TYPE_CONTENT_TREE
+      default: VOLUME_INSTANCE_TYPE_UNSPECIFIED
+      title: VolumeInstanceType - On update, please update VolumeInstanceType_HttpRequest as well
     ZsrvError:
       type: object
       properties:
@@ -877,46 +812,77 @@ components:
         details:
           type: string
           title: Field captures string description of details
-    ObjectRevision:
+    ZsrvResponse:
       type: object
       properties:
-        prev:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
           type: string
-          description: Previous
-        curr:
+          title: zedcloud object kind on which the operation was performed
+        objectId:
           type: string
-          description: Current Database version of the record
-        createdAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was created.
-        createdBy:
+          title: Unique value identifies the object that was operated on
+        objectName:
           type: string
-          description: 'User data: Created By'
-        updatedAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was last updated.
-        updatedBy:
+          title: name of the object
+        objectRevision:
           type: string
-          description: 'User data: Updated By'
-      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
-      title: ObjectRevision is used to store the user information.
-      required:
-      - curr
-      - createdAt
-      - createdBy
-      - updatedAt
-      - updatedBy
-    VolInstEdgeNodeCluster:
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
+    Summary:
       type: object
       properties:
-        id:
+        description:
           type: string
-          description: edge node cluster ID
-        designatedNodeID:
-          type: string
-          description: designated node ID
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
     VolInstConfig:
       type: object
       properties:
@@ -1001,6 +967,19 @@ components:
           $ref: '#/components/schemas/VolInstEdgeNodeCluster'
           description: edge node cluster associated with the volume instance
       title: VolInstConfig - On update, please update VolInstConfigUpdate_HttpRequest as well
+    ZedCloudOpsCmd:
+      type: object
+      properties:
+        counter:
+          type: number
+          format: int64
+          description: counter
+        opsTime:
+          type: object
+          format: date-time
+          description: 'Timestamp: Operational time'
+      description: Zed cloud Operation command
+      title: Zed cloud Operation command
     ZcOpsStatus:
       type: string
       enum:
@@ -1011,6 +990,27 @@ components:
       default: OPS_STATUS_UNSPECIFIED
       description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
       title: ZedCloud internal operation status
+    VolInstEdgeNodeCluster:
+      type: object
+      properties:
+        id:
+          type: string
+          description: edge node cluster ID
+        designatedNodeID:
+          type: string
+          description: designated node ID
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
   securitySchemes:
     BearerToken:
       type: apiKey

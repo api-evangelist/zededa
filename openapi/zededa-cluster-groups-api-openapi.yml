@@ -777,59 +777,6 @@ paths:
           type: string
 components:
   schemas:
-    ZsrvResponse:
-      type: object
-      properties:
-        operationType:
-          $ref: '#/components/schemas/ZcOpsType'
-          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
-        operationStatus:
-          $ref: '#/components/schemas/ZcOpsStatus'
-          title: if this is log running job
-        objectKind:
-          type: string
-          title: zedcloud object kind on which the operation was performed
-        objectId:
-          type: string
-          title: Unique value identifies the object that was operated on
-        objectName:
-          type: string
-          title: name of the object
-        objectRevision:
-          type: string
-          title: 'object revision post the operation, note Read operation
-
-            doesn''t change the revision'
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-        operationTime:
-          type: string
-          title: time of operation
-        startTime:
-          type: string
-          title: total time taken by operations
-        endTime:
-          type: string
-        user:
-          type: string
-          title: the operation is performed on behalf of this user
-        httpStatusCode:
-          type: integer
-          format: int32
-          title: http response
-        httpStatusMsg:
-          type: string
-          title: summary of the error in text format
-        jobId:
-          type: string
-          title: for tracking asynchronous tasks
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZsrvError'
-          title: 'one or more errors will be set if the operation failed
-
-            i.e. httpStatusCode != 2xx'
     ZsrvErrorCode:
       type: string
       enum:
@@ -868,6 +815,275 @@ components:
       default: zMsgErrorNone
       description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
       title: ZedCould internal error code
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    RunState:
+      type: string
+      enum:
+      - RUN_STATE_UNSPECIFIED
+      - RUN_STATE_ONLINE
+      - RUN_STATE_HALTED
+      - RUN_STATE_INIT
+      - RUN_STATE_REBOOTING
+      - RUN_STATE_OFFLINE
+      - RUN_STATE_UNKNOWN
+      - RUN_STATE_UNPROVISIONED
+      - RUN_STATE_PROVISIONED
+      - RUN_STATE_SUSPECT
+      - RUN_STATE_DOWNLOADING
+      - RUN_STATE_RESTARTING
+      - RUN_STATE_PURGING
+      - RUN_STATE_HALTING
+      - RUN_STATE_ERROR
+      - RUN_STATE_VERIFYING
+      - RUN_STATE_LOADING
+      - RUN_STATE_CREATING_VOLUME
+      - RUN_STATE_BOOTING
+      - RUN_STATE_MAINTENANCE_MODE
+      - RUN_STATE_START_DELAYED
+      - RUN_STATE_BASEOS_UPDATING
+      - RUN_STATE_PREPARING_POWEROFF
+      - RUN_STATE_POWERING_OFF
+      - RUN_STATE_PREPARED_POWEROFF
+      default: RUN_STATE_UNSPECIFIED
+      description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
+      title: RunState - On update, please update RunState_HttpRequest as well
+    ClusterGroupCluster:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the cluster in the cluster group
+        state:
+          type: string
+          $ref: '#/components/schemas/RunState'
+          description: State of the cluster in the cluster group
+        bundleReady:
+          type: string
+          description: Bundle readiness of the cluster in the cluster group
+        reposReady:
+          type: string
+          description: Repository readiness of the cluster in the cluster group
+        resources:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster in the cluster group
+        lastSeen:
+          type: string
+          format: date-time
+          description: Last seen timestamp of the cluster in the cluster group
+        age:
+          type: string
+          format: date-time
+          description: Age of the cluster in the cluster group
+    ClusterGroup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the cluster group
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        projectId:
+          type: string
+          description: Foreign key to the project
+          pattern: '[0-9A-Za-z-]+'
+        name:
+          type: string
+          description: User defined name of the cluster group, unique across the enterprise. Once cluster group is created, name can’t be changed
+        title:
+          type: string
+          description: User defined title of the cluster group. Title can be changed at any time
+        description:
+          type: string
+          description: Detailed description of the cluster group
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        manifest:
+          type: object
+          $ref: '#/components/schemas/ClusterGroupManifest'
+          description: The cluster group manifest
+      description: Cluster Group details
+      title: Cluster Group details
+      required:
+      - projectId
+      - name
+    ClusterGroupStatusListResp:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClusterGroupStatus'
+          description: Detailed statuses of the cluster groups
+        result:
+          $ref: '#/components/schemas/ZsrvResponse'
+          description: Response result
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of cluster groups satisfying the filter criteria
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Cursor for pagination
+    ClusterGroupManifest:
+      type: object
+      properties:
+        yamlContent:
+          type: string
+          description: The content of an yaml manifest
+      description: Cluster Group Manifest details
+      title: Cluster Group Manifest details
+      required:
+      - yamlContent
+    ClusterGroupResources:
+      type: object
+      properties:
+        amount:
+          type: integer
+          format: int64
+          description: Total resources of clusters in the cluster group
+        summary:
+          $ref: '#/components/schemas/ClusterGroupResourceSummary'
+          description: Summary of the resources in the cluster group
+    ClusterGroupResourceSummary:
+      type: object
+      properties:
+        missing:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are missing
+        modified:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are modified
+        notReady:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are not ready
+        orphaned:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are orphaned
+        ready:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are ready
+        unknown:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are in unknown state
+        waitApplied:
+          type: integer
+          format: int64
+          description: Number of resources in the cluster group that are waiting for applied state
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
     ClusterGroupStatus:
       type: object
       properties:
@@ -926,62 +1142,65 @@ components:
           additionalProperties:
             type: string
           description: Cluster tags are name/value pairs that enable you to categorize clusters
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
+    ClusterGroupManifestJaml:
+      type: object
+      properties:
+        yamlContent:
+          type: string
+          description: The content of an jaml manifest
+    ZsrvResponse:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
+          type: string
+          title: zedcloud object kind on which the operation was performed
+        objectId:
+          type: string
+          title: Unique value identifies the object that was operated on
+        objectName:
+          type: string
+          title: name of the object
+        objectRevision:
+          type: string
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
     ClusterReadiness:
       type: object
       properties:
@@ -993,174 +1212,22 @@ components:
           type: integer
           format: int64
           description: Number of clusters in the cluster group that are ready
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
-    ClusterGroupResources:
-      type: object
-      properties:
-        amount:
-          type: integer
-          format: int64
-          description: Total resources of clusters in the cluster group
-        summary:
-          $ref: '#/components/schemas/ClusterGroupResourceSummary'
-          description: Summary of the resources in the cluster group
-    ClusterGroupCluster:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the cluster in the cluster group
-        state:
-          type: string
-          $ref: '#/components/schemas/RunState'
-          description: State of the cluster in the cluster group
-        bundleReady:
-          type: string
-          description: Bundle readiness of the cluster in the cluster group
-        reposReady:
-          type: string
-          description: Repository readiness of the cluster in the cluster group
-        resources:
-          type: integer
-          format: int64
-          description: Number of resources in the cluster in the cluster group
-        lastSeen:
-          type: string
-          format: date-time
-          description: Last seen timestamp of the cluster in the cluster group
-        age:
-          type: string
-          format: date-time
-          description: Age of the cluster in the cluster group
-    ClusterGroupManifest:
-      type: object
-      properties:
-        yamlContent:
-          type: string
-          description: The content of an yaml manifest
-      description: Cluster Group Manifest details
-      title: Cluster Group Manifest details
-      required:
-      - yamlContent
-    ClusterGroup:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the cluster group
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        projectId:
-          type: string
-          description: Foreign key to the project
-          pattern: '[0-9A-Za-z-]+'
-        name:
-          type: string
-          description: User defined name of the cluster group, unique across the enterprise. Once cluster group is created, name can’t be changed
-        title:
-          type: string
-          description: User defined title of the cluster group. Title can be changed at any time
-        description:
-          type: string
-          description: Detailed description of the cluster group
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-        manifest:
-          type: object
-          $ref: '#/components/schemas/ClusterGroupManifest'
-          description: The cluster group manifest
-      description: Cluster Group details
-      title: Cluster Group details
-      required:
-      - projectId
-      - name
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    ClusterGroupStatusListResp:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClusterGroupStatus'
-          description: Detailed statuses of the cluster groups
-        result:
-          $ref: '#/components/schemas/ZsrvResponse'
-          description: Response result
-        totalCount:
-          type: integer
-          format: int64
-          description: Total number of cluster groups satisfying the filter criteria
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Cursor for pagination
-    RunState:
+    ZcOpsStatus:
       type: string
       enum:
-      - RUN_STATE_UNSPECIFIED
-      - RUN_STATE_ONLINE
-      - RUN_STATE_HALTED
-      - RUN_STATE_INIT
-      - RUN_STATE_REBOOTING
-      - RUN_STATE_OFFLINE
-      - RUN_STATE_UNKNOWN
-      - RUN_STATE_UNPROVISIONED
-      - RUN_STATE_PROVISIONED
-      - RUN_STATE_SUSPECT
-      - RUN_STATE_DOWNLOADING
-      - RUN_STATE_RESTARTING
-      - RUN_STATE_PURGING
-      - RUN_STATE_HALTING
-      - RUN_STATE_ERROR
-      - RUN_STATE_VERIFYING
-      - RUN_STATE_LOADING
-      - RUN_STATE_CREATING_VOLUME
-      - RUN_STATE_BOOTING
-      - RUN_STATE_MAINTENANCE_MODE
-      - RUN_STATE_START_DELAYED
-      - RUN_STATE_BASEOS_UPDATING
-      - RUN_STATE_PREPARING_POWEROFF
-      - RUN_STATE_POWERING_OFF
-      - RUN_STATE_PREPARED_POWEROFF
-      default: RUN_STATE_UNSPECIFIED
-      description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
-      title: RunState - On update, please update RunState_HttpRequest as well
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+    ClusterGroupManifestOutput:
+      type: object
+      properties:
+        manifest:
+          $ref: '#/components/schemas/ClusterGroupManifestJaml'
+          description: The cluster group manifest in jaml format
     googlerpcStatus:
       type: object
       properties:
@@ -1173,73 +1240,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/protobufAny'
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
-    ClusterGroupResourceSummary:
-      type: object
-      properties:
-        missing:
-          type: integer
-          format: int64
-          description: Number of resources in the cluster group that are missing
-        modified:
-          type: integer
-          format: int64
-          description: Number of resources in the cluster group that are modified
-        notReady:
-          type: integer
-          format: int64
-          description: Number of resources in the cluster group that are not ready
-        orphaned:
-          type: integer
-          format: int64
-          description: Number of resources in the cluster group that are orphaned
-        ready:
-          type: integer
-          format: int64
-          description: Number of resources in the cluster group that are ready
-        unknown:
-          type: integer
-          format: int64
-          description: Number of resources in the cluster group that are in unknown state
-        waitApplied:
-          type: integer
-          format: int64
-          description: Number of resources in the cluster group that are waiting for applied state
-    ClusterGroupManifestOutput:
-      type: object
-      properties:
-        manifest:
-          $ref: '#/components/schemas/ClusterGroupManifestJaml'
-          description: The cluster group manifest in jaml format
-    ClusterGroupManifestJaml:
-      type: object
-      properties:
-        yamlContent:
-          type: string
-          description: The content of an jaml manifest
-    ZcOpsStatus:
-      type: string
-      enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

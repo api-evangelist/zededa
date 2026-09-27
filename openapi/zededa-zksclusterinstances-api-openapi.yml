@@ -2566,65 +2566,37 @@ paths:
           type: string
 components:
   schemas:
-    ZksInstanceStatusSummaries:
+    ZksInstanceK3sBulkUpgradeData:
       type: object
       properties:
-        statuses:
-          $ref: '#/components/schemas/ZksInstanceStatusSummary'
-          description: Summary of the zks instance status
-    ZsrvResponse:
+        version:
+          type: string
+          description: K3s version to upgrade to
+    BaseOSImage:
       type: object
       properties:
-        operationType:
-          $ref: '#/components/schemas/ZcOpsType'
-          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
-        operationStatus:
-          $ref: '#/components/schemas/ZcOpsStatus'
-          title: if this is log running job
-        objectKind:
+        uuid:
           type: string
-          title: zedcloud object kind on which the operation was performed
-        objectId:
+          description: system generated unique id for an image
+        version:
           type: string
-          title: Unique value identifies the object that was operated on
-        objectName:
+          description: image version
+        imageName:
           type: string
-          title: name of the object
-        objectRevision:
+          description: image name
+        activate:
+          type: boolean
+          description: activation flag
+        imvolId:
           type: string
-          title: 'object revision post the operation, note Read operation
-
-            doesn''t change the revision'
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-        operationTime:
-          type: string
-          title: time of operation
-        startTime:
-          type: string
-          title: total time taken by operations
-        endTime:
-          type: string
-        user:
-          type: string
-          title: the operation is performed on behalf of this user
-        httpStatusCode:
-          type: integer
-          format: int32
-          title: http response
-        httpStatusMsg:
-          type: string
-          title: summary of the error in text format
-        jobId:
-          type: string
-          title: for tracking asynchronous tasks
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZsrvError'
-          title: 'one or more errors will be set if the operation failed
-
-            i.e. httpStatusCode != 2xx'
+          description: immutable Volume for this base image
+      description: Base OS image request details
+      title: Base OS image payload detail
+      required:
+      - uuid
+      - version
+      - imageName
+      - activate
     ZsrvErrorCode:
       type: string
       enum:
@@ -2663,154 +2635,6 @@ components:
       default: zMsgErrorNone
       description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
       title: ZedCould internal error code
-    ClusterCapacity:
-      type: object
-      properties:
-        pods:
-          $ref: '#/components/schemas/PodsCapacity'
-          description: Pods capacity of the cluster
-        cpus:
-          $ref: '#/components/schemas/ResourceCapacityUsage'
-          description: CPU capacity of the cluster
-        memory:
-          $ref: '#/components/schemas/ResourceCapacityUsage'
-          description: Memory capacity of the cluster
-      title: ClusterCapacity represents the overall capacity of a cluster
-    ZksInstance:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the zks instance
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        projectId:
-          type: string
-          description: Foreign key to the project
-          pattern: '[0-9A-Za-z-]+'
-        name:
-          type: string
-          description: User defined name of the zks instance, unique across the enterprise. Once zks instance is created, name can’t be changed
-        title:
-          type: string
-          description: User defined title of the zks instance. Title can be changed at any time
-        description:
-          type: string
-          description: Detailed description of the zks instance
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZksInstanceNode'
-          description: A list of nodes in the zks instance
-        isImported:
-          type: boolean
-          description: Indicates if the ZKS instance is imported from an external source
-        clusterPrefix:
-          type: string
-          description: Cluster prefix for the ZKS instance
-      description: ZKS Instance details
-      title: ZKS Instance details
-      required:
-      - projectId
-      - name
-      - nodes
-    BaseOSImage:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: system generated unique id for an image
-        version:
-          type: string
-          description: image version
-        imageName:
-          type: string
-          description: image name
-        activate:
-          type: boolean
-          description: activation flag
-        imvolId:
-          type: string
-          description: immutable Volume for this base image
-      description: Base OS image request details
-      title: Base OS image payload detail
-      required:
-      - uuid
-      - version
-      - imageName
-      - activate
-    NodeAction:
-      type: string
-      enum:
-      - NODE_ACTION_UNSPECIFIED
-      - NODE_ACTION_ADD_NODES
-      - NODE_ACTION_REMOVE_NODES
-      default: NODE_ACTION_UNSPECIFIED
-      title: NodeAction enum for node operations
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
     Cursor:
       type: object
       properties:
@@ -2836,171 +2660,6 @@ components:
           description: Total number of pages to be fetched.
       description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
       title: Cursor is used as filter in list operation.
-    ZksInstanceStatusSummary:
-      type: object
-      properties:
-        online:
-          type: integer
-          format: int32
-          description: Number of online nodes in the zks instance
-        init:
-          type: integer
-          format: int32
-          description: Number of nodes in init state in the zks instance
-        suspect:
-          type: integer
-          format: int32
-          description: Number of suspect nodes in the zks instance
-        error:
-          type: integer
-          format: int32
-          description: Number of error nodes in the zks instance
-        unspecified:
-          type: integer
-          format: int32
-          description: Number of nodes in unspecified state in the zks instance
-        unknown:
-          type: integer
-          format: int32
-          description: Number of nodes in unknown state in the zks instance
-        offline:
-          type: integer
-          format: int32
-          description: Number of offline nodes in the zks instance
-        pending:
-          type: integer
-          format: int32
-          description: Number of pending nodes in the zks instance
-    ZksK3sVersionList:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZksK3sVersion'
-          description: List of available K3s versions
-    ZksInstanceSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the zks instance
-        projectId:
-          type: string
-          description: Foreign key to the project
-        name:
-          type: string
-          description: User defined name of the zks instance, unique across the enterprise. Once zks instance is created, name can’t be changed
-        title:
-          type: string
-          description: User defined title of the zks instance. Title can be changed at any time
-        description:
-          type: string
-          description: Detailed description of the zks instance
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources.
-        nOfNodes:
-          type: integer
-          format: int32
-          description: Number of nodes in the zks instance
-      title: ZksInstanceSummary is used for listing ZKS instances
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    RunState:
-      type: string
-      enum:
-      - RUN_STATE_UNSPECIFIED
-      - RUN_STATE_ONLINE
-      - RUN_STATE_HALTED
-      - RUN_STATE_INIT
-      - RUN_STATE_REBOOTING
-      - RUN_STATE_OFFLINE
-      - RUN_STATE_UNKNOWN
-      - RUN_STATE_UNPROVISIONED
-      - RUN_STATE_PROVISIONED
-      - RUN_STATE_SUSPECT
-      - RUN_STATE_DOWNLOADING
-      - RUN_STATE_RESTARTING
-      - RUN_STATE_PURGING
-      - RUN_STATE_HALTING
-      - RUN_STATE_ERROR
-      - RUN_STATE_VERIFYING
-      - RUN_STATE_LOADING
-      - RUN_STATE_CREATING_VOLUME
-      - RUN_STATE_BOOTING
-      - RUN_STATE_MAINTENANCE_MODE
-      - RUN_STATE_START_DELAYED
-      - RUN_STATE_BASEOS_UPDATING
-      - RUN_STATE_PREPARING_POWEROFF
-      - RUN_STATE_POWERING_OFF
-      - RUN_STATE_PREPARED_POWEROFF
-      default: RUN_STATE_UNSPECIFIED
-      description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
-      title: RunState - On update, please update RunState_HttpRequest as well
-    ZksInstanceStatusListResp:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZksInstanceStatus'
-          description: Detailed statuses of the zks instances
-        result:
-          $ref: '#/components/schemas/ZsrvResponse'
-          description: Response result
-        summaries:
-          $ref: '#/components/schemas/ZksInstanceStatusSummaries'
-          description: Summaries of the ZKS instance statuses
-        totalCount:
-          type: integer
-          format: int64
-          description: Total count of zks instances matching the filter
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Cursor for pagination
-    ZksInstanceNode:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the node
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        clusterInterface:
-          type: string
-          description: Cluster interface of the node
-      description: ZKS Instance node detail
-      title: ZKS Instance node detail
-      required:
-      - id
-      - clusterInterface
-    ZksInstanceK3sBulkUpgradeData:
-      type: object
-      properties:
-        version:
-          type: string
-          description: K3s version to upgrade to
-    ZksInstanceBulkUpdate:
-      type: object
-      properties:
-        ids:
-          type: array
-          items:
-            type: string
-          description: List of ZKS instance IDs to be updated
-        data:
-          $ref: '#/components/schemas/ZksInstanceBulkUpdateData'
-          description: Data for bulk update
     ResourceUsage:
       type: object
       properties:
@@ -3013,69 +2672,6 @@ components:
           format: double
           description: Total resource usage
       title: ResourceUsage represents usage metrics for a resource
-    ResourceCapacityUsage:
-      type: object
-      properties:
-        reserved:
-          $ref: '#/components/schemas/ResourceUsage'
-          description: Reserved resource usage
-        used:
-          $ref: '#/components/schemas/ResourceUsage'
-          description: Used resource usage
-      title: ResourceCapacityUsage represents capacity with reserved and used values
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    ZksInstanceRegistrationCommands:
-      type: object
-      properties:
-        command:
-          type: string
-          description: Command to register a node with the ZKS instance
-        insecureCommand:
-          type: string
-          description: Insecure command to register a node with the ZKS instance
-        nodeCommand:
-          type: string
-          description: Node command to register a node with the ZKS instance
-        windowsNodeCommand:
-          type: string
-          description: Windows node command to register a node with the ZKS instance
-    ZksK3sVersion:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the K3s version
-        version:
-          type: string
-          description: K3s version string
-        type:
-          type: string
-          description: Type of the K3s version (e.g., release, beta)
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
     ZksInstanceBulkUpdateData:
       type: object
       properties:
@@ -3084,66 +2680,19 @@ components:
           additionalProperties:
             type: string
           description: New tags for the ZKS instance
-    ZksInstanceK3sBulkUpgrade:
+    ClusterCapacity:
       type: object
       properties:
-        ids:
-          type: array
-          items:
-            type: string
-          description: List of ZKS instance IDs to be upgraded
-        data:
-          $ref: '#/components/schemas/ZksInstanceK3sBulkUpgradeData'
-          description: Data for bulk upgrade
-    ZksInstanceMetrics:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ZKS instance ID for which metrics are provided
-        name:
-          type: string
-          description: ZKS instance name for which metrics are provided
-        provider:
-          type: string
-          description: Provider of the zks instance
-        kubeVersion:
-          type: string
-          description: Kubernetes version of the zks instance
-        architecture:
-          type: string
-          description: Architecture of the zks instance
-        created:
-          type: string
-          format: date-time
-          description: Creation time of the zks instance
-        totalResources:
-          type: integer
-          format: int32
-          description: Total resources in the zks instance
-        nOfNodes:
-          type: integer
-          format: int32
-          description: Number of nodes in the zks instance
-        deployments:
-          type: integer
-          format: int32
-          description: Number of deployments in the zks instance
-        capacity:
-          $ref: '#/components/schemas/ClusterCapacity'
-          description: Capacity information of the zks instance
-    PodsCapacity:
-      type: object
-      properties:
-        used:
-          type: integer
-          format: int32
-          description: Used pods capacity
-        total:
-          type: integer
-          format: int32
-          description: Total pods capacity
-      title: ResourceCapacity represents capacity info for pods
+        pods:
+          $ref: '#/components/schemas/PodsCapacity'
+          description: Pods capacity of the cluster
+        cpus:
+          $ref: '#/components/schemas/ResourceCapacityUsage'
+          description: CPU capacity of the cluster
+        memory:
+          $ref: '#/components/schemas/ResourceCapacityUsage'
+          description: Memory capacity of the cluster
+      title: ClusterCapacity represents the overall capacity of a cluster
     ZksInstanceRegistrationInfo:
       type: object
       properties:
@@ -3156,28 +2705,29 @@ components:
         commands:
           $ref: '#/components/schemas/ZksInstanceRegistrationCommands'
           description: Registration commands for the ZKS instance
-    ZksInstancesList:
+    PodsCapacity:
       type: object
       properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZksInstanceSummary'
-          description: List of ZKS instances
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: next cursor
-      title: ZksInstancesList is the response for listing ZKS instances
-    ZcOpsStatus:
+        used:
+          type: integer
+          format: int32
+          description: Used pods capacity
+        total:
+          type: integer
+          format: int32
+          description: Total pods capacity
+      title: ResourceCapacity represents capacity info for pods
+    ZcOpsType:
       type: string
       enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
     ZksInstanceStatus:
       type: object
       properties:
@@ -3255,6 +2805,456 @@ components:
           type: string
           description: Cluster prefix for the ZKS instance
       title: ZksClusterStatus represents detailed status information for a cluster
+    ZksK3sVersion:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the K3s version
+        version:
+          type: string
+          description: K3s version string
+        type:
+          type: string
+          description: Type of the K3s version (e.g., release, beta)
+    ZksInstanceNode:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the node
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        clusterInterface:
+          type: string
+          description: Cluster interface of the node
+      description: ZKS Instance node detail
+      title: ZKS Instance node detail
+      required:
+      - id
+      - clusterInterface
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    NodeAction:
+      type: string
+      enum:
+      - NODE_ACTION_UNSPECIFIED
+      - NODE_ACTION_ADD_NODES
+      - NODE_ACTION_REMOVE_NODES
+      default: NODE_ACTION_UNSPECIFIED
+      title: NodeAction enum for node operations
+    ZksInstanceBulkUpdate:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+          description: List of ZKS instance IDs to be updated
+        data:
+          $ref: '#/components/schemas/ZksInstanceBulkUpdateData'
+          description: Data for bulk update
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    RunState:
+      type: string
+      enum:
+      - RUN_STATE_UNSPECIFIED
+      - RUN_STATE_ONLINE
+      - RUN_STATE_HALTED
+      - RUN_STATE_INIT
+      - RUN_STATE_REBOOTING
+      - RUN_STATE_OFFLINE
+      - RUN_STATE_UNKNOWN
+      - RUN_STATE_UNPROVISIONED
+      - RUN_STATE_PROVISIONED
+      - RUN_STATE_SUSPECT
+      - RUN_STATE_DOWNLOADING
+      - RUN_STATE_RESTARTING
+      - RUN_STATE_PURGING
+      - RUN_STATE_HALTING
+      - RUN_STATE_ERROR
+      - RUN_STATE_VERIFYING
+      - RUN_STATE_LOADING
+      - RUN_STATE_CREATING_VOLUME
+      - RUN_STATE_BOOTING
+      - RUN_STATE_MAINTENANCE_MODE
+      - RUN_STATE_START_DELAYED
+      - RUN_STATE_BASEOS_UPDATING
+      - RUN_STATE_PREPARING_POWEROFF
+      - RUN_STATE_POWERING_OFF
+      - RUN_STATE_PREPARED_POWEROFF
+      default: RUN_STATE_UNSPECIFIED
+      description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
+      title: RunState - On update, please update RunState_HttpRequest as well
+    ZksInstanceRegistrationCommands:
+      type: object
+      properties:
+        command:
+          type: string
+          description: Command to register a node with the ZKS instance
+        insecureCommand:
+          type: string
+          description: Insecure command to register a node with the ZKS instance
+        nodeCommand:
+          type: string
+          description: Node command to register a node with the ZKS instance
+        windowsNodeCommand:
+          type: string
+          description: Windows node command to register a node with the ZKS instance
+    ZksInstanceSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the zks instance
+        projectId:
+          type: string
+          description: Foreign key to the project
+        name:
+          type: string
+          description: User defined name of the zks instance, unique across the enterprise. Once zks instance is created, name can’t be changed
+        title:
+          type: string
+          description: User defined title of the zks instance. Title can be changed at any time
+        description:
+          type: string
+          description: Detailed description of the zks instance
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources.
+        nOfNodes:
+          type: integer
+          format: int32
+          description: Number of nodes in the zks instance
+      title: ZksInstanceSummary is used for listing ZKS instances
+    ZksInstanceMetrics:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ZKS instance ID for which metrics are provided
+        name:
+          type: string
+          description: ZKS instance name for which metrics are provided
+        provider:
+          type: string
+          description: Provider of the zks instance
+        kubeVersion:
+          type: string
+          description: Kubernetes version of the zks instance
+        architecture:
+          type: string
+          description: Architecture of the zks instance
+        created:
+          type: string
+          format: date-time
+          description: Creation time of the zks instance
+        totalResources:
+          type: integer
+          format: int32
+          description: Total resources in the zks instance
+        nOfNodes:
+          type: integer
+          format: int32
+          description: Number of nodes in the zks instance
+        deployments:
+          type: integer
+          format: int32
+          description: Number of deployments in the zks instance
+        capacity:
+          $ref: '#/components/schemas/ClusterCapacity'
+          description: Capacity information of the zks instance
+    ZksInstanceStatusListResp:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZksInstanceStatus'
+          description: Detailed statuses of the zks instances
+        result:
+          $ref: '#/components/schemas/ZsrvResponse'
+          description: Response result
+        summaries:
+          $ref: '#/components/schemas/ZksInstanceStatusSummaries'
+          description: Summaries of the ZKS instance statuses
+        totalCount:
+          type: integer
+          format: int64
+          description: Total count of zks instances matching the filter
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Cursor for pagination
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    ZksInstanceK3sBulkUpgrade:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+          description: List of ZKS instance IDs to be upgraded
+        data:
+          $ref: '#/components/schemas/ZksInstanceK3sBulkUpgradeData'
+          description: Data for bulk upgrade
+    ZsrvResponse:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
+          type: string
+          title: zedcloud object kind on which the operation was performed
+        objectId:
+          type: string
+          title: Unique value identifies the object that was operated on
+        objectName:
+          type: string
+          title: name of the object
+        objectRevision:
+          type: string
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
+    ZksK3sVersionList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZksK3sVersion'
+          description: List of available K3s versions
+    ResourceCapacityUsage:
+      type: object
+      properties:
+        reserved:
+          $ref: '#/components/schemas/ResourceUsage'
+          description: Reserved resource usage
+        used:
+          $ref: '#/components/schemas/ResourceUsage'
+          description: Used resource usage
+      title: ResourceCapacityUsage represents capacity with reserved and used values
+    ZksInstanceStatusSummaries:
+      type: object
+      properties:
+        statuses:
+          $ref: '#/components/schemas/ZksInstanceStatusSummary'
+          description: Summary of the zks instance status
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+    ZksInstancesList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZksInstanceSummary'
+          description: List of ZKS instances
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: next cursor
+      title: ZksInstancesList is the response for listing ZKS instances
+    ZksInstanceStatusSummary:
+      type: object
+      properties:
+        online:
+          type: integer
+          format: int32
+          description: Number of online nodes in the zks instance
+        init:
+          type: integer
+          format: int32
+          description: Number of nodes in init state in the zks instance
+        suspect:
+          type: integer
+          format: int32
+          description: Number of suspect nodes in the zks instance
+        error:
+          type: integer
+          format: int32
+          description: Number of error nodes in the zks instance
+        unspecified:
+          type: integer
+          format: int32
+          description: Number of nodes in unspecified state in the zks instance
+        unknown:
+          type: integer
+          format: int32
+          description: Number of nodes in unknown state in the zks instance
+        offline:
+          type: integer
+          format: int32
+          description: Number of offline nodes in the zks instance
+        pending:
+          type: integer
+          format: int32
+          description: Number of pending nodes in the zks instance
+    ZksInstance:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the zks instance
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        projectId:
+          type: string
+          description: Foreign key to the project
+          pattern: '[0-9A-Za-z-]+'
+        name:
+          type: string
+          description: User defined name of the zks instance, unique across the enterprise. Once zks instance is created, name can’t be changed
+        title:
+          type: string
+          description: User defined title of the zks instance. Title can be changed at any time
+        description:
+          type: string
+          description: Detailed description of the zks instance
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZksInstanceNode'
+          description: A list of nodes in the zks instance
+        isImported:
+          type: boolean
+          description: Indicates if the ZKS instance is imported from an external source
+        clusterPrefix:
+          type: string
+          description: Cluster prefix for the ZKS instance
+      description: ZKS Instance details
+      title: ZKS Instance details
+      required:
+      - projectId
+      - name
+      - nodes
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -2113,104 +2113,93 @@ paths:
         required: true
 components:
   schemas:
-    ZsrvResponse:
+    ObjectRevision:
       type: object
       properties:
-        operationType:
-          $ref: '#/components/schemas/ZcOpsType'
-          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
-        operationStatus:
-          $ref: '#/components/schemas/ZcOpsStatus'
-          title: if this is log running job
-        objectKind:
+        prev:
           type: string
-          title: zedcloud object kind on which the operation was performed
-        objectId:
+          description: Previous
+        curr:
           type: string
-          title: Unique value identifies the object that was operated on
-        objectName:
+          description: Current Database version of the record
+        createdAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was created.
+        createdBy:
           type: string
-          title: name of the object
-        objectRevision:
+          description: 'User data: Created By'
+        updatedAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was last updated.
+        updatedBy:
           type: string
-          title: 'object revision post the operation, note Read operation
-
-            doesn''t change the revision'
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-        operationTime:
-          type: string
-          title: time of operation
-        startTime:
-          type: string
-          title: total time taken by operations
-        endTime:
-          type: string
-        user:
-          type: string
-          title: the operation is performed on behalf of this user
-        httpStatusCode:
-          type: integer
-          format: int32
-          title: http response
-        httpStatusMsg:
-          type: string
-          title: summary of the error in text format
-        jobId:
-          type: string
-          title: for tracking asynchronous tasks
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZsrvError'
-          title: 'one or more errors will be set if the operation failed
-
-            i.e. httpStatusCode != 2xx'
-    ActionScope:
+          description: 'User data: Updated By'
+      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+      title: ObjectRevision is used to store the user information.
+      required:
+      - curr
+      - createdAt
+      - createdBy
+      - updatedAt
+      - updatedBy
+    appACEAction:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/ObjectType'
-          description: Scope of the action (e.g. project in case certificate expired at project level)
-        id:
+        drop:
+          type: boolean
+          description: ACE drop flag
+        limit:
+          type: boolean
+          description: ACE limit flag
+        limitrate:
+          type: number
+          format: int64
+          description: ACE limit rate
+        limitunit:
           type: string
-          description: Unique id of the type (e.g. projectId in case of project type)
-    IoType:
-      type: string
-      enum:
-      - IO_TYPE_UNSPECIFIED
-      - IO_TYPE_ETH
-      - IO_TYPE_USB
-      - IO_TYPE_COM
-      - IO_TYPE_AUDIO
-      - IO_TYPE_WLAN
-      - IO_TYPE_WWAN
-      - IO_TYPE_HDMI
-      - IO_TYPE_LTE
-      - IO_TYPE_STORAGE_NVME_DEVICE
-      - IO_TYPE_STORAGE_SATA_DEVICE
-      - IO_TYPE_ETH_PF
-      - IO_TYPE_ETH_VF
-      - IO_TYPE_USB_CONTROLLER
-      - IO_TYPE_USB_DEVICE
-      - IO_TYPE_CAN
-      - IO_TYPE_VCAN
-      - IO_TYPE_LCAN
-      - IO_TYPE_OTHER
-      default: IO_TYPE_UNSPECIFIED
-      description: "- IO_TYPE_UNSPECIFIED: No operation/ Invalid peration\n - IO_TYPE_ETH: Ethernet\n - IO_TYPE_USB: USB Type - General\n - IO_TYPE_COM: Communication Port\n - IO_TYPE_AUDIO: Audio Port\n - IO_TYPE_WLAN: wireless LAN\n - IO_TYPE_WWAN: Wireless wide area network\n - IO_TYPE_HDMI: High-Definition Multimedia Interface\n - IO_TYPE_LTE: LTE Interfaces\n - IO_TYPE_STORAGE_NVME_DEVICE: Storage NVME device\n - IO_TYPE_STORAGE_SATA_DEVICE: Storage SATA device\n - IO_TYPE_ETH_PF: Physical Interface (PF) of the Virtual Functions\n - IO_TYPE_ETH_VF: Virtual Function (VF)\n - IO_TYPE_USB_CONTROLLER: USB Type - Controller\n - IO_TYPE_USB_DEVICE: USB Type - Device\n - IO_TYPE_CAN: CAN - Device\n - IO_TYPE_VCAN: VCAN - Virtual CAN device\n - IO_TYPE_LCAN: LCAN - Logical CAN device\n - IO_TYPE_OTHER: Other Io Types"
-      title: Input/Output Type
-    AppType:
-      type: string
-      enum:
-      - APP_TYPE_UNSPECIFIED
-      - APP_TYPE_VM
-      - APP_TYPE_VM_RUNTIME
-      - APP_TYPE_CONTAINER
-      - APP_TYPE_MODULE
-      - APP_TYPE_DOCKER_COMPOSE
-      default: APP_TYPE_UNSPECIFIED
-      description: type of app bundle.
+          description: ACE limit unit
+        limitburst:
+          type: number
+          format: int64
+          description: ACE limit burst
+        portmap:
+          type: boolean
+          description: application port map flag
+        mapparams:
+          $ref: '#/components/schemas/appMapParams'
+          description: Application map params
+      description: App ACE actions
+      title: App ACE Action
+      required:
+      - drop
+      - limit
+      - limitrate
+      - limitunit
+      - limitburst
+      - portmap
+      - mapparams
+    appMapParams:
+      type: object
+      properties:
+        port:
+          type: number
+          format: int64
+          description: Application port
+      description: Application map parameters
+      title: App map Params detail
+      required:
+      - port
+    VariableOptionVal:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Display label of the key in User-Agent
+        value:
+          type: string
+          description: Value of the key to be used
     ZsrvErrorCode:
       type: string
       enum:
@@ -2249,384 +2238,6 @@ components:
       default: zMsgErrorNone
       description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
       title: ZedCould internal error code
-    Summary:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    AppInstanceLogs:
-      type: object
-      properties:
-        access:
-          type: boolean
-          description: Flags to enable / disable sending of logs generated by app instance to zedcloud
-      description: App Instance Logs configuration
-      title: App Instance Logs configuration
-      required:
-      - access
-    AppInstanceSnapshot:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the app instance snapshot
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        name:
-          type: string
-          description: Snapshot name. Unique across the application instance
-        state:
-          $ref: '#/components/schemas/SnapshotState'
-          description: Status of the snapshot
-        config:
-          type: object
-          $ref: '#/components/schemas/AppInstance'
-          description: The complete configuration of the application instance
-        activate:
-          type: boolean
-          description: Indicates whether the snapshot should be activated
-        immediate:
-          type: boolean
-          description: Indicates that the snapshot should be taken immediately
-      description: App instance snapshot
-      title: App instance snapshot
-      required:
-      - name
-    phyAdapter:
-      type: object
-      properties:
-        type:
-          type: object
-          $ref: '#/components/schemas/IoType'
-          description: IoType specifies the type of the Input output of the device
-        name:
-          type: string
-          description: Physical Adapter name
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-      description: Physical Adapter
-      title: Physical Adapter
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    drive:
-      type: object
-      properties:
-        imagename:
-          type: string
-          description: Name of Image Object used for the drive.
-        maxsize:
-          type: number
-          format: uint64
-          description: Drive maximum size
-        readonly:
-          type: boolean
-          description: Read only flag. If set, drive is mounted as readonly by app instance.
-        preserve:
-          type: boolean
-          description: Preserve the drive even when all app instances using it are deleted
-        drvtype:
-          type: string
-          description: 'Type of Drive. Valid Values: UNSPECIFIED, CDROM, HDD, NET, HDD_EMPTY. HDD_EMPTY - is to allocate the empty disk of maxsizebytes specified'
-        target:
-          type: string
-          description: 'type of target. Valid values: Disk, Kernel, Initrd, RamDisk'
-        volumelabel:
-          type: string
-          description: 'User defined volume to use for this drive '
-        mvolname:
-          type: string
-          description: mutable Volume for this drive. Only one of imvolname and mvolname must be specified.
-        imvolname:
-          type: string
-          description: immutable Volume for this drive. Only one of imvolname and mvolname must be specified.
-        ignorepurge:
-          type: boolean
-          description: don't purge this drive as part of purge command for mutable volumes
-        cleartext:
-          type: boolean
-          description: If set, don't encrypt the drive. Store in cleartext
-        mountpath:
-          type: string
-          description: Mount Path for the drive in the App Instance
-        runtimeInternal:
-          type: boolean
-          description: If set, the drive is internal to the runtime and not externally exposed with API
-          readOnly: true
-      description: Drive configuration
-      title: Drive details
-      required:
-      - imagename
-      - maxsize
-      - readonly
-      - preserve
-      - drvtype
-      - target
-    VariableVariableFormat:
-      type: string
-      enum:
-      - VARIABLE_FORMAT_UNSPECIFIED
-      - VARIABLE_FORMAT_TEXT
-      - VARIABLE_FORMAT_NUMBER
-      - VARIABLE_FORMAT_FILE
-      - VARIABLE_FORMAT_DROPDOWN
-      - VARIABLE_FORMAT_BOOLEAN
-      - VARIABLE_FORMAT_PASSWORD
-      default: VARIABLE_FORMAT_UNSPECIFIED
-      description: "- VARIABLE_FORMAT_UNSPECIFIED: Invalid format\n - VARIABLE_FORMAT_TEXT: Value in string format\n - VARIABLE_FORMAT_NUMBER: Value in integer format\n - VARIABLE_FORMAT_FILE: Value to be read from a file\n - VARIABLE_FORMAT_DROPDOWN: Value to be selected from dropdown of options\n - VARIABLE_FORMAT_BOOLEAN: Value in boolean format\n - VARIABLE_FORMAT_PASSWORD: Value in string to be masked in User-Agent"
-      title: Custom variable format
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    SnapshotState:
-      type: string
-      enum:
-      - INVALID
-      - IDLE
-      - CREATING
-      - CREATED
-      - CREATE_FAILED
-      - ROLLING_BACK
-      - ACTIVE
-      - ROLLBACK_FAILED
-      - DELETING
-      - DELETE_FAILED
-      - DELETED
-      default: INVALID
-    AppInstanceUpdate_HttpRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the app instance
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        title:
-          type: string
-          description: User defined title of the app instance. Title can be changed at any time
-          maxLength: 256
-          minLength: 3
-          pattern: ^[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+$
-        description:
-          type: string
-          description: Detailed description of the app instance
-          maxLength: 256
-        revision:
-          $ref: '#/components/schemas/ObjectRevision'
-          description: app instance object revision details
-        projectId:
-          type: string
-          description: project name which the given app instance belong to
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-        clusterID:
-          type: string
-          description: System defined universally unique clusterInstance ID, unique across the enterprise.
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        appId:
-          type: string
-          description: User defined name of the edge app, unique across the enterprise. Once app name is created, name can’t be changed
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        deviceId:
-          type: string
-          description: User defined name of the device name, unique across the enterprise. Once device name is defined, name can’t be changed
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        activate:
-          type: boolean
-          description: app instance activation flag
-        vminfo:
-          $ref: '#/components/schemas/vm'
-          description: virtual machine info
-        drives:
-          type: array
-          items:
-            $ref: '#/components/schemas/drive'
-          description: drive details
-        interfaces:
-          type: array
-          items:
-            $ref: '#/components/schemas/appInterface'
-          description: application interfaces
-        userData:
-          type: string
-          description: 'Deprecated: Application initiazation script in cloud-config format to be used by cloud-init'
-        customConfig:
-          $ref: '#/components/schemas/CustomConfig'
-          description: Application initialization script template in cloud-config format and user specified values
-        collectStatsIPAddr:
-          type: string
-          description: holds the static Ip of the app instance
-        bundleversion:
-          type: string
-          description: version of bundle app is referring to
-        logs:
-          $ref: '#/components/schemas/AppInstanceLogs'
-          description: App Instance logs
-        restart:
-          $ref: '#/components/schemas/ZedCloudOpsCmd'
-          description: 'Restart counter: ZedCloudOpsCmd'
-        refresh:
-          $ref: '#/components/schemas/ZedCloudOpsCmd'
-          description: 'Refresh counter: ZedCloudOpsCmd'
-        purge:
-          $ref: '#/components/schemas/ZedCloudOpsCmd'
-          description: 'Purge counter: ZedCloudOpsCmd'
-        remoteConsole:
-          type: boolean
-          description: Remote console flag
-        encryptedSecrets:
-          type: object
-          additionalProperties:
-            type: string
-          description: user encrypted secrets map
-        cryptoKey:
-          type: string
-          description: Crypto Key for decrypting user secret information
-        manifestInfo:
-          $ref: '#/components/schemas/ManifestInfo'
-          description: app manifest Info
-        appType:
-          $ref: '#/components/schemas/AppType'
-          description: type of bundle
-        isSecretUpdated:
-          type: boolean
-          description: This field tells whether user secrets has updated or not, especially the cusotom config
-        appPolicyId:
-          type: string
-          description: app policy id
-        deploymentType:
-          $ref: '#/components/schemas/DeploymentType'
-          description: 'type of deployment for the app, eg: azure, k3s, standalone'
-        userDefinedVersion:
-          type: string
-          description: Instance version tells which edge app does this instance is running
-        startDelayInSeconds:
-          type: integer
-          format: int64
-          description: start delay is the time in seconds EVE should wait after boot before starting the application instance
-        cloudInitVersion:
-          type: integer
-          format: int64
-          description: Cloud-init version that indicates whether it necessary or not for cloud-init tool to restart in a guest
-        allowSnapshots:
-          type: boolean
-          description: Flag to determine if a snapshot creation is allowed
-        maxSnapshots:
-          type: integer
-          format: int64
-          description: Maximum number of snapshots allowed to be created
-        availableSnapshots:
-          type: array
-          items:
-            $ref: '#/components/schemas/AppInstanceSnapshot'
-          description: The list of available snapshots of the application instance
-        patchEnvelopeId:
-          type: string
-          description: patch envelope id
-        patchEnvelopeName:
-          type: string
-          description: patch envelope name
-        edgeNodeCluster:
-          $ref: '#/components/schemas/AppInstEdgeNodeCluster'
-          description: edge node cluster
-      description: App Instance detail
-      title: App Instance detail
-      required:
-      - name
-      - title
-      - projectId
-      - appId
-      - deviceId
-      - activate
     Cursor:
       type: object
       properties:
@@ -2652,42 +2263,51 @@ components:
           description: Total number of pages to be fetched.
       description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
       title: Cursor is used as filter in list operation.
-    appACEAction:
-      type: object
-      properties:
-        drop:
-          type: boolean
-          description: ACE drop flag
-        limit:
-          type: boolean
-          description: ACE limit flag
-        limitrate:
-          type: number
-          format: int64
-          description: ACE limit rate
-        limitunit:
-          type: string
-          description: ACE limit unit
-        limitburst:
-          type: number
-          format: int64
-          description: ACE limit burst
-        portmap:
-          type: boolean
-          description: application port map flag
-        mapparams:
-          $ref: '#/components/schemas/appMapParams'
-          description: Application map params
-      description: App ACE actions
-      title: App ACE Action
-      required:
-      - drop
-      - limit
-      - limitrate
-      - limitunit
-      - limitburst
-      - portmap
-      - mapparams
+    VariableVariableFormat:
+      type: string
+      enum:
+      - VARIABLE_FORMAT_UNSPECIFIED
+      - VARIABLE_FORMAT_TEXT
+      - VARIABLE_FORMAT_NUMBER
+      - VARIABLE_FORMAT_FILE
+      - VARIABLE_FORMAT_DROPDOWN
+      - VARIABLE_FORMAT_BOOLEAN
+      - VARIABLE_FORMAT_PASSWORD
+      default: VARIABLE_FORMAT_UNSPECIFIED
+      description: "- VARIABLE_FORMAT_UNSPECIFIED: Invalid format\n - VARIABLE_FORMAT_TEXT: Value in string format\n - VARIABLE_FORMAT_NUMBER: Value in integer format\n - VARIABLE_FORMAT_FILE: Value to be read from a file\n - VARIABLE_FORMAT_DROPDOWN: Value to be selected from dropdown of options\n - VARIABLE_FORMAT_BOOLEAN: Value in boolean format\n - VARIABLE_FORMAT_PASSWORD: Value in string to be masked in User-Agent"
+      title: Custom variable format
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    VmBootloaderMode:
+      type: string
+      enum:
+      - VM_BOOTLOADER_MODE_UNSPECIFIED
+      - VM_BOOTLOADER_MODE_LEGACY
+      - VM_BOOTLOADER_MODE_UEFI
+      default: VM_BOOTLOADER_MODE_UNSPECIFIED
+      title: 'VmBootloaderMode is used to specify the bootloader mode that will be used for the VM.
+
+        It represents the boot mechanism to be used to boot the VM'
+    AppType:
+      type: string
+      enum:
+      - APP_TYPE_UNSPECIFIED
+      - APP_TYPE_VM
+      - APP_TYPE_VM_RUNTIME
+      - APP_TYPE_CONTAINER
+      - APP_TYPE_MODULE
+      - APP_TYPE_DOCKER_COMPOSE
+      default: APP_TYPE_UNSPECIFIED
+      description: type of app bundle.
     ManifestInfo:
       type: object
       properties:
@@ -2714,6 +2334,18 @@ components:
           description: Enable vnc for the app
       description: Details about transition parameters and indication for cause of the transition and recommendation for the transition action
       title: Transition action information
+    TransDetails:
+      type: object
+      properties:
+        cause:
+          $ref: '#/components/schemas/TransCause'
+          description: Cause of the transition action
+        severity:
+          type: string
+          description: Urgency of the recommended action (ERROR - must take action immediately, WARN - must take action but not immediately, NOTICE - may take action
+        scope:
+          $ref: '#/components/schemas/ActionScope'
+          description: Scope of the action (e.g. project, cluster, instance)
     protobufAny:
       type: object
       properties:
@@ -2722,68 +2354,31 @@ components:
         value:
           type: string
           format: byte
-    TransCause:
+    IoType:
       type: string
       enum:
-      - TRANS_CAUSE_UNSPECIFIED
-      - TRANS_CAUSE_APP_DRIVE_CHANGED
-      - TRANS_CAUSE_APP_NETWORK_CHANGED
-      - TRANS_CAUSE_APP_CUSTOM_CONFIG_CHANGED
-      - TRANS_CAUSE_APP_MODULE_BUNDLE_UPDATE
-      - TRANS_CAUSE_APP_DESC_CHANGED
-      - TRANS_CAUSE_APP_FIXED_RESOURCES_CHANGED
-      - TRANS_CAUSE_APP_VNC_MODE_CHANGED
-      - TRANS_CAUSE_APP_VM_MODE_CHANGED
-      - TRANS_CAUSE_INTER_CA_EXPIRING
-      - TRANS_CAUSE_INTER_CA_EXPIRED
-      - TRANS_CAUSE_DEVICE_CA_EXPIRING
-      - TRANS_CAUSE_DEVICE_CA_EXPIRED
-      - TRANS_CAUSE_IDENTITY_CA_EXPIRING
-      - TRANS_CAUSE_IDENTITY_CA_EXPIRED
-      - TRANS_CAUSE_APP_COMPOSE_TAR_IMAGE_CHANGED
-      - TRANS_CAUSE_APP_COMPOSE_YAML_CHANGED
-      - TRANS_CAUSE_APP_COMPOSE_DATASTORE_CHANGED
-      - TRANS_CAUSE_APP_ENABLE_VM_CONFIG_CHANGED
-      default: TRANS_CAUSE_UNSPECIFIED
-    PatchReferenceUpdateConfig:
-      type: object
-      properties:
-        projectId:
-          type: string
-        patchenvelopeId:
-          type: string
-        appInstIDList:
-          type: array
-          items:
-            type: string
-    AppInstEdgeNodeCluster:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of the edge node cluster
-          pattern: '[0-9A-Za-z-]+'
-        designatedNodeID:
-          type: string
-          description: Id of the designated node
-          pattern: '[0-9A-Za-z-]+'
-        name:
-          type: string
-          description: edge node cluster name
-    DeploymentType:
-      type: string
-      enum:
-      - DEPLOYMENT_TYPE_UNSPECIFIED
-      - DEPLOYMENT_TYPE_STAND_ALONE
-      - DEPLOYMENT_TYPE_AZURE
-      - DEPLOYMENT_TYPE_K3S
-      - DEPLOYMENT_TYPE_AWS
-      - DEPLOYMENT_TYPE_K3S_AZURE
-      - DEPLOYMENT_TYPE_K3S_AWS
-      - DEPLOYMENT_TYPE_VMWARE_VCE
-      - DEPLOYMENT_TYPE_VMWARE_TKG_ATTACH
-      - DEPLOYMENT_TYPE_DOCKER_RUNTIME
-      default: DEPLOYMENT_TYPE_UNSPECIFIED
+      - IO_TYPE_UNSPECIFIED
+      - IO_TYPE_ETH
+      - IO_TYPE_USB
+      - IO_TYPE_COM
+      - IO_TYPE_AUDIO
+      - IO_TYPE_WLAN
+      - IO_TYPE_WWAN
+      - IO_TYPE_HDMI
+      - IO_TYPE_LTE
+      - IO_TYPE_STORAGE_NVME_DEVICE
+      - IO_TYPE_STORAGE_SATA_DEVICE
+      - IO_TYPE_ETH_PF
+      - IO_TYPE_ETH_VF
+      - IO_TYPE_USB_CONTROLLER
+      - IO_TYPE_USB_DEVICE
+      - IO_TYPE_CAN
+      - IO_TYPE_VCAN
+      - IO_TYPE_LCAN
+      - IO_TYPE_OTHER
+      default: IO_TYPE_UNSPECIFIED
+      description: "- IO_TYPE_UNSPECIFIED: No operation/ Invalid peration\n - IO_TYPE_ETH: Ethernet\n - IO_TYPE_USB: USB Type - General\n - IO_TYPE_COM: Communication Port\n - IO_TYPE_AUDIO: Audio Port\n - IO_TYPE_WLAN: wireless LAN\n - IO_TYPE_WWAN: Wireless wide area network\n - IO_TYPE_HDMI: High-Definition Multimedia Interface\n - IO_TYPE_LTE: LTE Interfaces\n - IO_TYPE_STORAGE_NVME_DEVICE: Storage NVME device\n - IO_TYPE_STORAGE_SATA_DEVICE: Storage SATA device\n - IO_TYPE_ETH_PF: Physical Interface (PF) of the Virtual Functions\n - IO_TYPE_ETH_VF: Virtual Function (VF)\n - IO_TYPE_USB_CONTROLLER: USB Type - Controller\n - IO_TYPE_USB_DEVICE: USB Type - Device\n - IO_TYPE_CAN: CAN - Device\n - IO_TYPE_VCAN: VCAN - Virtual CAN device\n - IO_TYPE_LCAN: LCAN - Logical CAN device\n - IO_TYPE_OTHER: Other Io Types"
+      title: Input/Output Type
     appACE:
       type: object
       properties:
@@ -2815,458 +2410,6 @@ components:
       - actions
       - id
       - name
-    VariableGroupConditionOperator:
-      type: string
-      enum:
-      - CONDITION_OPERATOR_UNSPECIFIED
-      - CONDITION_OPERATOR_EQUALTO
-      - CONDITION_OPERATOR_NOTEQUALTO
-      default: CONDITION_OPERATOR_UNSPECIFIED
-    VariableGroupVariable:
-      type: object
-      example:
-        format: VARIABLE_FORMAT_TEXT
-        name: username
-        label: Enter User Name
-        required: 'True'
-      properties:
-        type:
-          type: string
-        name:
-          type: string
-          description: Name of the Variable (Required)
-        label:
-          type: string
-          description: Label for the variable (Required)
-        maxLength:
-          type: string
-          description: 'Max length of the value of the variable(Optional. Default: 1024)'
-        required:
-          type: boolean
-          description: 'This variable MUST be specified when creating an App Instance. (Optional. Default: False)'
-        default:
-          type: string
-          description: 'Default value of the variable. (Optional. Default: <Default value based on type>)'
-        processInput:
-          type: string
-        value:
-          type: string
-          description: User-specified value of the variable.(Required if required is true. Optional otherwise)
-        format:
-          $ref: '#/components/schemas/VariableVariableFormat'
-          description: Format of the user variable. (Required)
-        encode:
-          $ref: '#/components/schemas/VariableFileEncoding'
-          description: Encoding of file content. Applicable if format is VARIABLE_FORMAT_FILE
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/VariableOptionVal'
-          description: Key-Value pair of options. Applicable if format is VARIABLE_FORMAT_DROPDOWN
-      description: Edge Application Artifact Details
-      title: Edge Application detail
-      required:
-      - format
-      - name
-      - label
-      - required
-    EIDRegister:
-      type: object
-      properties:
-        AppCert:
-          type: string
-          format: byte
-          description: app certificate
-        AppPublicKey:
-          type: string
-          format: byte
-          description: App public key
-        AppPrivateKey:
-          type: string
-          format: byte
-          description: App private key
-        UUID:
-          type: string
-          description: UUID
-        DisplayName:
-          type: string
-          description: Display name
-        LispInstance:
-          type: number
-          format: int64
-          description: Lisp Instance
-        EID:
-          type: string
-          description: EID
-        EIDHashLen:
-          type: number
-          format: int64
-          description: EID hash length
-        LispSignature:
-          type: string
-          description: Lisp Signature
-        LispMapServers:
-          type: array
-          items:
-            $ref: '#/components/schemas/LispServer'
-          description: Lisp Map Server
-          title: time CreateTime     time.Time
-      description: EID Register
-      title: EID Register detail
-      required:
-      - AppCert
-      - AppPublicKey
-      - AppPrivateKey
-      - UUID
-      - DisplayName
-      - LispInstance
-      - EID
-      - EIDHashLen
-      - LispSignature
-      - LispMapServers
-    ZedCloudOpsCmd:
-      type: object
-      properties:
-        counter:
-          type: number
-          format: int64
-          description: counter
-        opsTime:
-          type: object
-          format: date-time
-          description: 'Timestamp: Operational time'
-      description: Zed cloud Operation command
-      title: Zed cloud Operation command
-    InstanceTransitionAction:
-      type: string
-      enum:
-      - INSTANCE_TA_UNSPECIFIED
-      - INSTANCE_TA_NONE
-      - INSTANCE_TA_UPDATEREQUIRED
-      - INSTANCE_TA_UPDATEWITHRESTART
-      - INSTANCE_TA_UPDATEWITHPURGE
-      default: INSTANCE_TA_UNSPECIFIED
-      description: "- INSTANCE_TA_UNSPECIFIED: Default. Invalid option\n - INSTANCE_TA_NONE: Either Edge app bundle has not changed or Edge app bundle has\nchanged but the changes do not impact Edge app instances\n - INSTANCE_TA_UPDATEREQUIRED: Edge app bundle has changed. Changes impact Edge app Instances\nEdge App instances need to be restarted with temporary loss of access\n - INSTANCE_TA_UPDATEWITHRESTART: Transition Action: Update with Restart\n - INSTANCE_TA_UPDATEWITHPURGE: Edge app bundle has changed. Changes impact Edge app Instances\nEdge App instances need to be deleted and created again with\ntemporary loss of access and permanent loss of data"
-      title: Instance Transition action
-    vm:
-      type: object
-      properties:
-        cpus:
-          type: number
-          format: int64
-          description: CPUs
-        memory:
-          type: number
-          format: int64
-          description: Memory
-        mode:
-          $ref: '#/components/schemas/hvMode'
-          description: Hardware Virtualization
-        vnc:
-          type: boolean
-          description: VNC
-        vncDisplay:
-          type: number
-          format: int64
-          description: VNC display
-          readOnly: true
-        cpuPinningEnabled:
-          type: boolean
-          description: Enable CpuPinning
-        vmmMaxmem:
-          type: integer
-          format: int64
-          description: Maximum amount of memory in kbytes allowed for VM monitor to occupy
-        bootloaderMode:
-          $ref: '#/components/schemas/VmBootloaderMode'
-          description: The bootloader mode that will be used for the VM. Default is VM_BOOTLOADER_MODE_LEGACY
-        enableOemWinLicenseKey:
-          type: boolean
-          description: Enable device which has VM to receive the Windows license embedded in the ACPI tables
-        disableVTPM:
-          type: boolean
-          description: Disable vTPM for virtual machines (VM)
-      description: Virtual machine memory configuration
-      title: vm detail
-      required:
-      - cpus
-      - memory
-      - mode
-      - vnc
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    LispServer:
-      type: object
-      properties:
-        nameOrIp:
-          type: string
-          description: name/IP
-        credential:
-          type: string
-          description: lisp credential
-      description: LispServer request payload
-      title: LispServer payload detail
-      required:
-      - nameOrIp
-      - credential
-    TransDetails:
-      type: object
-      properties:
-        cause:
-          $ref: '#/components/schemas/TransCause'
-          description: Cause of the transition action
-        severity:
-          type: string
-          description: Urgency of the recommended action (ERROR - must take action immediately, WARN - must take action but not immediately, NOTICE - may take action
-        scope:
-          $ref: '#/components/schemas/ActionScope'
-          description: Scope of the action (e.g. project, cluster, instance)
-    VmBootloaderMode:
-      type: string
-      enum:
-      - VM_BOOTLOADER_MODE_UNSPECIFIED
-      - VM_BOOTLOADER_MODE_LEGACY
-      - VM_BOOTLOADER_MODE_UEFI
-      default: VM_BOOTLOADER_MODE_UNSPECIFIED
-      title: 'VmBootloaderMode is used to specify the bootloader mode that will be used for the VM.
-
-        It represents the boot mechanism to be used to boot the VM'
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
-    VariableOptionVal:
-      type: object
-      properties:
-        label:
-          type: string
-          description: Display label of the key in User-Agent
-        value:
-          type: string
-          description: Value of the key to be used
-    ObjectRevision:
-      type: object
-      properties:
-        prev:
-          type: string
-          description: Previous
-        curr:
-          type: string
-          description: Current Database version of the record
-        createdAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was created.
-        createdBy:
-          type: string
-          description: 'User data: Created By'
-        updatedAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was last updated.
-        updatedBy:
-          type: string
-          description: 'User data: Updated By'
-      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
-      title: ObjectRevision is used to store the user information.
-      required:
-      - curr
-      - createdAt
-      - createdBy
-      - updatedAt
-      - updatedBy
-    appInterface:
-      type: object
-      properties:
-        netname:
-          type: string
-          description: 'network name: will be deprecated in future, use netinstname'
-        io:
-          $ref: '#/components/schemas/phyAdapter'
-          description: Physical Adapter to be matched for interface assignment. Applicable only when "direct attach" flag is true
-        intforder:
-          type: number
-          format: int64
-          description: intforder
-        intfname:
-          type: string
-          description: intf Name
-        directattach:
-          type: boolean
-          description: direct attach flag
-          title: comes from manifest during app create
-        privateip:
-          type: string
-          description: Private IP flag
-        acls:
-          type: array
-          items:
-            $ref: '#/components/schemas/appACE'
-          description: app Acls
-        ipaddr:
-          type: string
-          description: IP address
-          title: 'if netname points static DHCP then we need to take
-
-            static /32 address here'
-        macaddr:
-          type: string
-          description: MAC address
-          title: 'in case of p2v we might want to provide a mac-address.
-
-            applicable only in case of DHCP=passthrough'
-        accessVlanId:
-          type: number
-          format: int64
-          description: access port VLAN ID, vlan id of zero will be treated as trunk port and vlan id 1 is implicitly used by linux bridges
-          maximum: 4093
-          minimum: 2
-        eidregister:
-          $ref: '#/components/schemas/EIDRegister'
-          description: EID register details
-          title: 'FIXME: Check why is this required'
-        netinstname:
-          type: string
-          description: Network Instance name to be matched for interface assignment. Applicable only when "direct attach" flag is false
-        netinsttag:
-          type: object
-          additionalProperties:
-            type: string
-          description: Network Instance tag to be matched for interface assignment. Applicable only when "direct attach" flag is false
-        netinstid:
-          type: string
-          description: Network Instance id to be matched for interface assignment.
-        defaultNetInstance:
-          type: boolean
-          description: default instance flag
-        allowToDiscover:
-          type: boolean
-          description: flag tells if appInstance have permission to access the network mappings from the connected netInstance
-      description: App Interface detail
-      title: App Interface detail
-      required:
-      - intfname
-    hvMode:
-      type: string
-      enum:
-      - HV_PV
-      - HV_HVM
-      - HV_FML
-      - HV_NOHYPER
-      - HV_LEGACY
-      default: HV_PV
-      description: 'For now we need to tell the device which virtualization mode
-
-        to use. Later we might use a single one for all VMs (on any particular
-
-        ISA). If we end up keeping this we should make the names be less
-
-        tied to a particular hypervisor.'
-    CustomConfigVariableGroup:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the Variable Group(Required)
-        variables:
-          type: array
-          items:
-            $ref: '#/components/schemas/VariableGroupVariable'
-          description: List of variables(Required)
-        required:
-          type: boolean
-          description: Indicates if the variable group is required to be specified for the App Instance. (Optional. Default:False)
-        condition:
-          $ref: '#/components/schemas/VariableGroupCondition'
-          description: 'Condition to apply the variable group. (Optional. Default: None)'
-    VariableGroupCondition:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        operator:
-          $ref: '#/components/schemas/VariableGroupConditionOperator'
-    CustomConfig:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of CustomConfig (Required)
-        add:
-          type: boolean
-          description: 'Add the Custom Config to App Instance (Optional. Default: False)'
-        override:
-          type: boolean
-          description: 'Override existing custom config from App Bundle Manifest (Optional. Default: False)'
-        allowStorageResize:
-          type: boolean
-          description: 'Allow Appinstance storage to be resized after app instance is created. (Optional. Default: False)'
-        fieldDelimiter:
-          type: string
-          description: Field delimiter used in specifying variables in template. (Required)
-        template:
-          type: string
-          description: base64 encrypted template string. (Optional)
-        variableGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomConfigVariableGroup'
-          description: List of Variable groups. (Required)
-    VariableFileEncoding:
-      type: string
-      enum:
-      - FILE_ENCODING_UNSPECIFIED
-      - FILE_ENCODING_BASE64
-      default: FILE_ENCODING_UNSPECIFIED
-      description: "- FILE_ENCODING_UNSPECIFIED: File content not encoded\n - FILE_ENCODING_BASE64: File content encoded in Base64"
-      title: File content encoding type
-    appMapParams:
-      type: object
-      properties:
-        port:
-          type: number
-          format: int64
-          description: Application port
-      description: Application map parameters
-      title: App map Params detail
-      required:
-      - port
-    AppInstances:
-      type: object
-      properties:
-        summaryByState:
-          $ref: '#/components/schemas/Summary'
-          description: app instance by summary
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/AppInstance'
-          description: app insatance list response
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: cursor next
     AppInstance:
       type: object
       properties:
@@ -3455,16 +2598,549 @@ components:
       - appId
       - deviceId
       - activate
-    ZcOpsStatus:
+    ObjectType:
       type: string
       enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    drive:
+      type: object
+      properties:
+        imagename:
+          type: string
+          description: Name of Image Object used for the drive.
+        maxsize:
+          type: number
+          format: uint64
+          description: Drive maximum size
+        readonly:
+          type: boolean
+          description: Read only flag. If set, drive is mounted as readonly by app instance.
+        preserve:
+          type: boolean
+          description: Preserve the drive even when all app instances using it are deleted
+        drvtype:
+          type: string
+          description: 'Type of Drive. Valid Values: UNSPECIFIED, CDROM, HDD, NET, HDD_EMPTY. HDD_EMPTY - is to allocate the empty disk of maxsizebytes specified'
+        target:
+          type: string
+          description: 'type of target. Valid values: Disk, Kernel, Initrd, RamDisk'
+        volumelabel:
+          type: string
+          description: 'User defined volume to use for this drive '
+        mvolname:
+          type: string
+          description: mutable Volume for this drive. Only one of imvolname and mvolname must be specified.
+        imvolname:
+          type: string
+          description: immutable Volume for this drive. Only one of imvolname and mvolname must be specified.
+        ignorepurge:
+          type: boolean
+          description: don't purge this drive as part of purge command for mutable volumes
+        cleartext:
+          type: boolean
+          description: If set, don't encrypt the drive. Store in cleartext
+        mountpath:
+          type: string
+          description: Mount Path for the drive in the App Instance
+        runtimeInternal:
+          type: boolean
+          description: If set, the drive is internal to the runtime and not externally exposed with API
+          readOnly: true
+      description: Drive configuration
+      title: Drive details
+      required:
+      - imagename
+      - maxsize
+      - readonly
+      - preserve
+      - drvtype
+      - target
+    AppInstEdgeNodeCluster:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the edge node cluster
+          pattern: '[0-9A-Za-z-]+'
+        designatedNodeID:
+          type: string
+          description: Id of the designated node
+          pattern: '[0-9A-Za-z-]+'
+        name:
+          type: string
+          description: edge node cluster name
+    VariableFileEncoding:
+      type: string
+      enum:
+      - FILE_ENCODING_UNSPECIFIED
+      - FILE_ENCODING_BASE64
+      default: FILE_ENCODING_UNSPECIFIED
+      description: "- FILE_ENCODING_UNSPECIFIED: File content not encoded\n - FILE_ENCODING_BASE64: File content encoded in Base64"
+      title: File content encoding type
+    AppInstanceSnapshot:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the app instance snapshot
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        name:
+          type: string
+          description: Snapshot name. Unique across the application instance
+        state:
+          $ref: '#/components/schemas/SnapshotState'
+          description: Status of the snapshot
+        config:
+          type: object
+          $ref: '#/components/schemas/AppInstance'
+          description: The complete configuration of the application instance
+        activate:
+          type: boolean
+          description: Indicates whether the snapshot should be activated
+        immediate:
+          type: boolean
+          description: Indicates that the snapshot should be taken immediately
+      description: App instance snapshot
+      title: App instance snapshot
+      required:
+      - name
+    phyAdapter:
+      type: object
+      properties:
+        type:
+          type: object
+          $ref: '#/components/schemas/IoType'
+          description: IoType specifies the type of the Input output of the device
+        name:
+          type: string
+          description: Physical Adapter name
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+      description: Physical Adapter
+      title: Physical Adapter
+    CustomConfig:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of CustomConfig (Required)
+        add:
+          type: boolean
+          description: 'Add the Custom Config to App Instance (Optional. Default: False)'
+        override:
+          type: boolean
+          description: 'Override existing custom config from App Bundle Manifest (Optional. Default: False)'
+        allowStorageResize:
+          type: boolean
+          description: 'Allow Appinstance storage to be resized after app instance is created. (Optional. Default: False)'
+        fieldDelimiter:
+          type: string
+          description: Field delimiter used in specifying variables in template. (Required)
+        template:
+          type: string
+          description: base64 encrypted template string. (Optional)
+        variableGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomConfigVariableGroup'
+          description: List of Variable groups. (Required)
+    VariableGroupCondition:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        operator:
+          $ref: '#/components/schemas/VariableGroupConditionOperator'
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    AppInstances:
+      type: object
+      properties:
+        summaryByState:
+          $ref: '#/components/schemas/Summary'
+          description: app instance by summary
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppInstance'
+          description: app insatance list response
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: cursor next
+    hvMode:
+      type: string
+      enum:
+      - HV_PV
+      - HV_HVM
+      - HV_FML
+      - HV_NOHYPER
+      - HV_LEGACY
+      default: HV_PV
+      description: 'For now we need to tell the device which virtualization mode
+
+        to use. Later we might use a single one for all VMs (on any particular
+
+        ISA). If we end up keeping this we should make the names be less
+
+        tied to a particular hypervisor.'
+    ZsrvResponse:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
+          type: string
+          title: zedcloud object kind on which the operation was performed
+        objectId:
+          type: string
+          title: Unique value identifies the object that was operated on
+        objectName:
+          type: string
+          title: name of the object
+        objectRevision:
+          type: string
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
+    appInterface:
+      type: object
+      properties:
+        netname:
+          type: string
+          description: 'network name: will be deprecated in future, use netinstname'
+        io:
+          $ref: '#/components/schemas/phyAdapter'
+          description: Physical Adapter to be matched for interface assignment. Applicable only when "direct attach" flag is true
+        intforder:
+          type: number
+          format: int64
+          description: intforder
+        intfname:
+          type: string
+          description: intf Name
+        directattach:
+          type: boolean
+          description: direct attach flag
+          title: comes from manifest during app create
+        privateip:
+          type: string
+          description: Private IP flag
+        acls:
+          type: array
+          items:
+            $ref: '#/components/schemas/appACE'
+          description: app Acls
+        ipaddr:
+          type: string
+          description: IP address
+          title: 'if netname points static DHCP then we need to take
+
+            static /32 address here'
+        macaddr:
+          type: string
+          description: MAC address
+          title: 'in case of p2v we might want to provide a mac-address.
+
+            applicable only in case of DHCP=passthrough'
+        accessVlanId:
+          type: number
+          format: int64
+          description: access port VLAN ID, vlan id of zero will be treated as trunk port and vlan id 1 is implicitly used by linux bridges
+          maximum: 4093
+          minimum: 2
+        eidregister:
+          $ref: '#/components/schemas/EIDRegister'
+          description: EID register details
+          title: 'FIXME: Check why is this required'
+        netinstname:
+          type: string
+          description: Network Instance name to be matched for interface assignment. Applicable only when "direct attach" flag is false
+        netinsttag:
+          type: object
+          additionalProperties:
+            type: string
+          description: Network Instance tag to be matched for interface assignment. Applicable only when "direct attach" flag is false
+        netinstid:
+          type: string
+          description: Network Instance id to be matched for interface assignment.
+        defaultNetInstance:
+          type: boolean
+          description: default instance flag
+        allowToDiscover:
+          type: boolean
+          description: flag tells if appInstance have permission to access the network mappings from the connected netInstance
+      description: App Interface detail
+      title: App Interface detail
+      required:
+      - intfname
+    SnapshotState:
+      type: string
+      enum:
+      - INVALID
+      - IDLE
+      - CREATING
+      - CREATED
+      - CREATE_FAILED
+      - ROLLING_BACK
+      - ACTIVE
+      - ROLLBACK_FAILED
+      - DELETING
+      - DELETE_FAILED
+      - DELETED
+      default: INVALID
+    TransCause:
+      type: string
+      enum:
+      - TRANS_CAUSE_UNSPECIFIED
+      - TRANS_CAUSE_APP_DRIVE_CHANGED
+      - TRANS_CAUSE_APP_NETWORK_CHANGED
+      - TRANS_CAUSE_APP_CUSTOM_CONFIG_CHANGED
+      - TRANS_CAUSE_APP_MODULE_BUNDLE_UPDATE
+      - TRANS_CAUSE_APP_DESC_CHANGED
+      - TRANS_CAUSE_APP_FIXED_RESOURCES_CHANGED
+      - TRANS_CAUSE_APP_VNC_MODE_CHANGED
+      - TRANS_CAUSE_APP_VM_MODE_CHANGED
+      - TRANS_CAUSE_INTER_CA_EXPIRING
+      - TRANS_CAUSE_INTER_CA_EXPIRED
+      - TRANS_CAUSE_DEVICE_CA_EXPIRING
+      - TRANS_CAUSE_DEVICE_CA_EXPIRED
+      - TRANS_CAUSE_IDENTITY_CA_EXPIRING
+      - TRANS_CAUSE_IDENTITY_CA_EXPIRED
+      - TRANS_CAUSE_APP_COMPOSE_TAR_IMAGE_CHANGED
+      - TRANS_CAUSE_APP_COMPOSE_YAML_CHANGED
+      - TRANS_CAUSE_APP_COMPOSE_DATASTORE_CHANGED
+      - TRANS_CAUSE_APP_ENABLE_VM_CONFIG_CHANGED
+      default: TRANS_CAUSE_UNSPECIFIED
+    vm:
+      type: object
+      properties:
+        cpus:
+          type: number
+          format: int64
+          description: CPUs
+        memory:
+          type: number
+          format: int64
+          description: Memory
+        mode:
+          $ref: '#/components/schemas/hvMode'
+          description: Hardware Virtualization
+        vnc:
+          type: boolean
+          description: VNC
+        vncDisplay:
+          type: number
+          format: int64
+          description: VNC display
+          readOnly: true
+        cpuPinningEnabled:
+          type: boolean
+          description: Enable CpuPinning
+        vmmMaxmem:
+          type: integer
+          format: int64
+          description: Maximum amount of memory in kbytes allowed for VM monitor to occupy
+        bootloaderMode:
+          $ref: '#/components/schemas/VmBootloaderMode'
+          description: The bootloader mode that will be used for the VM. Default is VM_BOOTLOADER_MODE_LEGACY
+        enableOemWinLicenseKey:
+          type: boolean
+          description: Enable device which has VM to receive the Windows license embedded in the ACPI tables
+        disableVTPM:
+          type: boolean
+          description: Disable vTPM for virtual machines (VM)
+      description: Virtual machine memory configuration
+      title: vm detail
+      required:
+      - cpus
+      - memory
+      - mode
+      - vnc
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    InstanceTransitionAction:
+      type: string
+      enum:
+      - INSTANCE_TA_UNSPECIFIED
+      - INSTANCE_TA_NONE
+      - INSTANCE_TA_UPDATEREQUIRED
+      - INSTANCE_TA_UPDATEWITHRESTART
+      - INSTANCE_TA_UPDATEWITHPURGE
+      default: INSTANCE_TA_UNSPECIFIED
+      description: "- INSTANCE_TA_UNSPECIFIED: Default. Invalid option\n - INSTANCE_TA_NONE: Either Edge app bundle has not changed or Edge app bundle has\nchanged but the changes do not impact Edge app instances\n - INSTANCE_TA_UPDATEREQUIRED: Edge app bundle has changed. Changes impact Edge app Instances\nEdge App instances need to be restarted with temporary loss of access\n - INSTANCE_TA_UPDATEWITHRESTART: Transition Action: Update with Restart\n - INSTANCE_TA_UPDATEWITHPURGE: Edge app bundle has changed. Changes impact Edge app Instances\nEdge App instances need to be deleted and created again with\ntemporary loss of access and permanent loss of data"
+      title: Instance Transition action
+    EIDRegister:
+      type: object
+      properties:
+        AppCert:
+          type: string
+          format: byte
+          description: app certificate
+        AppPublicKey:
+          type: string
+          format: byte
+          description: App public key
+        AppPrivateKey:
+          type: string
+          format: byte
+          description: App private key
+        UUID:
+          type: string
+          description: UUID
+        DisplayName:
+          type: string
+          description: Display name
+        LispInstance:
+          type: number
+          format: int64
+          description: Lisp Instance
+        EID:
+          type: string
+          description: EID
+        EIDHashLen:
+          type: number
+          format: int64
+          description: EID hash length
+        LispSignature:
+          type: string
+          description: Lisp Signature
+        LispMapServers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LispServer'
+          description: Lisp Map Server
+          title: time CreateTime     time.Time
+      description: EID Register
+      title: EID Register detail
+      required:
+      - AppCert
+      - AppPublicKey
+      - AppPrivateKey
+      - UUID
+      - DisplayName
+      - LispInstance
+      - EID
+      - EIDHashLen
+      - LispSignature
+      - LispMapServers
+    VariableGroupConditionOperator:
+      type: string
+      enum:
+      - CONDITION_OPERATOR_UNSPECIFIED
+      - CONDITION_OPERATOR_EQUALTO
+      - CONDITION_OPERATOR_NOTEQUALTO
+      default: CONDITION_OPERATOR_UNSPECIFIED
     appACEMatch:
       type: object
       properties:
@@ -3479,6 +3155,330 @@ components:
       required:
       - type
       - value
+    ActionScope:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ObjectType'
+          description: Scope of the action (e.g. project in case certificate expired at project level)
+        id:
+          type: string
+          description: Unique id of the type (e.g. projectId in case of project type)
+    ZedCloudOpsCmd:
+      type: object
+      properties:
+        counter:
+          type: number
+          format: int64
+          description: counter
+        opsTime:
+          type: object
+          format: date-time
+          description: 'Timestamp: Operational time'
+      description: Zed cloud Operation command
+      title: Zed cloud Operation command
+    VariableGroupVariable:
+      type: object
+      example:
+        format: VARIABLE_FORMAT_TEXT
+        name: username
+        label: Enter User Name
+        required: 'True'
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+          description: Name of the Variable (Required)
+        label:
+          type: string
+          description: Label for the variable (Required)
+        maxLength:
+          type: string
+          description: 'Max length of the value of the variable(Optional. Default: 1024)'
+        required:
+          type: boolean
+          description: 'This variable MUST be specified when creating an App Instance. (Optional. Default: False)'
+        default:
+          type: string
+          description: 'Default value of the variable. (Optional. Default: <Default value based on type>)'
+        processInput:
+          type: string
+        value:
+          type: string
+          description: User-specified value of the variable.(Required if required is true. Optional otherwise)
+        format:
+          $ref: '#/components/schemas/VariableVariableFormat'
+          description: Format of the user variable. (Required)
+        encode:
+          $ref: '#/components/schemas/VariableFileEncoding'
+          description: Encoding of file content. Applicable if format is VARIABLE_FORMAT_FILE
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariableOptionVal'
+          description: Key-Value pair of options. Applicable if format is VARIABLE_FORMAT_DROPDOWN
+      description: Edge Application Artifact Details
+      title: Edge Application detail
+      required:
+      - format
+      - name
+      - label
+      - required
+    LispServer:
+      type: object
+      properties:
+        nameOrIp:
+          type: string
+          description: name/IP
+        credential:
+          type: string
+          description: lisp credential
+      description: LispServer request payload
+      title: LispServer payload detail
+      required:
+      - nameOrIp
+      - credential
+    CustomConfigVariableGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the Variable Group(Required)
+        variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariableGroupVariable'
+          description: List of variables(Required)
+        required:
+          type: boolean
+          description: Indicates if the variable group is required to be specified for the App Instance. (Optional. Default:False)
+        condition:
+          $ref: '#/components/schemas/VariableGroupCondition'
+          description: 'Condition to apply the variable group. (Optional. Default: None)'
+    AppInstanceUpdate_HttpRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the app instance
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the app instance, unique across the enterprise. Once app instance is created, name can’t be changed
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        title:
+          type: string
+          description: User defined title of the app instance. Title can be changed at any time
+          maxLength: 256
+          minLength: 3
+          pattern: ^[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+$
+        description:
+          type: string
+          description: Detailed description of the app instance
+          maxLength: 256
+        revision:
+          $ref: '#/components/schemas/ObjectRevision'
+          description: app instance object revision details
+        projectId:
+          type: string
+          description: project name which the given app instance belong to
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        clusterID:
+          type: string
+          description: System defined universally unique clusterInstance ID, unique across the enterprise.
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        appId:
+          type: string
+          description: User defined name of the edge app, unique across the enterprise. Once app name is created, name can’t be changed
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        deviceId:
+          type: string
+          description: User defined name of the device name, unique across the enterprise. Once device name is defined, name can’t be changed
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        activate:
+          type: boolean
+          description: app instance activation flag
+        vminfo:
+          $ref: '#/components/schemas/vm'
+          description: virtual machine info
+        drives:
+          type: array
+          items:
+            $ref: '#/components/schemas/drive'
+          description: drive details
+        interfaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/appInterface'
+          description: application interfaces
+        userData:
+          type: string
+          description: 'Deprecated: Application initiazation script in cloud-config format to be used by cloud-init'
+        customConfig:
+          $ref: '#/components/schemas/CustomConfig'
+          description: Application initialization script template in cloud-config format and user specified values
+        collectStatsIPAddr:
+          type: string
+          description: holds the static Ip of the app instance
+        bundleversion:
+          type: string
+          description: version of bundle app is referring to
+        logs:
+          $ref: '#/components/schemas/AppInstanceLogs'
+          description: App Instance logs
+        restart:
+          $ref: '#/components/schemas/ZedCloudOpsCmd'
+          description: 'Restart counter: ZedCloudOpsCmd'
+        refresh:
+          $ref: '#/components/schemas/ZedCloudOpsCmd'
+          description: 'Refresh counter: ZedCloudOpsCmd'
+        purge:
+          $ref: '#/components/schemas/ZedCloudOpsCmd'
+          description: 'Purge counter: ZedCloudOpsCmd'
+        remoteConsole:
+          type: boolean
+          description: Remote console flag
+        encryptedSecrets:
+          type: object
+          additionalProperties:
+            type: string
+          description: user encrypted secrets map
+        cryptoKey:
+          type: string
+          description: Crypto Key for decrypting user secret information
+        manifestInfo:
+          $ref: '#/components/schemas/ManifestInfo'
+          description: app manifest Info
+        appType:
+          $ref: '#/components/schemas/AppType'
+          description: type of bundle
+        isSecretUpdated:
+          type: boolean
+          description: This field tells whether user secrets has updated or not, especially the cusotom config
+        appPolicyId:
+          type: string
+          description: app policy id
+        deploymentType:
+          $ref: '#/components/schemas/DeploymentType'
+          description: 'type of deployment for the app, eg: azure, k3s, standalone'
+        userDefinedVersion:
+          type: string
+          description: Instance version tells which edge app does this instance is running
+        startDelayInSeconds:
+          type: integer
+          format: int64
+          description: start delay is the time in seconds EVE should wait after boot before starting the application instance
+        cloudInitVersion:
+          type: integer
+          format: int64
+          description: Cloud-init version that indicates whether it necessary or not for cloud-init tool to restart in a guest
+        allowSnapshots:
+          type: boolean
+          description: Flag to determine if a snapshot creation is allowed
+        maxSnapshots:
+          type: integer
+          format: int64
+          description: Maximum number of snapshots allowed to be created
+        availableSnapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppInstanceSnapshot'
+          description: The list of available snapshots of the application instance
+        patchEnvelopeId:
+          type: string
+          description: patch envelope id
+        patchEnvelopeName:
+          type: string
+          description: patch envelope name
+        edgeNodeCluster:
+          $ref: '#/components/schemas/AppInstEdgeNodeCluster'
+          description: edge node cluster
+      description: App Instance detail
+      title: App Instance detail
+      required:
+      - name
+      - title
+      - projectId
+      - appId
+      - deviceId
+      - activate
+    DeploymentType:
+      type: string
+      enum:
+      - DEPLOYMENT_TYPE_UNSPECIFIED
+      - DEPLOYMENT_TYPE_STAND_ALONE
+      - DEPLOYMENT_TYPE_AZURE
+      - DEPLOYMENT_TYPE_K3S
+      - DEPLOYMENT_TYPE_AWS
+      - DEPLOYMENT_TYPE_K3S_AZURE
+      - DEPLOYMENT_TYPE_K3S_AWS
+      - DEPLOYMENT_TYPE_VMWARE_VCE
+      - DEPLOYMENT_TYPE_VMWARE_TKG_ATTACH
+      - DEPLOYMENT_TYPE_DOCKER_RUNTIME
+      default: DEPLOYMENT_TYPE_UNSPECIFIED
+    PatchReferenceUpdateConfig:
+      type: object
+      properties:
+        projectId:
+          type: string
+        patchenvelopeId:
+          type: string
+        appInstIDList:
+          type: array
+          items:
+            type: string
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+    AppInstanceLogs:
+      type: object
+      properties:
+        access:
+          type: boolean
+          description: Flags to enable / disable sending of logs generated by app instance to zedcloud
+      description: App Instance Logs configuration
+      title: App Instance Logs configuration
+      required:
+      - access
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
   securitySchemes:
     BearerToken:
       type: apiKey

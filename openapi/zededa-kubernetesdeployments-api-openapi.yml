@@ -873,59 +873,6 @@ paths:
         required: true
 components:
   schemas:
-    ZsrvResponse:
-      type: object
-      properties:
-        operationType:
-          $ref: '#/components/schemas/ZcOpsType'
-          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
-        operationStatus:
-          $ref: '#/components/schemas/ZcOpsStatus'
-          title: if this is log running job
-        objectKind:
-          type: string
-          title: zedcloud object kind on which the operation was performed
-        objectId:
-          type: string
-          title: Unique value identifies the object that was operated on
-        objectName:
-          type: string
-          title: name of the object
-        objectRevision:
-          type: string
-          title: 'object revision post the operation, note Read operation
-
-            doesn''t change the revision'
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-        operationTime:
-          type: string
-          title: time of operation
-        startTime:
-          type: string
-          title: total time taken by operations
-        endTime:
-          type: string
-        user:
-          type: string
-          title: the operation is performed on behalf of this user
-        httpStatusCode:
-          type: integer
-          format: int32
-          title: http response
-        httpStatusMsg:
-          type: string
-          title: summary of the error in text format
-        jobId:
-          type: string
-          title: for tracking asynchronous tasks
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZsrvError'
-          title: 'one or more errors will be set if the operation failed
-
-            i.e. httpStatusCode != 2xx'
     ZsrvErrorCode:
       type: string
       enum:
@@ -983,85 +930,43 @@ components:
       required:
       - isMultiCluster
       - clusterMetadata
-    Chart:
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    protobufAny:
       type: object
       properties:
-        name:
+        typeUrl:
           type: string
-          description: 'Name of the Helm chart. Example: ''nginx'''
-        version:
+        value:
           type: string
-          description: 'Version of the Helm chart. Example: ''15.4.0'''
-        customValues:
-          type: object
-          description: 'Custom values for the Helm chart. Example: {''replicaCount'': 3, ''service'': {''type'': ''LoadBalancer'', ''port'': 80}}'
-        repoIdentifier:
-          type: string
-          description: 'Repository identifier for the Helm chart. Example: ''bitnami'''
-      description: Details of the Helm chart
-      title: Helm chart details
+          format: byte
+    DeploymentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/K8sDeploymentType'
+          description: Type of deployment (required). Currently only 'HELMCHART' is supported.
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+          description: Metadata for the deployment (required)
+        data:
+          $ref: '#/components/schemas/DeploymentData'
+          description: Data for the deployment (required)
+      description: Deployment create request
+      title: Deployment create request
       required:
-      - name
-      - version
-    DeploymentData:
-      type: object
-      properties:
-        helmChartData:
-          $ref: '#/components/schemas/HelmChartData'
-          description: Helm chart data for the deployment
-      description: Data for the deployment
-      title: Deployment data
-      required:
-      - helmChartData
-    DeploymentListResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-          format: int64
-          description: Total number of deployments
-        stateSummary:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of deployment states
-        deployments:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeploymentGetResponse'
-          description: List of deployments
-      description: Response containing a list of deployments
-      title: Deployment list response
-    Summary:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    HelmChartData:
-      type: object
-      properties:
-        chart:
-          $ref: '#/components/schemas/Chart'
-          description: Helm chart details for the deployment
-        targetClusters:
-          $ref: '#/components/schemas/TargetClusters'
-          description: Target clusters for the deployment
-      description: Data for the Helm chart deployment
-      title: Helm chart data
-      required:
-      - chart
-      - targetClusters
+      - type
+      - metadata
+      - data
     ObjectType:
       type: string
       enum:
@@ -1107,43 +1012,12 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
     K8sDeploymentType:
       type: string
       enum:
       - K8sDeploymentType_UNSPECIFIED
       - HELMCHART
       default: K8sDeploymentType_UNSPECIFIED
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
     Metadata:
       type: object
       properties:
@@ -1164,40 +1038,6 @@ components:
       required:
       - name
       - projectId
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
-    ClusterMetadata:
-      type: object
-      properties:
-        clusterId:
-          type: string
-          description: 'ID of the target cluster. Example: ''cluster-abc123'''
-        orchestratorClusterId:
-          type: string
-          description: 'Orchestrator cluster ID. Example: ''rancher-cluster-123'''
-        clusterName:
-          type: string
-          description: 'Name of the target cluster. Example: ''production-k8s'''
-        kubeVersion:
-          type: string
-          description: 'Kubernetes version of the target cluster. Example: ''v1.28.0'''
-      description: Metadata for the target cluster
-      title: Cluster metadata
-      required:
-      - clusterId
-      - orchestratorClusterId
     DeploymentGetResponse:
       type: object
       properties:
@@ -1246,24 +1086,138 @@ components:
           description: User who last updated the deployment
       description: Deployment get response
       title: Deployment get response
-    DeploymentRequest:
+    DeploymentListResponse:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/K8sDeploymentType'
-          description: Type of deployment (required). Currently only 'HELMCHART' is supported.
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-          description: Metadata for the deployment (required)
-        data:
-          $ref: '#/components/schemas/DeploymentData'
-          description: Data for the deployment (required)
-      description: Deployment create request
-      title: Deployment create request
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of deployments
+        stateSummary:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of deployment states
+        deployments:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeploymentGetResponse'
+          description: List of deployments
+      description: Response containing a list of deployments
+      title: Deployment list response
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    ZsrvResponse:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
+          type: string
+          title: zedcloud object kind on which the operation was performed
+        objectId:
+          type: string
+          title: Unique value identifies the object that was operated on
+        objectName:
+          type: string
+          title: name of the object
+        objectRevision:
+          type: string
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
+    DeploymentData:
+      type: object
+      properties:
+        helmChartData:
+          $ref: '#/components/schemas/HelmChartData'
+          description: Helm chart data for the deployment
+      description: Data for the deployment
+      title: Deployment data
       required:
-      - type
-      - metadata
-      - data
+      - helmChartData
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    Chart:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Name of the Helm chart. Example: ''nginx'''
+        version:
+          type: string
+          description: 'Version of the Helm chart. Example: ''15.4.0'''
+        customValues:
+          type: object
+          description: 'Custom values for the Helm chart. Example: {''replicaCount'': 3, ''service'': {''type'': ''LoadBalancer'', ''port'': 80}}'
+        repoIdentifier:
+          type: string
+          description: 'Repository identifier for the Helm chart. Example: ''bitnami'''
+      description: Details of the Helm chart
+      title: Helm chart details
+      required:
+      - name
+      - version
     ZcOpsStatus:
       type: string
       enum:
@@ -1274,6 +1228,52 @@ components:
       default: OPS_STATUS_UNSPECIFIED
       description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
       title: ZedCloud internal operation status
+    ClusterMetadata:
+      type: object
+      properties:
+        clusterId:
+          type: string
+          description: 'ID of the target cluster. Example: ''cluster-abc123'''
+        orchestratorClusterId:
+          type: string
+          description: 'Orchestrator cluster ID. Example: ''rancher-cluster-123'''
+        clusterName:
+          type: string
+          description: 'Name of the target cluster. Example: ''production-k8s'''
+        kubeVersion:
+          type: string
+          description: 'Kubernetes version of the target cluster. Example: ''v1.28.0'''
+      description: Metadata for the target cluster
+      title: Cluster metadata
+      required:
+      - clusterId
+      - orchestratorClusterId
+    HelmChartData:
+      type: object
+      properties:
+        chart:
+          $ref: '#/components/schemas/Chart'
+          description: Helm chart details for the deployment
+        targetClusters:
+          $ref: '#/components/schemas/TargetClusters'
+          description: Target clusters for the deployment
+      description: Data for the Helm chart deployment
+      title: Helm chart data
+      required:
+      - chart
+      - targetClusters
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -544,6 +544,239 @@ paths:
       - CertificateEnrollmentProfileConfiguration
 components:
   schemas:
+    ObjectRevision:
+      type: object
+      properties:
+        prev:
+          type: string
+          description: Previous
+        curr:
+          type: string
+          description: Current Database version of the record
+        createdAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was created.
+        createdBy:
+          type: string
+          description: 'User data: Created By'
+        updatedAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was last updated.
+        updatedBy:
+          type: string
+          description: 'User data: Updated By'
+      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+      title: ObjectRevision is used to store the user information.
+      required:
+      - curr
+      - createdAt
+      - createdBy
+      - updatedAt
+      - updatedBy
+    CEPCommonKeyType:
+      type: string
+      enum:
+      - KEY_TYPE_UNSPECIFIED
+      - KEY_TYPE_RSA_2048
+      - KEY_TYPE_RSA_3072
+      - KEY_TYPE_RSA_4096
+      default: KEY_TYPE_UNSPECIFIED
+      title: Supported key types (algorithm + parameters)
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    CEPCommonSCEPProfileSecrets:
+      type: object
+      properties:
+        challengePassword:
+          type: string
+          description: SCEP challenge password for certificate enrollment authentication
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
+    CEPCommonProjectReference:
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Project unique identifier
+        projectName:
+          type: string
+          description: Project name
+      title: ProjectReference represents a project that references a CEP profile
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    CEPCommonHashAlgorithm:
+      type: string
+      enum:
+      - HASH_ALGORITHM_UNSPECIFIED
+      - HASH_ALGORITHM_SHA256
+      - HASH_ALGORITHM_SHA384
+      - HASH_ALGORITHM_SHA512
+      default: HASH_ALGORITHM_UNSPECIFIED
+      title: Supported hash algorithms for signing
+    CEPCommonSCEPProfiles:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/CEPCommonSCEPProfile'
+          description: List of SCEP profiles
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Pagination cursor for next page
+      description: Paginated list of SCEP profiles
+      title: SCEP Profiles List
+    CEPCommonSCEPProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System-generated unique identifier (UUID)
+          readOnly: true
+        name:
+          type: string
+          description: User-defined unique name for the profile
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+        title:
+          type: string
+          description: Human-readable display title
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+        description:
+          type: string
+          description: Detailed description of the profile purpose
+          maxLength: 256
+        scepUrl:
+          type: string
+          description: Full SCEP server URL including scheme, host, and path (e.g., https://ca.example.com/scep)
+        useControllerProxy:
+          type: boolean
+          description: If true, SCEP requests are routed through the controller proxy; if false, device connects directly to SCEP server
+        secret:
+          $ref: '#/components/schemas/CEPCommonSCEPProfileSecrets'
+          description: Write-only secret fields (challenge password). Not returned in GET responses.
+        encryptedSecrets:
+          type: object
+          additionalProperties:
+            type: string
+          description: Encrypted secret data (set by server, do not modify)
+        cryptoKey:
+          type: string
+          description: Encryption key reference (set by server, do not modify)
+        caCertPem:
+          type: array
+          items:
+            type: string
+            format: byte
+          description: PEM-encoded trusted CA certificates for SCEP server validation (per RFC8894 section 2.2)
+        csrProfile:
+          $ref: '#/components/schemas/CEPCommonCSRProfile'
+          description: Certificate Signing Request configuration including subject DN, SANs, and key parameters
+        enterpriseId:
+          type: string
+          description: Enterprise ID owning this profile
+          readOnly: true
+        revision:
+          $ref: '#/components/schemas/ObjectRevision'
+          description: Object revision information
+          readOnly: true
+        projectsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/CEPCommonProjectReference'
+          description: Projects referencing this CEP profile (populated only when showProjectsList=true)
+          readOnly: true
+      description: SCEP Certificate Enrollment Profile for obtaining certificates from a SCEP server
+      title: SCEP Profile
+      required:
+      - name
+      - scepUrl
+      - caCertPem
+      - csrProfile
     ZsrvResponse:
       type: object
       properties:
@@ -642,182 +875,6 @@ components:
       title: CSR Profile
       required:
       - commonName
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    CEPCommonProjectReference:
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: Project unique identifier
-        projectName:
-          type: string
-          description: Project name
-      title: ProjectReference represents a project that references a CEP profile
-    CEPCommonHashAlgorithm:
-      type: string
-      enum:
-      - HASH_ALGORITHM_UNSPECIFIED
-      - HASH_ALGORITHM_SHA256
-      - HASH_ALGORITHM_SHA384
-      - HASH_ALGORITHM_SHA512
-      default: HASH_ALGORITHM_UNSPECIFIED
-      title: Supported hash algorithms for signing
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
-    CEPCommonKeyType:
-      type: string
-      enum:
-      - KEY_TYPE_UNSPECIFIED
-      - KEY_TYPE_RSA_2048
-      - KEY_TYPE_RSA_3072
-      - KEY_TYPE_RSA_4096
-      default: KEY_TYPE_UNSPECIFIED
-      title: Supported key types (algorithm + parameters)
-    CEPCommonSCEPProfileSecrets:
-      type: object
-      properties:
-        challengePassword:
-          type: string
-          description: SCEP challenge password for certificate enrollment authentication
-    CEPCommonSCEPProfile:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System-generated unique identifier (UUID)
-          readOnly: true
-        name:
-          type: string
-          description: User-defined unique name for the profile
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-        title:
-          type: string
-          description: Human-readable display title
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
-        description:
-          type: string
-          description: Detailed description of the profile purpose
-          maxLength: 256
-        scepUrl:
-          type: string
-          description: Full SCEP server URL including scheme, host, and path (e.g., https://ca.example.com/scep)
-        useControllerProxy:
-          type: boolean
-          description: If true, SCEP requests are routed through the controller proxy; if false, device connects directly to SCEP server
-        secret:
-          $ref: '#/components/schemas/CEPCommonSCEPProfileSecrets'
-          description: Write-only secret fields (challenge password). Not returned in GET responses.
-        encryptedSecrets:
-          type: object
-          additionalProperties:
-            type: string
-          description: Encrypted secret data (set by server, do not modify)
-        cryptoKey:
-          type: string
-          description: Encryption key reference (set by server, do not modify)
-        caCertPem:
-          type: array
-          items:
-            type: string
-            format: byte
-          description: PEM-encoded trusted CA certificates for SCEP server validation (per RFC8894 section 2.2)
-        csrProfile:
-          $ref: '#/components/schemas/CEPCommonCSRProfile'
-          description: Certificate Signing Request configuration including subject DN, SANs, and key parameters
-        enterpriseId:
-          type: string
-          description: Enterprise ID owning this profile
-          readOnly: true
-        revision:
-          $ref: '#/components/schemas/ObjectRevision'
-          description: Object revision information
-          readOnly: true
-        projectsList:
-          type: array
-          items:
-            $ref: '#/components/schemas/CEPCommonProjectReference'
-          description: Projects referencing this CEP profile (populated only when showProjectsList=true)
-          readOnly: true
-      description: SCEP Certificate Enrollment Profile for obtaining certificates from a SCEP server
-      title: SCEP Profile
-      required:
-      - name
-      - scepUrl
-      - caCertPem
-      - csrProfile
     ObjectType:
       type: string
       enum:
@@ -863,6 +920,16 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
     ZcOpsType:
       type: string
       enum:
@@ -874,85 +941,18 @@ components:
       - OPS_TYPE_LIST
       default: OPS_TYPE_UNSPECIFIED
       title: ZedCloud internal operation type
-    ZcOpsStatus:
-      type: string
-      enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
-    CEPCommonSCEPProfiles:
+    googlerpcStatus:
       type: object
       properties:
-        list:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
           type: array
           items:
-            $ref: '#/components/schemas/CEPCommonSCEPProfile'
-          description: List of SCEP profiles
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Pagination cursor for next page
-      description: Paginated list of SCEP profiles
-      title: SCEP Profiles List
-    ObjectRevision:
-      type: object
-      properties:
-        prev:
-          type: string
-          description: Previous
-        curr:
-          type: string
-          description: Current Database version of the record
-        createdAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was created.
-        createdBy:
-          type: string
-          description: 'User data: Created By'
-        updatedAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was last updated.
-        updatedBy:
-          type: string
-          description: 'User data: Updated By'
-      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
-      title: ObjectRevision is used to store the user information.
-      required:
-      - curr
-      - createdAt
-      - createdBy
-      - updatedAt
-      - updatedBy
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
+            $ref: '#/components/schemas/protobufAny'
   securitySchemes:
     BearerToken:
       type: apiKey

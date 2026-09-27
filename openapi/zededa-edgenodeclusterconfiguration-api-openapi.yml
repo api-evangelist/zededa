@@ -993,89 +993,31 @@ paths:
         url: https://help.zededa.com
 components:
   schemas:
-    ZsrvResponse:
+    BaseOSImage:
       type: object
       properties:
-        operationType:
-          $ref: '#/components/schemas/ZcOpsType'
-          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
-        operationStatus:
-          $ref: '#/components/schemas/ZcOpsStatus'
-          title: if this is log running job
-        objectKind:
+        uuid:
           type: string
-          title: zedcloud object kind on which the operation was performed
-        objectId:
+          description: system generated unique id for an image
+        version:
           type: string
-          title: Unique value identifies the object that was operated on
-        objectName:
+          description: image version
+        imageName:
           type: string
-          title: name of the object
-        objectRevision:
+          description: image name
+        activate:
+          type: boolean
+          description: activation flag
+        imvolId:
           type: string
-          title: 'object revision post the operation, note Read operation
-
-            doesn''t change the revision'
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-        operationTime:
-          type: string
-          title: time of operation
-        startTime:
-          type: string
-          title: total time taken by operations
-        endTime:
-          type: string
-        user:
-          type: string
-          title: the operation is performed on behalf of this user
-        httpStatusCode:
-          type: integer
-          format: int32
-          title: http response
-        httpStatusMsg:
-          type: string
-          title: summary of the error in text format
-        jobId:
-          type: string
-          title: for tracking asynchronous tasks
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZsrvError'
-          title: 'one or more errors will be set if the operation failed
-
-            i.e. httpStatusCode != 2xx'
-    EdgeNodeClusterNode:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the node
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        clusterInterface:
-          type: string
-          description: User defined name of the cluster interface, unique across the enterprise. Once cluster interface is created, name can’t be changed
-        nodeType:
-          $ref: '#/components/schemas/EdgeNodeClusterNodeType'
-          description: Type of node
-        clusterPrefix:
-          type: string
-          description: A cluster prefix
-        resourceLabels:
-          type: object
-          additionalProperties:
-            type: string
-          description: Resource labels are name/value pairs that enable you to categorize resources. Label names are case insensitive with max_length 512 and min_length 3. Label values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-      description: Cluster node detail
-      title: Cluster node detail
+          description: immutable Volume for this base image
+      description: Base OS image request details
+      title: Base OS image payload detail
       required:
-      - id
-      - clusterInterface
+      - uuid
+      - version
+      - imageName
+      - activate
     ZsrvErrorCode:
       type: string
       enum:
@@ -1114,119 +1056,17 @@ components:
       default: zMsgErrorNone
       description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
       title: ZedCould internal error code
-    EdgeNodeClusterProject:
+    EdgeNodeClusterInterfacePorts:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-    BaseOSImage:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: system generated unique id for an image
-        version:
-          type: string
-          description: image version
-        imageName:
-          type: string
-          description: image name
-        activate:
-          type: boolean
-          description: activation flag
-        imvolId:
-          type: string
-          description: immutable Volume for this base image
-      description: Base OS image request details
-      title: Base OS image payload detail
-      required:
-      - uuid
-      - version
-      - imageName
-      - activate
-    EdgeNodeClusterProjects:
-      type: object
-      properties:
-        list:
+        ports:
           type: array
           items:
-            $ref: '#/components/schemas/EdgeNodeClusterProject'
-        next:
-          $ref: '#/components/schemas/Cursor'
-        totalCount:
-          type: integer
-          format: int64
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    AdminState:
-      type: string
-      enum:
-      - ADMIN_STATE_UNSPECIFIED
-      - ADMIN_STATE_CREATED
-      - ADMIN_STATE_DELETED
-      - ADMIN_STATE_ACTIVE
-      - ADMIN_STATE_INACTIVE
-      - ADMIN_STATE_REGISTERED
-      - ADMIN_STATE_ARCHIVED
-      default: ADMIN_STATE_UNSPECIFIED
-      description: "- ADMIN_STATE_CREATED: Entity Created in the controller\n - ADMIN_STATE_DELETED: Entity Deleted in the controller\n - ADMIN_STATE_ACTIVE: Entity Activated in the controller\n - ADMIN_STATE_INACTIVE: Entity Deactivated in the controller\n - ADMIN_STATE_REGISTERED: Specific to Edge-node - Edge-node Registered with the controller\n - ADMIN_STATE_ARCHIVED: Entity Archived in the controller"
-      title: AdminState - On update, please update AdminState_HttpRequest as well
+            type: string
+        sharedLabels:
+          type: array
+          items:
+            type: string
     Cursor:
       type: object
       properties:
@@ -1252,6 +1092,75 @@ components:
           description: Total number of pages to be fetched.
       description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
       title: Cursor is used as filter in list operation.
+    EdgeNodeClusterConfigSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the cluster
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the cluster, unique across the enterprise. Once cluster is created, name can’t be changed
+        title:
+          type: string
+          description: User defined title of the cluster. Title can be changed at any time
+        description:
+          type: string
+          description: Detailed description of the cluster
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        projectId:
+          type: string
+          description: Foreign key to the project
+        clusterPrefix:
+          type: string
+          description: A cluster prefix
+        seedNodeId:
+          type: string
+          description: Seed node id
+        seedNodeIp:
+          type: string
+          description: Seed node ip
+        adminState:
+          $ref: '#/components/schemas/AdminState'
+          description: Admin state of the cluster
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EdgeNodeClusterNode'
+          description: A list of nodes in the cluster
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation time of the cluster
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last updated time of the cluster
+        projectName:
+          type: string
+          description: Project Name
+      description: Cluster config summary
+      title: Cluster config summary
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
     EdgeNodeCluster:
       type: object
       properties:
@@ -1313,64 +1222,90 @@ components:
         value:
           type: string
           format: byte
-    EdgeNodeClusterConfigSummary:
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    EdgeNodeClusterProjects:
       type: object
       properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the cluster
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the cluster, unique across the enterprise. Once cluster is created, name can’t be changed
-        title:
-          type: string
-          description: User defined title of the cluster. Title can be changed at any time
-        description:
-          type: string
-          description: Detailed description of the cluster
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-        projectId:
-          type: string
-          description: Foreign key to the project
-        clusterPrefix:
-          type: string
-          description: A cluster prefix
-        seedNodeId:
-          type: string
-          description: Seed node id
-        seedNodeIp:
-          type: string
-          description: Seed node ip
-        adminState:
-          $ref: '#/components/schemas/AdminState'
-          description: Admin state of the cluster
-        nodes:
+        list:
           type: array
           items:
-            $ref: '#/components/schemas/EdgeNodeClusterNode'
-          description: A list of nodes in the cluster
-        createdAt:
-          type: string
-          format: date-time
-          description: Creation time of the cluster
-        updatedAt:
-          type: string
-          format: date-time
-          description: Last updated time of the cluster
-        projectName:
-          type: string
-          description: Project Name
-      description: Cluster config summary
-      title: Cluster config summary
+            $ref: '#/components/schemas/EdgeNodeClusterProject'
+        next:
+          $ref: '#/components/schemas/Cursor'
+        totalCount:
+          type: integer
+          format: int64
+    EdgeNodeClusterType:
+      type: string
+      enum:
+      - EDGE_NODE_CLUSTER_TYPE_STANDART
+      - EDGE_NODE_CLUSTER_TYPE_ZKS
+      default: EDGE_NODE_CLUSTER_TYPE_STANDART
+      description: " - EDGE_NODE_CLUSTER_TYPE_STANDART: A standard cluster is a cluster that has exactly 3 nodes.\nThis is the default type, which does not support zks clusters.\n - EDGE_NODE_CLUSTER_TYPE_ZKS: A zks cluster is a cluster that can have 1, 3 or more nodes.\nIts role is to support zks clusters."
+    EdgeNodeClusterNodeType:
+      type: string
+      enum:
+      - EDGE_NODE_CLUSTER_NODE_TYPE_UNSPECIFIED
+      - EDGE_NODE_CLUSTER_NODE_TYPE_SERVER
+      - EDGE_NODE_CLUSTER_NODE_TYPE_AGENT
+      default: EDGE_NODE_CLUSTER_NODE_TYPE_UNSPECIFIED
+    AdminState:
+      type: string
+      enum:
+      - ADMIN_STATE_UNSPECIFIED
+      - ADMIN_STATE_CREATED
+      - ADMIN_STATE_DELETED
+      - ADMIN_STATE_ACTIVE
+      - ADMIN_STATE_INACTIVE
+      - ADMIN_STATE_REGISTERED
+      - ADMIN_STATE_ARCHIVED
+      default: ADMIN_STATE_UNSPECIFIED
+      description: "- ADMIN_STATE_CREATED: Entity Created in the controller\n - ADMIN_STATE_DELETED: Entity Deleted in the controller\n - ADMIN_STATE_ACTIVE: Entity Activated in the controller\n - ADMIN_STATE_INACTIVE: Entity Deactivated in the controller\n - ADMIN_STATE_REGISTERED: Specific to Edge-node - Edge-node Registered with the controller\n - ADMIN_STATE_ARCHIVED: Entity Archived in the controller"
+      title: AdminState - On update, please update AdminState_HttpRequest as well
     EdgeNodeClusters:
       type: object
       properties:
@@ -1386,25 +1321,6 @@ components:
           type: integer
           format: int64
           description: total count of clusters
-    EdgeNodeClusterNodeType:
-      type: string
-      enum:
-      - EDGE_NODE_CLUSTER_NODE_TYPE_UNSPECIFIED
-      - EDGE_NODE_CLUSTER_NODE_TYPE_SERVER
-      - EDGE_NODE_CLUSTER_NODE_TYPE_AGENT
-      default: EDGE_NODE_CLUSTER_NODE_TYPE_UNSPECIFIED
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
     ZsrvError:
       type: object
       properties:
@@ -1419,13 +1335,96 @@ components:
         details:
           type: string
           title: Field captures string description of details
-    EdgeNodeClusterType:
-      type: string
-      enum:
-      - EDGE_NODE_CLUSTER_TYPE_STANDART
-      - EDGE_NODE_CLUSTER_TYPE_ZKS
-      default: EDGE_NODE_CLUSTER_TYPE_STANDART
-      description: " - EDGE_NODE_CLUSTER_TYPE_STANDART: A standard cluster is a cluster that has exactly 3 nodes.\nThis is the default type, which does not support zks clusters.\n - EDGE_NODE_CLUSTER_TYPE_ZKS: A zks cluster is a cluster that can have 1, 3 or more nodes.\nIts role is to support zks clusters."
+    ZsrvResponse:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
+          type: string
+          title: zedcloud object kind on which the operation was performed
+        objectId:
+          type: string
+          title: Unique value identifies the object that was operated on
+        objectName:
+          type: string
+          title: name of the object
+        objectRevision:
+          type: string
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
+    EdgeNodeClusterProject:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    EdgeNodeClusterNode:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the node
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        clusterInterface:
+          type: string
+          description: User defined name of the cluster interface, unique across the enterprise. Once cluster interface is created, name can’t be changed
+        nodeType:
+          $ref: '#/components/schemas/EdgeNodeClusterNodeType'
+          description: Type of node
+        clusterPrefix:
+          type: string
+          description: A cluster prefix
+        resourceLabels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Resource labels are name/value pairs that enable you to categorize resources. Label names are case insensitive with max_length 512 and min_length 3. Label values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+      description: Cluster node detail
+      title: Cluster node detail
+      required:
+      - id
+      - clusterInterface
     ZcOpsStatus:
       type: string
       enum:
@@ -1436,17 +1435,18 @@ components:
       default: OPS_STATUS_UNSPECIFIED
       description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
       title: ZedCloud internal operation status
-    EdgeNodeClusterInterfacePorts:
+    googlerpcStatus:
       type: object
       properties:
-        ports:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
           type: array
           items:
-            type: string
-        sharedLabels:
-          type: array
-          items:
-            type: string
+            $ref: '#/components/schemas/protobufAny'
   securitySchemes:
     BearerToken:
       type: apiKey

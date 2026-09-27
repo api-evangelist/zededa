@@ -681,67 +681,37 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
 components:
   schemas:
-    ZsrvResponse:
+    ObjectRevision:
       type: object
       properties:
-        operationType:
-          $ref: '#/components/schemas/ZcOpsType'
-          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
-        operationStatus:
-          $ref: '#/components/schemas/ZcOpsStatus'
-          title: if this is log running job
-        objectKind:
+        prev:
           type: string
-          title: zedcloud object kind on which the operation was performed
-        objectId:
+          description: Previous
+        curr:
           type: string
-          title: Unique value identifies the object that was operated on
-        objectName:
+          description: Current Database version of the record
+        createdAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was created.
+        createdBy:
           type: string
-          title: name of the object
-        objectRevision:
+          description: 'User data: Created By'
+        updatedAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was last updated.
+        updatedBy:
           type: string
-          title: 'object revision post the operation, note Read operation
-
-            doesn''t change the revision'
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-        operationTime:
-          type: string
-          title: time of operation
-        startTime:
-          type: string
-          title: total time taken by operations
-        endTime:
-          type: string
-        user:
-          type: string
-          title: the operation is performed on behalf of this user
-        httpStatusCode:
-          type: integer
-          format: int32
-          title: http response
-        httpStatusMsg:
-          type: string
-          title: summary of the error in text format
-        jobId:
-          type: string
-          title: for tracking asynchronous tasks
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZsrvError'
-          title: 'one or more errors will be set if the operation failed
-
-            i.e. httpStatusCode != 2xx'
-    CertificateChain:
-      type: object
-      properties:
-        certificates:
-          type: array
-          items:
-            $ref: '#/components/schemas/Certificate'
-          description: List of Certificate object holds the details of certificate like cert block, encryption type, validity, subject etc
+          description: 'User data: Updated By'
+      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+      title: ObjectRevision is used to store the user information.
+      required:
+      - curr
+      - createdAt
+      - createdBy
+      - updatedAt
+      - updatedBy
     ZsrvErrorCode:
       type: string
       enum:
@@ -780,102 +750,6 @@ components:
       default: zMsgErrorNone
       description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
       title: ZedCould internal error code
-    Summary:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    RSA:
-      type: object
-      properties:
-        rsaBits:
-          type: string
-          format: int64
-          description: RSA Encryption Key bit size.
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    DatastoreProjectList:
-      type: object
-      properties:
-        projectDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectDetail'
-          description: List of projects which are associated with the given datastore
-        totalCount:
-          type: integer
-          format: int64
-          description: total number of records
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Responded page details of filtered records
     Cursor:
       type: object
       properties:
@@ -901,47 +775,35 @@ components:
           description: Total number of pages to be fetched.
       description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
       title: Cursor is used as filter in list operation.
-    SANValues:
+    ObjectDetail:
       type: object
       properties:
-        hosts:
-          type: array
-          items:
-            type: string
-          description: List of permitted hosts.
-        emaildIds:
-          type: array
-          items:
-            type: string
-          description: List of permitted email addresses.
-        uris:
-          type: array
-          items:
-            type: string
-          description: List of permitted URIs.
-        ips:
-          type: array
-          items:
-            type: string
-          description: List of permitted IP addresses.
-        dns:
-          type: array
-          items:
-            type: string
-          description: List of permitted DNS names.
-        upns:
-          type: array
-          items:
-            type: string
-          description: List of permitted User principal names.
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
+        id:
           type: string
-        value:
+        name:
           type: string
-          format: byte
+    Origin:
+      type: string
+      enum:
+      - ORIGIN_UNSPECIFIED
+      - ORIGIN_IMPORTED
+      - ORIGIN_LOCAL
+      - ORIGIN_GLOBAL
+      - ORIGIN_APP_PROFILE_LOCAL
+      default: ORIGIN_UNSPECIFIED
+      description: "- ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+      title: 'OriginType : enum specifies the Object orgigin type'
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
     Certificate:
       type: object
       properties:
@@ -1019,6 +881,260 @@ components:
           description: Sequence of extended key usages.
         signatureAlgorithm:
           type: string
+    CertificateChain:
+      type: object
+      properties:
+        certificates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certificate'
+          description: List of Certificate object holds the details of certificate like cert block, encryption type, validity, subject etc
+    ECDSA:
+      type: object
+      properties:
+        curve:
+          type: string
+          description: ECDSA curve to be used while signing the certificate.
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    DatastoreStatus:
+      type: string
+      enum:
+      - DATASTORE_STATUS_UNSPECIFIED
+      - DATASTORE_STATUS_CREATED
+      - DATASTORE_STATUS_VERIFYING
+      - DATASTORE_STATUS_ACTIVE
+      - DATASTORE_STATUS_INACTIVE
+      - DATASTORE_STATUS_FAILED
+      default: DATASTORE_STATUS_UNSPECIFIED
+      title: Datastore status
+    DatastoreType:
+      type: string
+      enum:
+      - DATASTORE_TYPE_UNSPECIFIED
+      - DATASTORE_TYPE_HTTP
+      - DATASTORE_TYPE_HTTPS
+      - DATASTORE_TYPE_AWSS3
+      - DATASTORE_TYPE_SFTP
+      - DATASTORE_TYPE_CONTAINERREGISTRY
+      - DATASTORE_TYPE_AZUREBLOB
+      - DATASTORE_TYPE_ZEDEDAS3
+      - DATASTORE_TYPE_ZEDEDABLOB
+      - DATASTORE_TYPE_FILE_STORAGE
+      default: DATASTORE_TYPE_UNSPECIFIED
+      description: "- DATASTORE_TYPE_HTTP: Datastore hosted on HTTP server\n - DATASTORE_TYPE_HTTPS: Datastore hosted on HTTPS server\n - DATASTORE_TYPE_AWSS3: Datastore hosted on AWS S3\n - DATASTORE_TYPE_SFTP: Datastore hosted on SFTP server\n - DATASTORE_TYPE_CONTAINERREGISTRY: Datastore hosted on Container Registry (e.g. Dockerhub, Azure Container Registry etc.)\n - DATASTORE_TYPE_AZUREBLOB: Datastore hosted on Azure BlobStorage\n - DATASTORE_TYPE_ZEDEDAS3: ZEDEDA Owned and Operated datastore hosted on AWS S3\n - DATASTORE_TYPE_ZEDEDABLOB: ZEDEDA Owned and Operated datastore hosted on Azure BlobStorage\n - DATASTORE_TYPE_FILE_STORAGE: Datastore hosted on File Storage (e.g. HTTP, HTTPS, AWS S3, SFTP, Azure Blob, etc.)"
+      title: Datastore type
+    RSA:
+      type: object
+      properties:
+        rsaBits:
+          type: string
+          format: int64
+          description: RSA Encryption Key bit size.
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    DatastoreProjectList:
+      type: object
+      properties:
+        projectDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectDetail'
+          description: List of projects which are associated with the given datastore
+        totalCount:
+          type: integer
+          format: int64
+          description: total number of records
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Responded page details of filtered records
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    ZsrvResponse:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
+          type: string
+          title: zedcloud object kind on which the operation was performed
+        objectId:
+          type: string
+          title: Unique value identifies the object that was operated on
+        objectName:
+          type: string
+          title: name of the object
+        objectRevision:
+          type: string
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
+    SANValues:
+      type: object
+      properties:
+        hosts:
+          type: array
+          items:
+            type: string
+          description: List of permitted hosts.
+        emaildIds:
+          type: array
+          items:
+            type: string
+          description: List of permitted email addresses.
+        uris:
+          type: array
+          items:
+            type: string
+          description: List of permitted URIs.
+        ips:
+          type: array
+          items:
+            type: string
+          description: List of permitted IP addresses.
+        dns:
+          type: array
+          items:
+            type: string
+          description: List of permitted DNS names.
+        upns:
+          type: array
+          items:
+            type: string
+          description: List of permitted User principal names.
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    Datastores:
+      type: object
+      properties:
+        summaryByType:
+          $ref: '#/components/schemas/Summary'
+          description: Type distribution summary of filtered Datastore records
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatastoreInfo'
+          description: List of filtered Datastore records
+        summaryByCategory:
+          $ref: '#/components/schemas/Summary'
+          description: Category distribution summary of filtered Datastore records
+        summaryByOrigin:
+          $ref: '#/components/schemas/Summary'
+          description: datstore by origin summary
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Responded page details of filtered records
     Subject:
       type: object
       properties:
@@ -1058,51 +1174,6 @@ components:
         serialNumber:
           type: string
           description: Subject cerial number
-    Origin:
-      type: string
-      enum:
-      - ORIGIN_UNSPECIFIED
-      - ORIGIN_IMPORTED
-      - ORIGIN_LOCAL
-      - ORIGIN_GLOBAL
-      - ORIGIN_APP_PROFILE_LOCAL
-      default: ORIGIN_UNSPECIFIED
-      description: "- ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
-      title: 'OriginType : enum specifies the Object orgigin type'
-    DatastoreType:
-      type: string
-      enum:
-      - DATASTORE_TYPE_UNSPECIFIED
-      - DATASTORE_TYPE_HTTP
-      - DATASTORE_TYPE_HTTPS
-      - DATASTORE_TYPE_AWSS3
-      - DATASTORE_TYPE_SFTP
-      - DATASTORE_TYPE_CONTAINERREGISTRY
-      - DATASTORE_TYPE_AZUREBLOB
-      - DATASTORE_TYPE_ZEDEDAS3
-      - DATASTORE_TYPE_ZEDEDABLOB
-      - DATASTORE_TYPE_FILE_STORAGE
-      default: DATASTORE_TYPE_UNSPECIFIED
-      description: "- DATASTORE_TYPE_HTTP: Datastore hosted on HTTP server\n - DATASTORE_TYPE_HTTPS: Datastore hosted on HTTPS server\n - DATASTORE_TYPE_AWSS3: Datastore hosted on AWS S3\n - DATASTORE_TYPE_SFTP: Datastore hosted on SFTP server\n - DATASTORE_TYPE_CONTAINERREGISTRY: Datastore hosted on Container Registry (e.g. Dockerhub, Azure Container Registry etc.)\n - DATASTORE_TYPE_AZUREBLOB: Datastore hosted on Azure BlobStorage\n - DATASTORE_TYPE_ZEDEDAS3: ZEDEDA Owned and Operated datastore hosted on AWS S3\n - DATASTORE_TYPE_ZEDEDABLOB: ZEDEDA Owned and Operated datastore hosted on Azure BlobStorage\n - DATASTORE_TYPE_FILE_STORAGE: Datastore hosted on File Storage (e.g. HTTP, HTTPS, AWS S3, SFTP, Azure Blob, etc.)"
-      title: Datastore type
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    ECDSA:
-      type: object
-      properties:
-        curve:
-          type: string
-          description: ECDSA curve to be used while signing the certificate.
     DatastoreInfo:
       type: object
       properties:
@@ -1192,82 +1263,6 @@ components:
       - dsType
       - dsFQDN
       - dsPath
-    Datastores:
-      type: object
-      properties:
-        summaryByType:
-          $ref: '#/components/schemas/Summary'
-          description: Type distribution summary of filtered Datastore records
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/DatastoreInfo'
-          description: List of filtered Datastore records
-        summaryByCategory:
-          $ref: '#/components/schemas/Summary'
-          description: Category distribution summary of filtered Datastore records
-        summaryByOrigin:
-          $ref: '#/components/schemas/Summary'
-          description: datstore by origin summary
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Responded page details of filtered records
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
-    ObjectRevision:
-      type: object
-      properties:
-        prev:
-          type: string
-          description: Previous
-        curr:
-          type: string
-          description: Current Database version of the record
-        createdAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was created.
-        createdBy:
-          type: string
-          description: 'User data: Created By'
-        updatedAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was last updated.
-        updatedBy:
-          type: string
-          description: 'User data: Updated By'
-      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
-      title: ObjectRevision is used to store the user information.
-      required:
-      - curr
-      - createdAt
-      - createdBy
-      - updatedAt
-      - updatedBy
-    DatastoreStatus:
-      type: string
-      enum:
-      - DATASTORE_STATUS_UNSPECIFIED
-      - DATASTORE_STATUS_CREATED
-      - DATASTORE_STATUS_VERIFYING
-      - DATASTORE_STATUS_ACTIVE
-      - DATASTORE_STATUS_INACTIVE
-      - DATASTORE_STATUS_FAILED
-      default: DATASTORE_STATUS_UNSPECIFIED
-      title: Datastore status
     DatastoreInfoSecrets:
       type: object
       properties:
@@ -1277,13 +1272,6 @@ components:
         apiPasswd:
           type: string
           description: Datastore access API password in plain-text
-    ObjectDetail:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
     ZcOpsStatus:
       type: string
       enum:
@@ -1294,6 +1282,18 @@ components:
       default: OPS_STATUS_UNSPECIFIED
       description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
       title: ZedCloud internal operation status
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
   securitySchemes:
     BearerToken:
       type: apiKey

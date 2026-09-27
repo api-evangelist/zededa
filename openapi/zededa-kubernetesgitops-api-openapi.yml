@@ -856,6 +856,398 @@ paths:
         required: true
 components:
   schemas:
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    HelmAuthConfig:
+      type: object
+      properties:
+        secret:
+          $ref: '#/components/schemas/GitRepoSecretConfig'
+          description: Secret configuration for Helm authentication
+        helmRepoUrlRegex:
+          type: string
+          description: Regular expression pattern to match Helm repository URLs
+      description: Authentication configuration for Helm repository access
+      title: Helm authentication configuration
+    GitRepoRepositoryDetails:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Git repository URL (required)
+        branch:
+          type: string
+          description: Git branch to track
+        commit:
+          type: string
+          description: Specific git commit hash
+        pathList:
+          type: array
+          items:
+            type: string
+          description: List of paths within the repository to monitor
+      description: Repository configuration details for GitRepo
+      title: GitRepo repository details
+      required:
+      - url
+    GitRepoMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the GitRepo configuration (required)
+        title:
+          type: string
+          description: Display title of the GitRepo configuration
+        description:
+          type: string
+          description: Description of the GitRepo configuration
+      description: Metadata information for a GitRepo configuration
+      title: GitRepo metadata
+      required:
+      - name
+    GitRepoGetResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the GitRepo
+        name:
+          type: string
+          description: Name of the GitRepo configuration
+        title:
+          type: string
+          description: Display title of the GitRepo configuration
+        description:
+          type: string
+          description: Description of the GitRepo configuration
+        workspace:
+          type: string
+          description: Workspace where the GitRepo is deployed
+        data:
+          $ref: '#/components/schemas/GitRepoData'
+          description: Specification details
+        status:
+          $ref: '#/components/schemas/GitRepoGetStatus'
+          description: Current status information
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitRepoEvents'
+          description: List of events related to the GitRepo
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the GitRepo was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the GitRepo was last updated
+        createdBy:
+          type: string
+          description: User who created the GitRepo
+        updatedBy:
+          type: string
+          description: User who last updated the GitRepo
+      description: Complete response for GitRepo GET operations including metadata, specification, and status
+      title: GitRepo get response
+    GitRepoListResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          format: int32
+          description: Total count of GitRepos
+        stateSummary:
+          $ref: '#/components/schemas/GitRepoListStatusSummary'
+          description: Summary of GitRepo statuses
+        gitrepos:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitRepoGetResponse'
+          description: List of GitRepo entries
+      description: Response for GitRepo LIST operations containing multiple GitRepo entries with summary information
+      title: GitRepo list response
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    GitRepoCreateRequest:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/GitRepoMetadata'
+          description: Metadata for the GitRepo (required)
+        data:
+          $ref: '#/components/schemas/GitRepoData'
+          description: Data specification for the GitRepo (required)
+      description: Request message for creating a new GitRepo configuration
+      title: GitRepo create request
+      required:
+      - metadata
+      - data
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    GitRepoAuthConfig:
+      type: object
+      properties:
+        encodedCertificates:
+          type: string
+          description: Base64 encoded certificates for TLS authentication
+        insecureSkipTlsVerify:
+          type: boolean
+          description: Skip TLS certificate verification
+        git:
+          $ref: '#/components/schemas/GitAuthConfig'
+          description: Git-specific authentication configuration
+        helm:
+          $ref: '#/components/schemas/HelmAuthConfig'
+          description: Helm-specific authentication configuration
+      description: Complete authentication configuration for GitRepo including certificates and credentials
+      title: GitRepo authentication configuration
+    GitRepoEvents:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: Reason for the event
+        type:
+          type: string
+          description: Type of the event
+        message:
+          type: string
+          description: Detailed message about the event
+        lastUpdateTime:
+          type: string
+          format: date-time
+          description: Last time the event was updated
+      description: Events related to GitRepo operations
+      title: GitRepo events
+    GitRepoData:
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Project ID where the GitRepo belongs (required)
+        repoDetails:
+          $ref: '#/components/schemas/GitRepoRepositoryDetails'
+          description: Repository details and configuration (required)
+        auth:
+          $ref: '#/components/schemas/GitRepoAuthConfig'
+          description: Authentication configuration
+        target:
+          $ref: '#/components/schemas/GitRepoTargetConfig'
+          description: Target deployment configuration (required)
+      description: Complete data specification for a GitRepo configuration
+      title: GitRepo data
+      required:
+      - projectId
+      - repoDetails
+      - target
+    GitRepoStatusDisplay:
+      type: object
+      properties:
+        readyBundleDeployments:
+          type: string
+          description: Ready bundle deployments count
+        state:
+          type: string
+          description: Current state of the GitRepo
+      description: Display-friendly status information
+      title: GitRepo status display
+    GitRepoTargetConfig:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/GitRepoTargetType'
+          description: Type of target for GitRepo deployment (required)
+        value:
+          type: string
+          description: Target value (cluster ID, cluster group ID, etc.). Required when type is CLUSTER or CLUSTER_GROUP, not required for ALL_CLUSTER
+      description: Target configuration specifying where the GitRepo should be deployed
+      title: GitRepo target configuration
+      required:
+      - type
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    GitRepoTargetType:
+      type: string
+      enum:
+      - GIT_REPO_TARGET_TYPE_UNKNOWN
+      - GIT_REPO_TARGET_TYPE_ALL_CLUSTER
+      - GIT_REPO_TARGET_TYPE_CLUSTER
+      - GIT_REPO_TARGET_TYPE_CLUSTER_GROUP
+      default: GIT_REPO_TARGET_TYPE_UNKNOWN
+      title: GitRepo Target Types
+    GitRepoListStatusSummary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the status summary
+        total:
+          type: integer
+          format: int32
+          description: Total number of GitRepos
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+          description: Map of status values and their counts
+      description: Summary of GitRepo statuses in the list response
+      title: GitRepo list status summary
+    GitAuthConfig:
+      type: object
+      properties:
+        secret:
+          $ref: '#/components/schemas/GitRepoSecretConfig'
+          description: Secret configuration for Git authentication
+      description: Authentication configuration for Git repository access
+      title: Git authentication configuration
+    GitRepoResourceCounts:
+      type: object
+      properties:
+        desiredReady:
+          type: integer
+          format: int32
+          description: Desired ready count
+        missing:
+          type: integer
+          format: int32
+          description: Missing resources count
+        modified:
+          type: integer
+          format: int32
+          description: Modified resources count
+        notReady:
+          type: integer
+          format: int32
+          description: Not ready resources count
+        orphaned:
+          type: integer
+          format: int32
+          description: Orphaned resources count
+        ready:
+          type: integer
+          format: int32
+          description: Ready resources count
+        unknown:
+          type: integer
+          format: int32
+          description: Unknown resources count
+        waitApplied:
+          type: integer
+          format: int32
+          description: Wait applied resources count
+      description: Count of resources in different states
+      title: GitRepo resource counts
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
     ZsrvResponse:
       type: object
       properties:
@@ -909,461 +1301,6 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    GitRepoCreateRequest:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/GitRepoMetadata'
-          description: Metadata for the GitRepo (required)
-        data:
-          $ref: '#/components/schemas/GitRepoData'
-          description: Data specification for the GitRepo (required)
-      description: Request message for creating a new GitRepo configuration
-      title: GitRepo create request
-      required:
-      - metadata
-      - data
-    GitRepoTargetType:
-      type: string
-      enum:
-      - GIT_REPO_TARGET_TYPE_UNKNOWN
-      - GIT_REPO_TARGET_TYPE_ALL_CLUSTER
-      - GIT_REPO_TARGET_TYPE_CLUSTER
-      - GIT_REPO_TARGET_TYPE_CLUSTER_GROUP
-      default: GIT_REPO_TARGET_TYPE_UNKNOWN
-      title: GitRepo Target Types
-    GitRepoSecretConfig:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/SecretType'
-          description: Type of secret for authentication
-        name:
-          type: string
-          description: Name of the secret
-      description: Secret configuration for GitRepo authentication
-      title: GitRepo secret configuration
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    GitRepoCondition:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of the condition
-        status:
-          type: string
-          description: Status of the condition (True, False, Unknown)
-        error:
-          type: boolean
-          description: Whether the condition represents an error state
-        transitioning:
-          type: boolean
-          description: Whether the condition is in a transitioning state
-        message:
-          type: string
-          description: Human readable message indicating details about the condition
-        lastUpdateTime:
-          type: string
-          description: Last time the condition was updated
-      description: Status condition information for a GitRepo
-      title: GitRepo condition
-    GitRepoData:
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: Project ID where the GitRepo belongs (required)
-        repoDetails:
-          $ref: '#/components/schemas/GitRepoRepositoryDetails'
-          description: Repository details and configuration (required)
-        auth:
-          $ref: '#/components/schemas/GitRepoAuthConfig'
-          description: Authentication configuration
-        target:
-          $ref: '#/components/schemas/GitRepoTargetConfig'
-          description: Target deployment configuration (required)
-      description: Complete data specification for a GitRepo configuration
-      title: GitRepo data
-      required:
-      - projectId
-      - repoDetails
-      - target
-    GitRepoListResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-          format: int32
-          description: Total count of GitRepos
-        stateSummary:
-          $ref: '#/components/schemas/GitRepoListStatusSummary'
-          description: Summary of GitRepo statuses
-        gitrepos:
-          type: array
-          items:
-            $ref: '#/components/schemas/GitRepoGetResponse'
-          description: List of GitRepo entries
-      description: Response for GitRepo LIST operations containing multiple GitRepo entries with summary information
-      title: GitRepo list response
-    GitRepoGetResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the GitRepo
-        name:
-          type: string
-          description: Name of the GitRepo configuration
-        title:
-          type: string
-          description: Display title of the GitRepo configuration
-        description:
-          type: string
-          description: Description of the GitRepo configuration
-        workspace:
-          type: string
-          description: Workspace where the GitRepo is deployed
-        data:
-          $ref: '#/components/schemas/GitRepoData'
-          description: Specification details
-        status:
-          $ref: '#/components/schemas/GitRepoGetStatus'
-          description: Current status information
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/GitRepoEvents'
-          description: List of events related to the GitRepo
-        createdAt:
-          type: string
-          format: date-time
-          description: Timestamp when the GitRepo was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: Timestamp when the GitRepo was last updated
-        createdBy:
-          type: string
-          description: User who created the GitRepo
-        updatedBy:
-          type: string
-          description: User who last updated the GitRepo
-      description: Complete response for GitRepo GET operations including metadata, specification, and status
-      title: GitRepo get response
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    GitRepoState:
-      type: object
-      properties:
-        error:
-          type: boolean
-          description: Indicates if the GitRepo is in an error state
-        message:
-          type: string
-          description: Status message providing additional details about the GitRepo state
-        name:
-          type: string
-          description: current state name
-        transitioning:
-          type: boolean
-          description: Indicates if the GitRepo is currently undergoing state transition
-      description: Current operational state of a GitRepo
-      title: GitRepo state
-    GitRepoResourceStatusMap:
-      type: object
-      properties:
-        apiVersion:
-          type: string
-          description: API version of the resource
-        kind:
-          type: string
-          description: Kind of Kubernetes resource
-        name:
-          type: string
-          description: Name of the resource
-        namespace:
-          type: string
-          description: Namespace of the resource
-        state:
-          type: string
-          description: State of the resource
-      description: Status information for individual resources with detailed mapping
-      title: GitRepo resource status map
-    GitRepoStatusDisplay:
-      type: object
-      properties:
-        readyBundleDeployments:
-          type: string
-          description: Ready bundle deployments count
-        state:
-          type: string
-          description: Current state of the GitRepo
-      description: Display-friendly status information
-      title: GitRepo status display
-    GitRepoRepositoryDetails:
-      type: object
-      properties:
-        url:
-          type: string
-          description: Git repository URL (required)
-        branch:
-          type: string
-          description: Git branch to track
-        commit:
-          type: string
-          description: Specific git commit hash
-        pathList:
-          type: array
-          items:
-            type: string
-          description: List of paths within the repository to monitor
-      description: Repository configuration details for GitRepo
-      title: GitRepo repository details
-      required:
-      - url
-    GitRepoListStatusSummary:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description of the status summary
-        total:
-          type: integer
-          format: int32
-          description: Total number of GitRepos
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int32
-          description: Map of status values and their counts
-      description: Summary of GitRepo statuses in the list response
-      title: GitRepo list status summary
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    GitRepoAuthConfig:
-      type: object
-      properties:
-        encodedCertificates:
-          type: string
-          description: Base64 encoded certificates for TLS authentication
-        insecureSkipTlsVerify:
-          type: boolean
-          description: Skip TLS certificate verification
-        git:
-          $ref: '#/components/schemas/GitAuthConfig'
-          description: Git-specific authentication configuration
-        helm:
-          $ref: '#/components/schemas/HelmAuthConfig'
-          description: Helm-specific authentication configuration
-      description: Complete authentication configuration for GitRepo including certificates and credentials
-      title: GitRepo authentication configuration
-    GitRepoTargetConfig:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/GitRepoTargetType'
-          description: Type of target for GitRepo deployment (required)
-        value:
-          type: string
-          description: Target value (cluster ID, cluster group ID, etc.). Required when type is CLUSTER or CLUSTER_GROUP, not required for ALL_CLUSTER
-      description: Target configuration specifying where the GitRepo should be deployed
-      title: GitRepo target configuration
-      required:
-      - type
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
-    GitAuthConfig:
-      type: object
-      properties:
-        secret:
-          $ref: '#/components/schemas/GitRepoSecretConfig'
-          description: Secret configuration for Git authentication
-      description: Authentication configuration for Git repository access
-      title: Git authentication configuration
-    SecretType:
-      type: string
-      enum:
-      - SECRET_TYPE_UNSPECIFIED
-      - SECRET_TYPE_SSH
-      - SECRET_TYPE_BASIC_AUTH
-      - SECRET_TYPE_NONE
-      default: SECRET_TYPE_UNSPECIFIED
-      title: Kubernetes Secret Types
-    GitRepoMetadata:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the GitRepo configuration (required)
-        title:
-          type: string
-          description: Display title of the GitRepo configuration
-        description:
-          type: string
-          description: Description of the GitRepo configuration
-      description: Metadata information for a GitRepo configuration
-      title: GitRepo metadata
-      required:
-      - name
-    GitRepoResourceCounts:
-      type: object
-      properties:
-        desiredReady:
-          type: integer
-          format: int32
-          description: Desired ready count
-        missing:
-          type: integer
-          format: int32
-          description: Missing resources count
-        modified:
-          type: integer
-          format: int32
-          description: Modified resources count
-        notReady:
-          type: integer
-          format: int32
-          description: Not ready resources count
-        orphaned:
-          type: integer
-          format: int32
-          description: Orphaned resources count
-        ready:
-          type: integer
-          format: int32
-          description: Ready resources count
-        unknown:
-          type: integer
-          format: int32
-          description: Unknown resources count
-        waitApplied:
-          type: integer
-          format: int32
-          description: Wait applied resources count
-      description: Count of resources in different states
-      title: GitRepo resource counts
     GitRepoGetStatus:
       type: object
       properties:
@@ -1391,35 +1328,34 @@ components:
           description: Summary information for the GitRepo
       description: Status information for GitRepo including sync status and resource conditions
       title: GitRepo get status
-    GitRepoEvents:
+    GitRepoState:
       type: object
       properties:
-        reason:
-          type: string
-          description: Reason for the event
-        type:
-          type: string
-          description: Type of the event
+        error:
+          type: boolean
+          description: Indicates if the GitRepo is in an error state
         message:
           type: string
-          description: Detailed message about the event
-        lastUpdateTime:
+          description: Status message providing additional details about the GitRepo state
+        name:
           type: string
-          format: date-time
-          description: Last time the event was updated
-      description: Events related to GitRepo operations
-      title: GitRepo events
-    HelmAuthConfig:
+          description: current state name
+        transitioning:
+          type: boolean
+          description: Indicates if the GitRepo is currently undergoing state transition
+      description: Current operational state of a GitRepo
+      title: GitRepo state
+    GitRepoSecretConfig:
       type: object
       properties:
-        secret:
-          $ref: '#/components/schemas/GitRepoSecretConfig'
-          description: Secret configuration for Helm authentication
-        helmRepoUrlRegex:
+        type:
+          $ref: '#/components/schemas/SecretType'
+          description: Type of secret for authentication
+        name:
           type: string
-          description: Regular expression pattern to match Helm repository URLs
-      description: Authentication configuration for Helm repository access
-      title: Helm authentication configuration
+          description: Name of the secret
+      description: Secret configuration for GitRepo authentication
+      title: GitRepo secret configuration
     ZcOpsStatus:
       type: string
       enum:
@@ -1430,6 +1366,70 @@ components:
       default: OPS_STATUS_UNSPECIFIED
       description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
       title: ZedCloud internal operation status
+    GitRepoResourceStatusMap:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the resource
+        kind:
+          type: string
+          description: Kind of Kubernetes resource
+        name:
+          type: string
+          description: Name of the resource
+        namespace:
+          type: string
+          description: Namespace of the resource
+        state:
+          type: string
+          description: State of the resource
+      description: Status information for individual resources with detailed mapping
+      title: GitRepo resource status map
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    SecretType:
+      type: string
+      enum:
+      - SECRET_TYPE_UNSPECIFIED
+      - SECRET_TYPE_SSH
+      - SECRET_TYPE_BASIC_AUTH
+      - SECRET_TYPE_NONE
+      default: SECRET_TYPE_UNSPECIFIED
+      title: Kubernetes Secret Types
+    GitRepoCondition:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the condition
+        status:
+          type: string
+          description: Status of the condition (True, False, Unknown)
+        error:
+          type: boolean
+          description: Whether the condition represents an error state
+        transitioning:
+          type: boolean
+          description: Whether the condition is in a transitioning state
+        message:
+          type: string
+          description: Human readable message indicating details about the condition
+        lastUpdateTime:
+          type: string
+          description: Last time the condition was updated
+      description: Status condition information for a GitRepo
+      title: GitRepo condition
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

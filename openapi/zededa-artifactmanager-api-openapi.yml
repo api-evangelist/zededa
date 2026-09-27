@@ -497,6 +497,91 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
 components:
   schemas:
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
     ZsrvResponse:
       type: object
       properties:
@@ -550,195 +635,6 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    Artifact:
-      type: object
-      properties:
-        id:
-          type: string
-          description: system generated unique id for an artifact
-          readOnly: true
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+a'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the artifact, unique across the enterprise. Once object is created, name can’t be changed
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        status:
-          $ref: '#/components/schemas/Status'
-          description: describes the status of the operation
-          readOnly: true
-        signedUrl:
-          type: string
-          description: generated signed url for an artifact
-          readOnly: true
-        ttl:
-          type: number
-          format: int64
-          description: TTL for the URL
-          readOnly: true
-      description: ArtifactKey idenfies the artifact by artifactId
-      title: ArtifactKey detail
-    Status:
-      type: object
-      properties:
-        code:
-          type: string
-          $ref: '#/components/schemas/StatusCode'
-          default: SUCCESS
-          description: describes the overall status of the operation
-          readOnly: true
-        description:
-          $ref: '#/components/schemas/Description'
-          description: top level description of the operation
-          readOnly: true
-      description: Status encapsulates the top level status of the operation
-      title: Status encapsulates the top level status of the operation
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    Summary:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    StatusCode:
-      type: string
-      enum:
-      - STATUS_CODE_UNSPECIFIED
-      - STATUS_CODE_SUCCESS
-      - STATUS_CODE_FAILURE
-      - STATUS_CODE_PARTIAL_SUCCESS
-      default: STATUS_CODE_UNSPECIFIED
-      title: status codes for internal use (Gilas and Niles)
-    DecsriptionCode:
-      type: string
-      enum:
-      - DESCRIPTION_CODE_UNSPECIFIED
-      - DESCRIPTION_CODE_RECEIVED
-      - DESCRIPTION_CODE_PACKET_CORRUPT
-      - DESCRIPTION_CODE_FAILED_TO_RECEIVE
-      - DESCRIPTION_CODE_NETWORK_ERROR
-      - DESCRIPTION_CODE_NOT_FOUND
-      - DESCRIPTION_CODE_NOT_SUPPORTED
-      - DESCRIPTION_CODE_INTERNAL_ERROR
-      - DESCRIPTION_CODE_NOT_SPECIFIED
-      - DESCRIPTION_CODE_UPLOAD_DONE
-      - DESCRIPTION_CODE_ALREADY_EXISTS
-      - DESCRIPTION_CODE_INVALID_PARAMS
-      default: DESCRIPTION_CODE_UNSPECIFIED
-      title: description codes for internal use (Gilas and Niles)
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
-    ArtifactList:
-      type: object
-      properties:
-        summary:
-          type: object
-          $ref: '#/components/schemas/Summary'
-          description: Summary by state
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artifact'
-          description: Artifact Key list
-        next:
-          $ref: '#/components/schemas/Cursor'
-      description: Response returned for List artifact Keys
-      title: ArtifactKeyListResponse detail
     ObjectType:
       type: string
       enum:
@@ -784,6 +680,33 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+    DecsriptionCode:
+      type: string
+      enum:
+      - DESCRIPTION_CODE_UNSPECIFIED
+      - DESCRIPTION_CODE_RECEIVED
+      - DESCRIPTION_CODE_PACKET_CORRUPT
+      - DESCRIPTION_CODE_FAILED_TO_RECEIVE
+      - DESCRIPTION_CODE_NETWORK_ERROR
+      - DESCRIPTION_CODE_NOT_FOUND
+      - DESCRIPTION_CODE_NOT_SUPPORTED
+      - DESCRIPTION_CODE_INTERNAL_ERROR
+      - DESCRIPTION_CODE_NOT_SPECIFIED
+      - DESCRIPTION_CODE_UPLOAD_DONE
+      - DESCRIPTION_CODE_ALREADY_EXISTS
+      - DESCRIPTION_CODE_INVALID_PARAMS
+      default: DESCRIPTION_CODE_UNSPECIFIED
+      title: description codes for internal use (Gilas and Niles)
     ZcOpsType:
       type: string
       enum:
@@ -795,20 +718,6 @@ components:
       - OPS_TYPE_LIST
       default: OPS_TYPE_UNSPECIFIED
       title: ZedCloud internal operation type
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
     Description:
       type: object
       properties:
@@ -824,16 +733,107 @@ components:
           readOnly: true
       description: Description encapsulates the top level Description of the operation
       title: Description encapsulates the top level Description of the operation
-    ZcOpsStatus:
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    ArtifactList:
+      type: object
+      properties:
+        summary:
+          type: object
+          $ref: '#/components/schemas/Summary'
+          description: Summary by state
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artifact'
+          description: Artifact Key list
+        next:
+          $ref: '#/components/schemas/Cursor'
+      description: Response returned for List artifact Keys
+      title: ArtifactKeyListResponse detail
+    Status:
+      type: object
+      properties:
+        code:
+          type: string
+          $ref: '#/components/schemas/StatusCode'
+          default: SUCCESS
+          description: describes the overall status of the operation
+          readOnly: true
+        description:
+          $ref: '#/components/schemas/Description'
+          description: top level description of the operation
+          readOnly: true
+      description: Status encapsulates the top level status of the operation
+      title: Status encapsulates the top level status of the operation
+    StatusCode:
       type: string
       enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
+      - STATUS_CODE_UNSPECIFIED
+      - STATUS_CODE_SUCCESS
+      - STATUS_CODE_FAILURE
+      - STATUS_CODE_PARTIAL_SUCCESS
+      default: STATUS_CODE_UNSPECIFIED
+      title: status codes for internal use (Gilas and Niles)
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    Artifact:
+      type: object
+      properties:
+        id:
+          type: string
+          description: system generated unique id for an artifact
+          readOnly: true
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+a'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the artifact, unique across the enterprise. Once object is created, name can’t be changed
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        status:
+          $ref: '#/components/schemas/Status'
+          description: describes the status of the operation
+          readOnly: true
+        signedUrl:
+          type: string
+          description: generated signed url for an artifact
+          readOnly: true
+        ttl:
+          type: number
+          format: int64
+          description: TTL for the URL
+          readOnly: true
+      description: ArtifactKey idenfies the artifact by artifactId
+      title: ArtifactKey detail
   securitySchemes:
     BearerToken:
       type: apiKey
