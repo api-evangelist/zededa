@@ -515,143 +515,6 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/assetgroups
 components:
   schemas:
-    AssetGroup:
-      type: object
-      properties:
-        id:
-          type: string
-          description: unique Id of the asset group.
-          readOnly: true
-          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the asset group, unique across the enterprise. Once asset group is created, name can’t be changed.
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        title:
-          type: string
-          description: User defined title of the asset group. Title can be changed at any time.
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
-        description:
-          type: string
-          description: Detailed description of the asset group.
-          maxLength: 256
-        projectId:
-          type: string
-          description: project id
-        assetIds:
-          $ref: '#/components/schemas/AssetIDs'
-        assetTags:
-          $ref: '#/components/schemas/AssetTags'
-      description: Assetgroups is a proto that should be used by user-agents to create/update asset groups to group various assets like devices
-      title: Asset groups
-      required:
-      - name
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
-    AssetGroupList:
-      type: object
-      properties:
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: cursor next
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/AssetGroup'
-          description: asset group summary list
-        totalCount:
-          type: integer
-          format: int64
-          description: asset group total count
     ZsrvResponse:
       type: object
       properties:
@@ -705,6 +568,37 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
     ObjectType:
       type: string
       enum:
@@ -750,33 +644,6 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
-    ZcOpsStatus:
-      type: string
-      enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
-    AssetTag:
-      type: object
-      properties:
-        tag:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-    AssetTags:
-      type: object
-      properties:
-        assetTag:
-          type: array
-          items:
-            $ref: '#/components/schemas/AssetTag'
     AssetIDs:
       type: object
       properties:
@@ -785,17 +652,82 @@ components:
           items:
             type: string
       title: AssetIDs - represents a list of asset IDs
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
+    AssetGroup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: unique Id of the asset group.
+          readOnly: true
+          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the asset group, unique across the enterprise. Once asset group is created, name can’t be changed.
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        title:
+          type: string
+          description: User defined title of the asset group. Title can be changed at any time.
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+        description:
+          type: string
+          description: Detailed description of the asset group.
+          maxLength: 256
+        projectId:
+          type: string
+          description: project id
+        assetIds:
+          $ref: '#/components/schemas/AssetIDs'
+        assetTags:
+          $ref: '#/components/schemas/AssetTags'
+      description: Assetgroups is a proto that should be used by user-agents to create/update asset groups to group various assets like devices
+      title: Asset groups
+      required:
+      - name
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
     AssetGroupRead:
       type: object
       properties:
@@ -833,18 +765,86 @@ components:
           type: integer
           format: int64
       title: AssetGroupRead - refers to the response object for reading a asset group
-    googlerpcStatus:
+    AssetTag:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
+        tag:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+    AssetGroupList:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: cursor next
+        list:
           type: array
           items:
-            $ref: '#/components/schemas/protobufAny'
+            $ref: '#/components/schemas/AssetGroup'
+          description: asset group summary list
+        totalCount:
+          type: integer
+          format: int64
+          description: asset group total count
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    AssetTags:
+      type: object
+      properties:
+        assetTag:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetTag'
   securitySchemes:
     BearerToken:
       type: apiKey

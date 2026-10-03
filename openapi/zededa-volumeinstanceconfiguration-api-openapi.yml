@@ -507,132 +507,6 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
 components:
   schemas:
-    ObjectRevision:
-      type: object
-      properties:
-        prev:
-          type: string
-          description: Previous
-        curr:
-          type: string
-          description: Current Database version of the record
-        createdAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was created.
-        createdBy:
-          type: string
-          description: 'User data: Created By'
-        updatedAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was last updated.
-        updatedBy:
-          type: string
-          description: 'User data: Updated By'
-      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
-      title: ObjectRevision is used to store the user information.
-      required:
-      - curr
-      - createdAt
-      - createdBy
-      - updatedAt
-      - updatedBy
-    VolInstShortConfig:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/VolumeInstanceType'
-        deviceId:
-          type: string
-        projectId:
-          type: string
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    VolumeInstanceAccessMode:
-      type: string
-      enum:
-      - VOLUME_INSTANCE_ACCESS_MODE_INVALID
-      - VOLUME_INSTANCE_ACCESS_MODE_READWRITE
-      - VOLUME_INSTANCE_ACCESS_MODE_READONLY
-      - VOLUME_INSTANCE_ACCESS_MODE_MULTIREAD_SINGLEWRITE
-      default: VOLUME_INSTANCE_ACCESS_MODE_INVALID
     VolInstList:
       type: object
       properties:
@@ -648,97 +522,32 @@ components:
           $ref: '#/components/schemas/Summary'
         next:
           $ref: '#/components/schemas/Cursor'
-    protobufAny:
+    VolumeInstanceAccessMode:
+      type: string
+      enum:
+      - VOLUME_INSTANCE_ACCESS_MODE_INVALID
+      - VOLUME_INSTANCE_ACCESS_MODE_READWRITE
+      - VOLUME_INSTANCE_ACCESS_MODE_READONLY
+      - VOLUME_INSTANCE_ACCESS_MODE_MULTIREAD_SINGLEWRITE
+      default: VOLUME_INSTANCE_ACCESS_MODE_INVALID
+    Summary:
       type: object
       properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    VolInstConfigUpdate_HttpRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the volume instance.
-          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the volume instance, unique across the enterprise. Once object is created, name can’t be changed.
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        title:
-          type: string
-          description: User defined title of the volume instance. Title can be changed at any time.
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
         description:
           type: string
-          description: Detailed description of the volume instance.
-          maxLength: 256
-        revision:
-          $ref: '#/components/schemas/ObjectRevision'
-          description: system defined Revision info of the object
-          readOnly: true
-        projectId:
-          type: string
-          description: id of the project in which the volume instance is created
-        type:
-          type: string
-          $ref: '#/components/schemas/VolumeInstanceType'
-          description: type of Volume Instance
-        deviceId:
-          type: string
-          description: id of the device on which volume instance is created
-        multiattach:
-          type: boolean
-          description: flag to enable the volume to be attached to multiple app instances
-        cleartext:
-          type: boolean
-          description: flag to keep the contents of the volume unencrypted (in clear text)
-        accessmode:
-          type: string
-          $ref: '#/components/schemas/VolumeInstanceAccessMode'
-          description: Access mode
-        sizeBytes:
-          type: integer
-          format: uint64
-          description: size of volume
-        image:
-          type: string
-          description: name of the image
-        implicit:
-          type: boolean
-          description: flag to create implicit volumes
-        contentTreeId:
-          type: string
-          description: content tree ID
-        label:
-          type: string
-          description: label
-        purge:
-          $ref: '#/components/schemas/ZedCloudOpsCmd'
-          description: Purge Counter information
-        tags:
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
           type: object
           additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-        patchartifactvolume:
-          type: string
-          description: flag to indicate whether volume instance is created for patch envelope external artifact
-        edgeNodeCluster:
-          type: string
-          $ref: '#/components/schemas/VolInstEdgeNodeCluster'
-          description: edge node cluster associated with the volume instance
-      title: VolInstConfigUpdate_HttpRequest - Only for swagger documentation
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
     ObjectType:
       type: string
       enum:
@@ -784,6 +593,62 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
+    ObjectRevision:
+      type: object
+      properties:
+        prev:
+          type: string
+          description: Previous
+        curr:
+          type: string
+          description: Current Database version of the record
+        createdAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was created.
+        createdBy:
+          type: string
+          description: 'User data: Created By'
+        updatedAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was last updated.
+        updatedBy:
+          type: string
+          description: 'User data: Updated By'
+      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+      title: ObjectRevision is used to store the user information.
+      required:
+      - curr
+      - createdAt
+      - createdBy
+      - updatedAt
+      - updatedBy
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
     VolumeInstanceType:
       type: string
       enum:
@@ -798,20 +663,44 @@ components:
       - VOLUME_INSTANCE_TYPE_CONTENT_TREE
       default: VOLUME_INSTANCE_TYPE_UNSPECIFIED
       title: VolumeInstanceType - On update, please update VolumeInstanceType_HttpRequest as well
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
     ZsrvResponse:
       type: object
       properties:
@@ -865,24 +754,70 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
-    Summary:
+    googlerpcStatus:
       type: object
       properties:
-        description:
+        code:
+          type: integer
+          format: int32
+        message:
           type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    VolInstEdgeNodeCluster:
+      type: object
+      properties:
+        id:
+          type: string
+          description: edge node cluster ID
+        designatedNodeID:
+          type: string
+          description: designated node ID
     VolInstConfig:
       type: object
       properties:
@@ -980,37 +915,102 @@ components:
           description: 'Timestamp: Operational time'
       description: Zed cloud Operation command
       title: Zed cloud Operation command
-    ZcOpsStatus:
-      type: string
-      enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
-    VolInstEdgeNodeCluster:
+    VolInstConfigUpdate_HttpRequest:
       type: object
       properties:
         id:
           type: string
-          description: edge node cluster ID
-        designatedNodeID:
+          description: System defined universally unique Id of the volume instance.
+          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+          uniqueItems: true
+        name:
           type: string
-          description: designated node ID
-    googlerpcStatus:
+          description: User defined name of the volume instance, unique across the enterprise. Once object is created, name can’t be changed.
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        title:
+          type: string
+          description: User defined title of the volume instance. Title can be changed at any time.
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+        description:
+          type: string
+          description: Detailed description of the volume instance.
+          maxLength: 256
+        revision:
+          $ref: '#/components/schemas/ObjectRevision'
+          description: system defined Revision info of the object
+          readOnly: true
+        projectId:
+          type: string
+          description: id of the project in which the volume instance is created
+        type:
+          type: string
+          $ref: '#/components/schemas/VolumeInstanceType'
+          description: type of Volume Instance
+        deviceId:
+          type: string
+          description: id of the device on which volume instance is created
+        multiattach:
+          type: boolean
+          description: flag to enable the volume to be attached to multiple app instances
+        cleartext:
+          type: boolean
+          description: flag to keep the contents of the volume unencrypted (in clear text)
+        accessmode:
+          type: string
+          $ref: '#/components/schemas/VolumeInstanceAccessMode'
+          description: Access mode
+        sizeBytes:
+          type: integer
+          format: uint64
+          description: size of volume
+        image:
+          type: string
+          description: name of the image
+        implicit:
+          type: boolean
+          description: flag to create implicit volumes
+        contentTreeId:
+          type: string
+          description: content tree ID
+        label:
+          type: string
+          description: label
+        purge:
+          $ref: '#/components/schemas/ZedCloudOpsCmd'
+          description: Purge Counter information
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        patchartifactvolume:
+          type: string
+          description: flag to indicate whether volume instance is created for patch envelope external artifact
+        edgeNodeCluster:
+          type: string
+          $ref: '#/components/schemas/VolInstEdgeNodeCluster'
+          description: edge node cluster associated with the volume instance
+      title: VolInstConfigUpdate_HttpRequest - Only for swagger documentation
+    VolInstShortConfig:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
+        id:
           type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/VolumeInstanceType'
+        deviceId:
+          type: string
+        projectId:
+          type: string
   securitySchemes:
     BearerToken:
       type: apiKey

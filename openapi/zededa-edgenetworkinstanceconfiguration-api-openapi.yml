@@ -505,165 +505,6 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-network
 components:
   schemas:
-    ObjectRevision:
-      type: object
-      properties:
-        prev:
-          type: string
-          description: Previous
-        curr:
-          type: string
-          description: Current Database version of the record
-        createdAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was created.
-        createdBy:
-          type: string
-          description: 'User data: Created By'
-        updatedAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was last updated.
-        updatedBy:
-          type: string
-          description: 'User data: Updated By'
-      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
-      title: ObjectRevision is used to store the user information.
-      required:
-      - curr
-      - createdAt
-      - createdBy
-      - updatedAt
-      - updatedBy
-    commonProbeEndpoint:
-      type: object
-      properties:
-        host:
-          type: string
-          description: IP address or FQDN.
-        port:
-          type: integer
-          format: int64
-          description: 'TCP port required for CONNECTIVITY_PROBE_METHOD_TCP.
-
-            Leave empty for CONNECTIVITY_PROBE_METHOD_ICMP.'
-      description: Address of a remote endpoint to probe in order to determine connectivity status.
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
-    DhcpServerConfig:
-      type: object
-      properties:
-        subnet:
-          type: string
-          description: Subnet address
-        mask:
-          type: string
-          description: Subnet Mask
-        gateway:
-          type: string
-          description: IP Address of Network Gateway
-        domain:
-          type: string
-          description: Network domain
-        ntp:
-          type: string
-          description: IP Address of NTP Server
-          title: ntp will be deprecated
-        dns:
-          type: array
-          items:
-            type: string
-          description: IP Addresses of DNS servers
-          title: possible DNS ip address
-        dhcpRange:
-          $ref: '#/components/schemas/dhcpIpRange'
-          description: Range of IP addresses to be used for DHCP
-        ntpServers:
-          type: array
-          items:
-            $ref: '#/components/schemas/NtpServer'
-          description: NTP Servers
-    NtpServer:
-      type: object
-      properties:
-        server:
-          type: string
-          description: NTP Server IP or FQDN
-      description: NTP Server
-      title: NTP Server
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
     OpaqueConfigType:
       type: string
       enum:
@@ -671,68 +512,82 @@ components:
       - OPAQUE_CONFIG_TYPE_VPN
       - OPAQUE_CONFIG_TYPE_LISP
       default: OPAQUE_CONFIG_TYPE_UNSPECIFIED
-    NetworkInstanceDhcpType:
-      type: string
-      enum:
-      - NETWORK_INSTANCE_DHCP_TYPE_UNSPECIFIED
-      - NETWORK_INSTANCE_DHCP_TYPE_V4
-      - NETWORK_INSTANCE_DHCP_TYPE_V6
-      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOEID
-      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOV4
-      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOV6
-      default: NETWORK_INSTANCE_DHCP_TYPE_UNSPECIFIED
-      title: "NetworkInstanceDhcpType: Used in the network instance provide\n   dhcp server configuration"
-    NetInstShortConfig:
+    NetInstOpaqueConfig:
       type: object
-      example:
-        id: d85a545f-6510-4327-b03d-c02eef119e99
-        name: sample-app
       properties:
-        id:
+        type:
           type: string
-          description: System defined universally unique Id of the network instance
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        name:
+          $ref: '#/components/schemas/OpaqueConfigType'
+          description: type of Opaque config
+        oconfig:
           type: string
-          description: User defined name of the network instance, unique across the enterprise. Once object is created, name can’t be changed
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        deviceId:
+          description: base64 encoded string of opaque config
+        lisp:
           type: string
-        projectId:
+          $ref: '#/components/schemas/LispConfig'
+          description: Deprecated - Lisp config
+          title: lisp - Deprecated
+      description: Network Instance Opaque config. This is service specific configuration.
+    ProbeConfig:
+      type: object
+      properties:
+        enableGatewayPing:
+          type: boolean
+          description: Enable gateway ping
+        pingMaxCost:
+          type: number
+          format: int64
+          description: Ping max cost
+        preferLowerCost:
+          type: boolean
+          description: Prefer lower cost
+        preferStrongerWwanSignal:
+          type: boolean
+          description: Prefer stronger WWAN signal
+        customProbeConfig:
+          type: object
+          $ref: '#/components/schemas/commonConnectivityProbe'
+          description: Custom probe configuration
+      description: Probing configuration
+      title: Probing configuration
+    Summary:
+      type: object
+      properties:
+        description:
           type: string
-        tags:
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
           type: object
           additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-        kind:
-          $ref: '#/components/schemas/NetworkInstanceKind'
-        type:
-          $ref: '#/components/schemas/NetworkInstanceDhcpType'
-        forwardLldp:
-          type: boolean
-        deviceDefault:
-          type: boolean
-        networkPolicyId:
-          type: string
-          description: network policy id
-      description: Network instance provides Edge applications a variety of connectivity choices for all types of networks. This enables logical secure connectivity between Edge applications within a single Edge node and within a logical group of Edge nodes. This provides summary configuration of a Network instance.
-      title: Network instance summary configuration
-    protobufAny:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    spType:
+      type: string
+      enum:
+      - SPTYPE_INVALIDSRV
+      - SPTYPE_MAPSERVER
+      - SPTYPE_SUPPORTSERVER
+      default: SPTYPE_INVALIDSRV
+      description: "clone of types defined in API repo.\n\n - SPTYPE_MAPSERVER: mapping service for zededa overlay service\n - SPTYPE_SUPPORTSERVER: if device has support feature enabled, this ia cloud service\nwhich device can be reached."
+    commonConnectivityProbe:
       type: object
       properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
+        probeMethod:
+          $ref: '#/components/schemas/commonConnectivityProbeMethod'
+          description: Method to use to determine the connectivity status.
+        probeEndpoint:
+          $ref: '#/components/schemas/commonProbeEndpoint'
+          description: 'Endpoint to probe using the selected probing mechanism to determine
+
+            the connectivity status.'
+      description: Configuration for user-defined connectivity-testing probe.
     ObjectType:
       type: string
       enum:
@@ -778,17 +633,236 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
-    NetInstEdgeNodeCluster:
+    NetInstList:
       type: object
       properties:
-        id:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetInstShortConfig'
+        cfgList:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetInstConfig'
+        summaryByKind:
+          $ref: '#/components/schemas/Summary'
+          description: Summary information about netinstance list records by network instance kind.
+        summaryByAddressType:
+          $ref: '#/components/schemas/Summary'
+          description: Summary information about netinstance list records by addressing type.
+        next:
+          $ref: '#/components/schemas/Cursor'
+    ObjectRevision:
+      type: object
+      properties:
+        prev:
           type: string
-          description: Id of the Edge Node Cluster
-          pattern: '[0-9A-Za-z-]+'
-        designatedNodeID:
+          description: Previous
+        curr:
           type: string
-          description: Id of the designated Edge Node
-          pattern: '[0-9A-Za-z-]+'
+          description: Current Database version of the record
+        createdAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was created.
+        createdBy:
+          type: string
+          description: 'User data: Created By'
+        updatedAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was last updated.
+        updatedBy:
+          type: string
+          description: 'User data: Updated By'
+      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+      title: ObjectRevision is used to store the user information.
+      required:
+      - curr
+      - createdAt
+      - createdBy
+      - updatedAt
+      - updatedBy
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    DhcpServerConfig:
+      type: object
+      properties:
+        subnet:
+          type: string
+          description: Subnet address
+        mask:
+          type: string
+          description: Subnet Mask
+        gateway:
+          type: string
+          description: IP Address of Network Gateway
+        domain:
+          type: string
+          description: Network domain
+        ntp:
+          type: string
+          description: IP Address of NTP Server
+          title: ntp will be deprecated
+        dns:
+          type: array
+          items:
+            type: string
+          description: IP Addresses of DNS servers
+          title: possible DNS ip address
+        dhcpRange:
+          $ref: '#/components/schemas/dhcpIpRange'
+          description: Range of IP addresses to be used for DHCP
+        ntpServers:
+          type: array
+          items:
+            $ref: '#/components/schemas/NtpServer'
+          description: NTP Servers
+    dhcpIpRange:
+      type: object
+      properties:
+        start:
+          type: string
+          description: starting IP
+        end:
+          type: string
+          description: ending IP
+      description: DHCP IP range
+      title: DHCP IP range
+    ZsrvResponse:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
+          type: string
+          title: zedcloud object kind on which the operation was performed
+        objectId:
+          type: string
+          title: Unique value identifies the object that was operated on
+        objectName:
+          type: string
+          title: name of the object
+        objectRevision:
+          type: string
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
     NetInstConfig:
       type: object
       properties:
@@ -922,76 +996,6 @@ components:
       - deviceId
       - port
       - kind
-    NetInstList:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/NetInstShortConfig'
-        cfgList:
-          type: array
-          items:
-            $ref: '#/components/schemas/NetInstConfig'
-        summaryByKind:
-          $ref: '#/components/schemas/Summary'
-          description: Summary information about netinstance list records by network instance kind.
-        summaryByAddressType:
-          $ref: '#/components/schemas/Summary'
-          description: Summary information about netinstance list records by addressing type.
-        next:
-          $ref: '#/components/schemas/Cursor'
-    NetInstOpaqueConfig:
-      type: object
-      properties:
-        type:
-          type: string
-          $ref: '#/components/schemas/OpaqueConfigType'
-          description: type of Opaque config
-        oconfig:
-          type: string
-          description: base64 encoded string of opaque config
-        lisp:
-          type: string
-          $ref: '#/components/schemas/LispConfig'
-          description: Deprecated - Lisp config
-          title: lisp - Deprecated
-      description: Network Instance Opaque config. This is service specific configuration.
-    commonConnectivityProbe:
-      type: object
-      properties:
-        probeMethod:
-          $ref: '#/components/schemas/commonConnectivityProbeMethod'
-          description: Method to use to determine the connectivity status.
-        probeEndpoint:
-          $ref: '#/components/schemas/commonProbeEndpoint'
-          description: 'Endpoint to probe using the selected probing mechanism to determine
-
-            the connectivity status.'
-      description: Configuration for user-defined connectivity-testing probe.
-    ServicePoint:
-      type: object
-      properties:
-        type:
-          type: object
-          $ref: '#/components/schemas/spType'
-          description: Service Point Type
-        NameOrIp:
-          type: string
-          description: Service name/ service name
-        Credential:
-          type: string
-          description: Service credentials
-      description: Service Point
-      title: Service Point
-    commonConnectivityProbeMethod:
-      type: string
-      enum:
-      - CONNECTIVITY_PROBE_METHOD_UNSPECIFIED
-      - CONNECTIVITY_PROBE_METHOD_ICMP
-      - CONNECTIVITY_PROBE_METHOD_TCP
-      default: CONNECTIVITY_PROBE_METHOD_UNSPECIFIED
-      description: "User-defined method to use to determine the connectivity status.\n\n - CONNECTIVITY_PROBE_METHOD_UNSPECIFIED: Connectivity probing method is not specified and therefore will not be used.\n - CONNECTIVITY_PROBE_METHOD_ICMP: Use ICMP ping against the probed endpoint to determine the connectivity status.\n - CONNECTIVITY_PROBE_METHOD_TCP: Try to establish TCP connection with the probed endpoint to determine the connectivity\nstatus."
     ZsrvError:
       type: object
       properties:
@@ -1006,59 +1010,19 @@ components:
         details:
           type: string
           title: Field captures string description of details
-    ZsrvResponse:
+    StaticDNSList:
       type: object
       properties:
-        operationType:
-          $ref: '#/components/schemas/ZcOpsType'
-          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
-        operationStatus:
-          $ref: '#/components/schemas/ZcOpsStatus'
-          title: if this is log running job
-        objectKind:
+        hostname:
           type: string
-          title: zedcloud object kind on which the operation was performed
-        objectId:
-          type: string
-          title: Unique value identifies the object that was operated on
-        objectName:
-          type: string
-          title: name of the object
-        objectRevision:
-          type: string
-          title: 'object revision post the operation, note Read operation
-
-            doesn''t change the revision'
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-        operationTime:
-          type: string
-          title: time of operation
-        startTime:
-          type: string
-          title: total time taken by operations
-        endTime:
-          type: string
-        user:
-          type: string
-          title: the operation is performed on behalf of this user
-        httpStatusCode:
-          type: integer
-          format: int32
-          title: http response
-        httpStatusMsg:
-          type: string
-          title: summary of the error in text format
-        jobId:
-          type: string
-          title: for tracking asynchronous tasks
-        error:
+          description: Host name
+        addrs:
           type: array
           items:
-            $ref: '#/components/schemas/ZsrvError'
-          title: 'one or more errors will be set if the operation failed
-
-            i.e. httpStatusCode != 2xx'
+            type: string
+          description: Addresses
+      description: Static DNS list
+      title: Static DNS list
     NetworkInstanceKind:
       type: string
       enum:
@@ -1070,17 +1034,40 @@ components:
       - NETWORK_INSTANCE_KIND_MESH
       - NETWORK_INSTANCE_KIND_HONEYPOT
       default: NETWORK_INSTANCE_KIND_UNSPECIFIED
-    dhcpIpRange:
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+    commonProbeEndpoint:
       type: object
       properties:
-        start:
+        host:
           type: string
-          description: starting IP
-        end:
+          description: IP address or FQDN.
+        port:
+          type: integer
+          format: int64
+          description: 'TCP port required for CONNECTIVITY_PROBE_METHOD_TCP.
+
+            Leave empty for CONNECTIVITY_PROBE_METHOD_ICMP.'
+      description: Address of a remote endpoint to probe in order to determine connectivity status.
+    NetInstEdgeNodeCluster:
+      type: object
+      properties:
+        id:
           type: string
-          description: ending IP
-      description: DHCP IP range
-      title: DHCP IP range
+          description: Id of the Edge Node Cluster
+          pattern: '[0-9A-Za-z-]+'
+        designatedNodeID:
+          type: string
+          description: Id of the designated Edge Node
+          pattern: '[0-9A-Za-z-]+'
     LispConfig:
       type: object
       properties:
@@ -1109,60 +1096,32 @@ components:
           description: Service Point List
       description: List Configurations.
       title: Lisp Configurations
-    spType:
+    ZcOpsType:
       type: string
       enum:
-      - SPTYPE_INVALIDSRV
-      - SPTYPE_MAPSERVER
-      - SPTYPE_SUPPORTSERVER
-      default: SPTYPE_INVALIDSRV
-      description: "clone of types defined in API repo.\n\n - SPTYPE_MAPSERVER: mapping service for zededa overlay service\n - SPTYPE_SUPPORTSERVER: if device has support feature enabled, this ia cloud service\nwhich device can be reached."
-    Summary:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    ServicePoint:
       type: object
       properties:
-        description:
-          type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
+        type:
           type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    StaticIPRoute:
-      type: object
-      properties:
-        prefix:
+          $ref: '#/components/schemas/spType'
+          description: Service Point Type
+        NameOrIp:
           type: string
-          description: IP Prefix
-        gateway:
+          description: Service name/ service name
+        Credential:
           type: string
-          description: Gateway IP
-        outputPort:
-          type: string
-          description: Output Port
-        probeConfig:
-          type: object
-          $ref: '#/components/schemas/ProbeConfig'
-          description: Probe Configuration
-      description: Static IP Routes
-      title: Static IP Routes
-    ZcOpsStatus:
-      type: string
-      enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
+          description: Service credentials
+      description: Service Point
+      title: Service Point
     NetInstConfigUpdate_HttpRequest:
       type: object
       properties:
@@ -1284,53 +1243,94 @@ components:
       - deviceId
       - port
       - kind
-    ProbeConfig:
+    commonConnectivityProbeMethod:
+      type: string
+      enum:
+      - CONNECTIVITY_PROBE_METHOD_UNSPECIFIED
+      - CONNECTIVITY_PROBE_METHOD_ICMP
+      - CONNECTIVITY_PROBE_METHOD_TCP
+      default: CONNECTIVITY_PROBE_METHOD_UNSPECIFIED
+      description: "User-defined method to use to determine the connectivity status.\n\n - CONNECTIVITY_PROBE_METHOD_UNSPECIFIED: Connectivity probing method is not specified and therefore will not be used.\n - CONNECTIVITY_PROBE_METHOD_ICMP: Use ICMP ping against the probed endpoint to determine the connectivity status.\n - CONNECTIVITY_PROBE_METHOD_TCP: Try to establish TCP connection with the probed endpoint to determine the connectivity\nstatus."
+    NetInstShortConfig:
       type: object
+      example:
+        id: d85a545f-6510-4327-b03d-c02eef119e99
+        name: sample-app
       properties:
-        enableGatewayPing:
-          type: boolean
-          description: Enable gateway ping
-        pingMaxCost:
-          type: number
-          format: int64
-          description: Ping max cost
-        preferLowerCost:
-          type: boolean
-          description: Prefer lower cost
-        preferStrongerWwanSignal:
-          type: boolean
-          description: Prefer stronger WWAN signal
-        customProbeConfig:
+        id:
+          type: string
+          description: System defined universally unique Id of the network instance
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the network instance, unique across the enterprise. Once object is created, name can’t be changed
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        deviceId:
+          type: string
+        projectId:
+          type: string
+        tags:
           type: object
-          $ref: '#/components/schemas/commonConnectivityProbe'
-          description: Custom probe configuration
-      description: Probing configuration
-      title: Probing configuration
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    StaticDNSList:
-      type: object
-      properties:
-        hostname:
-          type: string
-          description: Host name
-        addrs:
-          type: array
-          items:
+          additionalProperties:
             type: string
-          description: Addresses
-      description: Static DNS list
-      title: Static DNS list
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        kind:
+          $ref: '#/components/schemas/NetworkInstanceKind'
+        type:
+          $ref: '#/components/schemas/NetworkInstanceDhcpType'
+        forwardLldp:
+          type: boolean
+        deviceDefault:
+          type: boolean
+        networkPolicyId:
+          type: string
+          description: network policy id
+      description: Network instance provides Edge applications a variety of connectivity choices for all types of networks. This enables logical secure connectivity between Edge applications within a single Edge node and within a logical group of Edge nodes. This provides summary configuration of a Network instance.
+      title: Network instance summary configuration
+    StaticIPRoute:
+      type: object
+      properties:
+        prefix:
+          type: string
+          description: IP Prefix
+        gateway:
+          type: string
+          description: Gateway IP
+        outputPort:
+          type: string
+          description: Output Port
+        probeConfig:
+          type: object
+          $ref: '#/components/schemas/ProbeConfig'
+          description: Probe Configuration
+      description: Static IP Routes
+      title: Static IP Routes
+    NetworkInstanceDhcpType:
+      type: string
+      enum:
+      - NETWORK_INSTANCE_DHCP_TYPE_UNSPECIFIED
+      - NETWORK_INSTANCE_DHCP_TYPE_V4
+      - NETWORK_INSTANCE_DHCP_TYPE_V6
+      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOEID
+      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOV4
+      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOV6
+      default: NETWORK_INSTANCE_DHCP_TYPE_UNSPECIFIED
+      title: "NetworkInstanceDhcpType: Used in the network instance provide\n   dhcp server configuration"
+    NtpServer:
+      type: object
+      properties:
+        server:
+          type: string
+          description: NTP Server IP or FQDN
+      description: NTP Server
+      title: NTP Server
   securitySchemes:
     BearerToken:
       type: apiKey

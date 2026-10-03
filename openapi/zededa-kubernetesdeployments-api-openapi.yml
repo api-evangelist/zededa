@@ -873,44 +873,123 @@ paths:
         required: true
 components:
   schemas:
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
+    DeploymentListResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of deployments
+        stateSummary:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of deployment states
+        deployments:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeploymentGetResponse'
+          description: List of deployments
+      description: Response containing a list of deployments
+      title: Deployment list response
+    HelmChartData:
+      type: object
+      properties:
+        chart:
+          $ref: '#/components/schemas/Chart'
+          description: Helm chart details for the deployment
+        targetClusters:
+          $ref: '#/components/schemas/TargetClusters'
+          description: Target clusters for the deployment
+      description: Data for the Helm chart deployment
+      title: Helm chart data
+      required:
+      - chart
+      - targetClusters
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    DeploymentGetResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Deployment ID
+        name:
+          type: string
+          description: Release name
+        title:
+          type: string
+          description: Title of the deployment
+        description:
+          type: string
+          description: Description of the deployment
+        projectId:
+          type: string
+          description: Project ID associated with the deployment
+        type:
+          $ref: '#/components/schemas/K8sDeploymentType'
+          description: Type of deployment
+        spec:
+          $ref: '#/components/schemas/DeploymentData'
+          description: Deployment spec
+        deploymentStatus:
+          type: string
+          description: Deployment status
+        resourceStatusMap:
+          type: array
+          items:
+            type: object
+          description: Map of resource status details
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        createdBy:
+          type: string
+          description: User who created the deployment
+        updatedBy:
+          type: string
+          description: User who last updated the deployment
+      description: Deployment get response
+      title: Deployment get response
+    Metadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Name of the deployment. Example: ''nginx-deployment'''
+        title:
+          type: string
+          description: 'Human-readable title of the deployment. Example: ''NGINX Web Server'''
+        description:
+          type: string
+          description: 'Description of the deployment. Example: ''Production NGINX deployment with custom configuration'''
+        projectId:
+          type: string
+          description: Project ID associated with the deployment
+      description: Metadata for the deployment
+      title: Metadata for deployment
+      required:
+      - name
+      - projectId
     TargetClusters:
       type: object
       properties:
@@ -930,25 +1009,6 @@ components:
       required:
       - isMultiCluster
       - clusterMetadata
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
     DeploymentRequest:
       type: object
       properties:
@@ -1012,111 +1072,44 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
-    K8sDeploymentType:
+    ZsrvErrorCode:
       type: string
       enum:
-      - K8sDeploymentType_UNSPECIFIED
-      - HELMCHART
-      default: K8sDeploymentType_UNSPECIFIED
-    Metadata:
-      type: object
-      properties:
-        name:
-          type: string
-          description: 'Name of the deployment. Example: ''nginx-deployment'''
-        title:
-          type: string
-          description: 'Human-readable title of the deployment. Example: ''NGINX Web Server'''
-        description:
-          type: string
-          description: 'Description of the deployment. Example: ''Production NGINX deployment with custom configuration'''
-        projectId:
-          type: string
-          description: Project ID associated with the deployment
-      description: Metadata for the deployment
-      title: Metadata for deployment
-      required:
-      - name
-      - projectId
-    DeploymentGetResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Deployment ID
-        name:
-          type: string
-          description: Release name
-        title:
-          type: string
-          description: Title of the deployment
-        description:
-          type: string
-          description: Description of the deployment
-        projectId:
-          type: string
-          description: Project ID associated with the deployment
-        type:
-          $ref: '#/components/schemas/K8sDeploymentType'
-          description: Type of deployment
-        spec:
-          $ref: '#/components/schemas/DeploymentData'
-          description: Deployment spec
-        deploymentStatus:
-          type: string
-          description: Deployment status
-        resourceStatusMap:
-          type: array
-          items:
-            type: object
-          description: Map of resource status details
-        createdAt:
-          type: string
-          format: date-time
-          description: Creation timestamp
-        updatedAt:
-          type: string
-          format: date-time
-          description: Last update timestamp
-        createdBy:
-          type: string
-          description: User who created the deployment
-        updatedBy:
-          type: string
-          description: User who last updated the deployment
-      description: Deployment get response
-      title: Deployment get response
-    DeploymentListResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-          format: int64
-          description: Total number of deployments
-        stateSummary:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of deployment states
-        deployments:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeploymentGetResponse'
-          description: List of deployments
-      description: Response containing a list of deployments
-      title: Deployment list response
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
     ZsrvResponse:
       type: object
       properties:
@@ -1170,64 +1163,26 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
-    DeploymentData:
+    googlerpcStatus:
       type: object
       properties:
-        helmChartData:
-          $ref: '#/components/schemas/HelmChartData'
-          description: Helm chart data for the deployment
-      description: Data for the deployment
-      title: Deployment data
-      required:
-      - helmChartData
-    Summary:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    protobufAny:
       type: object
       properties:
-        description:
+        typeUrl:
           type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    Chart:
-      type: object
-      properties:
-        name:
+        value:
           type: string
-          description: 'Name of the Helm chart. Example: ''nginx'''
-        version:
-          type: string
-          description: 'Version of the Helm chart. Example: ''15.4.0'''
-        customValues:
-          type: object
-          description: 'Custom values for the Helm chart. Example: {''replicaCount'': 3, ''service'': {''type'': ''LoadBalancer'', ''port'': 80}}'
-        repoIdentifier:
-          type: string
-          description: 'Repository identifier for the Helm chart. Example: ''bitnami'''
-      description: Details of the Helm chart
-      title: Helm chart details
-      required:
-      - name
-      - version
-    ZcOpsStatus:
-      type: string
-      enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
+          format: byte
     ClusterMetadata:
       type: object
       properties:
@@ -1248,32 +1203,77 @@ components:
       required:
       - clusterId
       - orchestratorClusterId
-    HelmChartData:
+    Chart:
       type: object
       properties:
-        chart:
-          $ref: '#/components/schemas/Chart'
-          description: Helm chart details for the deployment
-        targetClusters:
-          $ref: '#/components/schemas/TargetClusters'
-          description: Target clusters for the deployment
-      description: Data for the Helm chart deployment
-      title: Helm chart data
-      required:
-      - chart
-      - targetClusters
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
+        name:
           type: string
+          description: 'Name of the Helm chart. Example: ''nginx'''
+        version:
+          type: string
+          description: 'Version of the Helm chart. Example: ''15.4.0'''
+        customValues:
+          type: object
+          description: 'Custom values for the Helm chart. Example: {''replicaCount'': 3, ''service'': {''type'': ''LoadBalancer'', ''port'': 80}}'
+        repoIdentifier:
+          type: string
+          description: 'Repository identifier for the Helm chart. Example: ''bitnami'''
+      description: Details of the Helm chart
+      title: Helm chart details
+      required:
+      - name
+      - version
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
         details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
+          type: string
+          title: Field captures string description of details
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+    K8sDeploymentType:
+      type: string
+      enum:
+      - K8sDeploymentType_UNSPECIFIED
+      - HELMCHART
+      default: K8sDeploymentType_UNSPECIFIED
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    DeploymentData:
+      type: object
+      properties:
+        helmChartData:
+          $ref: '#/components/schemas/HelmChartData'
+          description: Helm chart data for the deployment
+      description: Data for the deployment
+      title: Deployment data
+      required:
+      - helmChartData
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

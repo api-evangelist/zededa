@@ -530,106 +530,6 @@ paths:
         required: true
 components:
   schemas:
-    ObjectRevision:
-      type: object
-      properties:
-        prev:
-          type: string
-          description: Previous
-        curr:
-          type: string
-          description: Current Database version of the record
-        createdAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was created.
-        createdBy:
-          type: string
-          description: 'User data: Created By'
-        updatedAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was last updated.
-        updatedBy:
-          type: string
-          description: 'User data: Updated By'
-      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
-      title: ObjectRevision is used to store the user information.
-      required:
-      - curr
-      - createdAt
-      - createdBy
-      - updatedAt
-      - updatedBy
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    HealthServiceSubType:
-      type: string
-      enum:
-      - Publisher
-      - Subscriber
-      default: Publisher
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
     PolicyDocVersionResp:
       type: object
       properties:
@@ -639,6 +539,24 @@ components:
           $ref: '#/components/schemas/PolicyDocVersion'
         plist:
           $ref: '#/components/schemas/PolicyDocVersionList'
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
     PolicyDocVersion:
       type: object
       properties:
@@ -650,56 +568,6 @@ components:
           type: string
         revision:
           $ref: '#/components/schemas/ObjectRevision'
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    HealthDesc:
-      type: object
-      properties:
-        hostName:
-          type: string
-        envName:
-          type: string
-        serviceName:
-          type: string
-        serviceInstance:
-          type: string
-        briefHealth:
-          $ref: '#/components/schemas/BriefHealth'
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    HelloResp:
-      type: object
-      properties:
-        response:
-          type: string
-    HelloName:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        encryptedSecrets:
-          type: object
-          additionalProperties:
-            type: string
-        cryptoKey:
-          type: string
     ObjectType:
       type: string
       enum:
@@ -745,54 +613,123 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
-    HealthServiceResp:
+    HealthDesc:
       type: object
       properties:
-        healthService:
-          $ref: '#/components/schemas/HealthServiceSubType'
-        hresult:
-          $ref: '#/components/schemas/ZsrvResponse'
-        healthDesc:
-          type: array
-          items:
-            $ref: '#/components/schemas/HealthDesc'
-    CloudVersionResp:
+        hostName:
+          type: string
+        envName:
+          type: string
+        serviceName:
+          type: string
+        serviceInstance:
+          type: string
+        briefHealth:
+          $ref: '#/components/schemas/BriefHealth'
+    ObjectRevision:
       type: object
       properties:
-        version:
-          $ref: '#/components/schemas/CloudVersion'
-        result:
-          $ref: '#/components/schemas/ZsrvResponse'
+        prev:
+          type: string
+          description: Previous
+        curr:
+          type: string
+          description: Current Database version of the record
+        createdAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was created.
+        createdBy:
+          type: string
+          description: 'User data: Created By'
+        updatedAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was last updated.
+        updatedBy:
+          type: string
+          description: 'User data: Updated By'
+      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+      title: ObjectRevision is used to store the user information.
+      required:
+      - curr
+      - createdAt
+      - createdBy
+      - updatedAt
+      - updatedBy
+    HelloResp:
+      type: object
+      properties:
+        response:
+          type: string
     BriefHealth:
       type: object
       properties:
         serviceHealthStatus:
           type: string
-    PolicyDocVersionList:
+    Cursor:
       type: object
       properties:
-        summary:
-          $ref: '#/components/schemas/Summary'
-        list:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
           type: array
           items:
-            $ref: '#/components/schemas/PolicyDocVersion'
-        next:
-          $ref: '#/components/schemas/Cursor'
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
     ZsrvResponse:
       type: object
       properties:
@@ -846,30 +783,6 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
-    PingMsgSendResp:
-      type: object
-      properties:
-        pingId:
-          type: string
-          format: int64
-    Summary:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
     CloudVersion:
       type: object
       properties:
@@ -877,16 +790,19 @@ components:
           type: string
         ver:
           type: string
-    ZcOpsStatus:
-      type: string
-      enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
+    HelloName:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        encryptedSecrets:
+          type: object
+          additionalProperties:
+            type: string
+        cryptoKey:
+          type: string
     googlerpcStatus:
       type: object
       properties:
@@ -899,6 +815,90 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/protobufAny'
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+    PolicyDocVersionList:
+      type: object
+      properties:
+        summary:
+          $ref: '#/components/schemas/Summary'
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyDocVersion'
+        next:
+          $ref: '#/components/schemas/Cursor'
+    HealthServiceSubType:
+      type: string
+      enum:
+      - Publisher
+      - Subscriber
+      default: Publisher
+    CloudVersionResp:
+      type: object
+      properties:
+        version:
+          $ref: '#/components/schemas/CloudVersion'
+        result:
+          $ref: '#/components/schemas/ZsrvResponse'
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    HealthServiceResp:
+      type: object
+      properties:
+        healthService:
+          $ref: '#/components/schemas/HealthServiceSubType'
+        hresult:
+          $ref: '#/components/schemas/ZsrvResponse'
+        healthDesc:
+          type: array
+          items:
+            $ref: '#/components/schemas/HealthDesc'
+    PingMsgSendResp:
+      type: object
+      properties:
+        pingId:
+          type: string
+          format: int64
   securitySchemes:
     BearerToken:
       type: apiKey

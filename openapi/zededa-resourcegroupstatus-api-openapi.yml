@@ -442,128 +442,6 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-nodes
 components:
   schemas:
-    AttestPolicyType:
-      type: string
-      enum:
-      - ATTEST_POLICY_TYPE_UNSPECIFIED
-      - ATTEST_POLICY_TYPE_ACCEPT
-      - ATTEST_POLICY_TYPE_ENFORCE
-      default: ATTEST_POLICY_TYPE_UNSPECIFIED
-      description: " - ATTEST_POLICY_TYPE_ACCEPT: Do not enforce attestation. All devices are marked as successfully attested.\n - ATTEST_POLICY_TYPE_ENFORCE: Enforce attestation. Devices failing attestation are marked accordingly."
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
-    TagStatusListMsg:
-      type: object
-      properties:
-        summaryByState:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of filtered resource group records
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/TagStatusMsg'
-          description: List of filtered resource group records
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Responded page details of filtered records
-        summaryByType:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of filtered resource group records
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
-    TagStatus:
-      type: string
-      enum:
-      - TAG_STATUS_UNSPECIFIED
-      - TAG_STATUS_ARCHIVE
-      - TAG_STATUS_ACTIVE
-      - TAG_STATUS_INACTIVE
-      - TAG_STATUS_INITIALIZED
-      - TAG_STATUS_FAILED
-      default: TAG_STATUS_UNSPECIFIED
-      description: "- TAG_STATUS_UNSPECIFIED: Tag Status : UNSPECIFIED\n - TAG_STATUS_ARCHIVE: Tag Status : ARCHIVE\n - TAG_STATUS_ACTIVE: Tag Status : ACTIVE\n - TAG_STATUS_INACTIVE: Tag Status : INACTIVE"
-      title: Resource group status
     TagStatusMsg:
       type: object
       example:
@@ -650,112 +528,29 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
-    ObjectType:
+    TagStatus:
       type: string
       enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    TagsConfigStatus:
-      type: object
-      properties:
-        summaryByState:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of filtered resource group records
-        summaryByType:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of filtered resource group records
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/tagConfigStatus'
-          description: List of filtered resource group records
-        totalCount:
-          type: integer
-          format: int32
-          description: total count of projects
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Responded page details of filtered records
-    ZcOpsStatus:
+      - TAG_STATUS_UNSPECIFIED
+      - TAG_STATUS_ARCHIVE
+      - TAG_STATUS_ACTIVE
+      - TAG_STATUS_INACTIVE
+      - TAG_STATUS_INITIALIZED
+      - TAG_STATUS_FAILED
+      default: TAG_STATUS_UNSPECIFIED
+      description: "- TAG_STATUS_UNSPECIFIED: Tag Status : UNSPECIFIED\n - TAG_STATUS_ARCHIVE: Tag Status : ARCHIVE\n - TAG_STATUS_ACTIVE: Tag Status : ACTIVE\n - TAG_STATUS_INACTIVE: Tag Status : INACTIVE"
+      title: Resource group status
+    TagType:
       type: string
       enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    PolicyType:
-      type: string
-      enum:
-      - POLICY_TYPE_UNSPECIFIED
-      - POLICY_TYPE_APP
-      - POLICY_TYPE_AZURE
-      - POLICY_TYPE_AWS
-      - POLICY_TYPE_GCP
-      - POLICY_TYPE_MODULE
-      - POLICY_TYPE_ATTESTATION
-      - POLICY_TYPE_NETWORK
-      - POLICY_TYPE_CLUSTER
-      - POLICY_TYPE_EDGEVIEW
-      - POLICY_TYPE_LOC
-      - POLICY_TYPE_CONFIGURATION_LOCK
-      - POLICY_TYPE_PCR
-      - POLICY_TYPE_PORT_BASED_NETWORK_ACCESS_CONTROL
-      default: POLICY_TYPE_UNSPECIFIED
-      description: type of policy.
+      - TAG_TYPE_UNSPECIFIED
+      - TAG_TYPE_GENERIC
+      - TAG_TYPE_PROJECT
+      - TAG_TYPE_AZURE
+      - TAG_TYPE_DEPLOYMENT
+      default: TAG_TYPE_UNSPECIFIED
+      description: "- TAG_TYPE_UNSPECIFIED: Unspecified\n - TAG_TYPE_GENERIC: Generic resource group\n - TAG_TYPE_PROJECT: Project resource group\n - TAG_TYPE_AZURE: Project resource group\n - TAG_TYPE_DEPLOYMENT: Project with deployment"
+      title: Resource group types
     googlerpcStatus:
       type: object
       properties:
@@ -768,24 +563,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/protobufAny'
-    Summary:
+    protobufAny:
       type: object
       properties:
-        description:
+        typeUrl:
           type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
+        value:
+          type: string
+          format: byte
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
     tagConfigStatus:
       type: object
       properties:
@@ -841,17 +637,221 @@ components:
           description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
           maxLength: 32
           pattern: ^[^<%&?/\>]+$
-    TagType:
+    ObjectType:
       type: string
       enum:
-      - TAG_TYPE_UNSPECIFIED
-      - TAG_TYPE_GENERIC
-      - TAG_TYPE_PROJECT
-      - TAG_TYPE_AZURE
-      - TAG_TYPE_DEPLOYMENT
-      default: TAG_TYPE_UNSPECIFIED
-      description: "- TAG_TYPE_UNSPECIFIED: Unspecified\n - TAG_TYPE_GENERIC: Generic resource group\n - TAG_TYPE_PROJECT: Project resource group\n - TAG_TYPE_AZURE: Project resource group\n - TAG_TYPE_DEPLOYMENT: Project with deployment"
-      title: Resource group types
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
+    AttestPolicyType:
+      type: string
+      enum:
+      - ATTEST_POLICY_TYPE_UNSPECIFIED
+      - ATTEST_POLICY_TYPE_ACCEPT
+      - ATTEST_POLICY_TYPE_ENFORCE
+      default: ATTEST_POLICY_TYPE_UNSPECIFIED
+      description: " - ATTEST_POLICY_TYPE_ACCEPT: Do not enforce attestation. All devices are marked as successfully attested.\n - ATTEST_POLICY_TYPE_ENFORCE: Enforce attestation. Devices failing attestation are marked accordingly."
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    TagsConfigStatus:
+      type: object
+      properties:
+        summaryByState:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered resource group records
+        summaryByType:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered resource group records
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/tagConfigStatus'
+          description: List of filtered resource group records
+        totalCount:
+          type: integer
+          format: int32
+          description: total count of projects
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Responded page details of filtered records
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    TagStatusListMsg:
+      type: object
+      properties:
+        summaryByState:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered resource group records
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagStatusMsg'
+          description: List of filtered resource group records
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Responded page details of filtered records
+        summaryByType:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered resource group records
+    PolicyType:
+      type: string
+      enum:
+      - POLICY_TYPE_UNSPECIFIED
+      - POLICY_TYPE_APP
+      - POLICY_TYPE_AZURE
+      - POLICY_TYPE_AWS
+      - POLICY_TYPE_GCP
+      - POLICY_TYPE_MODULE
+      - POLICY_TYPE_ATTESTATION
+      - POLICY_TYPE_NETWORK
+      - POLICY_TYPE_CLUSTER
+      - POLICY_TYPE_EDGEVIEW
+      - POLICY_TYPE_LOC
+      - POLICY_TYPE_CONFIGURATION_LOCK
+      - POLICY_TYPE_PCR
+      - POLICY_TYPE_PORT_BASED_NETWORK_ACCESS_CONTROL
+      default: POLICY_TYPE_UNSPECIFIED
+      description: type of policy.
   securitySchemes:
     BearerToken:
       type: apiKey

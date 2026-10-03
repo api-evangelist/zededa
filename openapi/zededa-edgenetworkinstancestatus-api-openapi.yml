@@ -617,11 +617,499 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/edge-network
 components:
   schemas:
+    IoMemberStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          description: IoBundle Member name
+        ioAddress:
+          $ref: '#/components/schemas/IoAddresses'
+          description: IO addresses of the member. Each address corresponds to the member in the members array
+    DeviceEntity:
+      type: object
+      properties:
+        entity:
+          $ref: '#/components/schemas/Entity'
+        entityId:
+          type: string
+        entityName:
+          type: string
+    LTEAdapter:
+      type: object
+      properties:
+        simName:
+          type: string
+          description: Name of SIM card.
+        cellModuleName:
+          type: string
+          description: Name of Cell Module
+        imsi:
+          type: string
+          description: imsi of the SIM
+        iccid:
+          type: string
+          description: iccid of the SIM
+        simcardState:
+          type: string
+          $ref: '#/components/schemas/SimcardState'
+          description: State of SimCard
+        imei:
+          type: string
+          description: IMEI of Cell Radio.
+        firmwareVersion:
+          type: string
+          description: Firmware Version of Cell Radio.
+      description: Details of LTE Adapter
+      title: LTE Adapter
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    IoType:
+      type: string
+      enum:
+      - IO_TYPE_UNSPECIFIED
+      - IO_TYPE_ETH
+      - IO_TYPE_USB
+      - IO_TYPE_COM
+      - IO_TYPE_AUDIO
+      - IO_TYPE_WLAN
+      - IO_TYPE_WWAN
+      - IO_TYPE_HDMI
+      - IO_TYPE_LTE
+      - IO_TYPE_STORAGE_NVME_DEVICE
+      - IO_TYPE_STORAGE_SATA_DEVICE
+      - IO_TYPE_ETH_PF
+      - IO_TYPE_ETH_VF
+      - IO_TYPE_USB_CONTROLLER
+      - IO_TYPE_USB_DEVICE
+      - IO_TYPE_CAN
+      - IO_TYPE_VCAN
+      - IO_TYPE_LCAN
+      - IO_TYPE_OTHER
+      default: IO_TYPE_UNSPECIFIED
+      description: "- IO_TYPE_UNSPECIFIED: No operation/ Invalid peration\n - IO_TYPE_ETH: Ethernet\n - IO_TYPE_USB: USB Type - General\n - IO_TYPE_COM: Communication Port\n - IO_TYPE_AUDIO: Audio Port\n - IO_TYPE_WLAN: wireless LAN\n - IO_TYPE_WWAN: Wireless wide area network\n - IO_TYPE_HDMI: High-Definition Multimedia Interface\n - IO_TYPE_LTE: LTE Interfaces\n - IO_TYPE_STORAGE_NVME_DEVICE: Storage NVME device\n - IO_TYPE_STORAGE_SATA_DEVICE: Storage SATA device\n - IO_TYPE_ETH_PF: Physical Interface (PF) of the Virtual Functions\n - IO_TYPE_ETH_VF: Virtual Function (VF)\n - IO_TYPE_USB_CONTROLLER: USB Type - Controller\n - IO_TYPE_USB_DEVICE: USB Type - Device\n - IO_TYPE_CAN: CAN - Device\n - IO_TYPE_VCAN: VCAN - Virtual CAN device\n - IO_TYPE_LCAN: LCAN - Logical CAN device\n - IO_TYPE_OTHER: Other Io Types"
+      title: Input/Output Type
+    NetInstConfigStatusList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetInstConfigStatus'
+        summaryByKind:
+          $ref: '#/components/schemas/Summary'
+          description: Summary information about netinstance config status list records by network instance kind.
+        summaryByAddressType:
+          $ref: '#/components/schemas/Summary'
+          description: Summary information about netinstance config status list records by addressing type.
+        next:
+          $ref: '#/components/schemas/Cursor'
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    IPAssignment:
+      type: object
+      properties:
+        macAddress:
+          type: string
+        ipAddress:
+          type: array
+          items:
+            type: string
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
     IoAddresses:
       type: object
       properties:
         macAddress:
           type: string
+    VifInfo:
+      type: object
+      properties:
+        vifName:
+          type: string
+        macAddress:
+          type: string
+        appName:
+          type: string
+    NetInstConfigStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the network instance
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the network instance, unique across the enterprise. Once object is created, name can’t be changed
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        runState:
+          $ref: '#/components/schemas/RunState'
+        upTimeStamp:
+          type: string
+          format: date-time
+        uplinkIntf:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        clusterID:
+          type: string
+          description: User defined name of the clusterInstance, unique across the enterprise.
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        type:
+          $ref: '#/components/schemas/NetworkInstanceDhcpType'
+        kind:
+          $ref: '#/components/schemas/NetworkInstanceKind'
+        deviceDefault:
+          type: boolean
+        deviceId:
+          type: string
+        projectId:
+          type: string
+        deviceName:
+          type: string
+        projectName:
+          type: string
+        networkPolicyId:
+          type: string
+        edgeNodeClusterID:
+          type: string
+      description: NetInstConfigStatus stores the summary of the network instance config status.
+      title: Network instance config status
+    ZsrvResponse:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
+          type: string
+          title: zedcloud object kind on which the operation was performed
+        objectId:
+          type: string
+          title: Unique value identifies the object that was operated on
+        objectName:
+          type: string
+          title: name of the object
+        objectRevision:
+          type: string
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
+    eveinfoIPRoute:
+      type: object
+      properties:
+        destinationNetwork:
+          type: string
+          title: 'Destination network address in the CIDR format: <IP-address>/<prefix-length>'
+        gateway:
+          type: string
+          description: 'Gateway IP address.
+
+            Empty for connected route.'
+        port:
+          type: string
+          description: 'Logical label of the output device port for the routed traffic.
+
+            Empty if the gateway is IP address of one of the applications. In that case,
+
+            ''gateway_app'' is defined instead.'
+        gatewayApp:
+          type: string
+          description: 'UUID of the application used as the gateway for the route.
+
+            Empty if the gateway is external (not one of the apps but outside of the device)
+
+            or this is a connected route for a port (thus gateway is empty).
+
+            In that case, ''port'' is defined instead.'
+      description: 'Information about an IP route configured for a network instance.
+
+        The next-hop for the IP route is specified by the "gateway" IP address
+
+        (empty for a connected route) and the output "port". However, if the gateway
+
+        is one of the applications running on the device, the port is actually a virtual
+
+        interface with an EVE-generated interface name and no user-assigned logical label.
+
+        Therefore, in such cases, it is more useful to leave "port" empty and instead use
+
+        the "gateway_app" field to publish the UUID of the application used as the gateway.'
+    ObjectTag:
+      type: object
+      properties:
+        key:
+          type: string
+          description: object tag key identifier.
+        value:
+          type: string
+          description: value associated for the object tag key
+        description:
+          type: string
+          description: Description of the tag key
+      description: Object tag deaails.
+      title: Object Tag details
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    Severity:
+      type: string
+      enum:
+      - SEVERITY_UNSPECIFIED
+      - SEVERITY_NOTICE
+      - SEVERITY_WARNING
+      - SEVERITY_ERROR
+      default: SEVERITY_UNSPECIFIED
+      title: Severity tells the severity type
+    SimcardState:
+      type: string
+      enum:
+      - SIMCARD_STATE_INVALID
+      - SIMCARD_STATE_ASSIGNED
+      - SIMCARD_STATE_PROVISIONED
+      - SIMCARD_STATE_ACTIVE
+      - SIMCARD_STATE_SUSPENDED
+      - SIMCARD_STATE_CANCELLED
+      default: SIMCARD_STATE_INVALID
+    NetInstStatusSummaryMsg:
+      type: object
+      example:
+        id: d85a545f-6510-4327-b03d-c02eef119e99
+        name: sample-app
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the network instance
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the network instance, unique across the enterprise. Once object is created, name can’t be changed
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        runState:
+          $ref: '#/components/schemas/RunState'
+        upTimeStamp:
+          type: string
+          format: date-time
+        uplinkIntf:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        clusterID:
+          type: string
+          description: User defined name of the clusterInstance, unique across the enterprise.
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        type:
+          $ref: '#/components/schemas/NetworkInstanceDhcpType'
+        kind:
+          $ref: '#/components/schemas/NetworkInstanceKind'
+        deviceId:
+          type: string
+        projectId:
+          type: string
+        deviceName:
+          type: string
+        projectName:
+          type: string
+        edgeNodeClusterID:
+          type: string
+      description: Network instance provides Edge applications a variety of connectivity choices for all types of networks. This enables logical secure connectivity between Edge applications within a single Edge node and within a logical group of Edge nodes. This provides summary status of a Network instance.
+      title: Network instance summary status
     NetInstStatusMsg:
       type: object
       example:
@@ -712,78 +1200,31 @@ components:
           type: string
       description: Network instance provides Edge applications a variety of connectivity choices for all types of networks. This enables logical secure connectivity between Edge applications within a single Edge node and within a logical group of Edge nodes. This provides detailed status of a Network instance.
       title: Network instance detailed status
-    IoMemberStatus:
+    ZsrvError:
       type: object
       properties:
-        name:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
           type: string
-          description: IoBundle Member name
-        ioAddress:
-          $ref: '#/components/schemas/IoAddresses'
-          description: IO addresses of the member. Each address corresponds to the member in the members array
-    ZsrvErrorCode:
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    NetworkInstanceKind:
       type: string
       enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
+      - NETWORK_INSTANCE_KIND_UNSPECIFIED
+      - NETWORK_INSTANCE_KIND_TRANSPARENT
+      - NETWORK_INSTANCE_KIND_SWITCH
+      - NETWORK_INSTANCE_KIND_LOCAL
+      - NETWORK_INSTANCE_KIND_CLOUD
+      - NETWORK_INSTANCE_KIND_MESH
+      - NETWORK_INSTANCE_KIND_HONEYPOT
+      default: NETWORK_INSTANCE_KIND_UNSPECIFIED
     DeviceError:
       type: object
       properties:
@@ -813,347 +1254,16 @@ components:
       - severity
       - timestamp
       - entities
-    Entity:
+    ZcOpsStatus:
       type: string
       enum:
-      - ENTITY_UNSPECIFIED
-      - ENTITY_BASE_OS
-      - ENTITY_SYSTEM_ADAPTER
-      - ENTITY_VAULT
-      - ENTITY_ATTESTATION
-      - ENTITY_APP_INSTANCE
-      - ENTITY_PORT
-      - ENTITY_NETWORK
-      - ENTITY_NETWORK_INSTANCE
-      - ENTITY_CONTENT_TREE
-      - ENTITY_CONTENT_BLOB
-      - ENTITY_VOLUME
-      default: ENTITY_UNSPECIFIED
-      description: "- ENTITY_UNSPECIFIED: Invalid Device Entity\n - ENTITY_BASE_OS: Base OS entity\n - ENTITY_SYSTEM_ADAPTER: System Adapter Entity\n - ENTITY_VAULT: Vault Entity\n - ENTITY_ATTESTATION: Attestation Entity\n - ENTITY_APP_INSTANCE: App Instance Entity\n - ENTITY_PORT: Port Entity\n - ENTITY_NETWORK: Network Entity\n - ENTITY_NETWORK_INSTANCE: Network Instance Entity\n - ENTITY_CONTENT_TREE: ContentTree Entity\n - ENTITY_CONTENT_BLOB: Blob Entity\n - ENTITY_VOLUME: VOLUME Entity"
-      title: Edge node components
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    NetworkInstanceDhcpType:
-      type: string
-      enum:
-      - NETWORK_INSTANCE_DHCP_TYPE_UNSPECIFIED
-      - NETWORK_INSTANCE_DHCP_TYPE_V4
-      - NETWORK_INSTANCE_DHCP_TYPE_V6
-      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOEID
-      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOV4
-      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOV6
-      default: NETWORK_INSTANCE_DHCP_TYPE_UNSPECIFIED
-      title: "NetworkInstanceDhcpType: Used in the network instance provide\n   dhcp server configuration"
-    LTEAdapter:
-      type: object
-      properties:
-        simName:
-          type: string
-          description: Name of SIM card.
-        cellModuleName:
-          type: string
-          description: Name of Cell Module
-        imsi:
-          type: string
-          description: imsi of the SIM
-        iccid:
-          type: string
-          description: iccid of the SIM
-        simcardState:
-          type: string
-          $ref: '#/components/schemas/SimcardState'
-          description: State of SimCard
-        imei:
-          type: string
-          description: IMEI of Cell Radio.
-        firmwareVersion:
-          type: string
-          description: Firmware Version of Cell Radio.
-      description: Details of LTE Adapter
-      title: LTE Adapter
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    IoType:
-      type: string
-      enum:
-      - IO_TYPE_UNSPECIFIED
-      - IO_TYPE_ETH
-      - IO_TYPE_USB
-      - IO_TYPE_COM
-      - IO_TYPE_AUDIO
-      - IO_TYPE_WLAN
-      - IO_TYPE_WWAN
-      - IO_TYPE_HDMI
-      - IO_TYPE_LTE
-      - IO_TYPE_STORAGE_NVME_DEVICE
-      - IO_TYPE_STORAGE_SATA_DEVICE
-      - IO_TYPE_ETH_PF
-      - IO_TYPE_ETH_VF
-      - IO_TYPE_USB_CONTROLLER
-      - IO_TYPE_USB_DEVICE
-      - IO_TYPE_CAN
-      - IO_TYPE_VCAN
-      - IO_TYPE_LCAN
-      - IO_TYPE_OTHER
-      default: IO_TYPE_UNSPECIFIED
-      description: "- IO_TYPE_UNSPECIFIED: No operation/ Invalid peration\n - IO_TYPE_ETH: Ethernet\n - IO_TYPE_USB: USB Type - General\n - IO_TYPE_COM: Communication Port\n - IO_TYPE_AUDIO: Audio Port\n - IO_TYPE_WLAN: wireless LAN\n - IO_TYPE_WWAN: Wireless wide area network\n - IO_TYPE_HDMI: High-Definition Multimedia Interface\n - IO_TYPE_LTE: LTE Interfaces\n - IO_TYPE_STORAGE_NVME_DEVICE: Storage NVME device\n - IO_TYPE_STORAGE_SATA_DEVICE: Storage SATA device\n - IO_TYPE_ETH_PF: Physical Interface (PF) of the Virtual Functions\n - IO_TYPE_ETH_VF: Virtual Function (VF)\n - IO_TYPE_USB_CONTROLLER: USB Type - Controller\n - IO_TYPE_USB_DEVICE: USB Type - Device\n - IO_TYPE_CAN: CAN - Device\n - IO_TYPE_VCAN: VCAN - Virtual CAN device\n - IO_TYPE_LCAN: LCAN - Logical CAN device\n - IO_TYPE_OTHER: Other Io Types"
-      title: Input/Output Type
-    NetInstConfigStatus:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the network instance
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the network instance, unique across the enterprise. Once object is created, name can’t be changed
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        runState:
-          $ref: '#/components/schemas/RunState'
-        upTimeStamp:
-          type: string
-          format: date-time
-        uplinkIntf:
-          type: string
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-        clusterID:
-          type: string
-          description: User defined name of the clusterInstance, unique across the enterprise.
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        type:
-          $ref: '#/components/schemas/NetworkInstanceDhcpType'
-        kind:
-          $ref: '#/components/schemas/NetworkInstanceKind'
-        deviceDefault:
-          type: boolean
-        deviceId:
-          type: string
-        projectId:
-          type: string
-        deviceName:
-          type: string
-        projectName:
-          type: string
-        networkPolicyId:
-          type: string
-        edgeNodeClusterID:
-          type: string
-      description: NetInstConfigStatus stores the summary of the network instance config status.
-      title: Network instance config status
-    DeviceEntity:
-      type: object
-      properties:
-        entity:
-          $ref: '#/components/schemas/Entity'
-        entityId:
-          type: string
-        entityName:
-          type: string
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    NetInstStatusSummaryMsg:
-      type: object
-      example:
-        id: d85a545f-6510-4327-b03d-c02eef119e99
-        name: sample-app
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the network instance
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the network instance, unique across the enterprise. Once object is created, name can’t be changed
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        runState:
-          $ref: '#/components/schemas/RunState'
-        upTimeStamp:
-          type: string
-          format: date-time
-        uplinkIntf:
-          type: string
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-        clusterID:
-          type: string
-          description: User defined name of the clusterInstance, unique across the enterprise.
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        type:
-          $ref: '#/components/schemas/NetworkInstanceDhcpType'
-        kind:
-          $ref: '#/components/schemas/NetworkInstanceKind'
-        deviceId:
-          type: string
-        projectId:
-          type: string
-        deviceName:
-          type: string
-        projectName:
-          type: string
-        edgeNodeClusterID:
-          type: string
-      description: Network instance provides Edge applications a variety of connectivity choices for all types of networks. This enables logical secure connectivity between Edge applications within a single Edge node and within a logical group of Edge nodes. This provides summary status of a Network instance.
-      title: Network instance summary status
-    RunState:
-      type: string
-      enum:
-      - RUN_STATE_UNSPECIFIED
-      - RUN_STATE_ONLINE
-      - RUN_STATE_HALTED
-      - RUN_STATE_INIT
-      - RUN_STATE_REBOOTING
-      - RUN_STATE_OFFLINE
-      - RUN_STATE_UNKNOWN
-      - RUN_STATE_UNPROVISIONED
-      - RUN_STATE_PROVISIONED
-      - RUN_STATE_SUSPECT
-      - RUN_STATE_DOWNLOADING
-      - RUN_STATE_RESTARTING
-      - RUN_STATE_PURGING
-      - RUN_STATE_HALTING
-      - RUN_STATE_ERROR
-      - RUN_STATE_VERIFYING
-      - RUN_STATE_LOADING
-      - RUN_STATE_CREATING_VOLUME
-      - RUN_STATE_BOOTING
-      - RUN_STATE_MAINTENANCE_MODE
-      - RUN_STATE_START_DELAYED
-      - RUN_STATE_BASEOS_UPDATING
-      - RUN_STATE_PREPARING_POWEROFF
-      - RUN_STATE_POWERING_OFF
-      - RUN_STATE_PREPARED_POWEROFF
-      default: RUN_STATE_UNSPECIFIED
-      description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
-      title: RunState - On update, please update RunState_HttpRequest as well
-    ObjectTag:
-      type: object
-      properties:
-        key:
-          type: string
-          description: object tag key identifier.
-        value:
-          type: string
-          description: value associated for the object tag key
-        description:
-          type: string
-          description: Description of the tag key
-      description: Object tag deaails.
-      title: Object Tag details
-    NetInstConfigStatusList:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/NetInstConfigStatus'
-        summaryByKind:
-          $ref: '#/components/schemas/Summary'
-          description: Summary information about netinstance config status list records by network instance kind.
-        summaryByAddressType:
-          $ref: '#/components/schemas/Summary'
-          description: Summary information about netinstance config status list records by addressing type.
-        next:
-          $ref: '#/components/schemas/Cursor'
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
     NetInstStatusListMsg:
       type: object
       properties:
@@ -1169,165 +1279,17 @@ components:
           description: Summary information about netinstance status list records by addressing type.
         next:
           $ref: '#/components/schemas/Cursor'
-    Severity:
+    ZcOpsType:
       type: string
       enum:
-      - SEVERITY_UNSPECIFIED
-      - SEVERITY_NOTICE
-      - SEVERITY_WARNING
-      - SEVERITY_ERROR
-      default: SEVERITY_UNSPECIFIED
-      title: Severity tells the severity type
-    ZsrvResponse:
-      type: object
-      properties:
-        operationType:
-          $ref: '#/components/schemas/ZcOpsType'
-          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
-        operationStatus:
-          $ref: '#/components/schemas/ZcOpsStatus'
-          title: if this is log running job
-        objectKind:
-          type: string
-          title: zedcloud object kind on which the operation was performed
-        objectId:
-          type: string
-          title: Unique value identifies the object that was operated on
-        objectName:
-          type: string
-          title: name of the object
-        objectRevision:
-          type: string
-          title: 'object revision post the operation, note Read operation
-
-            doesn''t change the revision'
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-        operationTime:
-          type: string
-          title: time of operation
-        startTime:
-          type: string
-          title: total time taken by operations
-        endTime:
-          type: string
-        user:
-          type: string
-          title: the operation is performed on behalf of this user
-        httpStatusCode:
-          type: integer
-          format: int32
-          title: http response
-        httpStatusMsg:
-          type: string
-          title: summary of the error in text format
-        jobId:
-          type: string
-          title: for tracking asynchronous tasks
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZsrvError'
-          title: 'one or more errors will be set if the operation failed
-
-            i.e. httpStatusCode != 2xx'
-    IPAssignment:
-      type: object
-      properties:
-        macAddress:
-          type: string
-        ipAddress:
-          type: array
-          items:
-            type: string
-    NetworkInstanceKind:
-      type: string
-      enum:
-      - NETWORK_INSTANCE_KIND_UNSPECIFIED
-      - NETWORK_INSTANCE_KIND_TRANSPARENT
-      - NETWORK_INSTANCE_KIND_SWITCH
-      - NETWORK_INSTANCE_KIND_LOCAL
-      - NETWORK_INSTANCE_KIND_CLOUD
-      - NETWORK_INSTANCE_KIND_MESH
-      - NETWORK_INSTANCE_KIND_HONEYPOT
-      default: NETWORK_INSTANCE_KIND_UNSPECIFIED
-    eveinfoIPRoute:
-      type: object
-      properties:
-        destinationNetwork:
-          type: string
-          title: 'Destination network address in the CIDR format: <IP-address>/<prefix-length>'
-        gateway:
-          type: string
-          description: 'Gateway IP address.
-
-            Empty for connected route.'
-        port:
-          type: string
-          description: 'Logical label of the output device port for the routed traffic.
-
-            Empty if the gateway is IP address of one of the applications. In that case,
-
-            ''gateway_app'' is defined instead.'
-        gatewayApp:
-          type: string
-          description: 'UUID of the application used as the gateway for the route.
-
-            Empty if the gateway is external (not one of the apps but outside of the device)
-
-            or this is a connected route for a port (thus gateway is empty).
-
-            In that case, ''port'' is defined instead.'
-      description: 'Information about an IP route configured for a network instance.
-
-        The next-hop for the IP route is specified by the "gateway" IP address
-
-        (empty for a connected route) and the output "port". However, if the gateway
-
-        is one of the applications running on the device, the port is actually a virtual
-
-        interface with an EVE-generated interface name and no user-assigned logical label.
-
-        Therefore, in such cases, it is more useful to leave "port" empty and instead use
-
-        the "gateway_app" field to publish the UUID of the application used as the gateway.'
-    Summary:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    VifInfo:
-      type: object
-      properties:
-        vifName:
-          type: string
-        macAddress:
-          type: string
-        appName:
-          type: string
-    ZcOpsStatus:
-      type: string
-      enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
     IoBundleStatus:
       type: object
       properties:
@@ -1367,28 +1329,37 @@ components:
       - name
       - members
       - appName
-    SimcardState:
+    RunState:
       type: string
       enum:
-      - SIMCARD_STATE_INVALID
-      - SIMCARD_STATE_ASSIGNED
-      - SIMCARD_STATE_PROVISIONED
-      - SIMCARD_STATE_ACTIVE
-      - SIMCARD_STATE_SUSPENDED
-      - SIMCARD_STATE_CANCELLED
-      default: SIMCARD_STATE_INVALID
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
+      - RUN_STATE_UNSPECIFIED
+      - RUN_STATE_ONLINE
+      - RUN_STATE_HALTED
+      - RUN_STATE_INIT
+      - RUN_STATE_REBOOTING
+      - RUN_STATE_OFFLINE
+      - RUN_STATE_UNKNOWN
+      - RUN_STATE_UNPROVISIONED
+      - RUN_STATE_PROVISIONED
+      - RUN_STATE_SUSPECT
+      - RUN_STATE_DOWNLOADING
+      - RUN_STATE_RESTARTING
+      - RUN_STATE_PURGING
+      - RUN_STATE_HALTING
+      - RUN_STATE_ERROR
+      - RUN_STATE_VERIFYING
+      - RUN_STATE_LOADING
+      - RUN_STATE_CREATING_VOLUME
+      - RUN_STATE_BOOTING
+      - RUN_STATE_MAINTENANCE_MODE
+      - RUN_STATE_START_DELAYED
+      - RUN_STATE_BASEOS_UPDATING
+      - RUN_STATE_PREPARING_POWEROFF
+      - RUN_STATE_POWERING_OFF
+      - RUN_STATE_PREPARED_POWEROFF
+      default: RUN_STATE_UNSPECIFIED
+      description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
+      title: RunState - On update, please update RunState_HttpRequest as well
     ObjectTagsList:
       type: object
       properties:
@@ -1402,6 +1373,35 @@ components:
           description: Returned record page.
       description: Returned list of Object tags matched by filter criteria
       title: Object tag list records
+    Entity:
+      type: string
+      enum:
+      - ENTITY_UNSPECIFIED
+      - ENTITY_BASE_OS
+      - ENTITY_SYSTEM_ADAPTER
+      - ENTITY_VAULT
+      - ENTITY_ATTESTATION
+      - ENTITY_APP_INSTANCE
+      - ENTITY_PORT
+      - ENTITY_NETWORK
+      - ENTITY_NETWORK_INSTANCE
+      - ENTITY_CONTENT_TREE
+      - ENTITY_CONTENT_BLOB
+      - ENTITY_VOLUME
+      default: ENTITY_UNSPECIFIED
+      description: "- ENTITY_UNSPECIFIED: Invalid Device Entity\n - ENTITY_BASE_OS: Base OS entity\n - ENTITY_SYSTEM_ADAPTER: System Adapter Entity\n - ENTITY_VAULT: Vault Entity\n - ENTITY_ATTESTATION: Attestation Entity\n - ENTITY_APP_INSTANCE: App Instance Entity\n - ENTITY_PORT: Port Entity\n - ENTITY_NETWORK: Network Entity\n - ENTITY_NETWORK_INSTANCE: Network Instance Entity\n - ENTITY_CONTENT_TREE: ContentTree Entity\n - ENTITY_CONTENT_BLOB: Blob Entity\n - ENTITY_VOLUME: VOLUME Entity"
+      title: Edge node components
+    NetworkInstanceDhcpType:
+      type: string
+      enum:
+      - NETWORK_INSTANCE_DHCP_TYPE_UNSPECIFIED
+      - NETWORK_INSTANCE_DHCP_TYPE_V4
+      - NETWORK_INSTANCE_DHCP_TYPE_V6
+      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOEID
+      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOV4
+      - NETWORK_INSTANCE_DHCP_TYPE_CRYPTOV6
+      default: NETWORK_INSTANCE_DHCP_TYPE_UNSPECIFIED
+      title: "NetworkInstanceDhcpType: Used in the network instance provide\n   dhcp server configuration"
   securitySchemes:
     BearerToken:
       type: apiKey
