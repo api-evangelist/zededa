@@ -993,300 +993,17 @@ paths:
         url: https://help.zededa.com
 components:
   schemas:
-    EdgeNodeClusterConfigSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the cluster
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the cluster, unique across the enterprise. Once cluster is created, name can’t be changed
-        title:
-          type: string
-          description: User defined title of the cluster. Title can be changed at any time
-        description:
-          type: string
-          description: Detailed description of the cluster
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-        projectId:
-          type: string
-          description: Foreign key to the project
-        clusterPrefix:
-          type: string
-          description: A cluster prefix
-        seedNodeId:
-          type: string
-          description: Seed node id
-        seedNodeIp:
-          type: string
-          description: Seed node ip
-        adminState:
-          $ref: '#/components/schemas/AdminState'
-          description: Admin state of the cluster
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/EdgeNodeClusterNode'
-          description: A list of nodes in the cluster
-        createdAt:
-          type: string
-          format: date-time
-          description: Creation time of the cluster
-        updatedAt:
-          type: string
-          format: date-time
-          description: Last updated time of the cluster
-        projectName:
-          type: string
-          description: Project Name
-      description: Cluster config summary
-      title: Cluster config summary
-    EdgeNodeClusters:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/EdgeNodeClusterConfigSummary'
-          description: cluster config summary list response
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: cursor next
-        totalCount:
-          type: integer
-          format: int64
-          description: total count of clusters
-    EdgeNodeClusterInterfacePorts:
-      type: object
-      properties:
-        ports:
-          type: array
-          items:
-            type: string
-        sharedLabels:
-          type: array
-          items:
-            type: string
-    EdgeNodeClusterNode:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the node
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        clusterInterface:
-          type: string
-          description: User defined name of the cluster interface, unique across the enterprise. Once cluster interface is created, name can’t be changed
-        nodeType:
-          $ref: '#/components/schemas/EdgeNodeClusterNodeType'
-          description: Type of node
-        clusterPrefix:
-          type: string
-          description: A cluster prefix
-        resourceLabels:
-          type: object
-          additionalProperties:
-            type: string
-          description: Resource labels are name/value pairs that enable you to categorize resources. Label names are case insensitive with max_length 512 and min_length 3. Label values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-      description: Cluster node detail
-      title: Cluster node detail
-      required:
-      - id
-      - clusterInterface
-    EdgeNodeCluster:
-      type: object
-      properties:
-        id:
-          type: string
-          description: System defined universally unique Id of the cluster
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the cluster, unique across the enterprise. Once cluster is created, name can’t be changed
-        title:
-          type: string
-          description: User defined title of the cluster. Title can be changed at any time
-        description:
-          type: string
-          description: Detailed description of the cluster
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
-          maxLength: 32
-          pattern: ^[^<%&?/\>]+$
-        projectId:
-          type: string
-          description: Foreign key to the project
-          pattern: '[0-9A-Za-z-]+'
-        clusterPrefix:
-          type: string
-          description: A cluster prefix
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/EdgeNodeClusterNode'
-          description: A list of nodes in the cluster
-        clusterType:
-          $ref: '#/components/schemas/EdgeNodeClusterType'
-          description: Type of the edge-node cluster
-        manifestUrl:
-          type: string
-          description: URL to the configuration manifest
-        manifest:
-          type: string
-          format: byte
-          description: Configuration manifest in bytes
-      description: Cluster detail
-      title: Cluster detail
-      required:
-      - projectId
-      - name
-      - nodes
-    ObjectType:
+    ZcOpsType:
       type: string
       enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
-    EdgeNodeClusterProject:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    EdgeNodeClusterProjects:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/EdgeNodeClusterProject'
-        next:
-          $ref: '#/components/schemas/Cursor'
-        totalCount:
-          type: integer
-          format: int64
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
     ZsrvResponse:
       type: object
       properties:
@@ -1352,6 +1069,76 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/protobufAny'
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
+    EdgeNodeClusters:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/EdgeNodeClusterConfigSummary'
+          description: cluster config summary list response
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: cursor next
+        totalCount:
+          type: integer
+          format: int64
+          description: total count of clusters
+    EdgeNodeClusterNode:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the node
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        clusterInterface:
+          type: string
+          description: User defined name of the cluster interface, unique across the enterprise. Once cluster interface is created, name can’t be changed
+        nodeType:
+          $ref: '#/components/schemas/EdgeNodeClusterNodeType'
+          description: Type of node
+        clusterPrefix:
+          type: string
+          description: A cluster prefix
+        resourceLabels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Resource labels are name/value pairs that enable you to categorize resources. Label names are case insensitive with max_length 512 and min_length 3. Label values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+      description: Cluster node detail
+      title: Cluster node detail
+      required:
+      - id
+      - clusterInterface
     protobufAny:
       type: object
       properties:
@@ -1360,6 +1147,269 @@ components:
         value:
           type: string
           format: byte
+    EdgeNodeClusterConfigSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the cluster
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the cluster, unique across the enterprise. Once cluster is created, name can’t be changed
+        title:
+          type: string
+          description: User defined title of the cluster. Title can be changed at any time
+        description:
+          type: string
+          description: Detailed description of the cluster
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        projectId:
+          type: string
+          description: Foreign key to the project
+        clusterPrefix:
+          type: string
+          description: A cluster prefix
+        seedNodeId:
+          type: string
+          description: Seed node id
+        seedNodeIp:
+          type: string
+          description: Seed node ip
+        adminState:
+          $ref: '#/components/schemas/AdminState'
+          description: Admin state of the cluster
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EdgeNodeClusterNode'
+          description: A list of nodes in the cluster
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation time of the cluster
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last updated time of the cluster
+        projectName:
+          type: string
+          description: Project Name
+      description: Cluster config summary
+      title: Cluster config summary
+    EdgeNodeClusterNodeType:
+      type: string
+      enum:
+      - EDGE_NODE_CLUSTER_NODE_TYPE_UNSPECIFIED
+      - EDGE_NODE_CLUSTER_NODE_TYPE_SERVER
+      - EDGE_NODE_CLUSTER_NODE_TYPE_AGENT
+      default: EDGE_NODE_CLUSTER_NODE_TYPE_UNSPECIFIED
+    BaseOSImage:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: system generated unique id for an image
+        version:
+          type: string
+          description: image version
+        imageName:
+          type: string
+          description: image name
+        activate:
+          type: boolean
+          description: activation flag
+        imvolId:
+          type: string
+          description: immutable Volume for this base image
+      description: Base OS image request details
+      title: Base OS image payload detail
+      required:
+      - uuid
+      - version
+      - imageName
+      - activate
+    EdgeNodeClusterProjects:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/EdgeNodeClusterProject'
+        next:
+          $ref: '#/components/schemas/Cursor'
+        totalCount:
+          type: integer
+          format: int64
+    EdgeNodeCluster:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System defined universally unique Id of the cluster
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the cluster, unique across the enterprise. Once cluster is created, name can’t be changed
+        title:
+          type: string
+          description: User defined title of the cluster. Title can be changed at any time
+        description:
+          type: string
+          description: Detailed description of the cluster
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags are name/value pairs that enable you to categorize resources. Tag names are case insensitive with max_length 512 and min_length 3. Tag values are case sensitive with max_length 256 and min_length 3.
+          maxLength: 32
+          pattern: ^[^<%&?/\>]+$
+        projectId:
+          type: string
+          description: Foreign key to the project
+          pattern: '[0-9A-Za-z-]+'
+        clusterPrefix:
+          type: string
+          description: A cluster prefix
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EdgeNodeClusterNode'
+          description: A list of nodes in the cluster
+        clusterType:
+          $ref: '#/components/schemas/EdgeNodeClusterType'
+          description: Type of the edge-node cluster
+        manifestUrl:
+          type: string
+          description: URL to the configuration manifest
+        manifest:
+          type: string
+          format: byte
+          description: Configuration manifest in bytes
+      description: Cluster detail
+      title: Cluster detail
+      required:
+      - projectId
+      - name
+      - nodes
+    EdgeNodeClusterProject:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    EdgeNodeClusterInterfacePorts:
+      type: object
+      properties:
+        ports:
+          type: array
+          items:
+            type: string
+        sharedLabels:
+          type: array
+          items:
+            type: string
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    EdgeNodeClusterType:
+      type: string
+      enum:
+      - EDGE_NODE_CLUSTER_TYPE_STANDART
+      - EDGE_NODE_CLUSTER_TYPE_ZKS
+      default: EDGE_NODE_CLUSTER_TYPE_STANDART
+      description: " - EDGE_NODE_CLUSTER_TYPE_STANDART: A standard cluster is a cluster that has exactly 3 nodes.\nThis is the default type, which does not support zks clusters.\n - EDGE_NODE_CLUSTER_TYPE_ZKS: A zks cluster is a cluster that can have 1, 3 or more nodes.\nIts role is to support zks clusters."
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
     ZsrvError:
       type: object
       properties:
@@ -1397,56 +1447,6 @@ components:
       default: OPS_STATUS_UNSPECIFIED
       description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
       title: ZedCloud internal operation status
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    BaseOSImage:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: system generated unique id for an image
-        version:
-          type: string
-          description: image version
-        imageName:
-          type: string
-          description: image name
-        activate:
-          type: boolean
-          description: activation flag
-        imvolId:
-          type: string
-          description: immutable Volume for this base image
-      description: Base OS image request details
-      title: Base OS image payload detail
-      required:
-      - uuid
-      - version
-      - imageName
-      - activate
-    EdgeNodeClusterType:
-      type: string
-      enum:
-      - EDGE_NODE_CLUSTER_TYPE_STANDART
-      - EDGE_NODE_CLUSTER_TYPE_ZKS
-      default: EDGE_NODE_CLUSTER_TYPE_STANDART
-      description: " - EDGE_NODE_CLUSTER_TYPE_STANDART: A standard cluster is a cluster that has exactly 3 nodes.\nThis is the default type, which does not support zks clusters.\n - EDGE_NODE_CLUSTER_TYPE_ZKS: A zks cluster is a cluster that can have 1, 3 or more nodes.\nIts role is to support zks clusters."
-    EdgeNodeClusterNodeType:
-      type: string
-      enum:
-      - EDGE_NODE_CLUSTER_NODE_TYPE_UNSPECIFIED
-      - EDGE_NODE_CLUSTER_NODE_TYPE_SERVER
-      - EDGE_NODE_CLUSTER_NODE_TYPE_AGENT
-      default: EDGE_NODE_CLUSTER_NODE_TYPE_UNSPECIFIED
   securitySchemes:
     BearerToken:
       type: apiKey

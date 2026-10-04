@@ -4604,516 +4604,59 @@ paths:
         required: true
 components:
   schemas:
-    DetailedUsers:
+    AAARequestLoginForgotPassword:
+      type: object
+      properties:
+        username:
+          type: string
+    AAASuccessResponseQueryAllSessionDetails:
+      type: object
+      properties:
+        cause:
+          $ref: '#/components/schemas/AAASuccessResponseQueryAllSessionDetailsCause'
+        sessionDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionDetails'
+    Policies:
       type: object
       properties:
         summaryByState:
           $ref: '#/components/schemas/Summary'
-          description: Summary of filtered users
         list:
           type: array
           items:
-            $ref: '#/components/schemas/DetailedUser'
-          description: List of users
-        summaryByUserActivity:
-          $ref: '#/components/schemas/Summary'
-          description: Count of online/offline users
-        summaryByRoleDistribution:
-          $ref: '#/components/schemas/Summary'
-          description: User distribution by role
+            $ref: '#/components/schemas/Policy'
         next:
           $ref: '#/components/schemas/Cursor'
-          description: Page details of the filtered records
-    AAAFailureResponseGenerateTokenCause:
-      type: string
-      enum:
-      - __INVALID__
-      - AAAFailureResponseGenerateTokenCauseUserUnknown
-      - AAAFailureResponseGenerateTokenCauseException
-      - AAAFailureResponseGenerateTokenCauseEnterpriseUnknown
-      - AAAFailureResponseGenerateTokenCauseForbidden
-      - AAAFailureResponseGenerateTokenCauseInternalError
-      default: __INVALID__
-    AAASuccessTokenRefresh:
-      type: object
-      properties:
-        token:
-          $ref: '#/components/schemas/Token64'
-      title: Token64 refresh was successful
-    Entitlement:
-      type: object
-      properties:
-        entpId:
-          type: string
-          description: Enterprise id for which we want to post/get enforce entitlement
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        entpName:
-          type: string
-          description: Enterprise name for which we want to post/get enforce entitlement
-          pattern: '[0-9A-Za-z-]+'
-          uniqueItems: true
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeviceEntitlement'
-          description: Device entitlement data
-        userCount:
-          $ref: '#/components/schemas/UserEntitlement'
-          description: User entitlement data
-        plugins:
-          $ref: '#/components/schemas/PluginEntitlement'
-          description: Plugin entitlement data
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeatureEntitlement'
-          description: Features entitlement data
-      description: Get Entitlement data
-      title: Entitlement data
-    Token64:
-      type: object
-      properties:
-        base64:
-          type: string
-        expires:
-          type: string
-          format: int64
-      title: Base64 encoded token
-    CrudContentJSON:
-      type: object
-      properties:
-        json:
-          type: string
-    AAASuccessResponse:
+    AAAFailureResponse:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/AAASuccessResponseType'
+          $ref: '#/components/schemas/AAAFailureResponseType'
         login:
-          $ref: '#/components/schemas/AAASuccessResponseLogin'
+          $ref: '#/components/schemas/AAAFailureResponseLogin'
         refresh:
-          $ref: '#/components/schemas/AAASuccessTokenRefresh'
-        details:
-          $ref: '#/components/schemas/AAASuccessSessionDetailsResponse'
+          $ref: '#/components/schemas/AAAFailureTokenRefresh'
         logout:
-          $ref: '#/components/schemas/AAASuccessResponseLogout'
-        credential:
-          $ref: '#/components/schemas/AAASuccessResponseCredentialChange'
-        querySessionDetails:
-          $ref: '#/components/schemas/AAASuccessResponseQueryAllSessionDetails'
-        generateToken:
-          $ref: '#/components/schemas/AAASuccessResponseGenerateToken'
-    AAA_Frontend_LogoutResponseCause:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - OK
-      - FAILED
-      default: UNSPECIFIED
-    AAA_Frontend_SessionDetailsResponse:
-      type: object
-      properties:
-        cause:
-          $ref: '#/components/schemas/AAA_Frontend_SessionDetailsResponseCause'
-        user:
-          $ref: '#/components/schemas/DetailedUser'
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Policy'
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
-    AAASuccessSessionDetailsResponse:
-      type: object
-      properties:
-        original:
-          $ref: '#/components/schemas/OpaqueToken64'
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Policy'
-        user:
-          $ref: '#/components/schemas/DetailedUser'
-    AuthorizationProfiles:
-      type: object
-      properties:
-        summaryByState:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of filtered profiles
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthorizationProfile'
-          description: List of profiles
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Page details of the filtered records
-    Policy:
-      type: object
-      properties:
-        id:
-          type: string
-        zone:
-          type: string
-        scope:
-          $ref: '#/components/schemas/PolicyScope'
-        access:
-          $ref: '#/components/schemas/PolicyAccess'
-        ownerId:
-          type: string
-        external:
-          type: boolean
-    ProjectList:
-      type: object
-      properties:
-        project:
-          type: array
-          items:
-            type: string
-    ZsrvResponse:
-      type: object
-      properties:
-        operationType:
-          $ref: '#/components/schemas/ZcOpsType'
-          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
-        operationStatus:
-          $ref: '#/components/schemas/ZcOpsStatus'
-          title: if this is log running job
-        objectKind:
-          type: string
-          title: zedcloud object kind on which the operation was performed
-        objectId:
-          type: string
-          title: Unique value identifies the object that was operated on
-        objectName:
-          type: string
-          title: name of the object
-        objectRevision:
-          type: string
-          title: 'object revision post the operation, note Read operation
-
-            doesn''t change the revision'
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-        operationTime:
-          type: string
-          title: time of operation
-        startTime:
-          type: string
-          title: total time taken by operations
-        endTime:
-          type: string
-        user:
-          type: string
-          title: the operation is performed on behalf of this user
-        httpStatusCode:
-          type: integer
-          format: int32
-          title: http response
-        httpStatusMsg:
-          type: string
-          title: summary of the error in text format
-        jobId:
-          type: string
-          title: for tracking asynchronous tasks
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZsrvError'
-          title: 'one or more errors will be set if the operation failed
-
-            i.e. httpStatusCode != 2xx'
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    AAASuccessResponseLogout:
-      type: object
-      properties:
-        original:
-          $ref: '#/components/schemas/OpaqueToken64'
-    AdminUserSignup:
-      type: object
-      properties:
-        name:
-          type: string
-        firstName:
-          type: string
-        fullName:
-          type: string
-        type:
-          $ref: '#/components/schemas/CredentialType'
-        password:
-          type: string
-        email:
-          type: string
-    Scope:
-      type: object
-      properties:
-        accessDevice:
-          type: string
-          description: Device access permission
-        accessApp:
-          type: string
-          description: Application access permission, this will be deprecated in further release - please use accessEdgeApp and accessAppInstance for granular permission access scope.
-        accessUser:
-          type: string
-          description: User access permission
-        accessStorage:
-          type: string
-          description: Storage access permission
-        accessEnterprise:
-          type: string
-          description: Enterprise access permission
-        enterpriseFilter:
-          type: array
-          items:
-            type: string
-          description: List of enterprise filters
-        projectFilter:
-          type: array
-          items:
-            type: string
-          description: List of project filters
-        accessEdgeApp:
-          type: string
-          description: Edge app access permission
-        accessAppInstance:
-          type: string
-          description: Application Instance access permission
-        accessEnterpriseIntegrationItems:
-          type: string
-          description: datastream and 3rd party integration access permission
-        uuid:
-          type: string
-          description: Unique system defined scope ID
-          readOnly: true
-          pattern: '[0-9A-Za-z_=-]{28}'
-          uniqueItems: true
-    EnterpriseType:
-      type: string
-      enum:
-      - ENTERPRISE_TYPE_UNSPECIFIED
-      - ENTERPRISE_TYPE_SELFSIGNUP
-      default: ENTERPRISE_TYPE_UNSPECIFIED
-    AAAFailureResponseGenerateToken:
-      type: object
-      properties:
-        cause:
-          $ref: '#/components/schemas/AAAFailureResponseGenerateTokenCause'
-        error:
-          type: string
-    AAAFailureTokenRefresh:
-      type: object
-      properties:
-        cause:
-          $ref: '#/components/schemas/AAAFailureTokenRefreshCause'
-        original:
-          $ref: '#/components/schemas/OpaqueToken64'
-        error:
-          type: string
-      title: The token did not get refreshed for a specific reason. Supplies original token in the response
-    AAAFailureResponseQueryAllSessionDetails:
-      type: object
-      properties:
-        error:
-          type: string
-        cause:
-          $ref: '#/components/schemas/AAAFailureResponseQueryAllSessionDetailsCause'
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
+          $ref: '#/components/schemas/AAAFailureResponseLogout'
         details:
-          type: string
-          title: Field captures string description of details
-    UserUsagePerEnterprise:
-      type: object
-      properties:
-        entpId:
-          type: string
-          description: Enterprise id
-          readOnly: true
-          pattern: '[0-9A-Za-z-]+'
-        userUsage:
-          type: string
-          format: int64
-          description: User usage for that enterprise
-    Credentials:
-      type: object
-      properties:
-        summaryByState:
-          $ref: '#/components/schemas/Summary'
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/Credential'
-        next:
-          $ref: '#/components/schemas/Cursor'
-    UserEntitlement:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        usage:
-          type: integer
-          format: int64
-    Realms:
-      type: object
-      properties:
-        summaryByState:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of filtered realms
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/Realm'
-          description: List of realms
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Page details of the filtered records
-    CrudResponseRead:
-      type: object
-      properties:
-        result:
-          $ref: '#/components/schemas/CrudResultWithContent'
-    AAA_Frontend_LoginModeResponseMode:
+          $ref: '#/components/schemas/AAAFailureResponseSessionDetails'
+        credential:
+          $ref: '#/components/schemas/AAAFailureResponseCredentialChange'
+        querySessionDetails:
+          $ref: '#/components/schemas/AAAFailureResponseQueryAllSessionDetails'
+        generateToken:
+          $ref: '#/components/schemas/AAAFailureResponseGenerateToken'
+    AuthProfileType:
       type: string
       enum:
-      - LOCAL
-      - EXTERNAL
-      default: LOCAL
-    DocPolicies:
-      type: object
-      properties:
-        summaryByState:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of filtered docpolicy
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocPolicySummary'
-          description: List of docpolicy
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Page details of the filtered records
-    AAARedirectResponse:
-      type: object
-      properties:
-        redirectUrl:
-          type: string
-        code:
-          type: integer
-          format: int64
-    UserRole:
-      type: string
-      enum:
-      - USER_ROLE_UNSPECIFIED
-      - USER_ROLE_SYSTEM_DEFINED
-      - USER_ROLE_USER_DEFINED
-      - USER_ROLE_CLUSTER
-      default: USER_ROLE_UNSPECIFIED
-    CrudAction:
-      type: string
-      enum:
-      - CrudAction__INVALID__
-      - CrudActionNotApplicable
-      - CrudActionCreate
-      - CrudActionRead
-      - CrudActionUpdate
-      - CrudActionDelete
-      - CrudActionQuery
-      - CrudActionQueryNext
-      - CrudActionReadSelf
-      - CrudActionUpdateSelf
-      default: CrudAction__INVALID__
-    PasswordProfile:
-      type: object
-      properties:
-        minLength:
-          type: integer
-          format: int64
-        maxLength:
-          type: integer
-          format: int64
-        minNumericChars:
-          type: integer
-          format: int64
-        minSymbolChars:
-          type: integer
-          format: int64
-        minUppercaseChars:
-          type: integer
-          format: int64
-        minLowercaseChars:
-          type: integer
-          format: int64
-        maxPasswordAge:
-          type: integer
-          format: int64
-        minPasswordAge:
-          type: integer
-          format: int64
-        numPrevPasswordCheck:
-          type: integer
-          format: int64
-        passwordExpiryNotificationPeriodInSeconds:
-          type: integer
-          format: int64
-    CrudStatisticsUser:
-      type: object
-      properties:
-        total:
-          type: integer
-          format: int64
-        suspended:
-          type: integer
-          format: int64
-        deleted:
-          type: integer
-          format: int64
-      title: User related statistics
-    AAASuccessResponseCredentialChange:
-      type: object
-      properties:
-        credentialId:
-          type: string
+      - AUTH_PROFILE_TYPE_UNSPECIFIED
+      - AUTH_PROFILE_TYPE_OAUTH_AZURE_AD
+      - AUTH_PROFILE_TYPE_OAUTH_GOOGLE
+      - AUTH_PROFILE_TYPE_OAUTH_CUSTOM
+      - AUTH_PROFILE_TYPE_LOCAL
+      default: AUTH_PROFILE_TYPE_UNSPECIFIED
     CrudResponseQuery:
       type: object
       properties:
@@ -5174,109 +4717,316 @@ components:
           $ref: '#/components/schemas/UserSummaryReport'
         userUsagePerEnterpriseList:
           $ref: '#/components/schemas/UserUsagePerEnterpriseList'
-    AAARequestEnterpriseSignup:
+    DeviceSize:
+      type: string
+      enum:
+      - DEFAULT_SIZE
+      - SMALL_SIZE
+      - MEDIUM_SIZE
+      - LARGE_SIZE
+      - XLARGE_SIZE
+      default: DEFAULT_SIZE
+    PolicyAccess:
+      type: string
+      enum:
+      - PermissionAccess__INVALID__
+      - PermissionAccessCreate
+      - PermissionAccessRead
+      - PermissionAccessCreateRead
+      - PermissionAccessUpdate
+      - PermissionAccessCreateUpdate
+      - PermissionAccessReadUpdate
+      - PermissionAccessCreateReadUpdate
+      - PermissionAccessDelete
+      - PermissionAccessCreateDelete
+      - PermissionAccessReadDelete
+      - PermissionAccessCreateReadDelete
+      - PermissionAccessUpdateDelete
+      - PermissionAccessCreateUpdateDelete
+      - PermissionAccessReadUpdateDelete
+      - PermissionAccessCreateReadUpdateDelete
+      - PermissionAccessExecute
+      - PermissionAccessCreateExecute
+      - PermissionAccessReadExecute
+      - PermissionAccessCreateReadExecute
+      - PermissionAccessUpdateExecute
+      - PermissionAccessCreateUpdateExecute
+      - PermissionAccessReadUpdateExecute
+      - PermissionAccessCreateReadUpdateExecute
+      - PermissionAccessDeleteExecute
+      - PermissionAccessCreateDeleteExecute
+      - PermissionAccessReadDeleteExecute
+      - PermissionAccessCreateReadDeleteExecute
+      - PermissionAccessUpdateDeleteExecute
+      - PermissionAccessCreateUpdateDeleteExecute
+      - PermissionAccessReadUpdateDeleteExecute
+      - PermissionAccessCreateReadUpdateDeleteExecute
+      - PermissionAccessQuery
+      - PermissionAccessCreateQuery
+      - PermissionAccessReadQuery
+      - PermissionAccessCreateReadQuery
+      - PermissionAccessUpdateQuery
+      - PermissionAccessCreateUpdateQuery
+      - PermissionAccessReadUpdateQuery
+      - PermissionAccessCreateReadUpdateQuery
+      - PermissionAccessDeleteQuery
+      - PermissionAccessCreateDeleteQuery
+      - PermissionAccessReadDeleteQuery
+      - PermissionAccessCreateReadDeleteQuery
+      - PermissionAccessUpdateDeleteQuery
+      - PermissionAccessCreateUpdateDeleteQuery
+      - PermissionAccessReadUpdateDeleteQuery
+      - PermissionAccessCreateReadUpdateDeleteQuery
+      - PermissionAccessExecuteQuery
+      - PermissionAccessCreateExecuteQuery
+      - PermissionAccessReadExecuteQuery
+      - PermissionAccessCreateReadExecuteQuery
+      - PermissionAccessUpdateExecuteQuery
+      - PermissionAccessCreateUpdateExecuteQuery
+      - PermissionAccessReadUpdateExecuteQuery
+      - PermissionAccessCreateReadUpdateExecuteQuery
+      - PermissionAccessDeleteExecuteQuery
+      - PermissionAccessCreateDeleteExecuteQuery
+      - PermissionAccessReadDeleteExecuteQuery
+      - PermissionAccessCreateReadDeleteExecuteQuery
+      - PermissionAccessUpdateDeleteExecuteQuery
+      - PermissionAccessCreateUpdateDeleteExecuteQuery
+      - PermissionAccessReadUpdateDeleteExecuteQuery
+      - PermissionAccessCreateReadUpdateDeleteExecuteQuery
+      default: PermissionAccess__INVALID__
+    OpaqueToken64:
       type: object
       properties:
-        enterprise:
-          $ref: '#/components/schemas/Enterprise'
-        adminUser:
-          $ref: '#/components/schemas/AdminUserSignup'
-        realmList:
+        base64:
+          type: string
+      title: Base64 encoded opaque token
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    AAA_Frontend_LoginResponseCause:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - OK
+      - UNKNOWN
+      - CREDENTIALS
+      - SUSPENDED
+      - EXCEPTION
+      - INACTIVE
+      - SIGNEDUPSTATE
+      - UNKNOWNSTATE
+      - CREATEDSTATE
+      - USER_UNKNOWN
+      - ENTERPRISE_UNKNOWN
+      - ROLE_UNKNOWN
+      - USER_UNKNOWNSTATE
+      - USER_INACTIVE
+      - USER_SIGNEDUPSTATE
+      - USER_CREATEDSTATE
+      - ENTERPRISE_UNKNOWNSTATE
+      - ENTERPRISE_INACTIVE
+      - ENTERPRISE_SIGNEDUPSTATE
+      - ENTERPRISE_CREATEDSTATE
+      - CREDENTIAL_NOTFOUND
+      - CREDENTIAL_MISMATCH
+      - SCHEME_UNKNOWN
+      - UPDATE_LOGINTIME_FAILED
+      - CREDENTIAL_MISMATCH_MAX_FAILED_PWD_ATTEMPT
+      - REDIRECT
+      - DECRYPTION_FAILED
+      - PASSWORD_EXPIRED
+      - TOTP_OK
+      - TOTP_INVALID_CODE
+      - TOTP_ERR
+      default: UNSPECIFIED
+      title: '- EXCEPTION: Some exception has occurred on the server'
+    CrudResultWithContent:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/CrudResultCode'
+        content:
+          $ref: '#/components/schemas/CrudContent'
+        identifier:
+          $ref: '#/components/schemas/Identifier64'
+    AAAResponseType:
+      type: string
+      enum:
+      - __INVALID__
+      - AAAResponseTypeSuccess
+      - AAAResponseTypeFailure
+      - AAAResponseTypeNotify
+      - AAAResponseTypeEnterpriseSignup
+      - AAAResponseTypeAdminUserSignup
+      - AAAResponseTypeRedirect
+      - AAAResponseTypeLoginMode
+      - TOTPEnrolment
+      - EnrolTOTP
+      default: __INVALID__
+    AAAFailureResponseSessionDetails:
+      type: object
+      properties:
+        cause:
+          $ref: '#/components/schemas/AAAFailureResponseSessionDetailsCause'
+        original:
+          $ref: '#/components/schemas/OpaqueToken64'
+    AAAFailureResponseQueryAllSessionDetailsCause:
+      type: string
+      enum:
+      - __INVALID__
+      - AAAFailureResponseQueryAllSessionDetailsCauseUnknown
+      - AAAFailureResponseQueryAllSessionDetailsCauseUnauthorizedAccess
+      - AAAFailureResponseQueryAllSessionDetailsCauseUserUnknown
+      default: __INVALID__
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    AdminUserSignup:
+      type: object
+      properties:
+        name:
+          type: string
+        firstName:
+          type: string
+        fullName:
+          type: string
+        type:
+          $ref: '#/components/schemas/CredentialType'
+        password:
+          type: string
+        email:
+          type: string
+    TOTPSettings:
+      type: object
+      properties:
+        enforce:
+          type: boolean
+        enforceInChildren:
+          type: boolean
+        enforcedByParent:
+          type: boolean
+    DeviceEntitlement:
+      type: object
+      properties:
+        size:
+          $ref: '#/components/schemas/DeviceSize'
+        limit:
+          type: integer
+          format: int32
+        usage:
+          type: integer
+          format: int64
+    AAASuccessTokenRefresh:
+      type: object
+      properties:
+        token:
+          $ref: '#/components/schemas/Token64'
+      title: Token64 refresh was successful
+    ProjectList:
+      type: object
+      properties:
+        project:
           type: array
           items:
             type: string
-        profileType:
-          $ref: '#/components/schemas/AuthProfileType'
-        token:
-          type: string
-        title:
-          type: string
-        employerName:
-          type: string
-    AuthorizationProfile:
+    DetailedUsers:
       type: object
       properties:
-        id:
-          type: string
-          description: Unique system defined profile ID
-          readOnly: true
-          pattern: '[0-9A-Za-z_=-]{28}'
-          uniqueItems: true
-        enterpriseId:
-          type: string
-          description: Parent enterprise ID of the authorization profile
-          pattern: '[0-9A-Za-z_=-]{28}'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the profile. Profile name is unique within an enterprise. Name can't be changed once created
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        type:
-          $ref: '#/components/schemas/AuthType'
-          description: Type of the profile
-        oauthProfile:
-          $ref: '#/components/schemas/OAUTHProfile'
-          description: Oauth profile configuration details
-        passwordProfile:
-          $ref: '#/components/schemas/PasswordProfile'
-        testOnly:
-          type: boolean
-        active:
-          type: boolean
-          description: Mark this profile as active. Only one profile can be active in a given enterprise
-        defaultRoleId:
-          type: string
-          description: Default Role ID to associate with the profile
-          pattern: '[0-9A-Za-z_=-]{28}'
-        title:
-          type: string
-          description: User defined title for the profile. Title can be changed anytime
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
-        description:
-          type: string
-          description: Detailed description of the profile
-          maxLength: 256
-        profileType:
-          $ref: '#/components/schemas/AuthProfileType'
-          description: Authorization profile type
-        disableAutoUserCreate:
-          type: boolean
-          description: Do not automatically create new users if this is set
-        revision:
-          $ref: '#/components/schemas/ObjectRevision'
-          description: system defined info
-          readOnly: true
-      description: Authorization profile  meta data
-      title: Authorization profile detail
-      required:
-      - name
-      - title
-      - defaultRoleId
-    CrudContentEncoding:
-      type: string
-      enum:
-      - CrudPayloadEncoding__INVALID__
-      - CrudPayloadEncodingProtobuf
-      - CrudPayloadEncodingJSON
-      default: CrudPayloadEncoding__INVALID__
-    PluginEntitlement:
-      type: object
-      properties:
-        pluginTotalLimit:
-          type: integer
-          format: int32
-        pluginTotalUsage:
-          type: integer
-          format: int64
-        pluginTypeEntitlement:
+        summaryByState:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered users
+        list:
           type: array
           items:
-            $ref: '#/components/schemas/PluginTypeEntitlement'
+            $ref: '#/components/schemas/DetailedUser'
+          description: List of users
+        summaryByUserActivity:
+          $ref: '#/components/schemas/Summary'
+          description: Count of online/offline users
+        summaryByRoleDistribution:
+          $ref: '#/components/schemas/Summary'
+          description: User distribution by role
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Page details of the filtered records
+    AAA_Frontend_SessionDetailsResponseCause:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - OK
+      - FAILED
+      default: UNSPECIFIED
+    CrudResponseRead:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/CrudResultWithContent'
+    AAARedirectResponse:
+      type: object
+      properties:
+        redirectUrl:
+          type: string
+        code:
+          type: integer
+          format: int64
+    CrudStatisticsUser:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        suspended:
+          type: integer
+          format: int64
+        deleted:
+          type: integer
+          format: int64
+      title: User related statistics
+    AAALoginModeResponse:
+      type: object
+      properties:
+        username:
+          type: string
+        mode:
+          $ref: '#/components/schemas/AAALoginModeResponseMode'
+    Identifier64:
+      type: object
+      properties:
+        base64:
+          type: string
+      title: Generic identifier, base64 encoding
+    AAAFailureTokenRefresh:
+      type: object
+      properties:
+        cause:
+          $ref: '#/components/schemas/AAAFailureTokenRefreshCause'
+        original:
+          $ref: '#/components/schemas/OpaqueToken64'
+        error:
+          type: string
+      title: The token did not get refreshed for a specific reason. Supplies original token in the response
+    CrudStatisticsContainer:
+      type: object
+      properties:
+        clazz:
+          $ref: '#/components/schemas/ModelClazz'
+        user:
+          $ref: '#/components/schemas/CrudStatisticsUser'
+      title: Container for per-clazz statistics
     RoleState:
       type: string
       enum:
@@ -5289,28 +5039,308 @@ components:
       description: 'Values for this needs to match the const defined in libs/database/datamodel.go for
 
         backward compatibility.'
-    AAASuccessResponseQueryAllSessionDetails:
+    AAA_Frontend_LoginWithPasswordRequest:
+      type: object
+      properties:
+        usernameAtRealm:
+          type: string
+        username:
+          type: string
+        realm:
+          type: string
+        password:
+          type: string
+        verbosePolicy:
+          type: boolean
+          title: How verbal should the response be
+        verboseSimpleUser:
+          type: boolean
+        verboseDetailedUser:
+          type: boolean
+        verboseRealm:
+          type: boolean
+        verboseEnterprise:
+          type: boolean
+        enterpriseName:
+          type: string
+      description: User either a combination of (username, realm) or (usernameAtRealm) to specify login details
+      title: Login request
+    AAA_Frontend_LoginWithOauthRequest:
+      type: object
+      properties:
+        usernameAtRealm:
+          type: string
+        enterpriseName:
+          type: string
+    EnterpriseSummary:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+    AAA_Frontend_SessionDetailsResponse:
       type: object
       properties:
         cause:
-          $ref: '#/components/schemas/AAASuccessResponseQueryAllSessionDetailsCause'
-        sessionDetails:
+          $ref: '#/components/schemas/AAA_Frontend_SessionDetailsResponseCause'
+        user:
+          $ref: '#/components/schemas/DetailedUser'
+        policies:
           type: array
           items:
-            $ref: '#/components/schemas/SessionDetails'
-    OpaqueToken64:
+            $ref: '#/components/schemas/Policy'
+    ObjectRevision:
       type: object
       properties:
-        base64:
+        prev:
           type: string
-      title: Base64 encoded opaque token
-    AAASuccessResponseQueryAllSessionDetailsCause:
-      type: string
-      enum:
-      - __INVALID__
-      - OK
-      - FAILED
-      default: __INVALID__
+          description: Previous
+        curr:
+          type: string
+          description: Current Database version of the record
+        createdAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was created.
+        createdBy:
+          type: string
+          description: 'User data: Created By'
+        updatedAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was last updated.
+        updatedBy:
+          type: string
+          description: 'User data: Updated By'
+      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+      title: ObjectRevision is used to store the user information.
+      required:
+      - curr
+      - createdAt
+      - createdBy
+      - updatedAt
+      - updatedBy
+    Scope:
+      type: object
+      properties:
+        accessDevice:
+          type: string
+          description: Device access permission
+        accessApp:
+          type: string
+          description: Application access permission, this will be deprecated in further release - please use accessEdgeApp and accessAppInstance for granular permission access scope.
+        accessUser:
+          type: string
+          description: User access permission
+        accessStorage:
+          type: string
+          description: Storage access permission
+        accessEnterprise:
+          type: string
+          description: Enterprise access permission
+        enterpriseFilter:
+          type: array
+          items:
+            type: string
+          description: List of enterprise filters
+        projectFilter:
+          type: array
+          items:
+            type: string
+          description: List of project filters
+        accessEdgeApp:
+          type: string
+          description: Edge app access permission
+        accessAppInstance:
+          type: string
+          description: Application Instance access permission
+        accessEnterpriseIntegrationItems:
+          type: string
+          description: datastream and 3rd party integration access permission
+        uuid:
+          type: string
+          description: Unique system defined scope ID
+          readOnly: true
+          pattern: '[0-9A-Za-z_=-]{28}'
+          uniqueItems: true
+    DocPolicy:
+      type: object
+      example:
+        id: EAJ1ABAi-KOom7dJlrBoE8eq1pj9
+        policyName: xxxxxxxxx
+        version: xxxxxxx
+        fileURL: xxxxxxxx
+        serverHost: zedcontrol.local.zededa.net
+        latest: false
+        revision:
+          prev: ''
+          curr: '1'
+          createdAt: '2020-07-17T06:03:14Z'
+          createdBy: us.root@zededa.com
+          updatedAt: '2020-07-17T06:03:14Z'
+          updatedBy: us.root@zededa.com
+      properties:
+        id:
+          type: string
+          description: Unique system defined docpolicy ID
+          readOnly: true
+          pattern: '[0-9A-Za-z_=-]{28}'
+          uniqueItems: true
+        policyName:
+          type: string
+          description: User defined name of the docpolicy. Name cannot be changed once created
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        version:
+          type: string
+          description: Policy doc version
+        fileURL:
+          type: string
+          description: Policy doc fileURL
+        serverHost:
+          type: string
+          description: Server Host
+        latest:
+          type: boolean
+          description: Mark latest docpolicy check
+        revision:
+          $ref: '#/components/schemas/ObjectRevision'
+          description: System defined info
+          readOnly: true
+      description: DocPolicy meta data
+      title: DocPolicy detail
+      required:
+      - policyName
+    AAAFailureResponseGenerateToken:
+      type: object
+      properties:
+        cause:
+          $ref: '#/components/schemas/AAAFailureResponseGenerateTokenCause'
+        error:
+          type: string
+    AAASuccessResponseLogout:
+      type: object
+      properties:
+        original:
+          $ref: '#/components/schemas/OpaqueToken64'
+    AAASuccessResponse:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AAASuccessResponseType'
+        login:
+          $ref: '#/components/schemas/AAASuccessResponseLogin'
+        refresh:
+          $ref: '#/components/schemas/AAASuccessTokenRefresh'
+        details:
+          $ref: '#/components/schemas/AAASuccessSessionDetailsResponse'
+        logout:
+          $ref: '#/components/schemas/AAASuccessResponseLogout'
+        credential:
+          $ref: '#/components/schemas/AAASuccessResponseCredentialChange'
+        querySessionDetails:
+          $ref: '#/components/schemas/AAASuccessResponseQueryAllSessionDetails'
+        generateToken:
+          $ref: '#/components/schemas/AAASuccessResponseGenerateToken'
+    Enterprises:
+      type: object
+      properties:
+        summaryByState:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered enterprises
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Enterprise'
+          description: List of enterprises
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Page details of the filtered records
+    CrudContentProtobuf:
+      type: object
+      properties:
+        detailedUser:
+          $ref: '#/components/schemas/DetailedUser'
+        simpleUser:
+          $ref: '#/components/schemas/SimpleUser'
+        enterprise:
+          $ref: '#/components/schemas/Enterprise'
+        realm:
+          $ref: '#/components/schemas/Realm'
+        user:
+          $ref: '#/components/schemas/DetailedUser'
+        credential:
+          $ref: '#/components/schemas/Credential'
+        role:
+          $ref: '#/components/schemas/Role'
+        policy:
+          $ref: '#/components/schemas/Policy'
+        profile:
+          $ref: '#/components/schemas/AuthorizationProfile'
+        docPolicy:
+          $ref: '#/components/schemas/DocPolicy'
+        encryptedSecrets:
+          type: object
+          additionalProperties:
+            type: string
+        cryptoKey:
+          type: string
+    ZsrvResponse:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
+          type: string
+          title: zedcloud object kind on which the operation was performed
+        objectId:
+          type: string
+          title: Unique value identifies the object that was operated on
+        objectName:
+          type: string
+          title: name of the object
+        objectRevision:
+          type: string
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
     Role:
       type: object
       example:
@@ -5388,1139 +5418,31 @@ components:
       - title
       - type
       - scopes
-    Credential:
+    Cursor:
       type: object
       properties:
-        id:
+        pageToken:
           type: string
-        owner:
-          type: string
-        type:
-          $ref: '#/components/schemas/CredentialType'
-        currentCred:
-          type: string
-        newCred:
-          type: string
-        forgot:
-          type: boolean
-        salt:
-          type: integer
-          format: int64
-    CrudContentProtobuf:
-      type: object
-      properties:
-        detailedUser:
-          $ref: '#/components/schemas/DetailedUser'
-        simpleUser:
-          $ref: '#/components/schemas/SimpleUser'
-        enterprise:
-          $ref: '#/components/schemas/Enterprise'
-        realm:
-          $ref: '#/components/schemas/Realm'
-        user:
-          $ref: '#/components/schemas/DetailedUser'
-        credential:
-          $ref: '#/components/schemas/Credential'
-        role:
-          $ref: '#/components/schemas/Role'
-        policy:
-          $ref: '#/components/schemas/Policy'
-        profile:
-          $ref: '#/components/schemas/AuthorizationProfile'
-        docPolicy:
-          $ref: '#/components/schemas/DocPolicy'
-        encryptedSecrets:
-          type: object
-          additionalProperties:
-            type: string
-        cryptoKey:
-          type: string
-    AAALoginModeResponseMode:
-      type: string
-      enum:
-      - AAALoginModeLocal
-      - AAALoginModeExternal
-      default: AAALoginModeLocal
-    SimpleUser:
-      type: object
-      properties:
-        id:
-          type: string
-          title: BEGIN-SYNC(SimpleUser)
-        username:
-          type: string
-        realmId:
-          type: string
-        state:
-          $ref: '#/components/schemas/UserState'
-        firstName:
-          type: string
-    AAAResponseType:
-      type: string
-      enum:
-      - __INVALID__
-      - AAAResponseTypeSuccess
-      - AAAResponseTypeFailure
-      - AAAResponseTypeNotify
-      - AAAResponseTypeEnterpriseSignup
-      - AAAResponseTypeAdminUserSignup
-      - AAAResponseTypeRedirect
-      - AAAResponseTypeLoginMode
-      - TOTPEnrolment
-      - EnrolTOTP
-      default: __INVALID__
-    AAA_Frontend_GenerateTokenResponseCause:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - OK
-      - USER_UNKNOWN
-      - EXCEPTION
-      default: UNSPECIFIED
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    TOTPSettings:
-      type: object
-      properties:
-        enforce:
-          type: boolean
-        enforceInChildren:
-          type: boolean
-        enforcedByParent:
-          type: boolean
-    EnterpriseState:
-      type: string
-      enum:
-      - ENTERPRISE_STATE_UNSPECIFIED
-      - ENTERPRISE_STATE_CREATED
-      - ENTERPRISE_STATE_DELETED
-      - ENTERPRISE_STATE_ACTIVE
-      - ENTERPRISE_STATE_INACTIVE
-      - ENTERPRISE_STATE_SIGNEDUP
-      default: ENTERPRISE_STATE_UNSPECIFIED
-    SessionDetails:
-      type: object
-      properties:
-        sessionId:
-          type: string
-          description: DEPRECATED. sessionId is obfuscated for security reasons
-          readOnly: true
-        expiresAt:
-          type: string
-          format: date-time
-          description: session expiry time
-        userName:
-          type: string
-          description: Logged in user name
-        clientIp:
-          type: string
-          description: IP address of the logged in user
-        userAgent:
-          type: string
-          description: user agent details
-      description: Details of all logged in session
-      title: Session detail
-    PolicyVersionList:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyVersion'
-    AAAFailureResponseSessionDetails:
-      type: object
-      properties:
-        cause:
-          $ref: '#/components/schemas/AAAFailureResponseSessionDetailsCause'
-        original:
-          $ref: '#/components/schemas/OpaqueToken64'
-    ZksSyncStatus:
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/ZksSyncStatusCode'
-        serverStatuses:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServerSyncStatus'
-    AAANotifyResponse:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/AAANotifyResponseType'
-        login:
-          $ref: '#/components/schemas/AAASuccessResponseLogin'
-        logout:
-          $ref: '#/components/schemas/AAASuccessResponseLogout'
-    AAA_Frontend_RefreshResponseCause:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - OK
-      - UNKNOWN
-      - CREDENTIALS
-      - EXPIRED
-      default: UNSPECIFIED
-    Enterprise:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique system defined enterprise ID
-          readOnly: true
-          pattern: '[0-9A-Za-z_=-]{28}'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the enterprise. Once enterprise is created, name can’t be changed
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        SfdcId:
-          type: string
-        HubspotId:
-          type: string
-        state:
-          $ref: '#/components/schemas/EnterpriseState'
-          description: Enterprise state
-        type:
-          $ref: '#/components/schemas/EnterpriseType'
-          description: Enterprise type
-        policyList:
-          $ref: '#/components/schemas/PolicyVersionList'
-          description: Policy version list
-        parentEntpId:
-          type: string
-          description: Parent enterprise ID
-          title: 'string id = 100;
-
-            string name = 101;'
-          pattern: '[0-9A-Za-z_=-]{28}'
-        azureSubId:
-          type: string
-          description: Azure subscription ID tied to this enterprise
-        title:
-          type: string
-          description: User defined title for the enterprise. Title can be changed any time
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
-        description:
-          type: string
-          description: Detailed description of the enterprise
-          maxLength: 256
-        revision:
-          $ref: '#/components/schemas/ObjectRevision'
-          description: system defined info
-          readOnly: true
-        realms:
+          description: Page Token
+        orderBy:
           type: array
           items:
             type: string
-          description: List of realms associated with the enterprise
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          description: enterprise level key-value pairs
-        inheritAuthFromParent:
-          type: boolean
-          description: Perform authorization using parent enterprise
-        childEnterprises:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnterpriseSummary'
-          description: List of all child enterprises
-        controllerHostURL:
-          type: string
-          description: zedcontrol host
-        streamEvents:
-          $ref: '#/components/schemas/DataStream'
-          description: Enable / Disable streaming of events to 3rd party end point
-        totpSettings:
-          $ref: '#/components/schemas/TOTPSettings'
-          description: Enterprise settings to enforce TOTP
-        apiTokenExpiryInSeconds:
-          type: integer
-          format: int64
-          description: Enterprise settings for API Token expiry to be set in seconds
-      description: Enterprise meta data
-      title: Enterprise detail
-      required:
-      - name
-      - title
-    CrudResponse:
-      type: object
-      properties:
-        token:
-          $ref: '#/components/schemas/OpaqueToken64'
-        action:
-          $ref: '#/components/schemas/CrudAction'
-        result:
-          $ref: '#/components/schemas/ZsrvResponse'
-        read:
-          $ref: '#/components/schemas/CrudResponseRead'
-        query:
-          $ref: '#/components/schemas/CrudResponseQuery'
-    AAARequestLoginForgotPassword:
-      type: object
-      properties:
-        username:
-          type: string
-    ModelClazz:
-      type: string
-      enum:
-      - ModelClazzUnspecified
-      - ModelClazzDetailedUser
-      - ModelClazzSimpleUser
-      - ModelClazzEnterprise
-      - ModelClazzRealm
-      - ModelClazzCredential
-      - ModelClazzPolicy
-      - ModelClazzRole
-      - ModelClazzProfile
-      - ModelClazzDocPolicy
-      - ModelClazzAllowedEnterpriseList
-      - ModelClazzTotalUserCount
-      - ModelClazzLastLoggedInUserInfo
-      - ModelClazzUserActivitySummary
-      - ModelClazzUserUsagePerEnterprise
-      - ModelClazzEnterpriseGithubRepository
-      default: ModelClazzUnspecified
-      title: Global identifier of clazz types
-    AAAFailureTokenRefreshCause:
-      type: string
-      enum:
-      - __INVALID__
-      - AAAFailureTokenRefreshCauseExpired
-      - AAAFailureTokenRefreshCauseUnknown
-      default: __INVALID__
-      title: Reason why token refresh failed
-    DocPolicy:
-      type: object
-      example:
-        id: EAJ1ABAi-KOom7dJlrBoE8eq1pj9
-        policyName: xxxxxxxxx
-        version: xxxxxxx
-        fileURL: xxxxxxxx
-        serverHost: zedcontrol.local.zededa.net
-        latest: false
-        revision:
-          prev: ''
-          curr: '1'
-          createdAt: '2020-07-17T06:03:14Z'
-          createdBy: us.root@zededa.com
-          updatedAt: '2020-07-17T06:03:14Z'
-          updatedBy: us.root@zededa.com
-      properties:
-        id:
-          type: string
-          description: Unique system defined docpolicy ID
-          readOnly: true
-          pattern: '[0-9A-Za-z_=-]{28}'
-          uniqueItems: true
-        policyName:
-          type: string
-          description: User defined name of the docpolicy. Name cannot be changed once created
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        version:
-          type: string
-          description: Policy doc version
-        fileURL:
-          type: string
-          description: Policy doc fileURL
-        serverHost:
-          type: string
-          description: Server Host
-        latest:
-          type: boolean
-          description: Mark latest docpolicy check
-        revision:
-          $ref: '#/components/schemas/ObjectRevision'
-          description: System defined info
-          readOnly: true
-      description: DocPolicy meta data
-      title: DocPolicy detail
-      required:
-      - policyName
-    AAA_Frontend_LoginResponseCause:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - OK
-      - UNKNOWN
-      - CREDENTIALS
-      - SUSPENDED
-      - EXCEPTION
-      - INACTIVE
-      - SIGNEDUPSTATE
-      - UNKNOWNSTATE
-      - CREATEDSTATE
-      - USER_UNKNOWN
-      - ENTERPRISE_UNKNOWN
-      - ROLE_UNKNOWN
-      - USER_UNKNOWNSTATE
-      - USER_INACTIVE
-      - USER_SIGNEDUPSTATE
-      - USER_CREATEDSTATE
-      - ENTERPRISE_UNKNOWNSTATE
-      - ENTERPRISE_INACTIVE
-      - ENTERPRISE_SIGNEDUPSTATE
-      - ENTERPRISE_CREATEDSTATE
-      - CREDENTIAL_NOTFOUND
-      - CREDENTIAL_MISMATCH
-      - SCHEME_UNKNOWN
-      - UPDATE_LOGINTIME_FAILED
-      - CREDENTIAL_MISMATCH_MAX_FAILED_PWD_ATTEMPT
-      - REDIRECT
-      - DECRYPTION_FAILED
-      - PASSWORD_EXPIRED
-      - TOTP_OK
-      - TOTP_INVALID_CODE
-      - TOTP_ERR
-      default: UNSPECIFIED
-      title: '- EXCEPTION: Some exception has occurred on the server'
-    AAA_Frontend_OAUTHCallbackRequest:
-      type: object
-      properties:
-        code:
-          type: string
-        state:
-          type: string
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    OAUTHProfileJWTAuthProfile:
-      type: object
-      properties:
-        alg:
-          $ref: '#/components/schemas/JWTAuthProfileAlgorithm'
-          description: Algorithm for JWT signature verification
-      description: Config for JWT based authentication, jwks_uri is derived from OIDC Well Known Endpoints
-      title: JWT Authentication profile detail
-    Identifier64:
-      type: object
-      properties:
-        base64:
-          type: string
-      title: Generic identifier, base64 encoding
-    JWTAuthProfileAlgorithm:
-      type: string
-      enum:
-      - None
-      - RS256
-      - RS384
-      - RS512
-      default: None
-    AAAResponse:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/AAAResponseType'
-        success:
-          $ref: '#/components/schemas/AAASuccessResponse'
-        failure:
-          $ref: '#/components/schemas/AAAFailureResponse'
-        notify:
-          $ref: '#/components/schemas/AAANotifyResponse'
-        redirect:
-          $ref: '#/components/schemas/AAARedirectResponse'
-        mode:
-          $ref: '#/components/schemas/AAALoginModeResponse'
-        result:
-          $ref: '#/components/schemas/ZsrvResponse'
-        totpURL:
-          $ref: '#/components/schemas/TOTPEnrolmentURL'
-      title: 'BEGIN: Responses'
-    AAA_Frontend_SessionDetailsResponseCause:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - OK
-      - FAILED
-      default: UNSPECIFIED
-    PluginType:
-      type: string
-      enum:
-      - PLUGIN_TYPE_UNSPECIFIED
-      - PLUGIN_TYPE_SPLUNK
-      - PLUGIN_TYPE_HTTP
-      - PLUGIN_TYPE_RANCHER
-      - PLUGIN_TYPE_VMWARE_VCO
-      - PLUGIN_TYPE_VMWARE_TMC
-      default: PLUGIN_TYPE_UNSPECIFIED
-    AAAFailureResponseLogin:
-      type: object
-      properties:
-        cause:
-          $ref: '#/components/schemas/AAAFailureResponseLoginCause'
-        error:
-          type: string
-        noOfLoginAttemptsLeft:
-          type: integer
-          format: int64
-        tempToken:
-          $ref: '#/components/schemas/Token64'
-        tempSuccessResponse:
-          $ref: '#/components/schemas/AAASuccessResponseLogin'
-          description: 'Sessions depend heavily on AAASuccessResponseLogin. In case of password expired,
-
-            we need temporary token. We can not generate a temporary token for password reset with
-
-            AAAFailureResponseLogin itself. Therefore, adding this tempSuccessResponse, to be used to create new session.'
-    AAANotifyResponseType:
-      type: string
-      enum:
-      - __INVALID__
-      - AAANotifyTypeLogin
-      - AAANotifyTypeLogout
-      default: __INVALID__
-    AAAFailureResponseLogoutCause:
-      type: string
-      enum:
-      - __INVALID__
-      - AAAFailureResponseLogoutCauseUnknown
-      - AAAFailureResponseLogoutCauseGarbage
-      - AAAFailureResponseLogoutCauseExpired
-      - AAAFailureResponseLogoutCauseNoSuchSession
-      default: __INVALID__
-    AAAFailureResponseLoginCause:
-      type: string
-      enum:
-      - __INVALID__
-      - AAAFailureResponseLoginCauseGarbage
-      - AAAFailureResponseLoginCauseRealmUnknown
-      - AAAFailureResponseLoginCauseUserUnknown
-      - AAAFailureResponseLoginCauseUserSuspended
-      - AAAFailureResponseLoginCausePasswordMismatch
-      - AAAFailureResponseLoginCauseChallengeMismatch
-      - AAAFailureResponseLoginCauseNoSuchCredentials
-      - AAAFailureResponseLoginCauseException
-      - AAAFailureResponseLoginCauseEnterpriseUnknown
-      - AAAFailureResponseLoginCauseSchemeUnknown
-      - AAAFailureResponseLoginCauseUserSignedupState
-      - AAAFailureResponseLoginCauseRoleUnknown
-      - AAAFailureResponseLoginCauseUpdateLastLoginTimeFailed
-      - AAAFailureResponseLoginCauseEnterpriseInactive
-      - AAAFailureResponseLoginCauseUserInactive
-      - AAAFailureResponseLoginCauseEnterpriseSignedupState
-      - AAAFailureResponseLoginCauseEnterpriseUnknownState
-      - AAAFailureResponseLoginCauseUserUnknownState
-      - AAAFailureResponseLoginCauseEnterpriseCreatedState
-      - AAAFailureResponseLoginCauseUserCreatedState
-      - AAAFailureResponseLoginCausePasswordMismatchAndMaxFailedPwdAttempt
-      - AAAFailureResponseLoginCausePasswordDecryptionFailed
-      - AAAFailureResponseLoginCausePasswordExpired
-      - TOTPError
-      - TOTPInvalidCode
-      - AAAFailureResponseLoginCauseEmptySubject
-      default: __INVALID__
-      title: Reason why authentication failed, this is more detailed than should be passed on to external clients
-    AllowedEnterpriseList:
-      type: object
-      properties:
-        enterprises:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllowedEnterprise'
-          description: List of child enterprises
-        error:
-          type: string
-          description: Error while fetching list of child enterprises, if any
-        next:
-          type: string
-          $ref: '#/components/schemas/Cursor'
-          description: Next page information
-        total:
-          type: string
-          format: int64
-          description: Total number of allowed enterprises
-        enterpriseEntitlements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entitlement'
-          description: Enterprises entitlement data
-      description: Get list of child enterprises
-      title: Get child enterprises
-    Realm:
-      type: object
-      example:
-        id: EAJ1ABAi-KOom7dJlrBoE8eq1pj9
-        name: zededa.com
-        enterpriseId: AAFlABDe6Nm63ixF5LJBbk9Keqp6
-        title: zededa
-        description: Test realm
-        revision:
-          prev: ''
-          curr: '1'
-          createdAt: '2020-07-17T06:03:14Z'
-          createdBy: us.root@zededa.com
-          updatedAt: '2020-07-17T06:03:14Z'
-          updatedBy: us.root@zededa.com
-      properties:
-        id:
-          type: string
-          description: Unique system defined realm ID
-          readOnly: true
-          pattern: '[0-9A-Za-z_=-]{28}'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the realm. Name cannot be changed once created
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        enterpriseId:
-          type: string
-          description: Enterprise ID of the enterprise where the realm is to be created
-          pattern: '[0-9A-Za-z_=-]{28}'
-          uniqueItems: true
-        title:
-          type: string
-          description: User defined title of the realm. Title can be changed anytime
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
-        description:
-          type: string
-          description: Detailed description of the realm
-          maxLength: 256
-        revision:
-          $ref: '#/components/schemas/ObjectRevision'
-          description: System defined info
-          readOnly: true
-      description: Realm meta data
-      title: Realm detail
-      required:
-      - name
-      - title
-      - enterpriseId
-    CrudResultCode:
-      type: string
-      enum:
-      - CrudResultCode__INVALID__
-      - CrudResultCodeSuccess
-      - CrudResultCodeAuthentication
-      - CrudResultCodeAlreadyExists
-      - CrudResultCodeException
-      - CrudResultCodeHasDependencies
-      - CrudResultCodeIllegalArgument
-      - CrudResultCodeIllegalRequest
-      - CrudResultCodeIncomplete
-      - CrudResultCodeInternalError
-      - CrudResultCodeNotFound
-      - CrudResultCodeNotIdentified
-      - CrudResultCodePermissionDenied
-      - CrudResultCodeQueryExpired
-      - CrudResultCodeUnknown
-      default: CrudResultCode__INVALID__
-      title: Responses to the action requests
-    UserState:
-      type: string
-      enum:
-      - USER_STATE_UNSPECIFIED
-      - USER_STATE_CREATED
-      - USER_STATE_ACTIVE
-      - USER_STATE_INACTIVE
-      - USER_STATE_SIGNEDUP
-      - USER_STATE_SUSPENDED
-      default: USER_STATE_UNSPECIFIED
-      title: General well being of the user
-    AAASuccessResponseGenerateToken:
-      type: object
-      properties:
-        login:
-          $ref: '#/components/schemas/AAASuccessResponseLogin'
-        sessionDetails:
-          $ref: '#/components/schemas/SessionDetails'
-    AAA_Frontend_LoginWithOauthRequest:
-      type: object
-      properties:
-        usernameAtRealm:
-          type: string
-        enterpriseName:
-          type: string
-    ZksSyncStatusCode:
-      type: string
-      enum:
-      - ZKS_SYNC_STATUS_CODE_UNSPECIFIED
-      - ZKS_SYNC_STATUS_CODE_HEALTHY
-      - ZKS_SYNC_STATUS_CODE_PARTIALLY_HEALTHY
-      - ZKS_SYNC_STATUS_CODE_UNHEALTHY
-      default: ZKS_SYNC_STATUS_CODE_UNSPECIFIED
-    AAAFailureResponseSessionDetailsCause:
-      type: string
-      enum:
-      - __INVALID__
-      - AAAFailureResponseSessionDetailsCauseUnknown
-      - AAAFailureResponseSessionDetailsCauseNoSuchSession
-      default: __INVALID__
-    IdState:
-      type: string
-      enum:
-      - ID_STATE_UNSPECIFIED
-      - ID_STATE_NOT_VERIFIED
-      - ID_STATE_VERIFIED
-      default: ID_STATE_UNSPECIFIED
-    CrudContent:
-      type: object
-      properties:
-        oid:
-          $ref: '#/components/schemas/Identifier64'
-        encoding:
-          $ref: '#/components/schemas/CrudContentEncoding'
-        clazz:
-          $ref: '#/components/schemas/ModelClazz'
-        protobuf:
-          $ref: '#/components/schemas/CrudContentProtobuf'
-        json:
-          $ref: '#/components/schemas/CrudContentJSON'
-      title: Content, with a type encoded either as protobuf or json
-    AllowedEnterprise:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        roleId:
-          type: string
-    Roles:
-      type: object
-      properties:
-        summaryByState:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of filtered roles
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-          description: List of roles
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Page details of the filtered records
-    DocPolicySummary:
-      type: object
-      example:
-        policyName: xxxxxxxxx
-        version: xxxxxxx
-        fileURL: xxxxxxxx
-        revision:
-          prev: ''
-          curr: '1'
-          createdAt: '2020-07-17T06:03:14Z'
-          createdBy: us.root@zededa.com
-          updatedAt: '2020-07-17T06:03:14Z'
-          updatedBy: us.root@zededa.com
-      properties:
-        policy:
-          type: string
-          description: User defined name of the docpolicy. Name cannot be changed once created
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        version:
-          type: string
-          description: Policy doc version
-        fileURL:
-          type: string
-          description: Policy doc fileURL
-        revision:
-          $ref: '#/components/schemas/ObjectRevision'
-          description: System defined info
-          readOnly: true
-      description: DocPolicy meta data
-      title: DocPolicy detail
-    CrudStatisticsContainer:
-      type: object
-      properties:
-        clazz:
-          $ref: '#/components/schemas/ModelClazz'
-        user:
-          $ref: '#/components/schemas/CrudStatisticsUser'
-      title: Container for per-clazz statistics
-    PolicyScope:
-      type: string
-      enum:
-      - PermissionScope__INVALID__
-      - PermissionScopeOther
-      - PermissionScopeGroup
-      - PermissionScopeOtherGroup
-      - PermissionScopeOwner
-      - PermissionScopeOtherOwner
-      - PermissionScopeGroupOwner
-      - PermissionScopeOtherGroupOwner
-      - PermissionScopeEnterprise
-      - PermissionScopeOtherEnterprise
-      - PermissionScopeGroupEnterprise
-      - PermissionScopeOtherGroupEnterprise
-      - PermissionScopeOwnerEnterprise
-      - PermissionScopeOtherOwnerEnterprise
-      - PermissionScopeGroupOwnerEnterprise
-      - PermissionScopeOtherGroupOwnerEnterprise
-      default: PermissionScope__INVALID__
-      title: Scope of the permission, similar to Unix file system
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    AAA_Frontend_LogoutResponse:
-      type: object
-      properties:
-        cause:
-          $ref: '#/components/schemas/AAA_Frontend_LogoutResponseCause'
-        token:
-          $ref: '#/components/schemas/OpaqueToken64'
-    AAASuccessResponseType:
-      type: string
-      enum:
-      - __INVALID__
-      - AAASuccessResponseTypeLogin
-      - AAASuccessResponseTypeRefresh
-      - AAASuccessResponseTypePermisson
-      - AAASuccessResponseTypeLogout
-      - AAASuccessResponseTypeSessionDetails
-      - AAASuccessResponseTypeCredentialChange
-      - AAASuccessResponseTypeQueryAllSessionDetails
-      - AAASuccessResponseTypeGenerateToken
-      default: __INVALID__
-    AuthType:
-      type: string
-      enum:
-      - AUTH_TYPE_UNSPECIFIED
-      - AUTH_TYPE_LOCAL
-      - AUTH_TYPE_OAUTH
-      - AUTH_TYPE_SAML
-      default: AUTH_TYPE_UNSPECIFIED
-    AAAFailureResponseLogout:
-      type: object
-      properties:
-        cause:
-          $ref: '#/components/schemas/AAAFailureResponseLogoutCause'
-        original:
-          $ref: '#/components/schemas/OpaqueToken64'
-        error:
-          type: string
-    ZcOpsStatus:
-      type: string
-      enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
-    PolicyVersion:
-      type: object
-      properties:
-        Policy:
-          type: string
-        Version:
-          type: string
-        AcceptedAt:
-          type: string
-          format: date-time
-        AcceptedBy:
-          type: string
-        EffectiveFrom:
-          type: string
-          format: date-time
-    AuthProfileType:
-      type: string
-      enum:
-      - AUTH_PROFILE_TYPE_UNSPECIFIED
-      - AUTH_PROFILE_TYPE_OAUTH_AZURE_AD
-      - AUTH_PROFILE_TYPE_OAUTH_GOOGLE
-      - AUTH_PROFILE_TYPE_OAUTH_CUSTOM
-      - AUTH_PROFILE_TYPE_LOCAL
-      default: AUTH_PROFILE_TYPE_UNSPECIFIED
-    ServerSyncStatus:
-      type: object
-      properties:
-        serverName:
-          type: string
-        status:
-          type: string
-        error:
-          type: string
-    AAA_Frontend_LoginModeRequest:
-      type: object
-      properties:
-        username:
-          type: string
-    AAAFailureResponseQueryAllSessionDetailsCause:
-      type: string
-      enum:
-      - __INVALID__
-      - AAAFailureResponseQueryAllSessionDetailsCauseUnknown
-      - AAAFailureResponseQueryAllSessionDetailsCauseUnauthorizedAccess
-      - AAAFailureResponseQueryAllSessionDetailsCauseUserUnknown
-      default: __INVALID__
-    AAAFailureResponseCredentialChange:
-      type: object
-      properties:
-        cause:
-          $ref: '#/components/schemas/AAAFailureResponseCredentialChangeCause'
-    DataStream:
-      type: object
-      properties:
-        pluginId:
-          type: string
-        enabled:
-          type: boolean
-    PluginTypeEntitlement:
-      type: object
-      properties:
-        pluginType:
-          $ref: '#/components/schemas/PluginType'
-        pluginTypeLimit:
-          type: integer
-          format: int32
-        pluginTypeUsage:
-          type: integer
-          format: int64
-    OAUTHProfile:
-      type: object
-      properties:
-        OIDCEndPoint:
-          type: string
-          description: OIDC endpoint for oauth validation
-        clientID:
-          type: string
-          description: OAUTH client ID
-        clientSecret:
-          type: string
-          description: OAUTH client secret
-        encryptedSecrets:
-          type: object
-          additionalProperties:
-            type: string
-        cryptoKey:
-          type: string
-        roleScope:
-          type: string
-          description: OIDC scope to fetch application role
-        jwtAuthProfile:
-          $ref: '#/components/schemas/OAUTHProfileJWTAuthProfile'
-          description: Config for JWT based authentication, jwks_uri is derived from OIDC Well Known Endpoints
-        idpId:
-          type: string
-          description: id for Vmware IDP
-        additionalParameters:
-          type: string
-          additionalProperties:
-            type: string
-          description: pass additional url parameters during the exchange and authorization process
-    UserUsagePerEnterpriseList:
-      type: object
-      properties:
-        userUsagePerEntp:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserUsagePerEnterprise'
-          description: user usage per enterprise list
-    AAA_Frontend_GenerateTokenResponse:
-      type: object
-      properties:
-        token:
-          type: string
-        expiresAt:
-          type: string
-          format: date-time
-        userName:
-          type: string
-        clientIp:
-          type: string
-        userAgent:
-          type: string
-        cause:
-          $ref: '#/components/schemas/AAA_Frontend_GenerateTokenResponseCause'
-        error:
-          type: string
-    Summary:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Summary description
-        total:
+          description: OrderBy helps in sorting the list response
+        pageNum:
           type: number
           format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    LastLoggedinUserInfo:
-      type: object
-      properties:
-        name:
-          type: string
-        lastLoginTime:
-          type: string
-          format: date-time
-    UserSummaryReport:
-      type: object
-      properties:
-        users:
-          type: integer
+          description: Page Number
+        pageSize:
+          type: number
           format: int64
-        activeUsersCount:
-          type: integer
+          description: Defines the page size
+        totalPages:
+          type: number
           format: int64
-        lastLoggedinUserInfo:
-          $ref: '#/components/schemas/LastLoggedinUserInfo'
-    AAAFailureResponseType:
-      type: string
-      enum:
-      - __INVALID__
-      - AAAFailureResponseTypeNone
-      - AAAFailureResponseTypeLogin
-      - AAAFailureResponseTypeRefresh
-      - AAAFailureResponseTypeLogout
-      - AAAFailureResponseTypeSessionDetails
-      - AAAFailureResponseTypeCredentialChange
-      - AAAFailureResponseTypeQueryAllSessionDetails
-      - AAAFailureResponseTypeGenerateToken
-      default: __INVALID__
-    DeviceEntitlement:
-      type: object
-      properties:
-        size:
-          $ref: '#/components/schemas/DeviceSize'
-        limit:
-          type: integer
-          format: int32
-        usage:
-          type: integer
-          format: int64
-    EnterpriseSummary:
-      type: object
-      properties:
-        name:
-          type: string
-        id:
-          type: string
-    AAAFailureResponseCredentialChangeCause:
-      type: string
-      enum:
-      - __INVALID__
-      - AAAFailureResponseCredentialChangeCauseUnknown
-      - AAAFailureResponseCredentialChangeCauseAuthenticationFailure
-      - AAAFailureResponseCredentialChangeCausePermissionDenied
-      - AAAFailureResponseCredentialChangeCauseInternalServerError
-      - AAAFailureResponseCredentialChangeCauseAlreadyExists
-      - AAAFailureResponseCredentialChangeCausePasswordTooSimple
-      - AAAFailureResponseCredentialChangeCauseNotFound
-      default: __INVALID__
-    ObjectRevision:
-      type: object
-      properties:
-        prev:
-          type: string
-          description: Previous
-        curr:
-          type: string
-          description: Current Database version of the record
-        createdAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was created.
-        createdBy:
-          type: string
-          description: 'User data: Created By'
-        updatedAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was last updated.
-        updatedBy:
-          type: string
-          description: 'User data: Updated By'
-      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
-      title: ObjectRevision is used to store the user information.
-      required:
-      - curr
-      - createdAt
-      - createdBy
-      - updatedAt
-      - updatedBy
-    TOTPEnrolmentURL:
-      type: object
-      properties:
-        URL:
-          type: string
-        Secret:
-          type: string
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
     AAASuccessResponseLogin:
       type: object
       properties:
@@ -6560,8 +5482,129 @@ components:
         isJWTValid:
           type: boolean
       title: AAA was successful
-    AAA_Frontend_LogoutRequest:
+    EnterpriseType:
+      type: string
+      enum:
+      - ENTERPRISE_TYPE_UNSPECIFIED
+      - ENTERPRISE_TYPE_SELFSIGNUP
+      default: ENTERPRISE_TYPE_UNSPECIFIED
+    DocPolicies:
       type: object
+      properties:
+        summaryByState:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered docpolicy
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocPolicySummary'
+          description: List of docpolicy
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Page details of the filtered records
+    PolicyScope:
+      type: string
+      enum:
+      - PermissionScope__INVALID__
+      - PermissionScopeOther
+      - PermissionScopeGroup
+      - PermissionScopeOtherGroup
+      - PermissionScopeOwner
+      - PermissionScopeOtherOwner
+      - PermissionScopeGroupOwner
+      - PermissionScopeOtherGroupOwner
+      - PermissionScopeEnterprise
+      - PermissionScopeOtherEnterprise
+      - PermissionScopeGroupEnterprise
+      - PermissionScopeOtherGroupEnterprise
+      - PermissionScopeOwnerEnterprise
+      - PermissionScopeOtherOwnerEnterprise
+      - PermissionScopeGroupOwnerEnterprise
+      - PermissionScopeOtherGroupOwnerEnterprise
+      default: PermissionScope__INVALID__
+      title: Scope of the permission, similar to Unix file system
+    AAANotifyResponseType:
+      type: string
+      enum:
+      - __INVALID__
+      - AAANotifyTypeLogin
+      - AAANotifyTypeLogout
+      default: __INVALID__
+    ModelClazz:
+      type: string
+      enum:
+      - ModelClazzUnspecified
+      - ModelClazzDetailedUser
+      - ModelClazzSimpleUser
+      - ModelClazzEnterprise
+      - ModelClazzRealm
+      - ModelClazzCredential
+      - ModelClazzPolicy
+      - ModelClazzRole
+      - ModelClazzProfile
+      - ModelClazzDocPolicy
+      - ModelClazzAllowedEnterpriseList
+      - ModelClazzTotalUserCount
+      - ModelClazzLastLoggedInUserInfo
+      - ModelClazzUserActivitySummary
+      - ModelClazzUserUsagePerEnterprise
+      - ModelClazzEnterpriseGithubRepository
+      default: ModelClazzUnspecified
+      title: Global identifier of clazz types
+    AuthType:
+      type: string
+      enum:
+      - AUTH_TYPE_UNSPECIFIED
+      - AUTH_TYPE_LOCAL
+      - AUTH_TYPE_OAUTH
+      - AUTH_TYPE_SAML
+      default: AUTH_TYPE_UNSPECIFIED
+    AAA_Frontend_LogoutResponse:
+      type: object
+      properties:
+        cause:
+          $ref: '#/components/schemas/AAA_Frontend_LogoutResponseCause'
+        token:
+          $ref: '#/components/schemas/OpaqueToken64'
+    UserEntitlement:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        usage:
+          type: integer
+          format: int64
+    ZksSyncStatus:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ZksSyncStatusCode'
+        serverStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServerSyncStatus'
+    SimpleUser:
+      type: object
+      properties:
+        id:
+          type: string
+          title: BEGIN-SYNC(SimpleUser)
+        username:
+          type: string
+        realmId:
+          type: string
+        state:
+          $ref: '#/components/schemas/UserState'
+        firstName:
+          type: string
+    DataStream:
+      type: object
+      properties:
+        pluginId:
+          type: string
+        enabled:
+          type: boolean
     ZsrvErrorCode:
       type: string
       enum:
@@ -6600,146 +5643,188 @@ components:
       default: zMsgErrorNone
       description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
       title: ZedCould internal error code
-    AAA_Frontend_RefreshResponse:
+    TOTPEnrolmentURL:
       type: object
       properties:
-        cause:
-          $ref: '#/components/schemas/AAA_Frontend_RefreshResponseCause'
-        userId:
+        URL:
           type: string
-          title: 'BEGIN: Only valid when Cause == OK'
-        token:
-          $ref: '#/components/schemas/Token64'
-    Enterprises:
+        Secret:
+          type: string
+    ZsrvError:
       type: object
       properties:
-        summaryByState:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of filtered enterprises
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/Enterprise'
-          description: List of enterprises
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Page details of the filtered records
-    CredentialType:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    AAA_Frontend_LoginModeResponseMode:
       type: string
       enum:
-      - CREDENTIAL_TYPE_UNSPECIFIED
-      - CREDENTIAL_TYPE_PASSWORD
-      - CREDENTIAL_TYPE_CHAP
-      - CREDENTIAL_TYPE_PUBLIC_KEY
-      - CREDENTIAL_TYPE_NONE
-      default: CREDENTIAL_TYPE_UNSPECIFIED
-    AAA_Frontend_LoginWithPasswordRequest:
+      - LOCAL
+      - EXTERNAL
+      default: LOCAL
+    Token64:
       type: object
       properties:
-        usernameAtRealm:
+        base64:
           type: string
-        username:
+        expires:
           type: string
-        realm:
-          type: string
-        password:
-          type: string
-        verbosePolicy:
-          type: boolean
-          title: How verbal should the response be
-        verboseSimpleUser:
-          type: boolean
-        verboseDetailedUser:
-          type: boolean
-        verboseRealm:
-          type: boolean
-        verboseEnterprise:
-          type: boolean
-        enterpriseName:
-          type: string
-      description: User either a combination of (username, realm) or (usernameAtRealm) to specify login details
-      title: Login request
-    Policies:
-      type: object
-      properties:
-        summaryByState:
-          $ref: '#/components/schemas/Summary'
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/Policy'
-        next:
-          $ref: '#/components/schemas/Cursor'
-    AAALoginModeResponse:
-      type: object
-      properties:
-        username:
-          type: string
-        mode:
-          $ref: '#/components/schemas/AAALoginModeResponseMode'
-    AAA_Frontend_LoginResponse:
-      type: object
-      properties:
-        cause:
-          $ref: '#/components/schemas/AAA_Frontend_LoginResponseCause'
-        userId:
-          type: string
-          title: 'BEGIN: Only valid when Cause == OK'
-        token:
-          $ref: '#/components/schemas/Token64'
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Policy'
-          title: 'BEGIN: Only valid when Verbose is requesed'
-        simpleUser:
-          $ref: '#/components/schemas/SimpleUser'
-        detailedUser:
-          $ref: '#/components/schemas/DetailedUser'
-        realm:
-          $ref: '#/components/schemas/Realm'
-        enterprise:
-          $ref: '#/components/schemas/Enterprise'
-        role:
-          $ref: '#/components/schemas/Role'
-        noOfLoginAttemptsLeft:
-          type: integer
           format: int64
-        redirectUrl:
-          type: string
-        loginToken:
-          $ref: '#/components/schemas/Token64'
-        apiToken:
-          $ref: '#/components/schemas/Token64'
-        passwordExpiryTime:
-          type: string
-          format: date-time
-        passwordExpiryNotificationPeriodInSeconds:
-          type: integer
-          format: int64
-        tempToken:
-          $ref: '#/components/schemas/Token64'
-    DeviceSize:
+      title: Base64 encoded token
+    JWTAuthProfileAlgorithm:
       type: string
       enum:
-      - DEFAULT_SIZE
-      - SMALL_SIZE
-      - MEDIUM_SIZE
-      - LARGE_SIZE
-      - XLARGE_SIZE
-      default: DEFAULT_SIZE
-    FeatureEntitlement:
+      - None
+      - RS256
+      - RS384
+      - RS512
+      default: None
+    LastLoggedinUserInfo:
       type: object
       properties:
         name:
           type: string
-        active:
-          type: boolean
-        subFeatureEntitlement:
+        lastLoginTime:
+          type: string
+          format: date-time
+    EnterpriseState:
+      type: string
+      enum:
+      - ENTERPRISE_STATE_UNSPECIFIED
+      - ENTERPRISE_STATE_CREATED
+      - ENTERPRISE_STATE_DELETED
+      - ENTERPRISE_STATE_ACTIVE
+      - ENTERPRISE_STATE_INACTIVE
+      - ENTERPRISE_STATE_SIGNEDUP
+      default: ENTERPRISE_STATE_UNSPECIFIED
+    CrudResultCode:
+      type: string
+      enum:
+      - CrudResultCode__INVALID__
+      - CrudResultCodeSuccess
+      - CrudResultCodeAuthentication
+      - CrudResultCodeAlreadyExists
+      - CrudResultCodeException
+      - CrudResultCodeHasDependencies
+      - CrudResultCodeIllegalArgument
+      - CrudResultCodeIllegalRequest
+      - CrudResultCodeIncomplete
+      - CrudResultCodeInternalError
+      - CrudResultCodeNotFound
+      - CrudResultCodeNotIdentified
+      - CrudResultCodePermissionDenied
+      - CrudResultCodeQueryExpired
+      - CrudResultCodeUnknown
+      default: CrudResultCode__INVALID__
+      title: Responses to the action requests
+    AAA_Frontend_LoginModeRequest:
+      type: object
+      properties:
+        username:
+          type: string
+    AAAFailureResponseCredentialChange:
+      type: object
+      properties:
+        cause:
+          $ref: '#/components/schemas/AAAFailureResponseCredentialChangeCause'
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    UserUsagePerEnterpriseList:
+      type: object
+      properties:
+        userUsagePerEntp:
           type: array
           items:
-            $ref: '#/components/schemas/FeatureEntitlement'
-          title: SubFeatureEntitlement represents nested sub-features entitlement
+            $ref: '#/components/schemas/UserUsagePerEnterprise'
+          description: user usage per enterprise list
+    PluginEntitlement:
+      type: object
+      properties:
+        pluginTotalLimit:
+          type: integer
+          format: int32
+        pluginTotalUsage:
+          type: integer
+          format: int64
+        pluginTypeEntitlement:
+          type: array
+          items:
+            $ref: '#/components/schemas/PluginTypeEntitlement'
+    SessionDetails:
+      type: object
+      properties:
+        sessionId:
+          type: string
+          description: DEPRECATED. sessionId is obfuscated for security reasons
+          readOnly: true
+        expiresAt:
+          type: string
+          format: date-time
+          description: session expiry time
+        userName:
+          type: string
+          description: Logged in user name
+        clientIp:
+          type: string
+          description: IP address of the logged in user
+        userAgent:
+          type: string
+          description: user agent details
+      description: Details of all logged in session
+      title: Session detail
+    PluginTypeEntitlement:
+      type: object
+      properties:
+        pluginType:
+          $ref: '#/components/schemas/PluginType'
+        pluginTypeLimit:
+          type: integer
+          format: int32
+        pluginTypeUsage:
+          type: integer
+          format: int64
+    IdState:
+      type: string
+      enum:
+      - ID_STATE_UNSPECIFIED
+      - ID_STATE_NOT_VERIFIED
+      - ID_STATE_VERIFIED
+      default: ID_STATE_UNSPECIFIED
+    AllowedEnterprise:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        roleId:
+          type: string
+    AAA_Frontend_RefreshResponseCause:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - OK
+      - UNKNOWN
+      - CREDENTIALS
+      - EXPIRED
+      default: UNSPECIFIED
     DetailedUser:
       type: object
       properties:
@@ -6851,100 +5936,194 @@ components:
       - username
       - email
       - roleId
-    AAAFailureResponse:
+    CrudContentJSON:
       type: object
       properties:
+        json:
+          type: string
+    PolicyVersion:
+      type: object
+      properties:
+        Policy:
+          type: string
+        Version:
+          type: string
+        AcceptedAt:
+          type: string
+          format: date-time
+        AcceptedBy:
+          type: string
+        EffectiveFrom:
+          type: string
+          format: date-time
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    AAA_Frontend_LoginResponse:
+      type: object
+      properties:
+        cause:
+          $ref: '#/components/schemas/AAA_Frontend_LoginResponseCause'
+        userId:
+          type: string
+          title: 'BEGIN: Only valid when Cause == OK'
+        token:
+          $ref: '#/components/schemas/Token64'
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Policy'
+          title: 'BEGIN: Only valid when Verbose is requesed'
+        simpleUser:
+          $ref: '#/components/schemas/SimpleUser'
+        detailedUser:
+          $ref: '#/components/schemas/DetailedUser'
+        realm:
+          $ref: '#/components/schemas/Realm'
+        enterprise:
+          $ref: '#/components/schemas/Enterprise'
+        role:
+          $ref: '#/components/schemas/Role'
+        noOfLoginAttemptsLeft:
+          type: integer
+          format: int64
+        redirectUrl:
+          type: string
+        loginToken:
+          $ref: '#/components/schemas/Token64'
+        apiToken:
+          $ref: '#/components/schemas/Token64'
+        passwordExpiryTime:
+          type: string
+          format: date-time
+        passwordExpiryNotificationPeriodInSeconds:
+          type: integer
+          format: int64
+        tempToken:
+          $ref: '#/components/schemas/Token64'
+    AuthorizationProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique system defined profile ID
+          readOnly: true
+          pattern: '[0-9A-Za-z_=-]{28}'
+          uniqueItems: true
+        enterpriseId:
+          type: string
+          description: Parent enterprise ID of the authorization profile
+          pattern: '[0-9A-Za-z_=-]{28}'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the profile. Profile name is unique within an enterprise. Name can't be changed once created
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
         type:
-          $ref: '#/components/schemas/AAAFailureResponseType'
+          $ref: '#/components/schemas/AuthType'
+          description: Type of the profile
+        oauthProfile:
+          $ref: '#/components/schemas/OAUTHProfile'
+          description: Oauth profile configuration details
+        passwordProfile:
+          $ref: '#/components/schemas/PasswordProfile'
+        testOnly:
+          type: boolean
+        active:
+          type: boolean
+          description: Mark this profile as active. Only one profile can be active in a given enterprise
+        defaultRoleId:
+          type: string
+          description: Default Role ID to associate with the profile
+          pattern: '[0-9A-Za-z_=-]{28}'
+        title:
+          type: string
+          description: User defined title for the profile. Title can be changed anytime
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+        description:
+          type: string
+          description: Detailed description of the profile
+          maxLength: 256
+        profileType:
+          $ref: '#/components/schemas/AuthProfileType'
+          description: Authorization profile type
+        disableAutoUserCreate:
+          type: boolean
+          description: Do not automatically create new users if this is set
+        revision:
+          $ref: '#/components/schemas/ObjectRevision'
+          description: system defined info
+          readOnly: true
+      description: Authorization profile  meta data
+      title: Authorization profile detail
+      required:
+      - name
+      - title
+      - defaultRoleId
+    Credentials:
+      type: object
+      properties:
+        summaryByState:
+          $ref: '#/components/schemas/Summary'
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Credential'
+        next:
+          $ref: '#/components/schemas/Cursor'
+    AAASuccessResponseGenerateToken:
+      type: object
+      properties:
         login:
-          $ref: '#/components/schemas/AAAFailureResponseLogin'
-        refresh:
-          $ref: '#/components/schemas/AAAFailureTokenRefresh'
-        logout:
-          $ref: '#/components/schemas/AAAFailureResponseLogout'
-        details:
-          $ref: '#/components/schemas/AAAFailureResponseSessionDetails'
-        credential:
-          $ref: '#/components/schemas/AAAFailureResponseCredentialChange'
-        querySessionDetails:
-          $ref: '#/components/schemas/AAAFailureResponseQueryAllSessionDetails'
-        generateToken:
-          $ref: '#/components/schemas/AAAFailureResponseGenerateToken'
-    PolicyAccess:
+          $ref: '#/components/schemas/AAASuccessResponseLogin'
+        sessionDetails:
+          $ref: '#/components/schemas/SessionDetails'
+    AAA_Frontend_GenerateTokenResponseCause:
       type: string
       enum:
-      - PermissionAccess__INVALID__
-      - PermissionAccessCreate
-      - PermissionAccessRead
-      - PermissionAccessCreateRead
-      - PermissionAccessUpdate
-      - PermissionAccessCreateUpdate
-      - PermissionAccessReadUpdate
-      - PermissionAccessCreateReadUpdate
-      - PermissionAccessDelete
-      - PermissionAccessCreateDelete
-      - PermissionAccessReadDelete
-      - PermissionAccessCreateReadDelete
-      - PermissionAccessUpdateDelete
-      - PermissionAccessCreateUpdateDelete
-      - PermissionAccessReadUpdateDelete
-      - PermissionAccessCreateReadUpdateDelete
-      - PermissionAccessExecute
-      - PermissionAccessCreateExecute
-      - PermissionAccessReadExecute
-      - PermissionAccessCreateReadExecute
-      - PermissionAccessUpdateExecute
-      - PermissionAccessCreateUpdateExecute
-      - PermissionAccessReadUpdateExecute
-      - PermissionAccessCreateReadUpdateExecute
-      - PermissionAccessDeleteExecute
-      - PermissionAccessCreateDeleteExecute
-      - PermissionAccessReadDeleteExecute
-      - PermissionAccessCreateReadDeleteExecute
-      - PermissionAccessUpdateDeleteExecute
-      - PermissionAccessCreateUpdateDeleteExecute
-      - PermissionAccessReadUpdateDeleteExecute
-      - PermissionAccessCreateReadUpdateDeleteExecute
-      - PermissionAccessQuery
-      - PermissionAccessCreateQuery
-      - PermissionAccessReadQuery
-      - PermissionAccessCreateReadQuery
-      - PermissionAccessUpdateQuery
-      - PermissionAccessCreateUpdateQuery
-      - PermissionAccessReadUpdateQuery
-      - PermissionAccessCreateReadUpdateQuery
-      - PermissionAccessDeleteQuery
-      - PermissionAccessCreateDeleteQuery
-      - PermissionAccessReadDeleteQuery
-      - PermissionAccessCreateReadDeleteQuery
-      - PermissionAccessUpdateDeleteQuery
-      - PermissionAccessCreateUpdateDeleteQuery
-      - PermissionAccessReadUpdateDeleteQuery
-      - PermissionAccessCreateReadUpdateDeleteQuery
-      - PermissionAccessExecuteQuery
-      - PermissionAccessCreateExecuteQuery
-      - PermissionAccessReadExecuteQuery
-      - PermissionAccessCreateReadExecuteQuery
-      - PermissionAccessUpdateExecuteQuery
-      - PermissionAccessCreateUpdateExecuteQuery
-      - PermissionAccessReadUpdateExecuteQuery
-      - PermissionAccessCreateReadUpdateExecuteQuery
-      - PermissionAccessDeleteExecuteQuery
-      - PermissionAccessCreateDeleteExecuteQuery
-      - PermissionAccessReadDeleteExecuteQuery
-      - PermissionAccessCreateReadDeleteExecuteQuery
-      - PermissionAccessUpdateDeleteExecuteQuery
-      - PermissionAccessCreateUpdateDeleteExecuteQuery
-      - PermissionAccessReadUpdateDeleteExecuteQuery
-      - PermissionAccessCreateReadUpdateDeleteExecuteQuery
-      default: PermissionAccess__INVALID__
-    AAA_Frontend_LoginModeResponse:
+      - UNSPECIFIED
+      - OK
+      - USER_UNKNOWN
+      - EXCEPTION
+      default: UNSPECIFIED
+    Credential:
       type: object
       properties:
-        username:
+        id:
           type: string
-        mode:
-          $ref: '#/components/schemas/AAA_Frontend_LoginModeResponseMode'
+        owner:
+          type: string
+        type:
+          $ref: '#/components/schemas/CredentialType'
+        currentCred:
+          type: string
+        newCred:
+          type: string
+        forgot:
+          type: boolean
+        salt:
+          type: integer
+          format: int64
     AAARequestAdminUserSignup:
       type: object
       properties:
@@ -6962,15 +6141,836 @@ components:
           type: string
         email:
           type: string
-    CrudResultWithContent:
+    AAAFailureResponseLogout:
+      type: object
+      properties:
+        cause:
+          $ref: '#/components/schemas/AAAFailureResponseLogoutCause'
+        original:
+          $ref: '#/components/schemas/OpaqueToken64'
+        error:
+          type: string
+    ZksSyncStatusCode:
+      type: string
+      enum:
+      - ZKS_SYNC_STATUS_CODE_UNSPECIFIED
+      - ZKS_SYNC_STATUS_CODE_HEALTHY
+      - ZKS_SYNC_STATUS_CODE_PARTIALLY_HEALTHY
+      - ZKS_SYNC_STATUS_CODE_UNHEALTHY
+      default: ZKS_SYNC_STATUS_CODE_UNSPECIFIED
+    AuthorizationProfiles:
+      type: object
+      properties:
+        summaryByState:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered profiles
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationProfile'
+          description: List of profiles
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Page details of the filtered records
+    UserState:
+      type: string
+      enum:
+      - USER_STATE_UNSPECIFIED
+      - USER_STATE_CREATED
+      - USER_STATE_ACTIVE
+      - USER_STATE_INACTIVE
+      - USER_STATE_SIGNEDUP
+      - USER_STATE_SUSPENDED
+      default: USER_STATE_UNSPECIFIED
+      title: General well being of the user
+    Entitlement:
+      type: object
+      properties:
+        entpId:
+          type: string
+          description: Enterprise id for which we want to post/get enforce entitlement
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        entpName:
+          type: string
+          description: Enterprise name for which we want to post/get enforce entitlement
+          pattern: '[0-9A-Za-z-]+'
+          uniqueItems: true
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceEntitlement'
+          description: Device entitlement data
+        userCount:
+          $ref: '#/components/schemas/UserEntitlement'
+          description: User entitlement data
+        plugins:
+          $ref: '#/components/schemas/PluginEntitlement'
+          description: Plugin entitlement data
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeatureEntitlement'
+          description: Features entitlement data
+      description: Get Entitlement data
+      title: Entitlement data
+    CrudContent:
+      type: object
+      properties:
+        oid:
+          $ref: '#/components/schemas/Identifier64'
+        encoding:
+          $ref: '#/components/schemas/CrudContentEncoding'
+        clazz:
+          $ref: '#/components/schemas/ModelClazz'
+        protobuf:
+          $ref: '#/components/schemas/CrudContentProtobuf'
+        json:
+          $ref: '#/components/schemas/CrudContentJSON'
+      title: Content, with a type encoded either as protobuf or json
+    AAAFailureResponseSessionDetailsCause:
+      type: string
+      enum:
+      - __INVALID__
+      - AAAFailureResponseSessionDetailsCauseUnknown
+      - AAAFailureResponseSessionDetailsCauseNoSuchSession
+      default: __INVALID__
+    AAASuccessResponseCredentialChange:
+      type: object
+      properties:
+        credentialId:
+          type: string
+    AAA_Frontend_LoginModeResponse:
+      type: object
+      properties:
+        username:
+          type: string
+        mode:
+          $ref: '#/components/schemas/AAA_Frontend_LoginModeResponseMode'
+    FeatureEntitlement:
+      type: object
+      properties:
+        name:
+          type: string
+        active:
+          type: boolean
+        subFeatureEntitlement:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeatureEntitlement'
+          title: SubFeatureEntitlement represents nested sub-features entitlement
+    AllowedEnterpriseList:
+      type: object
+      properties:
+        enterprises:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllowedEnterprise'
+          description: List of child enterprises
+        error:
+          type: string
+          description: Error while fetching list of child enterprises, if any
+        next:
+          type: string
+          $ref: '#/components/schemas/Cursor'
+          description: Next page information
+        total:
+          type: string
+          format: int64
+          description: Total number of allowed enterprises
+        enterpriseEntitlements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entitlement'
+          description: Enterprises entitlement data
+      description: Get list of child enterprises
+      title: Get child enterprises
+    AAAFailureResponseLogin:
+      type: object
+      properties:
+        cause:
+          $ref: '#/components/schemas/AAAFailureResponseLoginCause'
+        error:
+          type: string
+        noOfLoginAttemptsLeft:
+          type: integer
+          format: int64
+        tempToken:
+          $ref: '#/components/schemas/Token64'
+        tempSuccessResponse:
+          $ref: '#/components/schemas/AAASuccessResponseLogin'
+          description: 'Sessions depend heavily on AAASuccessResponseLogin. In case of password expired,
+
+            we need temporary token. We can not generate a temporary token for password reset with
+
+            AAAFailureResponseLogin itself. Therefore, adding this tempSuccessResponse, to be used to create new session.'
+    OAUTHProfileJWTAuthProfile:
+      type: object
+      properties:
+        alg:
+          $ref: '#/components/schemas/JWTAuthProfileAlgorithm'
+          description: Algorithm for JWT signature verification
+      description: Config for JWT based authentication, jwks_uri is derived from OIDC Well Known Endpoints
+      title: JWT Authentication profile detail
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    AAASuccessSessionDetailsResponse:
+      type: object
+      properties:
+        original:
+          $ref: '#/components/schemas/OpaqueToken64'
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Policy'
+        user:
+          $ref: '#/components/schemas/DetailedUser'
+    AAAFailureTokenRefreshCause:
+      type: string
+      enum:
+      - __INVALID__
+      - AAAFailureTokenRefreshCauseExpired
+      - AAAFailureTokenRefreshCauseUnknown
+      default: __INVALID__
+      title: Reason why token refresh failed
+    CrudAction:
+      type: string
+      enum:
+      - CrudAction__INVALID__
+      - CrudActionNotApplicable
+      - CrudActionCreate
+      - CrudActionRead
+      - CrudActionUpdate
+      - CrudActionDelete
+      - CrudActionQuery
+      - CrudActionQueryNext
+      - CrudActionReadSelf
+      - CrudActionUpdateSelf
+      default: CrudAction__INVALID__
+    AAASuccessResponseQueryAllSessionDetailsCause:
+      type: string
+      enum:
+      - __INVALID__
+      - OK
+      - FAILED
+      default: __INVALID__
+    PluginType:
+      type: string
+      enum:
+      - PLUGIN_TYPE_UNSPECIFIED
+      - PLUGIN_TYPE_SPLUNK
+      - PLUGIN_TYPE_HTTP
+      - PLUGIN_TYPE_RANCHER
+      - PLUGIN_TYPE_VMWARE_VCO
+      - PLUGIN_TYPE_VMWARE_TMC
+      default: PLUGIN_TYPE_UNSPECIFIED
+    AAAFailureResponseCredentialChangeCause:
+      type: string
+      enum:
+      - __INVALID__
+      - AAAFailureResponseCredentialChangeCauseUnknown
+      - AAAFailureResponseCredentialChangeCauseAuthenticationFailure
+      - AAAFailureResponseCredentialChangeCausePermissionDenied
+      - AAAFailureResponseCredentialChangeCauseInternalServerError
+      - AAAFailureResponseCredentialChangeCauseAlreadyExists
+      - AAAFailureResponseCredentialChangeCausePasswordTooSimple
+      - AAAFailureResponseCredentialChangeCauseNotFound
+      default: __INVALID__
+    AAA_Frontend_LogoutRequest:
+      type: object
+    Roles:
+      type: object
+      properties:
+        summaryByState:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered roles
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+          description: List of roles
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Page details of the filtered records
+    AAAFailureResponseType:
+      type: string
+      enum:
+      - __INVALID__
+      - AAAFailureResponseTypeNone
+      - AAAFailureResponseTypeLogin
+      - AAAFailureResponseTypeRefresh
+      - AAAFailureResponseTypeLogout
+      - AAAFailureResponseTypeSessionDetails
+      - AAAFailureResponseTypeCredentialChange
+      - AAAFailureResponseTypeQueryAllSessionDetails
+      - AAAFailureResponseTypeGenerateToken
+      default: __INVALID__
+    PolicyVersionList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyVersion'
+    PasswordProfile:
+      type: object
+      properties:
+        minLength:
+          type: integer
+          format: int64
+        maxLength:
+          type: integer
+          format: int64
+        minNumericChars:
+          type: integer
+          format: int64
+        minSymbolChars:
+          type: integer
+          format: int64
+        minUppercaseChars:
+          type: integer
+          format: int64
+        minLowercaseChars:
+          type: integer
+          format: int64
+        maxPasswordAge:
+          type: integer
+          format: int64
+        minPasswordAge:
+          type: integer
+          format: int64
+        numPrevPasswordCheck:
+          type: integer
+          format: int64
+        passwordExpiryNotificationPeriodInSeconds:
+          type: integer
+          format: int64
+    AAAFailureResponseLoginCause:
+      type: string
+      enum:
+      - __INVALID__
+      - AAAFailureResponseLoginCauseGarbage
+      - AAAFailureResponseLoginCauseRealmUnknown
+      - AAAFailureResponseLoginCauseUserUnknown
+      - AAAFailureResponseLoginCauseUserSuspended
+      - AAAFailureResponseLoginCausePasswordMismatch
+      - AAAFailureResponseLoginCauseChallengeMismatch
+      - AAAFailureResponseLoginCauseNoSuchCredentials
+      - AAAFailureResponseLoginCauseException
+      - AAAFailureResponseLoginCauseEnterpriseUnknown
+      - AAAFailureResponseLoginCauseSchemeUnknown
+      - AAAFailureResponseLoginCauseUserSignedupState
+      - AAAFailureResponseLoginCauseRoleUnknown
+      - AAAFailureResponseLoginCauseUpdateLastLoginTimeFailed
+      - AAAFailureResponseLoginCauseEnterpriseInactive
+      - AAAFailureResponseLoginCauseUserInactive
+      - AAAFailureResponseLoginCauseEnterpriseSignedupState
+      - AAAFailureResponseLoginCauseEnterpriseUnknownState
+      - AAAFailureResponseLoginCauseUserUnknownState
+      - AAAFailureResponseLoginCauseEnterpriseCreatedState
+      - AAAFailureResponseLoginCauseUserCreatedState
+      - AAAFailureResponseLoginCausePasswordMismatchAndMaxFailedPwdAttempt
+      - AAAFailureResponseLoginCausePasswordDecryptionFailed
+      - AAAFailureResponseLoginCausePasswordExpired
+      - TOTPError
+      - TOTPInvalidCode
+      - AAAFailureResponseLoginCauseEmptySubject
+      default: __INVALID__
+      title: Reason why authentication failed, this is more detailed than should be passed on to external clients
+    Enterprise:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique system defined enterprise ID
+          readOnly: true
+          pattern: '[0-9A-Za-z_=-]{28}'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the enterprise. Once enterprise is created, name can’t be changed
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        SfdcId:
+          type: string
+        HubspotId:
+          type: string
+        state:
+          $ref: '#/components/schemas/EnterpriseState'
+          description: Enterprise state
+        type:
+          $ref: '#/components/schemas/EnterpriseType'
+          description: Enterprise type
+        policyList:
+          $ref: '#/components/schemas/PolicyVersionList'
+          description: Policy version list
+        parentEntpId:
+          type: string
+          description: Parent enterprise ID
+          title: 'string id = 100;
+
+            string name = 101;'
+          pattern: '[0-9A-Za-z_=-]{28}'
+        azureSubId:
+          type: string
+          description: Azure subscription ID tied to this enterprise
+        title:
+          type: string
+          description: User defined title for the enterprise. Title can be changed any time
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+        description:
+          type: string
+          description: Detailed description of the enterprise
+          maxLength: 256
+        revision:
+          $ref: '#/components/schemas/ObjectRevision'
+          description: system defined info
+          readOnly: true
+        realms:
+          type: array
+          items:
+            type: string
+          description: List of realms associated with the enterprise
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          description: enterprise level key-value pairs
+        inheritAuthFromParent:
+          type: boolean
+          description: Perform authorization using parent enterprise
+        childEnterprises:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnterpriseSummary'
+          description: List of all child enterprises
+        controllerHostURL:
+          type: string
+          description: zedcontrol host
+        streamEvents:
+          $ref: '#/components/schemas/DataStream'
+          description: Enable / Disable streaming of events to 3rd party end point
+        totpSettings:
+          $ref: '#/components/schemas/TOTPSettings'
+          description: Enterprise settings to enforce TOTP
+        apiTokenExpiryInSeconds:
+          type: integer
+          format: int64
+          description: Enterprise settings for API Token expiry to be set in seconds
+      description: Enterprise meta data
+      title: Enterprise detail
+      required:
+      - name
+      - title
+    CredentialType:
+      type: string
+      enum:
+      - CREDENTIAL_TYPE_UNSPECIFIED
+      - CREDENTIAL_TYPE_PASSWORD
+      - CREDENTIAL_TYPE_CHAP
+      - CREDENTIAL_TYPE_PUBLIC_KEY
+      - CREDENTIAL_TYPE_NONE
+      default: CREDENTIAL_TYPE_UNSPECIFIED
+    UserUsagePerEnterprise:
+      type: object
+      properties:
+        entpId:
+          type: string
+          description: Enterprise id
+          readOnly: true
+          pattern: '[0-9A-Za-z-]+'
+        userUsage:
+          type: string
+          format: int64
+          description: User usage for that enterprise
+    UserSummaryReport:
+      type: object
+      properties:
+        users:
+          type: integer
+          format: int64
+        activeUsersCount:
+          type: integer
+          format: int64
+        lastLoggedinUserInfo:
+          $ref: '#/components/schemas/LastLoggedinUserInfo'
+    AAASuccessResponseType:
+      type: string
+      enum:
+      - __INVALID__
+      - AAASuccessResponseTypeLogin
+      - AAASuccessResponseTypeRefresh
+      - AAASuccessResponseTypePermisson
+      - AAASuccessResponseTypeLogout
+      - AAASuccessResponseTypeSessionDetails
+      - AAASuccessResponseTypeCredentialChange
+      - AAASuccessResponseTypeQueryAllSessionDetails
+      - AAASuccessResponseTypeGenerateToken
+      default: __INVALID__
+    AAAResponse:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AAAResponseType'
+        success:
+          $ref: '#/components/schemas/AAASuccessResponse'
+        failure:
+          $ref: '#/components/schemas/AAAFailureResponse'
+        notify:
+          $ref: '#/components/schemas/AAANotifyResponse'
+        redirect:
+          $ref: '#/components/schemas/AAARedirectResponse'
+        mode:
+          $ref: '#/components/schemas/AAALoginModeResponse'
+        result:
+          $ref: '#/components/schemas/ZsrvResponse'
+        totpURL:
+          $ref: '#/components/schemas/TOTPEnrolmentURL'
+      title: 'BEGIN: Responses'
+    AAANotifyResponse:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AAANotifyResponseType'
+        login:
+          $ref: '#/components/schemas/AAASuccessResponseLogin'
+        logout:
+          $ref: '#/components/schemas/AAASuccessResponseLogout'
+    DocPolicySummary:
+      type: object
+      example:
+        policyName: xxxxxxxxx
+        version: xxxxxxx
+        fileURL: xxxxxxxx
+        revision:
+          prev: ''
+          curr: '1'
+          createdAt: '2020-07-17T06:03:14Z'
+          createdBy: us.root@zededa.com
+          updatedAt: '2020-07-17T06:03:14Z'
+          updatedBy: us.root@zededa.com
+      properties:
+        policy:
+          type: string
+          description: User defined name of the docpolicy. Name cannot be changed once created
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        version:
+          type: string
+          description: Policy doc version
+        fileURL:
+          type: string
+          description: Policy doc fileURL
+        revision:
+          $ref: '#/components/schemas/ObjectRevision'
+          description: System defined info
+          readOnly: true
+      description: DocPolicy meta data
+      title: DocPolicy detail
+    CrudResponse:
+      type: object
+      properties:
+        token:
+          $ref: '#/components/schemas/OpaqueToken64'
+        action:
+          $ref: '#/components/schemas/CrudAction'
+        result:
+          $ref: '#/components/schemas/ZsrvResponse'
+        read:
+          $ref: '#/components/schemas/CrudResponseRead'
+        query:
+          $ref: '#/components/schemas/CrudResponseQuery'
+    Realm:
+      type: object
+      example:
+        id: EAJ1ABAi-KOom7dJlrBoE8eq1pj9
+        name: zededa.com
+        enterpriseId: AAFlABDe6Nm63ixF5LJBbk9Keqp6
+        title: zededa
+        description: Test realm
+        revision:
+          prev: ''
+          curr: '1'
+          createdAt: '2020-07-17T06:03:14Z'
+          createdBy: us.root@zededa.com
+          updatedAt: '2020-07-17T06:03:14Z'
+          updatedBy: us.root@zededa.com
+      properties:
+        id:
+          type: string
+          description: Unique system defined realm ID
+          readOnly: true
+          pattern: '[0-9A-Za-z_=-]{28}'
+          uniqueItems: true
+        name:
+          type: string
+          description: User defined name of the realm. Name cannot be changed once created
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        enterpriseId:
+          type: string
+          description: Enterprise ID of the enterprise where the realm is to be created
+          pattern: '[0-9A-Za-z_=-]{28}'
+          uniqueItems: true
+        title:
+          type: string
+          description: User defined title of the realm. Title can be changed anytime
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+        description:
+          type: string
+          description: Detailed description of the realm
+          maxLength: 256
+        revision:
+          $ref: '#/components/schemas/ObjectRevision'
+          description: System defined info
+          readOnly: true
+      description: Realm meta data
+      title: Realm detail
+      required:
+      - name
+      - title
+      - enterpriseId
+    AAALoginModeResponseMode:
+      type: string
+      enum:
+      - AAALoginModeLocal
+      - AAALoginModeExternal
+      default: AAALoginModeLocal
+    AAA_Frontend_GenerateTokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+        userName:
+          type: string
+        clientIp:
+          type: string
+        userAgent:
+          type: string
+        cause:
+          $ref: '#/components/schemas/AAA_Frontend_GenerateTokenResponseCause'
+        error:
+          type: string
+    AAARequestEnterpriseSignup:
+      type: object
+      properties:
+        enterprise:
+          $ref: '#/components/schemas/Enterprise'
+        adminUser:
+          $ref: '#/components/schemas/AdminUserSignup'
+        realmList:
+          type: array
+          items:
+            type: string
+        profileType:
+          $ref: '#/components/schemas/AuthProfileType'
+        token:
+          type: string
+        title:
+          type: string
+        employerName:
+          type: string
+    CrudContentEncoding:
+      type: string
+      enum:
+      - CrudPayloadEncoding__INVALID__
+      - CrudPayloadEncodingProtobuf
+      - CrudPayloadEncodingJSON
+      default: CrudPayloadEncoding__INVALID__
+    AAA_Frontend_OAUTHCallbackRequest:
       type: object
       properties:
         code:
-          $ref: '#/components/schemas/CrudResultCode'
-        content:
-          $ref: '#/components/schemas/CrudContent'
-        identifier:
-          $ref: '#/components/schemas/Identifier64'
+          type: string
+        state:
+          type: string
+    UserRole:
+      type: string
+      enum:
+      - USER_ROLE_UNSPECIFIED
+      - USER_ROLE_SYSTEM_DEFINED
+      - USER_ROLE_USER_DEFINED
+      - USER_ROLE_CLUSTER
+      default: USER_ROLE_UNSPECIFIED
+    Policy:
+      type: object
+      properties:
+        id:
+          type: string
+        zone:
+          type: string
+        scope:
+          $ref: '#/components/schemas/PolicyScope'
+        access:
+          $ref: '#/components/schemas/PolicyAccess'
+        ownerId:
+          type: string
+        external:
+          type: boolean
+    AAAFailureResponseGenerateTokenCause:
+      type: string
+      enum:
+      - __INVALID__
+      - AAAFailureResponseGenerateTokenCauseUserUnknown
+      - AAAFailureResponseGenerateTokenCauseException
+      - AAAFailureResponseGenerateTokenCauseEnterpriseUnknown
+      - AAAFailureResponseGenerateTokenCauseForbidden
+      - AAAFailureResponseGenerateTokenCauseInternalError
+      default: __INVALID__
+    ServerSyncStatus:
+      type: object
+      properties:
+        serverName:
+          type: string
+        status:
+          type: string
+        error:
+          type: string
+    AAA_Frontend_RefreshResponse:
+      type: object
+      properties:
+        cause:
+          $ref: '#/components/schemas/AAA_Frontend_RefreshResponseCause'
+        userId:
+          type: string
+          title: 'BEGIN: Only valid when Cause == OK'
+        token:
+          $ref: '#/components/schemas/Token64'
+    OAUTHProfile:
+      type: object
+      properties:
+        OIDCEndPoint:
+          type: string
+          description: OIDC endpoint for oauth validation
+        clientID:
+          type: string
+          description: OAUTH client ID
+        clientSecret:
+          type: string
+          description: OAUTH client secret
+        encryptedSecrets:
+          type: object
+          additionalProperties:
+            type: string
+        cryptoKey:
+          type: string
+        roleScope:
+          type: string
+          description: OIDC scope to fetch application role
+        jwtAuthProfile:
+          $ref: '#/components/schemas/OAUTHProfileJWTAuthProfile'
+          description: Config for JWT based authentication, jwks_uri is derived from OIDC Well Known Endpoints
+        idpId:
+          type: string
+          description: id for Vmware IDP
+        additionalParameters:
+          type: string
+          additionalProperties:
+            type: string
+          description: pass additional url parameters during the exchange and authorization process
+    AAA_Frontend_LogoutResponseCause:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - OK
+      - FAILED
+      default: UNSPECIFIED
+    AAAFailureResponseQueryAllSessionDetails:
+      type: object
+      properties:
+        error:
+          type: string
+        cause:
+          $ref: '#/components/schemas/AAAFailureResponseQueryAllSessionDetailsCause'
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
+    AAAFailureResponseLogoutCause:
+      type: string
+      enum:
+      - __INVALID__
+      - AAAFailureResponseLogoutCauseUnknown
+      - AAAFailureResponseLogoutCauseGarbage
+      - AAAFailureResponseLogoutCauseExpired
+      - AAAFailureResponseLogoutCauseNoSuchSession
+      default: __INVALID__
+    Realms:
+      type: object
+      properties:
+        summaryByState:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered realms
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Realm'
+          description: List of realms
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Page details of the filtered records
   securitySchemes:
     BearerToken:
       type: apiKey

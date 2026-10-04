@@ -796,253 +796,46 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
 components:
   schemas:
-    DeviceEntity:
-      type: object
-      properties:
-        entity:
-          $ref: '#/components/schemas/Entity'
-        entityId:
-          type: string
-        entityName:
-          type: string
-    infoStorageVolumeRobustness:
+    ZcOpsType:
       type: string
       enum:
-      - STORAGE_VOLUME_ROBUSTNESS_UNSPECIFIED
-      - STORAGE_VOLUME_ROBUSTNESS_HEALTHY
-      - STORAGE_VOLUME_ROBUSTNESS_DEGRADED
-      - STORAGE_VOLUME_ROBUSTNESS_FAULTED
-      default: STORAGE_VOLUME_ROBUSTNESS_UNSPECIFIED
-      title: "StorageVolumeRobustness is the 'robustness' of a replicated csi-driver volume.\n Refer to: https://github.com/longhorn/longhorn-manager/blob/v1.6.2/k8s/pkg/apis/longhorn/v1beta1/volume.go#L25"
-    Summary:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    DeviceError:
       type: object
       properties:
         description:
           type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
+          description: Description of the error
+        severity:
+          type: string
+          $ref: '#/components/schemas/Severity'
+          description: Severity of the error
+        timestamp:
           type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    EventSource:
-      type: string
-      enum:
-      - EVENT_SOURCE_UNSPECIFIED
-      - EVENT_SOURCE_SYSTEM
-      - EVENT_SOURCE_USER
-      default: EVENT_SOURCE_UNSPECIFIED
-      description: "- EVENT_SOURCE_UNSPECIFIED: Default\n - EVENT_SOURCE_SYSTEM: Event is generated as a result of status change reported by edge node / application\n - EVENT_SOURCE_USER: Event is generated as a result of an user's configuration action"
-      title: Source of events
-    infoStorageHealthStatus:
-      type: string
-      enum:
-      - STORAGE_HEALTH_STATUS_UNSPECIFIED
-      - STORAGE_HEALTH_STATUS_HEALTHY
-      - STORAGE_HEALTH_STATUS_DEGRADED_2_REPLICA_AVAILABLE_REPLICATING
-      - STORAGE_HEALTH_STATUS_DEGRADED_2_REPLICA_AVAILABLE_NOT_REPLICATING
-      - STORAGE_HEALTH_STATUS_DEGRADED_1_REPLICA_AVAILABLE_REPLICATING
-      - STORAGE_HEALTH_STATUS_DEGRADED_1_REPLICA_AVAILABLE_NOT_REPLICATING
-      - STORAGE_HEALTH_STATUS_FAILED
-      default: STORAGE_HEALTH_STATUS_UNSPECIFIED
-      description: 'StorageHealthStatus is a higher level tracking status to show redundancy/failure-zone level
-
-        and rebuild progress.'
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
+          format: date-time
+          description: Timestamp at which error had occurred
+        entities:
           type: array
           items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
-    infoStorageVolumePVCStatus:
-      type: string
-      enum:
-      - STORAGE_VOLUME_PVC_STATUS_UNSPECIFIED
-      - STORAGE_VOLUME_PVC_STATUS_BOUND
-      - STORAGE_VOLUME_PVC_STATUS_PENDING
-      - STORAGE_VOLUME_PVC_STATUS_AVAILABLE
-      - STORAGE_VOLUME_PVC_STATUS_RELEASED
-      - STORAGE_VOLUME_PVC_STATUS_FAILED
-      default: STORAGE_VOLUME_PVC_STATUS_UNSPECIFIED
-      title: "StorageVolumePVCStatus is the kubernetes 'phase' of a PVC. Listed as status in cli.\n Refer to: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase"
-    VolumeInstanceType:
-      type: string
-      enum:
-      - VOLUME_INSTANCE_TYPE_UNSPECIFIED
-      - VOLUME_INSTANCE_TYPE_EMPTYDIR
-      - VOLUME_INSTANCE_TYPE_BLOCKSTORAGE
-      - VOLUME_INSTANCE_TYPE_HOSTFS
-      - VOLUME_INSTANCE_TYPE_TMPFS
-      - VOLUME_INSTANCE_TYPE_SECRET
-      - VOLUME_INSTANCE_TYPE_NFS
-      - VOLUME_INSTANCE_TYPE_AWS_BLOCK_STORAGE
-      - VOLUME_INSTANCE_TYPE_CONTENT_TREE
-      default: VOLUME_INSTANCE_TYPE_UNSPECIFIED
-      title: VolumeInstanceType - On update, please update VolumeInstanceType_HttpRequest as well
-    ClusterVolInstanceStatus:
-      type: object
-      properties:
-        state:
-          $ref: '#/components/schemas/infoStorageVolumeState'
-        replicas:
-          type: array
-          items:
-            $ref: '#/components/schemas/VolumeInstanceReplicaStatus'
-        attachmentState:
-          $ref: '#/components/schemas/infoStorageVolumePVCStatus'
-        creationTime:
+            $ref: '#/components/schemas/DeviceEntity'
+          description: objects referenced by the description or retry_condition
+        retryCondition:
           type: string
-          format: date-time
-        size:
-          type: string
-          format: uint64
-        actualSize:
-          type: string
-          format: uint64
-        robustness:
-          $ref: '#/components/schemas/infoStorageVolumeRobustness'
-        robustnessSubstate:
-          $ref: '#/components/schemas/infoStorageHealthStatus'
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    VolInstStatusSummaryMsg:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        deviceId:
-          type: string
-        runState:
-          $ref: '#/components/schemas/RunState'
-        createTime:
-          type: string
-          format: date-time
-        projectId:
-          type: string
-        type:
-          $ref: '#/components/schemas/VolumeInstanceType'
-        deviceState:
-          $ref: '#/components/schemas/SWState'
-        progressPercentage:
-          type: integer
-          format: int64
-        deviceName:
-          type: string
-        projectName:
-          type: string
-        edgeNodeClusterID:
-          type: string
-        clusterVolInstanceStatus:
-          $ref: '#/components/schemas/ClusterVolInstanceStatus'
+          description: condition for retry
+      description: DeviceError store the error occurred at the device side
+      title: DeviceError is used to store the error details of the hardware.
+      required:
+      - description
+      - severity
+      - timestamp
+      - entities
     ZsrvResponse:
       type: object
       properties:
@@ -1096,90 +889,6 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    VolInstStatusListMsg:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/VolInstStatusSummaryMsg'
-        summaryByState:
-          $ref: '#/components/schemas/Summary'
-        summaryByType:
-          $ref: '#/components/schemas/Summary'
-        totalCount:
-          type: integer
-          format: int64
-        next:
-          $ref: '#/components/schemas/Cursor'
-    VolInstStatusMsg:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        deviceId:
-          type: string
-          title: device on which this volume is located
-        runState:
-          $ref: '#/components/schemas/RunState'
-        projectId:
-          type: string
-        progressPercentage:
-          type: integer
-          format: int64
-        usage:
-          $ref: '#/components/schemas/DeviceObjectUsageInfo'
-        resource:
-          $ref: '#/components/schemas/VolInstResource'
-        sha256:
-          type: string
-        type:
-          $ref: '#/components/schemas/VolumeInstanceType'
-        deviceState:
-          $ref: '#/components/schemas/SWState'
-        blobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/BlobInfo'
-        errInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeviceError'
-        rawStatus:
-          type: string
-        clusterVolInstanceStatus:
-          $ref: '#/components/schemas/ClusterVolInstanceStatus'
-    Severity:
-      type: string
-      enum:
-      - SEVERITY_UNSPECIFIED
-      - SEVERITY_NOTICE
-      - SEVERITY_WARNING
-      - SEVERITY_ERROR
-      default: SEVERITY_UNSPECIFIED
-      title: Severity tells the severity type
     SWState:
       type: string
       enum:
@@ -1206,28 +915,73 @@ components:
       default: SW_STATE_UNSPECIFIED
       description: "- SW_STATE_RESOLVING_TAG: Prior to DOWNLOAD_STARTED we go through these:\nResolving an image tag\n - SW_STATE_RESOLVED_TAG: Tag has been resolved/failed\n - SW_STATE_CREATING_VOLUME: Prior to INSTALLED we go through these:\nVolume create in progress\n - SW_STATE_CREATED_VOLUME: Volume create done/failed\n - SW_STATE_VERIFYING: Verification in-progress\n - SW_STATE_LOADING: Loading blob in CAS\n - SW_STATE_LOADED: Loaded blob in CAS\n - SW_STATE_AWAITNETWORKINSTANCE: Wait for network instance"
       title: State of EVE/Edge Application software
-    VolumeInstanceReplicaStatus:
-      type: object
-      properties:
-        nodeName:
-          type: string
-        rebuildProgressPercentage:
-          type: integer
-          format: int64
-        status:
-          $ref: '#/components/schemas/infoStorageVolumeReplicaStatus'
-    infoStorageVolumeState:
+    infoStorageVolumeReplicaStatus:
       type: string
       enum:
-      - STORAGE_VOLUME_STATE_UNSPECIFIED
-      - STORAGE_VOLUME_STATE_CREATING
-      - STORAGE_VOLUME_STATE_ATTACHED
-      - STORAGE_VOLUME_STATE_DETACHED
-      - STORAGE_VOLUME_STATE_ATTACHING
-      - STORAGE_VOLUME_STATE_DETACHING
-      - STORAGE_VOLUME_STATE_DELETING
-      default: STORAGE_VOLUME_STATE_UNSPECIFIED
-      title: "StorageVolumeState is the kubernetes 'state' field of a replicated csi-driver volume.\n Refer to: https://github.com/longhorn/longhorn-manager/blob/v1.6.2/k8s/pkg/apis/longhorn/v1beta1/volume.go#L14"
+      - STORAGE_VOLUME_REPLICA_STATUS_UNSPECIFIED
+      - STORAGE_VOLUME_REPLICA_STATUS_REBUILDING
+      - STORAGE_VOLUME_REPLICA_STATUS_ONLINE
+      - STORAGE_VOLUME_REPLICA_STATUS_FAILED
+      - STORAGE_VOLUME_REPLICA_STATUS_OFFLINE
+      - STORAGE_VOLUME_REPLICA_STATUS_STARTING
+      - STORAGE_VOLUME_REPLICA_STATUS_STOPPING
+      default: STORAGE_VOLUME_REPLICA_STATUS_UNSPECIFIED
+      description: "StorageVolumeReplicaStatus is a higher level status which combines replica and engine\n   status to show a simplified view of a replica rebuild state."
+    Entity:
+      type: string
+      enum:
+      - ENTITY_UNSPECIFIED
+      - ENTITY_BASE_OS
+      - ENTITY_SYSTEM_ADAPTER
+      - ENTITY_VAULT
+      - ENTITY_ATTESTATION
+      - ENTITY_APP_INSTANCE
+      - ENTITY_PORT
+      - ENTITY_NETWORK
+      - ENTITY_NETWORK_INSTANCE
+      - ENTITY_CONTENT_TREE
+      - ENTITY_CONTENT_BLOB
+      - ENTITY_VOLUME
+      default: ENTITY_UNSPECIFIED
+      description: "- ENTITY_UNSPECIFIED: Invalid Device Entity\n - ENTITY_BASE_OS: Base OS entity\n - ENTITY_SYSTEM_ADAPTER: System Adapter Entity\n - ENTITY_VAULT: Vault Entity\n - ENTITY_ATTESTATION: Attestation Entity\n - ENTITY_APP_INSTANCE: App Instance Entity\n - ENTITY_PORT: Port Entity\n - ENTITY_NETWORK: Network Entity\n - ENTITY_NETWORK_INSTANCE: Network Instance Entity\n - ENTITY_CONTENT_TREE: ContentTree Entity\n - ENTITY_CONTENT_BLOB: Blob Entity\n - ENTITY_VOLUME: VOLUME Entity"
+      title: Edge node components
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
     EventQueryResponseItem:
       type: object
       properties:
@@ -1279,148 +1033,6 @@ components:
           description: clusterInstance name
       description: Event query response item payload
       title: Event query response item payload detail
-    BlobInfo:
-      type: object
-      properties:
-        sha256:
-          type: string
-        resource:
-          $ref: '#/components/schemas/VolInstResource'
-        usage:
-          $ref: '#/components/schemas/DeviceObjectUsageInfo'
-        State:
-          $ref: '#/components/schemas/SWState'
-        progressPercentage:
-          type: integer
-          format: int64
-        errInfo:
-          $ref: '#/components/schemas/DeviceError'
-    DeviceError:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description of the error
-        severity:
-          type: string
-          $ref: '#/components/schemas/Severity'
-          description: Severity of the error
-        timestamp:
-          type: object
-          format: date-time
-          description: Timestamp at which error had occurred
-        entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeviceEntity'
-          description: objects referenced by the description or retry_condition
-        retryCondition:
-          type: string
-          description: condition for retry
-      description: DeviceError store the error occurred at the device side
-      title: DeviceError is used to store the error details of the hardware.
-      required:
-      - description
-      - severity
-      - timestamp
-      - entities
-    EventQueryResponse:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/EventQueryResponseItem'
-          description: Event Query response list
-        next:
-          type: object
-          $ref: '#/components/schemas/Cursor'
-          description: Cursor filter
-        summary:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of filtered events.
-      description: Event query response request payload
-      title: Event query Response payload detail
-      required:
-      - list
-      - next
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
-    ZcOpsStatus:
-      type: string
-      enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
-    infoStorageVolumeReplicaStatus:
-      type: string
-      enum:
-      - STORAGE_VOLUME_REPLICA_STATUS_UNSPECIFIED
-      - STORAGE_VOLUME_REPLICA_STATUS_REBUILDING
-      - STORAGE_VOLUME_REPLICA_STATUS_ONLINE
-      - STORAGE_VOLUME_REPLICA_STATUS_FAILED
-      - STORAGE_VOLUME_REPLICA_STATUS_OFFLINE
-      - STORAGE_VOLUME_REPLICA_STATUS_STARTING
-      - STORAGE_VOLUME_REPLICA_STATUS_STOPPING
-      default: STORAGE_VOLUME_REPLICA_STATUS_UNSPECIFIED
-      description: "StorageVolumeReplicaStatus is a higher level status which combines replica and engine\n   status to show a simplified view of a replica rebuild state."
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    DeviceObjectUsageInfo:
-      type: object
-      properties:
-        createTime:
-          type: object
-          format: date-time
-          description: Timestamp at which object was created
-        refCount:
-          type: number
-          format: int64
-          description: Object refcount
-        lastRefCountChangeTime:
-          type: object
-          format: date-time
-          description: Timestamp at which object refcount was last changed
-      description: DeviceObjectUsageInfo provides the metadata of object usage on the device
-      title: DeviceObjectUsageInfo carries metadata of object usage on the device.
-      required:
-      - createTime
-      - refCount
-      - lastRefCountChangeTime
-    VolInstResource:
-      type: object
-      properties:
-        curSizeBytes:
-          type: string
-          format: uint64
-        maxSizeBytes:
-          type: string
-          format: uint64
     RunState:
       type: string
       enum:
@@ -1452,24 +1064,412 @@ components:
       default: RUN_STATE_UNSPECIFIED
       description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
       title: RunState - On update, please update RunState_HttpRequest as well
-    Entity:
+    VolumeInstanceReplicaStatus:
+      type: object
+      properties:
+        nodeName:
+          type: string
+        rebuildProgressPercentage:
+          type: integer
+          format: int64
+        status:
+          $ref: '#/components/schemas/infoStorageVolumeReplicaStatus'
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    VolInstResource:
+      type: object
+      properties:
+        curSizeBytes:
+          type: string
+          format: uint64
+        maxSizeBytes:
+          type: string
+          format: uint64
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    ClusterVolInstanceStatus:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/infoStorageVolumeState'
+        replicas:
+          type: array
+          items:
+            $ref: '#/components/schemas/VolumeInstanceReplicaStatus'
+        attachmentState:
+          $ref: '#/components/schemas/infoStorageVolumePVCStatus'
+        creationTime:
+          type: string
+          format: date-time
+        size:
+          type: string
+          format: uint64
+        actualSize:
+          type: string
+          format: uint64
+        robustness:
+          $ref: '#/components/schemas/infoStorageVolumeRobustness'
+        robustnessSubstate:
+          $ref: '#/components/schemas/infoStorageHealthStatus'
+    VolumeInstanceType:
       type: string
       enum:
-      - ENTITY_UNSPECIFIED
-      - ENTITY_BASE_OS
-      - ENTITY_SYSTEM_ADAPTER
-      - ENTITY_VAULT
-      - ENTITY_ATTESTATION
-      - ENTITY_APP_INSTANCE
-      - ENTITY_PORT
-      - ENTITY_NETWORK
-      - ENTITY_NETWORK_INSTANCE
-      - ENTITY_CONTENT_TREE
-      - ENTITY_CONTENT_BLOB
-      - ENTITY_VOLUME
-      default: ENTITY_UNSPECIFIED
-      description: "- ENTITY_UNSPECIFIED: Invalid Device Entity\n - ENTITY_BASE_OS: Base OS entity\n - ENTITY_SYSTEM_ADAPTER: System Adapter Entity\n - ENTITY_VAULT: Vault Entity\n - ENTITY_ATTESTATION: Attestation Entity\n - ENTITY_APP_INSTANCE: App Instance Entity\n - ENTITY_PORT: Port Entity\n - ENTITY_NETWORK: Network Entity\n - ENTITY_NETWORK_INSTANCE: Network Instance Entity\n - ENTITY_CONTENT_TREE: ContentTree Entity\n - ENTITY_CONTENT_BLOB: Blob Entity\n - ENTITY_VOLUME: VOLUME Entity"
-      title: Edge node components
+      - VOLUME_INSTANCE_TYPE_UNSPECIFIED
+      - VOLUME_INSTANCE_TYPE_EMPTYDIR
+      - VOLUME_INSTANCE_TYPE_BLOCKSTORAGE
+      - VOLUME_INSTANCE_TYPE_HOSTFS
+      - VOLUME_INSTANCE_TYPE_TMPFS
+      - VOLUME_INSTANCE_TYPE_SECRET
+      - VOLUME_INSTANCE_TYPE_NFS
+      - VOLUME_INSTANCE_TYPE_AWS_BLOCK_STORAGE
+      - VOLUME_INSTANCE_TYPE_CONTENT_TREE
+      default: VOLUME_INSTANCE_TYPE_UNSPECIFIED
+      title: VolumeInstanceType - On update, please update VolumeInstanceType_HttpRequest as well
+    DeviceObjectUsageInfo:
+      type: object
+      properties:
+        createTime:
+          type: object
+          format: date-time
+          description: Timestamp at which object was created
+        refCount:
+          type: number
+          format: int64
+          description: Object refcount
+        lastRefCountChangeTime:
+          type: object
+          format: date-time
+          description: Timestamp at which object refcount was last changed
+      description: DeviceObjectUsageInfo provides the metadata of object usage on the device
+      title: DeviceObjectUsageInfo carries metadata of object usage on the device.
+      required:
+      - createTime
+      - refCount
+      - lastRefCountChangeTime
+    BlobInfo:
+      type: object
+      properties:
+        sha256:
+          type: string
+        resource:
+          $ref: '#/components/schemas/VolInstResource'
+        usage:
+          $ref: '#/components/schemas/DeviceObjectUsageInfo'
+        State:
+          $ref: '#/components/schemas/SWState'
+        progressPercentage:
+          type: integer
+          format: int64
+        errInfo:
+          $ref: '#/components/schemas/DeviceError'
+    VolInstStatusSummaryMsg:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        deviceId:
+          type: string
+        runState:
+          $ref: '#/components/schemas/RunState'
+        createTime:
+          type: string
+          format: date-time
+        projectId:
+          type: string
+        type:
+          $ref: '#/components/schemas/VolumeInstanceType'
+        deviceState:
+          $ref: '#/components/schemas/SWState'
+        progressPercentage:
+          type: integer
+          format: int64
+        deviceName:
+          type: string
+        projectName:
+          type: string
+        edgeNodeClusterID:
+          type: string
+        clusterVolInstanceStatus:
+          $ref: '#/components/schemas/ClusterVolInstanceStatus'
+    infoStorageVolumePVCStatus:
+      type: string
+      enum:
+      - STORAGE_VOLUME_PVC_STATUS_UNSPECIFIED
+      - STORAGE_VOLUME_PVC_STATUS_BOUND
+      - STORAGE_VOLUME_PVC_STATUS_PENDING
+      - STORAGE_VOLUME_PVC_STATUS_AVAILABLE
+      - STORAGE_VOLUME_PVC_STATUS_RELEASED
+      - STORAGE_VOLUME_PVC_STATUS_FAILED
+      default: STORAGE_VOLUME_PVC_STATUS_UNSPECIFIED
+      title: "StorageVolumePVCStatus is the kubernetes 'phase' of a PVC. Listed as status in cli.\n Refer to: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase"
+    infoStorageVolumeState:
+      type: string
+      enum:
+      - STORAGE_VOLUME_STATE_UNSPECIFIED
+      - STORAGE_VOLUME_STATE_CREATING
+      - STORAGE_VOLUME_STATE_ATTACHED
+      - STORAGE_VOLUME_STATE_DETACHED
+      - STORAGE_VOLUME_STATE_ATTACHING
+      - STORAGE_VOLUME_STATE_DETACHING
+      - STORAGE_VOLUME_STATE_DELETING
+      default: STORAGE_VOLUME_STATE_UNSPECIFIED
+      title: "StorageVolumeState is the kubernetes 'state' field of a replicated csi-driver volume.\n Refer to: https://github.com/longhorn/longhorn-manager/blob/v1.6.2/k8s/pkg/apis/longhorn/v1beta1/volume.go#L14"
+    DeviceEntity:
+      type: object
+      properties:
+        entity:
+          $ref: '#/components/schemas/Entity'
+        entityId:
+          type: string
+        entityName:
+          type: string
+    infoStorageVolumeRobustness:
+      type: string
+      enum:
+      - STORAGE_VOLUME_ROBUSTNESS_UNSPECIFIED
+      - STORAGE_VOLUME_ROBUSTNESS_HEALTHY
+      - STORAGE_VOLUME_ROBUSTNESS_DEGRADED
+      - STORAGE_VOLUME_ROBUSTNESS_FAULTED
+      default: STORAGE_VOLUME_ROBUSTNESS_UNSPECIFIED
+      title: "StorageVolumeRobustness is the 'robustness' of a replicated csi-driver volume.\n Refer to: https://github.com/longhorn/longhorn-manager/blob/v1.6.2/k8s/pkg/apis/longhorn/v1beta1/volume.go#L25"
+    Severity:
+      type: string
+      enum:
+      - SEVERITY_UNSPECIFIED
+      - SEVERITY_NOTICE
+      - SEVERITY_WARNING
+      - SEVERITY_ERROR
+      default: SEVERITY_UNSPECIFIED
+      title: Severity tells the severity type
+    EventSource:
+      type: string
+      enum:
+      - EVENT_SOURCE_UNSPECIFIED
+      - EVENT_SOURCE_SYSTEM
+      - EVENT_SOURCE_USER
+      default: EVENT_SOURCE_UNSPECIFIED
+      description: "- EVENT_SOURCE_UNSPECIFIED: Default\n - EVENT_SOURCE_SYSTEM: Event is generated as a result of status change reported by edge node / application\n - EVENT_SOURCE_USER: Event is generated as a result of an user's configuration action"
+      title: Source of events
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    VolInstStatusListMsg:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/VolInstStatusSummaryMsg'
+        summaryByState:
+          $ref: '#/components/schemas/Summary'
+        summaryByType:
+          $ref: '#/components/schemas/Summary'
+        totalCount:
+          type: integer
+          format: int64
+        next:
+          $ref: '#/components/schemas/Cursor'
+    ObjectType:
+      type: string
+      enum:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
+    infoStorageHealthStatus:
+      type: string
+      enum:
+      - STORAGE_HEALTH_STATUS_UNSPECIFIED
+      - STORAGE_HEALTH_STATUS_HEALTHY
+      - STORAGE_HEALTH_STATUS_DEGRADED_2_REPLICA_AVAILABLE_REPLICATING
+      - STORAGE_HEALTH_STATUS_DEGRADED_2_REPLICA_AVAILABLE_NOT_REPLICATING
+      - STORAGE_HEALTH_STATUS_DEGRADED_1_REPLICA_AVAILABLE_REPLICATING
+      - STORAGE_HEALTH_STATUS_DEGRADED_1_REPLICA_AVAILABLE_NOT_REPLICATING
+      - STORAGE_HEALTH_STATUS_FAILED
+      default: STORAGE_HEALTH_STATUS_UNSPECIFIED
+      description: 'StorageHealthStatus is a higher level tracking status to show redundancy/failure-zone level
+
+        and rebuild progress.'
+    VolInstStatusMsg:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        deviceId:
+          type: string
+          title: device on which this volume is located
+        runState:
+          $ref: '#/components/schemas/RunState'
+        projectId:
+          type: string
+        progressPercentage:
+          type: integer
+          format: int64
+        usage:
+          $ref: '#/components/schemas/DeviceObjectUsageInfo'
+        resource:
+          $ref: '#/components/schemas/VolInstResource'
+        sha256:
+          type: string
+        type:
+          $ref: '#/components/schemas/VolumeInstanceType'
+        deviceState:
+          $ref: '#/components/schemas/SWState'
+        blobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlobInfo'
+        errInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceError'
+        rawStatus:
+          type: string
+        clusterVolInstanceStatus:
+          $ref: '#/components/schemas/ClusterVolInstanceStatus'
+    EventQueryResponse:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventQueryResponseItem'
+          description: Event Query response list
+        next:
+          type: object
+          $ref: '#/components/schemas/Cursor'
+          description: Cursor filter
+        summary:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered events.
+      description: Event query response request payload
+      title: Event query Response payload detail
+      required:
+      - list
+      - next
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
   securitySchemes:
     BearerToken:
       type: apiKey

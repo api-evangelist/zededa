@@ -599,193 +599,17 @@ paths:
       - PatchEnvelopeConfiguration
 components:
   schemas:
-    PatchEnvelopeList:
-      type: object
-      properties:
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: cursor next
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/PatchEnvelope'
-          description: patch envelope summary list
-        summaryByAction:
-          $ref: '#/components/schemas/Summary'
-          description: patch envelopes summary by action
-        totalCount:
-          type: integer
-          format: int64
-          description: patch envelope total count
-    Summary:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    PatchEnvelopeState:
+    ZcOpsType:
       type: string
       enum:
-      - PatchEnvelopeStateUnknown
-      - PatchEnvelopeStateErrored
-      - PatchEnvelopeStateReceived
-      - PatchEnvelopeStateDownloading
-      - PatchEnvelopeStateDownloaded
-      - PatchEnvelopeStateReady
-      - PatchEnvelopeStateActive
-      default: PatchEnvelopeStateUnknown
-      title: "- PatchEnvelopeStateErrored: there is an error with config or during download or verification failed\n - PatchEnvelopeStateReceived: Configuration received but no downloads started\n - PatchEnvelopeStateDownloading: Artifact/Volume download started\nOne or more of the artifacts are being downloaded\n - PatchEnvelopeStateDownloaded: all downloads finished, verified and added to content tree\n - PatchEnvelopeStateReady: patch envelope ready for application instances\napplication instances will still not be allowed\nto fetch the patch envelope contents\n - PatchEnvelopeStateActive: application instances are now allowed to fetch contents"
-    ObjectType:
-      type: string
-      enum:
-      - OBJECT_TYPE_UNSPECIFIED
-      - OBJECT_TYPE_USER
-      - OBJECT_TYPE_EDGE_NODE
-      - OBJECT_TYPE_EDGE_APP
-      - OBJECT_TYPE_IMAGE
-      - OBJECT_TYPE_EDGE_APP_INSTANCE
-      - OBJECT_TYPE_PROJECT
-      - OBJECT_TYPE_NETWORK
-      - OBJECT_TYPE_DATASTORE
-      - OBJECT_TYPE_SERVICE
-      - OBJECT_TYPE_SERVICE_INSTANCE
-      - OBJECT_TYPE_ENTERPRISE
-      - OBJECT_TYPE_ROLE
-      - OBJECT_TYPE_CREDENTIAL
-      - OBJECT_TYPE_NETWORK_INSTANCE
-      - OBJECT_TYPE_VOLUME_INSTANCE
-      - OBJECT_TYPE_REALM
-      - OBJECT_TYPE_AUTHPROFILE
-      - OBJECT_TYPE_POLICY
-      - OBJECT_TYPE_APP_POLICY
-      - OBJECT_TYPE_CLUSTER_INSTANCE
-      - OBJECT_TYPE_PLUGIN
-      - OBJECT_TYPE_DOC_POLICY
-      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
-      - OBJECT_TYPE_TAGS
-      - OBJECT_TYPE_EDGE_NODE_INTERFACE
-      - OBJECT_TYPE_DEPLOYMENT
-      - OBJECT_TYPE_ENTITLEMENTS
-      - OBJECT_TYPE_DATA_STREAM
-      - OBJECT_TYPE_API_USAGE
-      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
-      - OBJECT_TYPE_PATCH_ENVELOPE
-      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
-      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
-      - OBJECT_TYPE_DEV_PASSTHROUGH
-      - OBJECT_TYPE_EDGE_NODE_CLUSTER
-      - OBJECT_TYPE_ASSET_GROUP
-      - OBJECT_TYPE_APP_PROFILE
-      - OBJECT_TYPE_PROFILE_DEPLOYMENT
-      - OBJECT_TYPE_ZKS_INSTANCE
-      - OBJECT_TYPE_CLUSTER_GROUP
-      default: OBJECT_TYPE_UNSPECIFIED
-    ObjectRevision:
-      type: object
-      properties:
-        prev:
-          type: string
-          description: Previous
-        curr:
-          type: string
-          description: Current Database version of the record
-        createdAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was created.
-        createdBy:
-          type: string
-          description: 'User data: Created By'
-        updatedAt:
-          type: object
-          format: date-time
-          description: The time, in milliseconds since the epoch, when the record was last updated.
-        updatedBy:
-          type: string
-          description: 'User data: Updated By'
-      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
-      title: ObjectRevision is used to store the user information.
-      required:
-      - curr
-      - createdAt
-      - createdBy
-      - updatedAt
-      - updatedBy
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
     ZsrvResponse:
       type: object
       properties:
@@ -851,6 +675,63 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/protobufAny'
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    InlineOpaqueBase64Data:
+      type: object
+      properties:
+        base64Data:
+          type: string
+          title: base64 encoded
+        fileNameToUse:
+          type: string
+          title: 'file name to be used for storing this data in EVE.
+
+            the same file name shall be advertised to application agent'
+        base64MetaData:
+          type: string
+          title: optional - any arbitrary metadata encoded to base64 string
     protobufAny:
       type: object
       properties:
@@ -859,40 +740,57 @@ components:
         value:
           type: string
           format: byte
-    BinaryArtifact:
+    PatchStatusListMsg:
       type: object
       properties:
-        format:
-          $ref: '#/components/schemas/OpaqueObjectCategory'
-          title: base64 or binary blob only - secret type is invalid
-        base64Artifact:
-          $ref: '#/components/schemas/InlineOpaqueBase64Data'
-        binaryArtifact:
-          $ref: '#/components/schemas/ExternalOpaqueBinaryBlob'
-        artifactMetaData:
-          type: string
-          title: optional - any arbitrary metadata about/for artifact encoded to base64 string
-        id:
-          type: string
-          description: System defined universally unique Id of the artifact.
-          title: artifact id
-          readOnly: true
-          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
-          uniqueItems: true
-    ZsrvError:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PatchEnvelopeStatus'
+        totalCount:
+          type: integer
+          format: int64
+        next:
+          $ref: '#/components/schemas/Cursor'
+    ExternalOpaqueBinaryBlob:
       type: object
       properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
+        imageName:
+          type: string
+          title: Name of the image uploaded into data store
+        fileNameToUse:
+          type: string
+          title: 'optional - file name to be used for storing this data in EVE.
 
-            value than just httpStatus'
-        location:
+            the same file name shall be advertised to application agent'
+        blobMetaData:
           type: string
-          title: 'Ignore: Internal field only'
-        details:
+          description: 'Eve shall use the image name when fileNameToUse is empty
+
+            optional - this can be image type or size etc encoded into a single string.
+
+            only the application instance agents will interpret this.'
+        imageId:
           type: string
-          title: Field captures string description of details
+    PatchEnvelopeState:
+      type: string
+      enum:
+      - PatchEnvelopeStateUnknown
+      - PatchEnvelopeStateErrored
+      - PatchEnvelopeStateReceived
+      - PatchEnvelopeStateDownloading
+      - PatchEnvelopeStateDownloaded
+      - PatchEnvelopeStateReady
+      - PatchEnvelopeStateActive
+      default: PatchEnvelopeStateUnknown
+      title: "- PatchEnvelopeStateErrored: there is an error with config or during download or verification failed\n - PatchEnvelopeStateReceived: Configuration received but no downloads started\n - PatchEnvelopeStateDownloading: Artifact/Volume download started\nOne or more of the artifacts are being downloaded\n - PatchEnvelopeStateDownloaded: all downloads finished, verified and added to content tree\n - PatchEnvelopeStateReady: patch envelope ready for application instances\napplication instances will still not be allowed\nto fetch the patch envelope contents\n - PatchEnvelopeStateActive: application instances are now allowed to fetch contents"
+    OpaqueObjectCategory:
+      type: string
+      enum:
+      - OpaqueObjectCategoryUnknown
+      - OpaqueObjectCategoryInline
+      - OpaqueObjectCategoryExternalBinary
+      default: OpaqueObjectCategoryUnknown
     PatchEnvelopeStatus:
       type: object
       properties:
@@ -931,6 +829,24 @@ components:
           description: device name
       description: PatchEnvelopeStatus encapsulates the status of an patch envelope
       title: Patch Envelope status message
+    PatchEnvelopeList:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: cursor next
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PatchEnvelope'
+          description: patch envelope summary list
+        summaryByAction:
+          $ref: '#/components/schemas/Summary'
+          description: patch envelopes summary by action
+        totalCount:
+          type: integer
+          format: int64
+          description: patch envelope total count
     PatchEnvelopeAction:
       type: string
       enum:
@@ -938,30 +854,6 @@ components:
       - PATCH_ENVELOPE_ACTION_STORE
       - PATCH_ENVELOPE_ACTION_ACTIVATE
       default: PATCH_ENVELOPE_ACTION_UNSPECIFIED
-    ZcOpsStatus:
-      type: string
-      enum:
-      - OPS_STATUS_UNSPECIFIED
-      - OPS_STATUS_PENDING
-      - OPS_STATUS_ONGOING
-      - OPS_STATUS_COMPLETE
-      default: OPS_STATUS_UNSPECIFIED
-      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
-      title: ZedCloud internal operation status
-    InlineOpaqueBase64Data:
-      type: object
-      properties:
-        base64Data:
-          type: string
-          title: base64 encoded
-        fileNameToUse:
-          type: string
-          title: 'file name to be used for storing this data in EVE.
-
-            the same file name shall be advertised to application agent'
-        base64MetaData:
-          type: string
-          title: optional - any arbitrary metadata encoded to base64 string
     PatchEnvelope:
       type: object
       properties:
@@ -1024,56 +916,164 @@ components:
       - title
       - action
       - artifacts
-    ZcOpsType:
+    ZsrvErrorCode:
       type: string
       enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    PatchStatusListMsg:
-      type: object
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/PatchEnvelopeStatus'
-        totalCount:
-          type: integer
-          format: int64
-        next:
-          $ref: '#/components/schemas/Cursor'
-    OpaqueObjectCategory:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    ObjectType:
       type: string
       enum:
-      - OpaqueObjectCategoryUnknown
-      - OpaqueObjectCategoryInline
-      - OpaqueObjectCategoryExternalBinary
-      default: OpaqueObjectCategoryUnknown
-    ExternalOpaqueBinaryBlob:
+      - OBJECT_TYPE_UNSPECIFIED
+      - OBJECT_TYPE_USER
+      - OBJECT_TYPE_EDGE_NODE
+      - OBJECT_TYPE_EDGE_APP
+      - OBJECT_TYPE_IMAGE
+      - OBJECT_TYPE_EDGE_APP_INSTANCE
+      - OBJECT_TYPE_PROJECT
+      - OBJECT_TYPE_NETWORK
+      - OBJECT_TYPE_DATASTORE
+      - OBJECT_TYPE_SERVICE
+      - OBJECT_TYPE_SERVICE_INSTANCE
+      - OBJECT_TYPE_ENTERPRISE
+      - OBJECT_TYPE_ROLE
+      - OBJECT_TYPE_CREDENTIAL
+      - OBJECT_TYPE_NETWORK_INSTANCE
+      - OBJECT_TYPE_VOLUME_INSTANCE
+      - OBJECT_TYPE_REALM
+      - OBJECT_TYPE_AUTHPROFILE
+      - OBJECT_TYPE_POLICY
+      - OBJECT_TYPE_APP_POLICY
+      - OBJECT_TYPE_CLUSTER_INSTANCE
+      - OBJECT_TYPE_PLUGIN
+      - OBJECT_TYPE_DOC_POLICY
+      - OBJECT_TYPE_ORCHESTRATOR_CLUSTER
+      - OBJECT_TYPE_TAGS
+      - OBJECT_TYPE_EDGE_NODE_INTERFACE
+      - OBJECT_TYPE_DEPLOYMENT
+      - OBJECT_TYPE_ENTITLEMENTS
+      - OBJECT_TYPE_DATA_STREAM
+      - OBJECT_TYPE_API_USAGE
+      - OBJECT_TYPE_APP_INSTANCE_SNAPSHOT
+      - OBJECT_TYPE_PATCH_ENVELOPE
+      - OBJECT_TYPE_RESOURCE_USAGE_TRACK
+      - OBJECT_TYPE_PATCH_ENVELOPE_REFERENCE
+      - OBJECT_TYPE_DEV_PASSTHROUGH
+      - OBJECT_TYPE_EDGE_NODE_CLUSTER
+      - OBJECT_TYPE_ASSET_GROUP
+      - OBJECT_TYPE_APP_PROFILE
+      - OBJECT_TYPE_PROFILE_DEPLOYMENT
+      - OBJECT_TYPE_ZKS_INSTANCE
+      - OBJECT_TYPE_CLUSTER_GROUP
+      default: OBJECT_TYPE_UNSPECIFIED
+    ZsrvError:
       type: object
       properties:
-        imageName:
-          type: string
-          title: Name of the image uploaded into data store
-        fileNameToUse:
-          type: string
-          title: 'optional - file name to be used for storing this data in EVE.
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
 
-            the same file name shall be advertised to application agent'
-        blobMetaData:
+            value than just httpStatus'
+        location:
           type: string
-          description: 'Eve shall use the image name when fileNameToUse is empty
-
-            optional - this can be image type or size etc encoded into a single string.
-
-            only the application instance agents will interpret this.'
-        imageId:
+          title: 'Ignore: Internal field only'
+        details:
           type: string
+          title: Field captures string description of details
+    ObjectRevision:
+      type: object
+      properties:
+        prev:
+          type: string
+          description: Previous
+        curr:
+          type: string
+          description: Current Database version of the record
+        createdAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was created.
+        createdBy:
+          type: string
+          description: 'User data: Created By'
+        updatedAt:
+          type: object
+          format: date-time
+          description: The time, in milliseconds since the epoch, when the record was last updated.
+        updatedBy:
+          type: string
+          description: 'User data: Updated By'
+      description: ObjectRevision store the user details, who has doent the necessary operation like Create Operation or update operation
+      title: ObjectRevision is used to store the user information.
+      required:
+      - curr
+      - createdAt
+      - createdBy
+      - updatedAt
+      - updatedBy
+    BinaryArtifact:
+      type: object
+      properties:
+        format:
+          $ref: '#/components/schemas/OpaqueObjectCategory'
+          title: base64 or binary blob only - secret type is invalid
+        base64Artifact:
+          $ref: '#/components/schemas/InlineOpaqueBase64Data'
+        binaryArtifact:
+          $ref: '#/components/schemas/ExternalOpaqueBinaryBlob'
+        artifactMetaData:
+          type: string
+          title: optional - any arbitrary metadata about/for artifact encoded to base64 string
+        id:
+          type: string
+          description: System defined universally unique Id of the artifact.
+          title: artifact id
+          readOnly: true
+          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+          uniqueItems: true
+    ZcOpsStatus:
+      type: string
+      enum:
+      - OPS_STATUS_UNSPECIFIED
+      - OPS_STATUS_PENDING
+      - OPS_STATUS_ONGOING
+      - OPS_STATUS_COMPLETE
+      default: OPS_STATUS_UNSPECIFIED
+      description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
+      title: ZedCloud internal operation status
   securitySchemes:
     BearerToken:
       type: apiKey

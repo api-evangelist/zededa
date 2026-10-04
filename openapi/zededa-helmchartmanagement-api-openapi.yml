@@ -785,26 +785,76 @@ paths:
               - chart
 components:
   schemas:
-    HelmChartDependency:
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    protobufAny:
       type: object
       properties:
-        name:
+        typeUrl:
           type: string
-          description: 'Name of the dependency chart. Example: ''postgresql'''
-          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
-        repository:
+        value:
           type: string
-          description: 'Repository URL for the dependency. Example: ''https://charts.bitnami.com/bitnami'''
-        tags:
+          format: byte
+    HelmChartDetail:
+      type: object
+      properties:
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+          description: Chart annotations including category, images, and licenses
+        apiVersion:
+          type: string
+          description: Helm chart API version
+        appVersion:
+          type: string
+          description: Version of the application packaged in the chart
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/HelmChartDependency'
+          description: List of chart dependencies
+        description:
+          type: string
+          description: Description of the Helm chart
+        home:
+          type: string
+          description: Home page URL for the chart
+        icon:
+          type: string
+          description: Icon URL for the chart
+        keywords:
           type: array
           items:
             type: string
-          description: 'Tags associated with the dependency. Example: [''database'', ''postgresql'']'
+          description: Keywords associated with the chart
+        maintainers:
+          type: array
+          items:
+            $ref: '#/components/schemas/HelmChartMaintainer'
+          description: List of chart maintainers
+        name:
+          type: string
+          description: Name of the Helm chart
+        sources:
+          type: array
+          items:
+            type: string
+          description: List of source code URLs for the chart
         version:
           type: string
-          description: 'Version constraint for the dependency. Example: ''^12.0.0'''
-      description: Dependency information for a Helm chart
-      title: Helm chart dependency
+          description: Version of the Helm chart
+      description: Detailed metadata information for a Helm chart
+      title: Helm chart metadata
     HelmChartMaintainer:
       type: object
       properties:
@@ -869,37 +919,20 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    googlerpcStatus:
+    ZsrvError:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
           type: string
+          title: 'Ignore: Internal field only'
         details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
           type: string
-        value:
-          type: string
-          format: byte
+          title: Field captures string description of details
     ObjectType:
       type: string
       enum:
@@ -945,57 +978,6 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
-    HelmChartDetail:
-      type: object
-      properties:
-        annotations:
-          type: object
-          additionalProperties:
-            type: string
-          description: Chart annotations including category, images, and licenses
-        apiVersion:
-          type: string
-          description: Helm chart API version
-        appVersion:
-          type: string
-          description: Version of the application packaged in the chart
-        dependencies:
-          type: array
-          items:
-            $ref: '#/components/schemas/HelmChartDependency'
-          description: List of chart dependencies
-        description:
-          type: string
-          description: Description of the Helm chart
-        home:
-          type: string
-          description: Home page URL for the chart
-        icon:
-          type: string
-          description: Icon URL for the chart
-        keywords:
-          type: array
-          items:
-            type: string
-          description: Keywords associated with the chart
-        maintainers:
-          type: array
-          items:
-            $ref: '#/components/schemas/HelmChartMaintainer'
-          description: List of chart maintainers
-        name:
-          type: string
-          description: Name of the Helm chart
-        sources:
-          type: array
-          items:
-            type: string
-          description: List of source code URLs for the chart
-        version:
-          type: string
-          description: Version of the Helm chart
-      description: Detailed metadata information for a Helm chart
-      title: Helm chart metadata
     HelmChartListResponse:
       type: object
       properties:
@@ -1013,20 +995,41 @@ components:
           description: Name of the Helm chart repository
       description: Response containing a list of Helm charts with their metadata and versions
       title: Helm chart list response
-    ZsrvError:
+    googlerpcStatus:
       type: object
       properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
+        code:
+          type: integer
+          format: int32
+        message:
           type: string
-          title: 'Ignore: Internal field only'
         details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    HelmChartInfoResponse:
+      type: object
+      properties:
+        readme:
           type: string
-          title: Field captures string description of details
+          description: README content for the Helm chart
+        appReadme:
+          type: string
+          description: Application-specific README content
+        questions:
+          type: object
+          description: Configuration questions for the Helm chart
+        values:
+          type: object
+          description: Default values for the Helm chart
+        chart:
+          $ref: '#/components/schemas/HelmChartDetail'
+          description: Detailed chart metadata and information
+        repoIdentifier:
+          type: string
+          description: Identifier for the Helm chart repository
+      description: Comprehensive Helm chart data containing chart details, configuration, and metadata
+      title: Helm chart data
     ZcOpsStatus:
       type: string
       enum:
@@ -1037,6 +1040,26 @@ components:
       default: OPS_STATUS_UNSPECIFIED
       description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
       title: ZedCloud internal operation status
+    HelmChartDependency:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Name of the dependency chart. Example: ''postgresql'''
+          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+        repository:
+          type: string
+          description: 'Repository URL for the dependency. Example: ''https://charts.bitnami.com/bitnami'''
+        tags:
+          type: array
+          items:
+            type: string
+          description: 'Tags associated with the dependency. Example: [''database'', ''postgresql'']'
+        version:
+          type: string
+          description: 'Version constraint for the dependency. Example: ''^12.0.0'''
+      description: Dependency information for a Helm chart
+      title: Helm chart dependency
     ZsrvErrorCode:
       type: string
       enum:
@@ -1075,29 +1098,6 @@ components:
       default: zMsgErrorNone
       description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
       title: ZedCould internal error code
-    HelmChartInfoResponse:
-      type: object
-      properties:
-        readme:
-          type: string
-          description: README content for the Helm chart
-        appReadme:
-          type: string
-          description: Application-specific README content
-        questions:
-          type: object
-          description: Configuration questions for the Helm chart
-        values:
-          type: object
-          description: Default values for the Helm chart
-        chart:
-          $ref: '#/components/schemas/HelmChartDetail'
-          description: Detailed chart metadata and information
-        repoIdentifier:
-          type: string
-          description: Identifier for the Helm chart repository
-      description: Comprehensive Helm chart data containing chart details, configuration, and metadata
-      title: Helm chart data
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -497,22 +497,67 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
 components:
   schemas:
-    ArtifactList:
+    Description:
       type: object
       properties:
-        summary:
+        descMessage:
+          type: string
+          description: description of an operation
+          readOnly: true
+        descCode:
+          type: string
+          $ref: '#/components/schemas/DecsriptionCode'
+          default: UPLOAD_DONE
+          description: description code for an operation
+          readOnly: true
+      description: Description encapsulates the top level Description of the operation
+      title: Description encapsulates the top level Description of the operation
+    StatusCode:
+      type: string
+      enum:
+      - STATUS_CODE_UNSPECIFIED
+      - STATUS_CODE_SUCCESS
+      - STATUS_CODE_FAILURE
+      - STATUS_CODE_PARTIAL_SUCCESS
+      default: STATUS_CODE_UNSPECIFIED
+      title: status codes for internal use (Gilas and Niles)
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    Summary:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Summary description
+        total:
+          type: number
+          format: int64
+          description: Total
+        values:
           type: object
-          $ref: '#/components/schemas/Summary'
-          description: Summary by state
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artifact'
-          description: Artifact Key list
-        next:
-          $ref: '#/components/schemas/Cursor'
-      description: Response returned for List artifact Keys
-      title: ArtifactKeyListResponse detail
+          additionalProperties:
+            type: integer
+            format: int64
+          description: 'Values: Map for storing <string, uint32>'
+      description: Summary is used to store the Summary details
+      title: Summary is used to store the Summary details
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
     ZsrvResponse:
       type: object
       properties:
@@ -566,52 +611,20 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
-    googlerpcStatus:
+    ZsrvError:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
           type: string
+          title: 'Ignore: Internal field only'
         details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
           type: string
-        value:
-          type: string
-          format: byte
-    Description:
-      type: object
-      properties:
-        descMessage:
-          type: string
-          description: description of an operation
-          readOnly: true
-        descCode:
-          type: string
-          $ref: '#/components/schemas/DecsriptionCode'
-          default: UPLOAD_DONE
-          description: description code for an operation
-          readOnly: true
-      description: Description encapsulates the top level Description of the operation
-      title: Description encapsulates the top level Description of the operation
+          title: Field captures string description of details
     ObjectType:
       type: string
       enum:
@@ -657,15 +670,6 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
-    StatusCode:
-      type: string
-      enum:
-      - STATUS_CODE_UNSPECIFIED
-      - STATUS_CODE_SUCCESS
-      - STATUS_CODE_FAILURE
-      - STATUS_CODE_PARTIAL_SUCCESS
-      default: STATUS_CODE_UNSPECIFIED
-      title: status codes for internal use (Gilas and Niles)
     Artifact:
       type: object
       properties:
@@ -697,6 +701,49 @@ components:
           readOnly: true
       description: ArtifactKey idenfies the artifact by artifactId
       title: ArtifactKey detail
+    Status:
+      type: object
+      properties:
+        code:
+          type: string
+          $ref: '#/components/schemas/StatusCode'
+          default: SUCCESS
+          description: describes the overall status of the operation
+          readOnly: true
+        description:
+          $ref: '#/components/schemas/Description'
+          description: top level description of the operation
+          readOnly: true
+      description: Status encapsulates the top level status of the operation
+      title: Status encapsulates the top level status of the operation
+    ArtifactList:
+      type: object
+      properties:
+        summary:
+          type: object
+          $ref: '#/components/schemas/Summary'
+          description: Summary by state
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artifact'
+          description: Artifact Key list
+        next:
+          $ref: '#/components/schemas/Cursor'
+      description: Response returned for List artifact Keys
+      title: ArtifactKeyListResponse detail
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
     Cursor:
       type: object
       properties:
@@ -722,53 +769,6 @@ components:
           description: Total number of pages to be fetched.
       description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
       title: Cursor is used as filter in list operation.
-    Summary:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Summary description
-        total:
-          type: number
-          format: int64
-          description: Total
-        values:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-          description: 'Values: Map for storing <string, uint32>'
-      description: Summary is used to store the Summary details
-      title: Summary is used to store the Summary details
-    Status:
-      type: object
-      properties:
-        code:
-          type: string
-          $ref: '#/components/schemas/StatusCode'
-          default: SUCCESS
-          description: describes the overall status of the operation
-          readOnly: true
-        description:
-          $ref: '#/components/schemas/Description'
-          description: top level description of the operation
-          readOnly: true
-      description: Status encapsulates the top level status of the operation
-      title: Status encapsulates the top level status of the operation
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
     ZcOpsStatus:
       type: string
       enum:
@@ -779,6 +779,23 @@ components:
       default: OPS_STATUS_UNSPECIFIED
       description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
       title: ZedCloud internal operation status
+    DecsriptionCode:
+      type: string
+      enum:
+      - DESCRIPTION_CODE_UNSPECIFIED
+      - DESCRIPTION_CODE_RECEIVED
+      - DESCRIPTION_CODE_PACKET_CORRUPT
+      - DESCRIPTION_CODE_FAILED_TO_RECEIVE
+      - DESCRIPTION_CODE_NETWORK_ERROR
+      - DESCRIPTION_CODE_NOT_FOUND
+      - DESCRIPTION_CODE_NOT_SUPPORTED
+      - DESCRIPTION_CODE_INTERNAL_ERROR
+      - DESCRIPTION_CODE_NOT_SPECIFIED
+      - DESCRIPTION_CODE_UPLOAD_DONE
+      - DESCRIPTION_CODE_ALREADY_EXISTS
+      - DESCRIPTION_CODE_INVALID_PARAMS
+      default: DESCRIPTION_CODE_UNSPECIFIED
+      title: description codes for internal use (Gilas and Niles)
     ZsrvErrorCode:
       type: string
       enum:
@@ -817,23 +834,6 @@ components:
       default: zMsgErrorNone
       description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
       title: ZedCould internal error code
-    DecsriptionCode:
-      type: string
-      enum:
-      - DESCRIPTION_CODE_UNSPECIFIED
-      - DESCRIPTION_CODE_RECEIVED
-      - DESCRIPTION_CODE_PACKET_CORRUPT
-      - DESCRIPTION_CODE_FAILED_TO_RECEIVE
-      - DESCRIPTION_CODE_NETWORK_ERROR
-      - DESCRIPTION_CODE_NOT_FOUND
-      - DESCRIPTION_CODE_NOT_SUPPORTED
-      - DESCRIPTION_CODE_INTERNAL_ERROR
-      - DESCRIPTION_CODE_NOT_SPECIFIED
-      - DESCRIPTION_CODE_UPLOAD_DONE
-      - DESCRIPTION_CODE_ALREADY_EXISTS
-      - DESCRIPTION_CODE_INVALID_PARAMS
-      default: DESCRIPTION_CODE_UNSPECIFIED
-      title: description codes for internal use (Gilas and Niles)
   securitySchemes:
     BearerToken:
       type: apiKey

@@ -619,21 +619,126 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/profiledeployments
 components:
   schemas:
-    ProfileDeploymentResourceObjectStatus:
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    ProfileDeploymentResourceDetailedStatus:
       type: object
       properties:
         id:
           type: string
-          description: Unique ID of the object.
+          description: unique Id of the deployment.
           readOnly: true
           pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
           uniqueItems: true
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-          description: object type
-        objectRunState:
-          $ref: '#/components/schemas/RunState'
-          description: object run state
+        name:
+          type: string
+          description: User defined name of the deployment, unique across the enterprise. Once deployment is created, name can’t be changed.
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
+          uniqueItems: true
+        title:
+          type: string
+          description: User defined title of the deployment. Title can be changed at any time.
+          maxLength: 256
+          minLength: 3
+          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
+        description:
+          type: string
+          description: Detailed description of the deployment.
+          maxLength: 256
+        projectId:
+          type: string
+          description: project id
+        appProfileInfo:
+          type: object
+          $ref: '#/components/schemas/AppProfileInfo'
+          description: app profile id
+        targetAssetGroup:
+          type: object
+          $ref: '#/components/schemas/TargetAssetGroup'
+          description: asset group info
+        assetResourceStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileDeploymentPerDeviceStatus'
+          description: list of status of objects created by deployment
+    AppProfileInfo:
+      type: object
+      properties:
+        appProfileId:
+          type: string
+          description: Unique ID of the asset group.
+          readOnly: true
+          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+          uniqueItems: true
+        version:
+          type: integer
+          format: int64
+    ProfileDeploymentResourceDetailedStatusResp:
+      type: object
+      properties:
+        resourceStatus:
+          $ref: '#/components/schemas/ProfileDeploymentResourceDetailedStatus'
+          description: List of status of deployment resources
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Requested page details of filtered records
     ZsrvResponse:
       type: object
       properties:
@@ -687,46 +792,20 @@ components:
           title: 'one or more errors will be set if the operation failed
 
             i.e. httpStatusCode != 2xx'
-    TargetAssetGroup:
+    ZsrvError:
       type: object
       properties:
-        groupId:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
           type: string
-          description: unique Id of the asset group.
-          readOnly: true
-          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
-          uniqueItems: true
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
+          title: 'Ignore: Internal field only'
         details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
           type: string
-        value:
-          type: string
-          format: byte
+          title: Field captures string description of details
     ObjectType:
       type: string
       enum:
@@ -772,6 +851,35 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
+    ProfileDeploymentPerDeviceStatus:
+      type: object
+      properties:
+        assetId:
+          type: string
+          description: Unique ID of the object.
+          readOnly: true
+          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+          uniqueItems: true
+        objectStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileDeploymentResourceObjectStatus'
+          description: list of status of objects created by deployment for the given asset id
+    ProfileDeploymentResourceObjectStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ID of the object.
+          readOnly: true
+          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+          uniqueItems: true
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+          description: object type
+        objectRunState:
+          $ref: '#/components/schemas/RunState'
+          description: object run state
     ZcOpsStatus:
       type: string
       enum:
@@ -782,69 +890,27 @@ components:
       default: OPS_STATUS_UNSPECIFIED
       description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
       title: ZedCloud internal operation status
-    ProfileDeploymentResourceDetailedStatusResp:
+    TargetAssetGroup:
       type: object
       properties:
-        resourceStatus:
-          $ref: '#/components/schemas/ProfileDeploymentResourceDetailedStatus'
-          description: List of status of deployment resources
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Requested page details of filtered records
-    ProfileDeploymentList:
-      type: object
-      properties:
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: cursor next
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProfileDeployment'
-          description: deployment summary list
-    RunState:
-      type: string
-      enum:
-      - RUN_STATE_UNSPECIFIED
-      - RUN_STATE_ONLINE
-      - RUN_STATE_HALTED
-      - RUN_STATE_INIT
-      - RUN_STATE_REBOOTING
-      - RUN_STATE_OFFLINE
-      - RUN_STATE_UNKNOWN
-      - RUN_STATE_UNPROVISIONED
-      - RUN_STATE_PROVISIONED
-      - RUN_STATE_SUSPECT
-      - RUN_STATE_DOWNLOADING
-      - RUN_STATE_RESTARTING
-      - RUN_STATE_PURGING
-      - RUN_STATE_HALTING
-      - RUN_STATE_ERROR
-      - RUN_STATE_VERIFYING
-      - RUN_STATE_LOADING
-      - RUN_STATE_CREATING_VOLUME
-      - RUN_STATE_BOOTING
-      - RUN_STATE_MAINTENANCE_MODE
-      - RUN_STATE_START_DELAYED
-      - RUN_STATE_BASEOS_UPDATING
-      - RUN_STATE_PREPARING_POWEROFF
-      - RUN_STATE_POWERING_OFF
-      - RUN_STATE_PREPARED_POWEROFF
-      default: RUN_STATE_UNSPECIFIED
-      description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
-      title: RunState - On update, please update RunState_HttpRequest as well
-    AppProfileInfo:
-      type: object
-      properties:
-        appProfileId:
+        groupId:
           type: string
-          description: Unique ID of the asset group.
+          description: unique Id of the asset group.
           readOnly: true
           pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
           uniqueItems: true
-        version:
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
           type: integer
-          format: int64
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
     Cursor:
       type: object
       properties:
@@ -870,62 +936,6 @@ components:
           description: Total number of pages to be fetched.
       description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
       title: Cursor is used as filter in list operation.
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
-    ProfileDeploymentResourceDetailedStatus:
-      type: object
-      properties:
-        id:
-          type: string
-          description: unique Id of the deployment.
-          readOnly: true
-          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
-          uniqueItems: true
-        name:
-          type: string
-          description: User defined name of the deployment, unique across the enterprise. Once deployment is created, name can’t be changed.
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9][a-zA-Z0-9_.-]+'
-          uniqueItems: true
-        title:
-          type: string
-          description: User defined title of the deployment. Title can be changed at any time.
-          maxLength: 256
-          minLength: 3
-          pattern: '[a-zA-Z0-9]+[a-zA-Z0-9!-~ ]+'
-        description:
-          type: string
-          description: Detailed description of the deployment.
-          maxLength: 256
-        projectId:
-          type: string
-          description: project id
-        appProfileInfo:
-          type: object
-          $ref: '#/components/schemas/AppProfileInfo'
-          description: app profile id
-        targetAssetGroup:
-          type: object
-          $ref: '#/components/schemas/TargetAssetGroup'
-          description: asset group info
-        assetResourceStatus:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProfileDeploymentPerDeviceStatus'
-          description: list of status of objects created by deployment
     ProfileDeployment:
       type: object
       properties:
@@ -970,58 +980,48 @@ components:
       - appProfileInfo
       - projectId
       - targetAssetGroup
-    ProfileDeploymentPerDeviceStatus:
-      type: object
-      properties:
-        assetId:
-          type: string
-          description: Unique ID of the object.
-          readOnly: true
-          pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
-          uniqueItems: true
-        objectStatus:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProfileDeploymentResourceObjectStatus'
-          description: list of status of objects created by deployment for the given asset id
-    ZsrvErrorCode:
+    RunState:
       type: string
       enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
+      - RUN_STATE_UNSPECIFIED
+      - RUN_STATE_ONLINE
+      - RUN_STATE_HALTED
+      - RUN_STATE_INIT
+      - RUN_STATE_REBOOTING
+      - RUN_STATE_OFFLINE
+      - RUN_STATE_UNKNOWN
+      - RUN_STATE_UNPROVISIONED
+      - RUN_STATE_PROVISIONED
+      - RUN_STATE_SUSPECT
+      - RUN_STATE_DOWNLOADING
+      - RUN_STATE_RESTARTING
+      - RUN_STATE_PURGING
+      - RUN_STATE_HALTING
+      - RUN_STATE_ERROR
+      - RUN_STATE_VERIFYING
+      - RUN_STATE_LOADING
+      - RUN_STATE_CREATING_VOLUME
+      - RUN_STATE_BOOTING
+      - RUN_STATE_MAINTENANCE_MODE
+      - RUN_STATE_START_DELAYED
+      - RUN_STATE_BASEOS_UPDATING
+      - RUN_STATE_PREPARING_POWEROFF
+      - RUN_STATE_POWERING_OFF
+      - RUN_STATE_PREPARED_POWEROFF
+      default: RUN_STATE_UNSPECIFIED
+      description: "- RUN_STATE_ONLINE: Entity Online\n - RUN_STATE_HALTED: Entity Halted\n - RUN_STATE_INIT: Entity Initializing\n - RUN_STATE_REBOOTING: Entity Rebooting\n - RUN_STATE_OFFLINE: Entity Offline\n - RUN_STATE_UNKNOWN: Entity state Unknown\n - RUN_STATE_UNPROVISIONED: Entity Unprovisioned\n - RUN_STATE_PROVISIONED: Entity Provisioned\n - RUN_STATE_SUSPECT: Entity Suspect\n - RUN_STATE_DOWNLOADING: Edge-node downloading entity artifacts\n - RUN_STATE_RESTARTING: Entity Restarting\n - RUN_STATE_PURGING: Entity Purging\n - RUN_STATE_HALTING: Entity Halting\n - RUN_STATE_ERROR: Entity encountered an error\n - RUN_STATE_VERIFYING: Verification of downloaded Artifacts in Progress.\n - RUN_STATE_LOADING: Loading of Artifacts into local datastore in Progress.\n - RUN_STATE_CREATING_VOLUME: Volume creation from artifacts in Progress\n - RUN_STATE_BOOTING: Entity booting up\n - RUN_STATE_MAINTENANCE_MODE: Entity maintenance mode\n - RUN_STATE_START_DELAYED: Application start delayed as per configuration\n - RUN_STATE_BASEOS_UPDATING: Device BaseOs Update in Progress\n - RUN_STATE_PREPARING_POWEROFF: device preparing power off - shutting down all app instances\n - RUN_STATE_POWERING_OFF: device powering off from local profile server\n - RUN_STATE_PREPARED_POWEROFF: device prepared power off - all app instances are shut down"
+      title: RunState - On update, please update RunState_HttpRequest as well
+    ProfileDeploymentList:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: cursor next
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileDeployment'
+          description: deployment summary list
   securitySchemes:
     BearerToken:
       type: apiKey

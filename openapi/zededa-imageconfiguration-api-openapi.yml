@@ -1605,6 +1605,136 @@ paths:
         url: https://docs.zededa.com/-M-8m8d8KqdLpfOgY_jo/storage
 components:
   schemas:
+    ZcOpsType:
+      type: string
+      enum:
+      - OPS_TYPE_UNSPECIFIED
+      - OPS_TYPE_READ
+      - OPS_TYPE_DELETE
+      - OPS_TYPE_CREATE
+      - OPS_TYPE_UPDATE
+      - OPS_TYPE_LIST
+      default: OPS_TYPE_UNSPECIFIED
+      title: ZedCloud internal operation type
+    Images:
+      type: object
+      properties:
+        terse:
+          $ref: '#/components/schemas/Summary'
+          description: Summary of filtered Image records
+        summaryByImageStatus:
+          $ref: '#/components/schemas/Summary'
+          description: Imagestatus distribution summary
+        summaryByImageArch:
+          $ref: '#/components/schemas/Summary'
+          description: Image architecture distribution summary
+        summaryByImageType:
+          $ref: '#/components/schemas/Summary'
+          description: Image type distribution summary
+        summaryByImageFormat:
+          $ref: '#/components/schemas/Summary'
+          description: Image format distribution summary
+        summaryByOrigin:
+          $ref: '#/components/schemas/Summary'
+          description: 'images by origin summary '
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageConfig'
+          description: List of filtered Image records
+        next:
+          $ref: '#/components/schemas/Cursor'
+          description: Responded page details of filtered records
+    ZsrvResponse:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/ZcOpsType'
+          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
+        operationStatus:
+          $ref: '#/components/schemas/ZcOpsStatus'
+          title: if this is log running job
+        objectKind:
+          type: string
+          title: zedcloud object kind on which the operation was performed
+        objectId:
+          type: string
+          title: Unique value identifies the object that was operated on
+        objectName:
+          type: string
+          title: name of the object
+        objectRevision:
+          type: string
+          title: 'object revision post the operation, note Read operation
+
+            doesn''t change the revision'
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        operationTime:
+          type: string
+          title: time of operation
+        startTime:
+          type: string
+          title: total time taken by operations
+        endTime:
+          type: string
+        user:
+          type: string
+          title: the operation is performed on behalf of this user
+        httpStatusCode:
+          type: integer
+          format: int32
+          title: http response
+        httpStatusMsg:
+          type: string
+          title: summary of the error in text format
+        jobId:
+          type: string
+          title: for tracking asynchronous tasks
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZsrvError'
+          title: 'one or more errors will be set if the operation failed
+
+            i.e. httpStatusCode != 2xx'
+    googlerpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    Cursor:
+      type: object
+      properties:
+        pageToken:
+          type: string
+          description: Page Token
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: OrderBy helps in sorting the list response
+        pageNum:
+          type: number
+          format: int64
+          description: Page Number
+        pageSize:
+          type: number
+          format: int64
+          description: Defines the page size
+        totalPages:
+          type: number
+          format: int64
+          description: Total number of pages to be fetched.
+      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
+      title: Cursor is used as filter in list operation.
     Summary:
       type: object
       properties:
@@ -1623,29 +1753,21 @@ components:
           description: 'Values: Map for storing <string, uint32>'
       description: Summary is used to store the Summary details
       title: Summary is used to store the Summary details
-    ModelArchType:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - UNDEFINED
-      - AMD64
-      - ARM64
-      default: UNSPECIFIED
-    configFormat:
-      type: string
-      enum:
-      - FmtUnknown
-      - RAW
-      - QCOW
-      - QCOW2
-      - VHD
-      - VMDK
-      - OVA
-      - VHDX
-      - CONTAINER
-      - ISO
-      - PVC
-      default: FmtUnknown
+    protobufAny:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          type: string
+          format: byte
+    ObjectDetail:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
     ImageConfig:
       type: object
       properties:
@@ -1741,6 +1863,14 @@ components:
       - imageArch
       - imageType
       - datastoreId
+    ModelArchType:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - UNDEFINED
+      - AMD64
+      - ARM64
+      default: UNSPECIFIED
     ImageProjectList:
       type: object
       properties:
@@ -1756,6 +1886,70 @@ components:
         next:
           $ref: '#/components/schemas/Cursor'
           description: Responded page details of filtered records
+    Origin:
+      type: string
+      enum:
+      - ORIGIN_UNSPECIFIED
+      - ORIGIN_IMPORTED
+      - ORIGIN_LOCAL
+      - ORIGIN_GLOBAL
+      - ORIGIN_APP_PROFILE_LOCAL
+      default: ORIGIN_UNSPECIFIED
+      description: "- ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
+      title: 'OriginType : enum specifies the Object orgigin type'
+    ZsrvErrorCode:
+      type: string
+      enum:
+      - zMsgErrorNone
+      - zMsgSucess
+      - NotFound
+      - AlreadyExists
+      - VersionMismatch
+      - RangeError
+      - LargeResult
+      - IncompleteData
+      - InvalidData
+      - FunctionUnsupported
+      - NoMemory
+      - SendFailure
+      - Timeout
+      - BadReqBody
+      - BadReqParam
+      - InvalidFieldFormat
+      - UrlNotFound
+      - ApiVersionNotSupported
+      - Unauthorized
+      - Forbidden
+      - Conflict
+      - NotModified
+      - DependencyConflict
+      - JsonFmtError
+      - ProtoFmtError
+      - CertError
+      - DataBaseConnection
+      - DBError
+      - zMsgAccepted
+      - zMsgCreated
+      - PreConditionFailed
+      - InternalServerError
+      default: zMsgErrorNone
+      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
+      title: ZedCould internal error code
+    configFormat:
+      type: string
+      enum:
+      - FmtUnknown
+      - RAW
+      - QCOW
+      - QCOW2
+      - VHD
+      - VMDK
+      - OVA
+      - VHDX
+      - CONTAINER
+      - ISO
+      - PVC
+      default: FmtUnknown
     ObjectType:
       type: string
       enum:
@@ -1801,6 +1995,20 @@ components:
       - OBJECT_TYPE_ZKS_INSTANCE
       - OBJECT_TYPE_CLUSTER_GROUP
       default: OBJECT_TYPE_UNSPECIFIED
+    ZsrvError:
+      type: object
+      properties:
+        ec:
+          $ref: '#/components/schemas/ZsrvErrorCode'
+          title: 'Enumrated error code, describes more granular numerical
+
+            value than just httpStatus'
+        location:
+          type: string
+          title: 'Ignore: Internal field only'
+        details:
+          type: string
+          title: Field captures string description of details
     ObjectRevision:
       type: object
       properties:
@@ -1832,31 +2040,6 @@ components:
       - createdBy
       - updatedAt
       - updatedBy
-    Cursor:
-      type: object
-      properties:
-        pageToken:
-          type: string
-          description: Page Token
-        orderBy:
-          type: array
-          items:
-            type: string
-          description: OrderBy helps in sorting the list response
-        pageNum:
-          type: number
-          format: int64
-          description: Page Number
-        pageSize:
-          type: number
-          format: int64
-          description: Defines the page size
-        totalPages:
-          type: number
-          format: int64
-          description: Total number of pages to be fetched.
-      description: 'Cursor helps in filtering the various list response like edge-app bundle list, model list, bundle list etc. '
-      title: Cursor is used as filter in list operation.
     ImageType:
       type: string
       enum:
@@ -1871,138 +2054,6 @@ components:
       default: IMAGE_TYPE_UNSPECIFIED
       description: "- IMAGE_TYPE_EVE: Base OS images for edge gateway\n - IMAGE_TYPE_APPLICATION: Edge application images\n - IMAGE_TYPE_EVEPRIVATE: Private Base OS images for edge gateway\n - IMAGE_TYPE_ARTIFACT: Image type to be used for configuration/patch service\n - IMAGE_TYPE_DOCKER_COMPOSE_TAR: Image type to be used for multi-file docker-compose projects\n - IMAGE_TYPE_DOCKER_RUNTIME: Image type to be used for Docker Compose runtime bundles\n - IMAGE_TYPE_ZKS_RUNTIME: Image type to be used for ZKS runtime bundles"
       title: Image types
-    ZsrvErrorCode:
-      type: string
-      enum:
-      - zMsgErrorNone
-      - zMsgSucess
-      - NotFound
-      - AlreadyExists
-      - VersionMismatch
-      - RangeError
-      - LargeResult
-      - IncompleteData
-      - InvalidData
-      - FunctionUnsupported
-      - NoMemory
-      - SendFailure
-      - Timeout
-      - BadReqBody
-      - BadReqParam
-      - InvalidFieldFormat
-      - UrlNotFound
-      - ApiVersionNotSupported
-      - Unauthorized
-      - Forbidden
-      - Conflict
-      - NotModified
-      - DependencyConflict
-      - JsonFmtError
-      - ProtoFmtError
-      - CertError
-      - DataBaseConnection
-      - DBError
-      - zMsgAccepted
-      - zMsgCreated
-      - PreConditionFailed
-      - InternalServerError
-      default: zMsgErrorNone
-      description: "- zMsgErrorNone: common validation errors\n - IncompleteData: message had fields that weren't filled in\n - InvalidData: message contained the field that wasn't expected\n - FunctionUnsupported: this feature unavailable on this version of device\n - InvalidFieldFormat: message contained the field that wasn't correctly formatted\n - JsonFmtError: Marshal / Unmarshal errors\n - DataBaseConnection: generic DB error"
-      title: ZedCould internal error code
-    ObjectDetail:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    ZsrvResponse:
-      type: object
-      properties:
-        operationType:
-          $ref: '#/components/schemas/ZcOpsType'
-          title: "Describes one of the operations type : possible values\n                        Read/Delete/Create/Update/List"
-        operationStatus:
-          $ref: '#/components/schemas/ZcOpsStatus'
-          title: if this is log running job
-        objectKind:
-          type: string
-          title: zedcloud object kind on which the operation was performed
-        objectId:
-          type: string
-          title: Unique value identifies the object that was operated on
-        objectName:
-          type: string
-          title: name of the object
-        objectRevision:
-          type: string
-          title: 'object revision post the operation, note Read operation
-
-            doesn''t change the revision'
-        objectType:
-          $ref: '#/components/schemas/ObjectType'
-        operationTime:
-          type: string
-          title: time of operation
-        startTime:
-          type: string
-          title: total time taken by operations
-        endTime:
-          type: string
-        user:
-          type: string
-          title: the operation is performed on behalf of this user
-        httpStatusCode:
-          type: integer
-          format: int32
-          title: http response
-        httpStatusMsg:
-          type: string
-          title: summary of the error in text format
-        jobId:
-          type: string
-          title: for tracking asynchronous tasks
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZsrvError'
-          title: 'one or more errors will be set if the operation failed
-
-            i.e. httpStatusCode != 2xx'
-    googlerpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    protobufAny:
-      type: object
-      properties:
-        typeUrl:
-          type: string
-        value:
-          type: string
-          format: byte
-    ZsrvError:
-      type: object
-      properties:
-        ec:
-          $ref: '#/components/schemas/ZsrvErrorCode'
-          title: 'Enumrated error code, describes more granular numerical
-
-            value than just httpStatus'
-        location:
-          type: string
-          title: 'Ignore: Internal field only'
-        details:
-          type: string
-          title: Field captures string description of details
     ZcOpsStatus:
       type: string
       enum:
@@ -2013,28 +2064,6 @@ components:
       default: OPS_STATUS_UNSPECIFIED
       description: "- OPS_STATUS_PENDING: In rare cases, system may not start operation when it was requested. Client will be notified that operation is PENDING\n - OPS_STATUS_ONGOING: system will start the operation, but at the time response was generated, operation is still ONGOING.\n - OPS_STATUS_COMPLETE: Even if the result of the operations may result in failure, but the OpsStatus will marked COMPLETE for almost all cases."
       title: ZedCloud internal operation status
-    Origin:
-      type: string
-      enum:
-      - ORIGIN_UNSPECIFIED
-      - ORIGIN_IMPORTED
-      - ORIGIN_LOCAL
-      - ORIGIN_GLOBAL
-      - ORIGIN_APP_PROFILE_LOCAL
-      default: ORIGIN_UNSPECIFIED
-      description: "- ORIGIN_UNSPECIFIED: default options, which says no Operation/Invalid Operation\n - ORIGIN_IMPORTED: Object imported from global enterprise.\n - ORIGIN_LOCAL: Objectl created locally.\n - ORIGIN_GLOBAL: Object created in global store,\nto use this type user should have root previlage.\n - ORIGIN_APP_PROFILE_LOCAL: Object created via App profile"
-      title: 'OriginType : enum specifies the Object orgigin type'
-    ZcOpsType:
-      type: string
-      enum:
-      - OPS_TYPE_UNSPECIFIED
-      - OPS_TYPE_READ
-      - OPS_TYPE_DELETE
-      - OPS_TYPE_CREATE
-      - OPS_TYPE_UPDATE
-      - OPS_TYPE_LIST
-      default: OPS_TYPE_UNSPECIFIED
-      title: ZedCloud internal operation type
     ImageStatus:
       type: string
       enum:
@@ -2051,35 +2080,6 @@ components:
       default: IMAGE_STATUS_UNSPECIFIED
       description: "- IMAGE_STATUS_CREATED: Image metadata is created\n - IMAGE_STATUS_UPLOADING: Image binary is being uploaded to Datstore\n - IMAGE_STATUS_READY: Image is ready for download\n - IMAGE_STATUS_INUSE: Image is being used by edge applications\n - IMAGE_STATUS_FAILED: Image binary upload has failed\n - IMAGE_STATUS_UPLINKING: Image metadata is being uplinked with Datstore binary"
       title: Image status
-    Images:
-      type: object
-      properties:
-        terse:
-          $ref: '#/components/schemas/Summary'
-          description: Summary of filtered Image records
-        summaryByImageStatus:
-          $ref: '#/components/schemas/Summary'
-          description: Imagestatus distribution summary
-        summaryByImageArch:
-          $ref: '#/components/schemas/Summary'
-          description: Image architecture distribution summary
-        summaryByImageType:
-          $ref: '#/components/schemas/Summary'
-          description: Image type distribution summary
-        summaryByImageFormat:
-          $ref: '#/components/schemas/Summary'
-          description: Image format distribution summary
-        summaryByOrigin:
-          $ref: '#/components/schemas/Summary'
-          description: 'images by origin summary '
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImageConfig'
-          description: List of filtered Image records
-        next:
-          $ref: '#/components/schemas/Cursor'
-          description: Responded page details of filtered records
   securitySchemes:
     BearerToken:
       type: apiKey
