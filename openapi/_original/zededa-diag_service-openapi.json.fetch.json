@@ -1,0 +1,12 @@
+{
+ "url": "https://zedcontrol.zededa.net/api/v1/docs/zapiservices/zedge_diag_service.swagger.json",
+ "requested_url": "https://zedcontrol.zededa.net/api/v1/docs/zapiservices/zedge_diag_service.swagger.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 288906,
+ "sha256": "bd5941a5213487176b4508ce964cfc8c77c434dd30d3435784a762b55f89c123",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
