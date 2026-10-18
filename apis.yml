@@ -287,9 +287,10 @@ apis:
   humanURL: https://zedcontrol.zededa.net/api/v1/docs/
   baseURL: https://zedcontrol.zededa.net/api
   tags:
-  - Identity Access Management
+  - Identity and Access Management
   tags_raw:
   - IdentityAccessManagement
+  - Identity Access Management
   properties:
   - type: OpenAPI
     url: openapi/zededa-identityaccessmanagement-api-openapi.yml
@@ -429,6 +430,8 @@ apis:
   humanURL: https://zedcontrol.zededa.net/api/v1/docs/
   baseURL: https://zedcontrol.zededa.net/api
   tags:
+  - ClusterGroups
+  tags_raw:
   - cluster groups
   properties:
   - type: OpenAPI
