@@ -908,3 +908,9 @@ components:
 externalDocs:
   description: ZEDEDA Product Documentation
   url: https://help.zededa.com/hc/en-us/articles/30323173611931-ZEDEDA-API-Overview
+x-provenance:
+  method: harvested
+  publisher: Zededa
+  source: https://zedcontrol.zededa.net/api/v1/docs/zapiservices/zedge_diag_service.swagger.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
